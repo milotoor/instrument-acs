@@ -1,0 +1,34 @@
+References 14 CFR parts 61, 91; FAA-H-8083-15, FAA-H-8083-16; IFP, AIM, AC 120-108
+Objective To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with performing nonprecision approach procedures solely by reference to instruments.
+Note: See Appendix 7: Aircraft, Equipment, and Operational Requirements & Limitations for related considerations.
+
+Knowledge
+IR.VI.A.K1 Procedures and limitations associated with a nonprecision approach, including the differences between Localizer Performance (LP) and Lateral Navigation (LNAV) approach guidance.
+IR.VI.A.K2 Navigation system annunciations expected during an RNAV approach.
+IR.VI.A.K3 Ground-based and satellite-based navigation systems used for a nonprecision approach.
+IR.VI.A.K4 A stabilized approach, to include energy management concepts.
+
+Risk Management
+IR.VI.A.R1 Failure to follow the correct approach procedure (e.g., descending too early, etc.).
+IR.VI.A.R2 Selecting an incorrect navigation frequency.
+IR.VI.A.R3 Failure to manage automated navigation and autoflight systems.
+IR.VI.A.R4 Failure to ensure proper airplane configuration during an approach and missed approach.
+IR.VI.A.R5 An unstable approach, including excessive descent rates.
+IR.VI.A.R6 Deteriorating weather conditions on approach.
+IR.VI.A.R7 Operating below the minimum descent altitude (MDA) or continuing a descent below decision altitude (DA) without proper visual references.
+
+Skills
+IR.VI.A.S1 Accomplish the nonprecision instrument approaches selected by the evaluator.
+IR.VI.A.S2 Establish two-way communications with ATC appropriate for the phase of flight or approach segment, and use proper communication phraseology.
+IR.VI.A.S3 Select, tune, identify, and confirm the operational status of navigation equipment to be used for the approach.
+IR.VI.A.S4 Comply with all clearances issued by ATC or the evaluator.
+IR.VI.A.S5 Recognize if any flight instrumentation is inaccurate or inoperative, and take appropriate action.
+IR.VI.A.S6 Advise ATC or the evaluator if unable to comply with a clearance.
+IR.VI.A.S7 Complete the appropriate checklist.
+IR.VI.A.S8 Establish the appropriate airplane configuration and airspeed considering meteorological and operating conditions.
+IR.VI.A.S9 Maintain altitude ±100 feet, selected heading ±10°, airspeed ±10 knots, and accurately track radials, courses, and bearings, prior to beginning the final approach segment.
+IR.VI.A.S10 Adjust the published MDA and visibility criteria for the aircraft approach category, as appropriate, for factors that include NOTAMs, inoperative aircraft or navigation equipment, or inoperative visual aids associated with the landing environment, etc.
+IR.VI.A.S11 Establish a stabilized descent to the appropriate altitude.
+IR.VI.A.S12 For the final approach segment, maintain no more than a ¾-scale deflection of the CDI, maintain airspeed ±10 knots, and altitude, if applicable, above MDA, +100/-0 feet, to the Visual Descent Point (VDP) or Missed Approach Point (MAP).
+IR.VI.A.S13 Execute the missed approach procedure if the required visual references are not distinctly visible and identifiable at the appropriate point or altitude for the approach profile; or execute a normal landing from a straight-in or circling approach.
+IR.VI.A.S14 Use an MFD and other graphical navigation displays, if installed, to monitor position, track wind drift, and to maintain situational awareness.

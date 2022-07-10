@@ -1,0 +1,23 @@
+[meta]
+references = [
+    "14 CFR part 91",
+    "FAA-8083-2",
+    "FAA-H-8083-3",
+    "FAA-H-8083-15",
+    "FAA-H-8083-25",
+    "AC 91.21-1",
+    "POH/AFM",
+]
+objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with conducting a preflight check on the airplane’s instruments necessary for an IFR flight."
+
+[knowledge]
+k1 = "Purpose of performing an instrument flight deck check and how to detect possible defects."
+k2 = "IFR airworthiness, to include airplane inspection requirements and required equipment for IFR flight."
+k3 = "Required procedures, documentation, and limitations of flying with inoperative equipment."
+
+[risk_management]
+r1 = "Operating with inoperative equipment."
+r2 = "Operating with outdated navigation publications or databases."
+
+[skills]
+s1 = "Perform preflight inspection by following the checklist appropriate to the airplane and determine that the airplane is in a condition for safe instrument flight."

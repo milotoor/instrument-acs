@@ -1,0 +1,31 @@
+[meta]
+references = [
+    "14 CFR parts 61",
+    "91",
+    "FAA-H-8083-15",
+    "IFP",
+    "AIM",
+]
+objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with performing a missed approach procedure solely by reference to instruments."
+
+[knowledge]
+k1 = "Elements related to missed approach procedures and limitations associated with standard instrument approaches, including while using an FMS or autopilot, if equipped."
+
+[risk_management]
+r1 = "Failure to follow prescribed procedures."
+r2 = "Holding, diverting, or electing to fly the approach again."
+r3 = "Failure to ensure proper airplane configuration during an approach and missed approach."
+r4 = "Factors that might lead to executing a missed approach procedure before the missed approach point or to a go-around below DA/MDA."
+r5 = "Failure to manage automated navigation and autoflight systems."
+
+[skills]
+s1 = "Promptly initiate the missed approach procedure and report it to ATC."
+s2 = "Apply the appropriate power setting for the flight condition and establish a pitch attitude necessary to obtain the desired performance."
+s3 = "Configure the airplane in accordance with airplane manufacturer’s instructions, establish a positive rate of climb, and accelerate to the appropriate airspeed, ±10 knots."
+s4 = "Follow the recommended checklist items appropriate to the missed approach/go-around procedure."
+s5 = "Comply with the published or alternate missed approach procedure."
+s6 = "Advise ATC or the evaluator if unable to comply with a clearance, restriction, or climb gradient."
+s7 = "Maintain the heading, course, or bearing ±10°; and altitude(s) ±100 feet during the missed approach procedure."
+s8 = "Use an MFD and other graphical navigation displays, if installed, to monitor position and track to help navigate the missed approach."
+s9 = "Demonstrate SRM or CRM, as appropriate."
+s10 = "Request ATC clearance to attempt another approach, proceed to the alternate airport, holding fix, or other clearance limit, as appropriate, or as directed by the evaluator."

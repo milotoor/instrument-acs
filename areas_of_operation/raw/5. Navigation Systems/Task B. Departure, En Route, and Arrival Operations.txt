@@ -1,0 +1,24 @@
+References 14 CFR parts 61, 91; FAA-H-8083-15, FAA-H-8083-16; AC 91-74; AFM; AIM
+Objective To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with IFR departure, en route, and arrival operations solely by reference to instruments.
+Note: See Appendix 7: Aircraft, Equipment, and Operational Requirements & Limitations for related considerations.
+
+Knowledge
+IR.V.B.K1 Elements related to ATC routes, including departure procedures (DPs) and associated climb gradients; arrival procedures (STARs) and associated constraints.
+IR.V.B.K2 Pilot/controller responsibilities, communication procedures, and ATC services available to pilots.
+
+Risk Management
+IR.V.B.R1 Failure to communicate with ATC or follow published procedures.
+IR.V.B.R2 Failure to recognize limitations of traffic avoidance equipment.
+IR.V.B.R3 Failure to use see and avoid techniques when possible.
+
+Skills The applicant demonstrates the ability to:
+IR.V.B.S1 Select, identify (as necessary) and use the appropriate communication and navigation facilities associated with the proposed flight.
+IR.V.B.S2 Perform the appropriate airplane checklist items relative to the phase of flight.
+IR.V.B.S3 Use the current and appropriate paper or electronic navigation publications..
+IR.V.B.S4 Establish two-way communications with the proper controlling agency, use proper phraseology, and comply in a timely manner with all ATC instructions and airspace restrictions, and exhibit adequate knowledge of communication failure procedures.
+IR.V.B.S5 Intercept all courses, radials, and bearings appropriate to the procedure, route, or clearance in a timely manner.
+IR.V.B.S6 Comply with all applicable charted procedures.
+IR.V.B.S7 Maintain airspeed ±10 knots, altitude ±100 feet, and selected headings ±10°, and apply proper correction to maintain a course allowing no more than ¾-scale deflection of the CDI.
+IR.V.B.S8 Update/interpret weather in flight.
+IR.V.B.S9 Explain and use flight deck displays of digital weather and aeronautical information, as applicable.
+IR.V.B.S10 Demonstrate SRM.

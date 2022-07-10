@@ -1,0 +1,28 @@
+References 14 CFR parts 61,91; FAA-H-8083-3, FAA-H-8083-15, IFP
+Objective To determine that the applicant exhibits satisfactory knowledge, risk management, and skills associated with executing a published instrument approach solely by reference to instruments with one engine inoperative.
+
+Knowledge
+IR.VII.C.K1 Instrument approach procedures with one engine inoperative.
+
+Risk Management
+IR.VII.C.R1 Failure to plan for engine failure during approach and landing.
+IR.VII.C.R2 Collision hazards, to include aircraft, terrain, obstacles, wires, vehicles, vessels, persons, and wildlife.
+IR.VII.C.R3 Improper airplane configuration.
+IR.VII.C.R4 Low altitude maneuvering including stall, spin, or CFIT.
+IR.VII.C.R5 Distractions, loss of situational awareness, or improper task management.
+IR.VII.C.R6 Performing a go-around/rejected landing with a powerplant failure.
+
+Skills
+IR.VII.C.S1 Promptly recognize a engine failure and maintain positive airplane control.
+IR.VII.C.S2 Set the engine controls, reduce drag, identify and verify the inoperative engine, and simulate feathering of the propeller on the inoperative engine. (Evaluator should then establish zero thrust on the inoperative engine.)
+IR.VII.C.S3 Use flight controls in the proper combination as recommended by the manufacturer, or as required to maintain best performance, and trim as required.
+IR.VII.C.S4 Follow the manufacturer’s recommended emergency procedures.
+IR.VII.C.S5 Monitor the operating engine and make adjustments as necessary.
+IR.VII.C.S6 Request and follow an actual or a simulated ATC clearance for an instrument approach.
+IR.VII.C.S7 Maintain altitude ±100 feet or minimum sink rate if applicable, airspeed ±10 knots, and selected heading ±10°.
+IR.VII.C.S8 Establish a rate of descent that will ensure arrival at the MDA or DA/DH with the airplane in a position from which a descent to a landing on the intended runway can be made, either straight in or circling as appropriate.
+IR.VII.C.S9 On final approach segment, maintain vertical (as applicable) and lateral guidance within ¾-scale deflection.
+IR.VII.C.S10 Avoid loss of airplane control, or attempted flight contrary to the operating limitations of the airplane.
+IR.VII.C.S11 Comply with the published criteria for the aircraft approach category if circling.
+IR.VII.C.S12 Execute a normal landing.
+IR.VII.C.S13 Complete the appropriate checklist. 

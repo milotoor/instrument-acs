@@ -1,0 +1,22 @@
+[meta]
+references = [
+    "14 CFR part 61",
+    "FAA-H-8083-2",
+    "FAA-H-8083-15",
+    "AC 68-1",
+]
+objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with the requirements to act as PIC under instrument flight rules."
+
+[knowledge]
+k1 = "Certification requirements, recency of experience, and recordkeeping."
+k2 = "Privileges and limitations."
+k3 = "Part 68 BasicMed Privileges and Limitations."
+
+[risk_management]
+r1 = "Failure to distinguish proficiency versus currency."
+r2 = "Failure to set personal minimums."
+r3 = "Failure to ensure fitness for flight and physiological factors that might affect the pilot’s ability to fly under instrument conditions."
+r4 = "Flying unfamiliar airplanes, or operating with unfamiliar flight display systems and avionics."
+
+[skills]
+s1 = "Apply requirements to act as PIC under Instrument Flight Rules (IFR) in a scenario given by the evaluator."

@@ -1,0 +1,31 @@
+[meta]
+references = [
+    "14 CFR parts 61",
+    "91",
+    "FAA-H-8083-15",
+    "IFP",
+    "AIM",
+]
+objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with performing a circling approach procedure."
+
+[knowledge]
+k1 = "Elements related to circling approach procedures and limitations including approach categories and related airspeed restrictions."
+
+[risk_management]
+r1 = "Failure to follow prescribed circling approach procedures."
+r2 = "Executing a circling approach at night or with marginal visibility."
+r3 = "Losing visual contact with an identifiable part of the airport."
+r4 = "Failure to manage automated navigation and autoflight systems."
+r5 = "Failure to maintain an appropriate altitude, airspeed, or distance while circling."
+r6 = "Low altitude maneuvering including stall, spin, or CFIT."
+r7 = "Executing an improper missed approach after the MAP while circling."
+
+[skills]
+s1 = "Comply with the circling approach procedure considering turbulence, windshear, and the maneuvering capability and approach category of the aircraft."
+s2 = "Confirm the direction of traffic and adhere to all restrictions and instructions issued by ATC or the evaluator."
+s3 = "Demonstrate SRM."
+s4 = "Establish the approach and landing configuration. Maintain a stabilized approach and a descent rate that ensures arrival at the MDA, or the preselected circling altitude above the MDA, prior to the missed approach point."
+s5 = "Maintain airspeed ±10 knots, desired heading/track ±10°, and altitude +100/-0 feet until descending below the MDA or the preselected circling altitude above the MDA."
+s6 = "Visually maneuver to a base or downwind leg appropriate for the landing runway and environmental conditions."
+s7 = "If a missed approach occurs, turn in the appropriate direction using the correct procedure and appropriately configure the airplane."
+s8 = "If landing, initiate a stabilized descent. Touch down on the first one-third of the selected runway without excessive maneuvering, without exceeding the normal operating limits of the airplane, and without exceeding 30° of bank."

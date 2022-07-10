@@ -1,0 +1,15 @@
+[meta]
+references = [
+    "14 CFR parts 61",
+    "91",
+]
+objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with checking flight instruments and equipment during postflight."
+
+[knowledge]
+k1 = "Procedures for checking the functionality of all installed instruments and navigation equipment."
+
+[risk_management]
+r1 = "Failure to perform a proper postflight inspection and properly document airplane discrepancies."
+
+[skills]
+s1 = "Conduct a postflight inspection, and document discrepancies and servicing requirements, if any."

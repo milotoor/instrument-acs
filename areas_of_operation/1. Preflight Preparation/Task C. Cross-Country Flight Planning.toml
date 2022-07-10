@@ -1,0 +1,40 @@
+[meta]
+references = [
+    "14 CFR part 91",
+    "FAA-H-8083-2",
+    "FAA-H-8083-15",
+    "FAA-H-8083-16",
+    "FAA-H-8083-25",
+    "Navigation Charts",
+    "Chart Supplements",
+    "AIM",
+    "NOTAMs",
+]
+objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with planning an IFR cross-country and filing an IFR flight plan."
+
+[knowledge]
+k1 = "Route planning, including consideration of the available navigational facilities, special use airspace, preferred routes, and alternate airports."
+k2 = "Altitude selection accounting for terrain and obstacles, glide distance of airplane, IFR cruising altitudes, effect of wind, and oxygen requirements."
+k3 = "Calculating:"
+k3a = "a. Time, climb and descent rates, course, distance, heading, true airspeed, and groundspeed"
+k3b = "b. Estimated time of arrival to include conversion to universal coordinated time (UTC)"
+k3c = "c. Fuel requirements, to include reserve"
+k4 = "Elements of an IFR flight plan."
+k5 = "Procedures for activating and closing an IFR flight plan in controlled and uncontrolled airspace."
+
+[risk_management]
+r1 = "Pilot."
+r2 = "Aircraft."
+r3 = "Environment (e.g., weather, airports, airspace, terrain, obstacles)."
+r4 = "External pressures."
+r5 = "Limitations of air traffic control (ATC) services."
+r6 = "Limitations of electronic planning applications and programs."
+r7 = "Improper fuel planning."
+
+[skills]
+s1 = "Prepare, present, and explain a cross-country flight plan assigned by the evaluator including a risk analysis based on real time weather which includes calculating time en route and fuel considering factors such as power settings, operating altitude, wind, fuel reserve requirements, and weight and balance requirements."
+s2 = "Recalculate fuel reserves based on a scenario provided by the evaluator."
+s3 = "Create a navigation plan and simulate filing an IFR flight plan."
+s4 = "Interpret departure, arrival, en route, and approach procedures with reference to appropriate and current charts."
+s5 = "Recognize simulated wing contamination due to airframe icing and demonstrate knowledge of the adverse effects of airframe icing during pre-takeoff, takeoff, cruise, and landing phases of flight as well as the corrective actions."
+s6 = "Apply pertinent information from appropriate and current aeronautical charts, Charts Supplement; NOTAMs relative to airport, runway and taxiway closures; and other flight publications."

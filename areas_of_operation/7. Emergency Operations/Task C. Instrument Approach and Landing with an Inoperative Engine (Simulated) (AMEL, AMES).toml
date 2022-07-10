@@ -1,0 +1,34 @@
+[meta]
+references = [
+    "14 CFR parts 61,91",
+    "FAA-H-8083-3",
+    "FAA-H-8083-15",
+    "IFP",
+]
+objective = "To determine that the applicant exhibits satisfactory knowledge, risk management, and skills associated with executing a published instrument approach solely by reference to instruments with one engine inoperative."
+
+[knowledge]
+k1 = "Instrument approach procedures with one engine inoperative."
+
+[risk_management]
+r1 = "Failure to plan for engine failure during approach and landing."
+r2 = "Collision hazards, to include aircraft, terrain, obstacles, wires, vehicles, vessels, persons, and wildlife."
+r3 = "Improper airplane configuration."
+r4 = "Low altitude maneuvering including stall, spin, or CFIT."
+r5 = "Distractions, loss of situational awareness, or improper task management."
+r6 = "Performing a go-around/rejected landing with a powerplant failure."
+
+[skills]
+s1 = "Promptly recognize a engine failure and maintain positive airplane control."
+s2 = "Set the engine controls, reduce drag, identify and verify the inoperative engine, and simulate feathering of the propeller on the inoperative engine. (Evaluator should then establish zero thrust on the inoperative engine.)"
+s3 = "Use flight controls in the proper combination as recommended by the manufacturer, or as required to maintain best performance, and trim as required."
+s4 = "Follow the manufacturer’s recommended emergency procedures."
+s5 = "Monitor the operating engine and make adjustments as necessary."
+s6 = "Request and follow an actual or a simulated ATC clearance for an instrument approach."
+s7 = "Maintain altitude ±100 feet or minimum sink rate if applicable, airspeed ±10 knots, and selected heading ±10°."
+s8 = "Establish a rate of descent that will ensure arrival at the MDA or DA/DH with the airplane in a position from which a descent to a landing on the intended runway can be made, either straight in or circling as appropriate."
+s9 = "On final approach segment, maintain vertical (as applicable) and lateral guidance within ¾-scale deflection."
+s10 = "Avoid loss of airplane control, or attempted flight contrary to the operating limitations of the airplane."
+s11 = "Comply with the published criteria for the aircraft approach category if circling."
+s12 = "Execute a normal landing."
+s13 = "Complete the appropriate checklist."

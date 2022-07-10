@@ -1,0 +1,36 @@
+References 14 CFR part 91; FAA-H-8083-25, AC 00-6; AC 00-45, AIM
+Objective To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with obtaining, understanding, and applying weather information for a flight under IFR.
+
+Knowledge
+IR.I.B.K1 Sources of weather data (e.g., National Weather Service, Flight Service) for flight planning purposes.
+IR.I.B.K2 Acceptable weather products and resources utilized for preflight planning, current and forecast weather for departure and en route operations and arrival phases of flight.
+IR.I.B.K3 Meteorology applicable to the departure, en route, alternate, and destination for flights conducted under Instrument Flight Rules (IFR) to include expected climate and hazardous conditions such as:
+IR.I.B.K3a a. Atmospheric composition and stability
+IR.I.B.K3b b. Wind (e.g., crosswind, tailwind, windshear, mountain wave, etc.)
+IR.I.B.K3c c. Temperature
+IR.I.B.K3d d. Moisture/precipitation
+IR.I.B.K3e e. Weather system formation, including air masses and fronts
+IR.I.B.K3f f. Clouds
+IR.I.B.K3g g. Turbulence
+IR.I.B.K3h h. Thunderstorms and microbursts
+IR.I.B.K3i i. Icing and freezing level information
+IR.I.B.K3j j. Fog/mist
+IR.I.B.K3k k. Frost
+IR.I.B.K3l l. Obstructions to visibility (e.g., smoke, haze, volcanic ash, etc.)
+IR.I.B.K4 Flight deck displays of digital weather and aeronautical information.
+
+Risk Management
+IR.I.B.R1 Factors involved in making the go/no-go and continue/divert decisions, to include:
+IR.I.B.R1a a. Circumstances that would make diversion prudent
+IR.I.B.R1b b. Personal Weather Minimums
+IR.I.B.R1c c. Hazardous weather conditions to include known or forecast icing or turbulence aloft
+IR.I.B.R2 Limitations of:
+IR.I.B.R2a a. Onboard weather equipment
+IR.I.B.R2b b. Aviation weather reports and forecasts
+IR.I.B.R2c c. Inflight weather resources
+
+Skills
+IR.I.B.S1 Use available aviation weather resources to obtain an adequate weather briefing.
+IR.I.B.S2 Analyze the implications of at least three of the conditions listed in K3a through K3l above, using actual weather or weather conditions in a scenario provided by the evaluator.
+IR.I.B.S3 Correlate weather information to make a competent go/no-go decision.
+IR.I.B.S4 Determine whether an alternate airport is required, and, if required, whether the selected alternate airport meets regulatory requirements.

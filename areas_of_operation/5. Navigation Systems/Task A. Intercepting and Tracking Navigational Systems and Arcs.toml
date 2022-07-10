@@ -1,0 +1,30 @@
+[meta]
+references = [
+    "14 CFR parts 61",
+    "91",
+    "FAA-H-8083-15",
+    "FAA-H-8083-16",
+    "AFM",
+    "AIM",
+]
+objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with intercepting and tracking navigation aids and arcs solely by reference to instruments."
+
+[knowledge]
+k1 = "Ground-based navigation (orientation, course determination, equipment, tests and regulations) including procedures for intercepting and tracking courses and arcs."
+k2 = "Satellite-based navigation (orientation, course determination, equipment, tests and regulations, interference, appropriate use of databases, RAIM, and WAAS) including procedures for intercepting and tracking courses and arcs."
+
+[risk_management]
+r1 = "Failure to manage automated navigation and autoflight systems."
+r2 = "Distractions, loss of situational awareness, or improper task management."
+r3 = "Limitations of the navigation system in use."
+
+[skills]
+s1 = "Tune and correctly identify the navigation facility/program the navigation system and verify system accuracy as appropriate for the equipment installed in the airplane."
+s2 = "Determine airplane position relative to the navigational facility or waypoint."
+s3 = "Set and correctly orient to the course to be intercepted."
+s4 = "Intercept the specified course at appropriate angle, inbound to or outbound from a navigational facility or waypoint."
+s5 = "Maintain airspeed ±10 knots, altitude ±100 feet, and selected headings ±5°."
+s6 = "Apply proper correction to maintain a course, allowing no more than ¾-scale deflection of the CDI. If a DME arc is selected, maintain that arc ±1 nautical mile."
+s7 = "Recognize navigational system or facility failure, and when required, report the failure to ATC."
+s8 = "Use an MFD and other graphical navigation displays, if installed, to monitor position, track wind drift, and to maintain situational awareness."
+s9 = "Use the autopilot to make appropriate course intercepts, if installed."

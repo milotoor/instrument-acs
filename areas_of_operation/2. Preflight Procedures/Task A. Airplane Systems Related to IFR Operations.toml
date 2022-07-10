@@ -1,0 +1,20 @@
+[meta]
+references = [
+    "14 CFR parts 61",
+    "91",
+    "FAA-H-8083-2",
+    "FAA-H-8083-15",
+    "AFM",
+    "AC 91-74",
+]
+objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with anti-icing and de-icing systems."
+
+[knowledge]
+k1 = "The general operational characteristics and limitations of applicable anti-icing and deicing systems, including airframe, propeller, intake, fuel, and pitot-static systems."
+
+[risk_management]
+r1 = "Pilots with little or no experience with flight in icing conditions."
+r2 = "Limitations of anti-icing and deicing systems."
+
+[skills]
+s1 = "Demonstrate familiarity with anti- or de-icing procedures or information published by the manufacturer that is specific to the airplane used on the practical test."

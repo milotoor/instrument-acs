@@ -1,0 +1,22 @@
+References 14 CFR parts 61, 91; FAA-H-8083-15; AIM
+Objective To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with managing instruments appropriate for an IFR flight.
+
+Knowledge
+IR.II.B.K1 Operation of their airplane’s applicable flight instrument system(s) including:
+IR.II.B.K1a a. Pitot-static instrument system: altimeter, airspeed indicator, vertical speed indicator
+IR.II.B.K1b b. Gyroscopic/electric/vacuum instrument system: attitude indicator, heading indicator, turn-and-slip indicator/turn coordinator
+IR.II.B.K1c c. Electrical systems, electronic flight instrument displays (PFD, MFD), transponder, and ADS-B
+IR.II.B.K1d d. Magnetic compass
+IR.II.B.K2 Operation of their airplane’s applicable navigation system(s) including:
+IR.II.B.K2a a. VOR, DME, ILS, marker beacon receiver/indicators
+IR.II.B.K2b b. RNAV, GPS, Wide Area Augmentation System (WAAS), FMS, autopilot
+
+Risk Management
+IR.II.B.R1 Failure to monitor and manage automated systems.
+IR.II.B.R2 The difference between approved and non-approved navigation devices.
+IR.II.B.R3 Common failure modes of flight and navigation instruments.
+IR.II.B.R4 The limitations of electronic flight bags.
+IR.II.B.R5 Failure to ensure currency of navigation databases.
+
+Skills
+IR.II.B.S1 Operate and manage installed instruments and navigation equipment.

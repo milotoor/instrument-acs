@@ -1,0 +1,18 @@
+References 14 CFR parts 61, 91; FAA-H-8083-15; AIM
+Objective To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with performing the procedures for a landing from an instrument approach.
+
+Knowledge
+IR.VI.E.K1 Elements related to the pilot’s responsibilities, and the environmental, operational, and meteorological factors that affect landing from a straight-in or circling approach.
+IR.VI.E.K2 Airport signs, markings and lighting, to include approach lighting systems.
+
+Risk Management
+IR.VI.E.R1 Attempting to land from an unstable approach.
+IR.VI.E.R2 Flying below the glidepath.
+IR.VI.E.R3 Transitioning from instrument to visual references for landing.
+
+Skills
+IR.VI.E.S1 Transition at the DA/DH, MDA, or visual descent point (VDP) to a visual flight condition, allowing for safe visual maneuvering and a normal landing.
+IR.VI.E.S2 Adhere to all ATC or evaluator advisories, such as NOTAMs, windshear, wake turbulence, runway surface, braking conditions, and other operational considerations.
+IR.VI.E.S3 Complete the appropriate checklist.
+IR.VI.E.S4 Maintain positive airplane control throughout the landing maneuver.
+IR.VI.E.S5 Demonstrate SRM.

@@ -1,0 +1,43 @@
+[meta]
+references = [
+    "14 CFR parts 61",
+    "91",
+    "FAA-H-8083-15",
+    "FAA-H-8083-16",
+    "IFP",
+    "AIM",
+]
+objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with performing precision approach procedures solely by reference to instruments."
+
+[knowledge]
+k1 = "Procedures and limitations associated with a precision approach, including determining required descent rates and adjusting minimums in the case of inoperative equipment."
+k2 = "Navigation system displays, annunciations, and modes of operation."
+k3 = "Ground-based and satellite-based navigation (orientation, course determination, equipment, tests and regulations, interference, appropriate use of navigation data, signal integrity)"
+k4 = "A stabilized approach, to include energy management concepts"
+
+[risk_management]
+r1 = "Failure to follow the correct approach procedure (e.g. descending below the glideslope, etc.)."
+r2 = "Selecting an incorrect navigation frequency."
+r3 = "Failure to manage automated navigation and autoflight systems."
+r4 = "Failure to ensure proper airplane configuration during an approach and missed approach."
+r5 = "An unstable approach including excessive descent rates."
+r6 = "Deteriorating weather conditions on approach."
+r7 = "Continuing to descend below the Decision Altitude (DA)/Decision Height (DH) when the required visual references are not visible."
+
+[skills]
+s1 = "Accomplish the precision instrument approach(es) selected by the evaluator."
+s2 = "Establish two-way communications with ATC appropriate for the phase of flight or approach segment, and use proper communication phraseology."
+s3 = "Select, tune, identify, and confirm the operational status of navigation equipment to be used for the approach."
+s4 = "Comply with all clearances issued by ATC or the evaluator."
+s5 = "Recognize if any flight instrumentation is inaccurate or inoperative, and take appropriate action."
+s6 = "Advise ATC or the evaluator if unable to comply with a clearance."
+s7 = "Complete the appropriate checklist."
+s8 = "Establish the appropriate airplane configuration and airspeed considering turbulence and windshear."
+s9 = "Maintain altitude ±100 feet, selected heading ±10°, airspeed ±10 knots, and accurately track radials, courses, and bearings, prior to beginning the final approach segment."
+s10 = "Adjust the published DA/DH and visibility criteria for the aircraft approach category, as appropriate, to account for NOTAMs, Inoperative airplane or navigation equipment, or inoperative visual aids associated with the landing environment."
+s11 = "Establish a predetermined rate of descent at the point where vertical guidance begins, which approximates that required for the airplane to follow the vertical guidance."
+s12 = "Maintain a stabilized final approach from the Final Approach Fix (FAF) to DA/DH allowing no more than ¾-scale deflection of either the vertical or lateral guidance indications and maintain the desired airspeed ±10 knots."
+s13 = "Immediately initiate the missed approach procedure when at the DA/DH, and the required visual references for the runway are not unmistakably visible and identifiable."
+s14 = "Transition to a normal landing approach (missed approach for seaplanes) only when the airplane is in a position from which a descent to a landing on the runway can be made at a normal rate of descent using normal maneuvering."
+s15 = "Maintain a stabilized visual flight path from the DA/DH to the runway aiming point where a normal landing may be accomplished within the touchdown zone."
+s16 = "Use an MFD and other graphical navigation displays, if installed, to monitor position, track wind drift, and to maintain situational awareness."
