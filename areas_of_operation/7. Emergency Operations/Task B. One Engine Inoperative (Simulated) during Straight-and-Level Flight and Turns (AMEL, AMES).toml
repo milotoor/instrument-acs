@@ -9,24 +9,24 @@ references = [
 ]
 
 [knowledge]
-k1 = "Procedures used if engine failure occurs during straight-and-level flight and turns while on instruments."
+1 = "Procedures used if engine failure occurs during straight-and-level flight and turns while on instruments."
 
 [risk_management]
-r1 = "Failure to identify the inoperative engine."
-r2 = "Inability to climb or maintain altitude with an inoperative engine."
-r3 = "Low altitude maneuvering including stall, spin, or CFIT."
-r4 = "Distractions, loss of situational awareness, or improper task management."
-r5 = "Fuel management during single-engine operation."
+1 = "Failure to identify the inoperative engine."
+2 = "Inability to climb or maintain altitude with an inoperative engine."
+3 = "Low altitude maneuvering including stall, spin, or CFIT."
+4 = "Distractions, loss of situational awareness, or improper task management."
+5 = "Fuel management during single-engine operation."
 
 [skills]
-s1 = "Promptly recognize an engine failure and maintain positive airplane control."
-s2 = "Set the engine controls, reduce drag, identify and verify the inoperative engine, and simulate feathering of the propeller on the inoperative engine. (Evaluator should then establish zero thrust on the inoperative engine.)"
-s3 = "Establish the best engine-inoperative airspeed and trim the airplane."
-s4 = "Use flight controls in the proper combination as recommended by the manufacturer, or as required to maintain best performance, and trim as required."
-s5 = "Verify the prescribed checklist procedures normally used for securing the inoperative engine."
-s6 = "Attempt to determine and resolve the reason for the engine failure."
-s7 = "Monitor engine functions and make necessary adjustments."
-s8 = "Maintain the specified altitude ±100 feet or minimum sink rate if applicable, airspeed ±10 knots, and the specified heading ±10°."
-s9 = "Assess the airplane’s performance capability and decide an appropriate action to ensure a safe landing."
-s10 = "Avoid loss of airplane control or attempted flight contrary to the engine-inoperative operating limitations of the airplane."
-s11 = "Demonstrate SRM."
+1 = "Promptly recognize an engine failure and maintain positive airplane control."
+2 = "Set the engine controls, reduce drag, identify and verify the inoperative engine, and simulate feathering of the propeller on the inoperative engine. (Evaluator should then establish zero thrust on the inoperative engine.)"
+3 = "Establish the best engine-inoperative airspeed and trim the airplane."
+4 = "Use flight controls in the proper combination as recommended by the manufacturer, or as required to maintain best performance, and trim as required."
+5 = "Verify the prescribed checklist procedures normally used for securing the inoperative engine."
+6 = "Attempt to determine and resolve the reason for the engine failure."
+7 = "Monitor engine functions and make necessary adjustments."
+8 = "Maintain the specified altitude ±100 feet or minimum sink rate if applicable, airspeed ±10 knots, and the specified heading ±10°."
+9 = "Assess the airplane’s performance capability and decide an appropriate action to ensure a safe landing."
+10 = "Avoid loss of airplane control or attempted flight contrary to the engine-inoperative operating limitations of the airplane."
+11 = "Demonstrate SRM."

@@ -8,10 +8,10 @@ references = [
 ]
 
 [knowledge]
-k1 = "Procedures for checking the functionality of all installed instruments and navigation equipment."
+1 = "Procedures for checking the functionality of all installed instruments and navigation equipment."
 
 [risk_management]
-r1 = "Failure to perform a proper postflight inspection and properly document airplane discrepancies."
+1 = "Failure to perform a proper postflight inspection and properly document airplane discrepancies."
 
 [skills]
-s1 = "Conduct a postflight inspection, and document discrepancies and servicing requirements, if any."
+1 = "Conduct a postflight inspection, and document discrepancies and servicing requirements, if any."

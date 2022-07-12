@@ -49,7 +49,7 @@ class TaskFile:
         for line in self.task_lines:
             match = re.match(regex, line)
             if match:
-                element_id = section[0] + match.groups()[0].lower()
+                element_id = match.groups()[0].lower()
                 element_text = re.sub(regex, "", line).strip()
                 data[element_id] = element_text
         return {section: data}

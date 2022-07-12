@@ -10,21 +10,21 @@ references = [
 ]
 
 [knowledge]
-k1 = "Operation of their airplane’s applicable flight instrument system(s) including:"
-k1a = "a. Pitot-static instrument system: altimeter, airspeed indicator, vertical speed indicator"
-k1b = "b. Gyroscopic/electric/vacuum instrument system: attitude indicator, heading indicator, turn-and-slip indicator/turn coordinator"
-k1c = "c. Electrical systems, electronic flight instrument displays (PFD, MFD), transponder, and ADS-B"
-k1d = "d. Magnetic compass"
-k2 = "Operation of their airplane’s applicable navigation system(s) including:"
-k2a = "a. VOR, DME, ILS, marker beacon receiver/indicators"
-k2b = "b. RNAV, GPS, Wide Area Augmentation System (WAAS), FMS, autopilot"
+1 = "Operation of their airplane’s applicable flight instrument system(s) including:"
+1a = "a. Pitot-static instrument system: altimeter, airspeed indicator, vertical speed indicator"
+1b = "b. Gyroscopic/electric/vacuum instrument system: attitude indicator, heading indicator, turn-and-slip indicator/turn coordinator"
+1c = "c. Electrical systems, electronic flight instrument displays (PFD, MFD), transponder, and ADS-B"
+1d = "d. Magnetic compass"
+2 = "Operation of their airplane’s applicable navigation system(s) including:"
+2a = "a. VOR, DME, ILS, marker beacon receiver/indicators"
+2b = "b. RNAV, GPS, Wide Area Augmentation System (WAAS), FMS, autopilot"
 
 [risk_management]
-r1 = "Failure to monitor and manage automated systems."
-r2 = "The difference between approved and non-approved navigation devices."
-r3 = "Common failure modes of flight and navigation instruments."
-r4 = "The limitations of electronic flight bags."
-r5 = "Failure to ensure currency of navigation databases."
+1 = "Failure to monitor and manage automated systems."
+2 = "The difference between approved and non-approved navigation devices."
+3 = "Common failure modes of flight and navigation instruments."
+4 = "The limitations of electronic flight bags."
+5 = "Failure to ensure currency of navigation databases."
 
 [skills]
-s1 = "Operate and manage installed instruments and navigation equipment."
+1 = "Operate and manage installed instruments and navigation equipment."

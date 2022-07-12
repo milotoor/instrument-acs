@@ -13,13 +13,13 @@ references = [
 ]
 
 [knowledge]
-k1 = "Purpose of performing an instrument flight deck check and how to detect possible defects."
-k2 = "IFR airworthiness, to include airplane inspection requirements and required equipment for IFR flight."
-k3 = "Required procedures, documentation, and limitations of flying with inoperative equipment."
+1 = "Purpose of performing an instrument flight deck check and how to detect possible defects."
+2 = "IFR airworthiness, to include airplane inspection requirements and required equipment for IFR flight."
+3 = "Required procedures, documentation, and limitations of flying with inoperative equipment."
 
 [risk_management]
-r1 = "Operating with inoperative equipment."
-r2 = "Operating with outdated navigation publications or databases."
+1 = "Operating with inoperative equipment."
+2 = "Operating with outdated navigation publications or databases."
 
 [skills]
-s1 = "Perform preflight inspection by following the checklist appropriate to the airplane and determine that the airplane is in a condition for safe instrument flight."
+1 = "Perform preflight inspection by following the checklist appropriate to the airplane and determine that the airplane is in a condition for safe instrument flight."

@@ -9,14 +9,14 @@ references = [
 ]
 
 [knowledge]
-k1 = "Procedures to follow in the event of lost communication during various phases of flight, including techniques for reestablishing communications, when it is acceptable to deviate from an IFR clearance, and when to begin an approach at the destination."
+1 = "Procedures to follow in the event of lost communication during various phases of flight, including techniques for reestablishing communications, when it is acceptable to deviate from an IFR clearance, and when to begin an approach at the destination."
 
 [risk_management]
-r1 = "Possible reasons for loss of communication."
-r2 = "Failure to follow procedures for lost communications."
+1 = "Possible reasons for loss of communication."
+2 = "Failure to follow procedures for lost communications."
 
 [skills]
-s1 = "Recognize a simulated loss of communication."
-s2 = "Simulate actions to re-establish communication."
-s3 = "Determine whether to continue to flight plan destination or deviate."
-s4 = "Determine appropriate time to begin an approach."
+1 = "Recognize a simulated loss of communication."
+2 = "Simulate actions to re-establish communication."
+3 = "Determine whether to continue to flight plan destination or deviate."
+4 = "Determine appropriate time to begin an approach."

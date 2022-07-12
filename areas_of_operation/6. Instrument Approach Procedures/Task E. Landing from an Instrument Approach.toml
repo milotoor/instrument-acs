@@ -10,17 +10,17 @@ references = [
 ]
 
 [knowledge]
-k1 = "Elements related to the pilot’s responsibilities, and the environmental, operational, and meteorological factors that affect landing from a straight-in or circling approach."
-k2 = "Airport signs, markings and lighting, to include approach lighting systems."
+1 = "Elements related to the pilot’s responsibilities, and the environmental, operational, and meteorological factors that affect landing from a straight-in or circling approach."
+2 = "Airport signs, markings and lighting, to include approach lighting systems."
 
 [risk_management]
-r1 = "Attempting to land from an unstable approach."
-r2 = "Flying below the glidepath."
-r3 = "Transitioning from instrument to visual references for landing."
+1 = "Attempting to land from an unstable approach."
+2 = "Flying below the glidepath."
+3 = "Transitioning from instrument to visual references for landing."
 
 [skills]
-s1 = "Transition at the DA/DH, MDA, or visual descent point (VDP) to a visual flight condition, allowing for safe visual maneuvering and a normal landing."
-s2 = "Adhere to all ATC or evaluator advisories, such as NOTAMs, windshear, wake turbulence, runway surface, braking conditions, and other operational considerations."
-s3 = "Complete the appropriate checklist."
-s4 = "Maintain positive airplane control throughout the landing maneuver."
-s5 = "Demonstrate SRM."
+1 = "Transition at the DA/DH, MDA, or visual descent point (VDP) to a visual flight condition, allowing for safe visual maneuvering and a normal landing."
+2 = "Adhere to all ATC or evaluator advisories, such as NOTAMs, windshear, wake turbulence, runway surface, braking conditions, and other operational considerations."
+3 = "Complete the appropriate checklist."
+4 = "Maintain positive airplane control throughout the landing maneuver."
+5 = "Demonstrate SRM."

@@ -11,20 +11,20 @@ references = [
 ]
 
 [knowledge]
-k1 = "Elements related to holding procedures, including reporting criteria, appropriate speeds, and recommended entry procedures for standard, nonstandard, published, and nonpublished holding patterns."
+1 = "Elements related to holding procedures, including reporting criteria, appropriate speeds, and recommended entry procedures for standard, nonstandard, published, and nonpublished holding patterns."
 
 [risk_management]
-r1 = "Recalculating fuel reserves if assigned an unanticipated EFC time."
-r2 = "Scenarios and circumstances that could result in minimum fuel or the need to declare an emergency."
-r3 = "Scenarios that could lead to holding, including deteriorating weather at the planned destination."
-r4 = "Improper holding entry and improper wind correction while holding."
+1 = "Recalculating fuel reserves if assigned an unanticipated EFC time."
+2 = "Scenarios and circumstances that could result in minimum fuel or the need to declare an emergency."
+3 = "Scenarios that could lead to holding, including deteriorating weather at the planned destination."
+4 = "Improper holding entry and improper wind correction while holding."
 
 [skills]
-s1 = "Explain and use an entry procedure that ensures the airplane remains within the holding pattern airspace for a standard, nonstandard, published, or non-published holding pattern."
-s2 = "Change to the holding airspeed appropriate for the altitude or airplane when 3 minutes or less from, but prior to arriving at, the holding fix and set appropriate power as needed for fuel conservation."
-s3 = "Recognize arrival at the holding fix and promptly initiate entry into the holding pattern."
-s4 = "Maintain airspeed ±10 knots, altitude ±100 feet, selected headings within ±10°, and track a selected course, radial, or bearing within ¾-scale deflection of the CDI."
-s5 = "Use proper wind correction procedures to maintain the desired pattern and to arrive over the fix as close as possible to a specified time and maintain pattern leg lengths when specified."
-s6 = "Use an MFD and other graphical navigation displays, if installed, to monitor position in relation to the desired flightpath during holding."
-s7 = "Comply with ATC reporting requirements and restrictions associated with the holding pattern."
-s8 = "Demonstrate SRM"
+1 = "Explain and use an entry procedure that ensures the airplane remains within the holding pattern airspace for a standard, nonstandard, published, or non-published holding pattern."
+2 = "Change to the holding airspeed appropriate for the altitude or airplane when 3 minutes or less from, but prior to arriving at, the holding fix and set appropriate power as needed for fuel conservation."
+3 = "Recognize arrival at the holding fix and promptly initiate entry into the holding pattern."
+4 = "Maintain airspeed ±10 knots, altitude ±100 feet, selected headings within ±10°, and track a selected course, radial, or bearing within ¾-scale deflection of the CDI."
+5 = "Use proper wind correction procedures to maintain the desired pattern and to arrive over the fix as close as possible to a specified time and maintain pattern leg lengths when specified."
+6 = "Use an MFD and other graphical navigation displays, if installed, to monitor position in relation to the desired flightpath during holding."
+7 = "Comply with ATC reporting requirements and restrictions associated with the holding pattern."
+8 = "Demonstrate SRM"

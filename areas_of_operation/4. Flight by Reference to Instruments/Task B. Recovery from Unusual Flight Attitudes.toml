@@ -8,13 +8,13 @@ references = [
 ]
 
 [knowledge]
-k1 = "Procedures for recovery from unusual flight attitudes."
-k2 = "Unusual flight attitude causal factors, including physiological factors, system and equipment failures, and environmental factors."
+1 = "Procedures for recovery from unusual flight attitudes."
+2 = "Unusual flight attitude causal factors, including physiological factors, system and equipment failures, and environmental factors."
 
 [risk_management]
-r1 = "Situations that could lead to loss of control or unusual flight attitudes (e.g., stress, task saturation, and distractions)."
-r2 = "Failure to recognize an unusual flight attitude and follow the proper recovery procedure."
-r3 = "Exceeding the operating envelope during the recovery."
+1 = "Situations that could lead to loss of control or unusual flight attitudes (e.g., stress, task saturation, and distractions)."
+2 = "Failure to recognize an unusual flight attitude and follow the proper recovery procedure."
+3 = "Exceeding the operating envelope during the recovery."
 
 [skills]
-s1 = "Use proper instrument cross-check and interpretation to identify an unusual attitude (including both nose-high and nose-low), and apply the appropriate pitch, bank, and power corrections, in the correct sequence, to return to a stabilized level flight attitude."
+1 = "Use proper instrument cross-check and interpretation to identify an unusual attitude (including both nose-high and nose-low), and apply the appropriate pitch, bank, and power corrections, in the correct sequence, to return to a stabilized level flight attitude."

@@ -4,8 +4,7 @@ import toml from 'toml';
 import { getSectionStructure } from './acs_data';
 
 export type TaskLetter = 'A' | 'B' | 'C' | 'D' | 'E';
-
-namespace TaskTOML {
+export namespace TaskTOML {
   type Meta = {
     letter: TaskLetter;
     name: string;
@@ -14,21 +13,18 @@ namespace TaskTOML {
   };
 
   type ItemNumber = 1 | 2 | 3;
-  type DataFactory<Letter extends string> = Record<`${Letter}${ItemNumber}`, string>;
-  type Knowledge = DataFactory<'k'>;
-  type RiskManagement = DataFactory<'r'>;
-  type Skills = DataFactory<'s'>;
+  export type DataList = Record<ItemNumber, string>;
 
-  export interface Json {
+  export interface JSON {
     meta: Meta;
-    knowledge: Knowledge;
-    risk_management: RiskManagement;
-    skills: Skills;
+    knowledge: DataList;
+    risk_management: DataList;
+    skills: DataList;
   }
 }
 
-export interface TaskJson {
-  json: TaskTOML.Json;
+export interface TaskJSON {
+  json: TaskTOML.JSON;
   letter: string;
   section: number;
 }
@@ -36,7 +32,7 @@ export interface TaskJson {
 export class Task {
   section: number;
   letter: string;
-  json: TaskTOML.Json;
+  json: TaskTOML.JSON;
 
   constructor(section: number, letter: string) {
     this.section = section;
@@ -62,7 +58,7 @@ export class Task {
     return new Task(section.number, task.letter);
   }
 
-  toJSON(): TaskJson {
+  toJSON(): TaskJSON {
     return {
       section: this.section,
       letter: this.letter,
