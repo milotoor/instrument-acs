@@ -1,4 +1,7 @@
 export type TaskLetter = 'A' | 'B' | 'C' | 'D' | 'E';
+export type GroupHeading = 'Knowledge' | 'Risk Management' | 'Skills';
+export type NoteID = [GroupHeading, number];
+
 export namespace TaskTOML {
   type Section = { numeral: string; name: string };
   type Meta = {
@@ -9,11 +12,16 @@ export namespace TaskTOML {
     section: Section;
   };
 
-  type ItemNumber = 1 | 2 | 3;
-  export type DataList = Record<ItemNumber, string>;
+  export type DataList = Record<number, string>;
 
   export interface JSON {
     meta: Meta;
+    knowledge: DataList;
+    risk_management: DataList;
+    skills: DataList;
+  }
+
+  export interface Notes {
     knowledge: DataList;
     risk_management: DataList;
     skills: DataList;
@@ -23,6 +31,7 @@ export namespace TaskTOML {
 export interface TaskJSON {
   json: TaskTOML.JSON;
   letter: string;
+  notes: TaskTOML.Notes | null;
   section: number;
 }
 
@@ -30,18 +39,40 @@ export class Task {
   section: number;
   letter: string;
   json: TaskTOML.JSON;
+  notes: TaskTOML.Notes | null;
 
   constructor(task: TaskJSON) {
-    this.section = task.section;
-    this.letter = task.letter;
     this.json = task.json;
+    this.letter = task.letter;
+    this.notes = task.notes;
+    this.section = task.section;
+  }
+
+  getGroup(heading: GroupHeading) {
+    const { json, notes } = this;
+    const getGroup = (h: keyof TaskTOML.Notes) => [json[h], notes && notes[h]] as const;
+
+    switch (heading) {
+      case 'Knowledge':
+        return getGroup('knowledge');
+      case 'Risk Management':
+        return getGroup('risk_management');
+      case 'Skills':
+        return getGroup('skills');
+    }
+  }
+
+  getNote([groupName, number]: NoteID) {
+    const [, notes] = this.getGroup(groupName);
+    return notes ? notes[number] : null;
   }
 
   toJSON(): TaskJSON {
     return {
-      section: this.section,
-      letter: this.letter,
       json: this.json,
+      letter: this.letter,
+      notes: this.notes,
+      section: this.section,
     };
   }
 }

@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "@emotion/react": "^11.9.3",
+    "classnames": "^2.3.1",
     "directory-tree": "^3.3.0",
     "next": "latest",
     "react": "18.1.0",
