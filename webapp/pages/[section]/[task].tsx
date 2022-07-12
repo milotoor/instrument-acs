@@ -3,13 +3,13 @@ import Head from 'next/head';
 import React from 'react';
 
 import { Link } from '../../components';
-import { getSectionStructure } from '../../lib/acs_data';
+import { getSectionStructure, getTaskFromNames } from '../../lib/data_loaders';
 import { Task, TaskJSON, TaskTOML } from '../../lib/task';
 
 type DataSectionProps = { data: TaskTOML.DataList; heading: string };
 type SectionContainerProps = { children: React.ReactNode; heading: string };
 type TaskDynamicPath = { section: string; task: string };
-type TaskPageProps = { task: TaskJSON };
+type TaskPageProps = { taskJSON: TaskJSON };
 
 export function getStaticPaths() {
   const sections = getSectionStructure();
@@ -28,11 +28,12 @@ export const getStaticProps: GetStaticProps<TaskPageProps, TaskDynamicPath> = as
   params,
 }) => {
   if (!params) throw Error();
-  const task = Task.fromNames(params.section, params.task);
-  return { props: { task: task.toJSON() } };
+  const task = getTaskFromNames(params.section, params.task);
+  return { props: { taskJSON: task.toJSON() } };
 };
 
-const TaskPage: NextPage<TaskPageProps> = ({ task }) => {
+const TaskPage: NextPage<TaskPageProps> = ({ taskJSON }) => {
+  const task = React.useMemo(() => new Task(taskJSON), [taskJSON]);
   const { knowledge, meta, risk_management, skills } = task.json;
   return (
     <div className="flex min-h-screen flex-col items-center justify-start py-16">

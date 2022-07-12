@@ -3,7 +3,7 @@ import { NextPage } from 'next';
 import Head from 'next/head';
 
 import { Link } from '../components';
-import { getSectionStructure, Section } from '../lib/acs_data';
+import { getSectionStructure, Section } from '../lib/data_loaders';
 
 type ACSProp = { sections: Section[] };
 type TOCLinkProps = { href: string; text: string };
