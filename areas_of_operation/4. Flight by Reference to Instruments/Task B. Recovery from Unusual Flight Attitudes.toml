@@ -7,6 +7,10 @@ references = [
     "FAA-H-8083-15",
 ]
 
+[meta.section]
+name = "Flight by Reference to Instruments"
+numeral = "IV"
+
 [knowledge]
 1 = "Procedures for recovery from unusual flight attitudes."
 2 = "Unusual flight attitude causal factors, including physiological factors, system and equipment failures, and environmental factors."

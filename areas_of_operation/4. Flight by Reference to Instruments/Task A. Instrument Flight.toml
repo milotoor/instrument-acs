@@ -8,6 +8,10 @@ references = [
     "FAA-H-8083-15",
 ]
 
+[meta.section]
+name = "Flight by Reference to Instruments"
+numeral = "IV"
+
 [knowledge]
 1 = "Elements related to attitude instrument flying during straight-and-level flight, climbs, turns, and descents while conducting various instrument flight procedures."
 2 = "Interpretation, operation, and limitations of pitch, bank, and power instruments."

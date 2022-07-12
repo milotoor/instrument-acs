@@ -9,6 +9,10 @@ references = [
     "AIM",
 ]
 
+[meta.section]
+name = "Instrument Approach Procedures"
+numeral = "VI"
+
 [knowledge]
 1 = "Elements related to the pilot’s responsibilities, and the environmental, operational, and meteorological factors that affect landing from a straight-in or circling approach."
 2 = "Airport signs, markings and lighting, to include approach lighting systems."

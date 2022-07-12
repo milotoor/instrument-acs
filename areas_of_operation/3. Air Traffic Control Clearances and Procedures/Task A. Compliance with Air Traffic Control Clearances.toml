@@ -9,6 +9,10 @@ references = [
     "AIM",
 ]
 
+[meta.section]
+name = "Air Traffic Control Clearances and Procedures"
+numeral = "III"
+
 [knowledge]
 1 = "Elements and procedures related to ATC clearances and pilot/controller responsibilities for departure, en route, and arrival phases of flight including clearance void times."
 2 = "PIC emergency authority."

@@ -9,6 +9,10 @@ references = [
     "IFP",
 ]
 
+[meta.section]
+name = "Emergency Operations"
+numeral = "VII"
+
 [knowledge]
 1 = "Instrument approach procedures with one engine inoperative."
 

@@ -11,6 +11,10 @@ references = [
     "AIM",
 ]
 
+[meta.section]
+name = "Instrument Approach Procedures"
+numeral = "VI"
+
 [knowledge]
 1 = "Procedures and limitations associated with a precision approach, including determining required descent rates and adjusting minimums in the case of inoperative equipment."
 2 = "Navigation system displays, annunciations, and modes of operation."

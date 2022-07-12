@@ -9,6 +9,10 @@ references = [
     "AIM",
 ]
 
+[meta.section]
+name = "Preflight Procedures"
+numeral = "II"
+
 [knowledge]
 1 = "Operation of their airplane’s applicable flight instrument system(s) including:"
 1a = "a. Pitot-static instrument system: altimeter, airspeed indicator, vertical speed indicator"

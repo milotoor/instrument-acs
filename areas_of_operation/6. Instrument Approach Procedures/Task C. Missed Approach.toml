@@ -10,6 +10,10 @@ references = [
     "AIM",
 ]
 
+[meta.section]
+name = "Instrument Approach Procedures"
+numeral = "VI"
+
 [knowledge]
 1 = "Elements related to missed approach procedures and limitations associated with standard instrument approaches, including while using an FMS or autopilot, if equipped."
 

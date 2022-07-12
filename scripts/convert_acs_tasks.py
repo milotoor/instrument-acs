@@ -40,6 +40,10 @@ class TaskFile:
                 "objective": objective,
                 "name": self.raw_path.name[len("Task A. ") : -len(".txt")],
                 "references": references,
+                "section": {
+                    "name": self.parsed_path.parts[-2][3:],
+                    "numeral": self.roman_numeral,
+                },
             }
         }
 
@@ -72,10 +76,6 @@ class TaskFile:
             line = line[len(text) :].strip()
         return line, i
 
-    knowledge_regex = property(lambda self: self.make_regex("K"))
-    risk_management_regex = property(lambda self: self.make_regex("R"))
-    skill_regex = property(lambda self: self.make_regex("S"))
-
     def make_regex(self, section_letter: str):
         return re.compile(
             AGNOSTIC_REGEX.format(
@@ -92,7 +92,7 @@ class TaskFile:
 
     @cached_property
     def task_lines(self) -> TaskLines:
-        return self.task_text.splitlines()
+        return self.raw_path.read_text().splitlines()
 
     @property
     def parsed_path(self):
@@ -133,10 +133,6 @@ class TaskFile:
         raise ModuleNotFoundError(
             f"No task {self.letter.upper()} found for area of operation {self.section}"
         )
-
-    @cached_property
-    def task_text(self):
-        return self.raw_path.read_text()
 
     def write_toml(self, parsed):
         with open(self.parsed_path, "wb") as f:

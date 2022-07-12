@@ -5,11 +5,13 @@ import { getSectionStructure } from './acs_data';
 
 export type TaskLetter = 'A' | 'B' | 'C' | 'D' | 'E';
 export namespace TaskTOML {
+  type Section = { numeral: string; name: string };
   type Meta = {
     letter: TaskLetter;
     name: string;
     objective: string;
     references: string[];
+    section: Section;
   };
 
   type ItemNumber = 1 | 2 | 3;
@@ -44,7 +46,6 @@ export class Task {
     if (!task) throw Error(`Invalid task identifiers (section: ${section}, letter: "${letter}")`);
     const fileContent = fs.readFileSync(task.path).toString();
     this.json = toml.parse(fileContent);
-    console.log(this.json);
   }
 
   static fromNames(sectionName: string, taskName: string) {

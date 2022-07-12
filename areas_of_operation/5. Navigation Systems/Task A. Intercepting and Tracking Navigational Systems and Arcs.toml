@@ -11,6 +11,10 @@ references = [
     "AIM",
 ]
 
+[meta.section]
+name = "Navigation Systems"
+numeral = "V"
+
 [knowledge]
 1 = "Ground-based navigation (orientation, course determination, equipment, tests and regulations) including procedures for intercepting and tracking courses and arcs."
 2 = "Satellite-based navigation (orientation, course determination, equipment, tests and regulations, interference, appropriate use of databases, RAIM, and WAAS) including procedures for intercepting and tracking courses and arcs."

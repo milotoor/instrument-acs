@@ -10,6 +10,10 @@ references = [
     "AIM",
 ]
 
+[meta.section]
+name = "Preflight Preparation"
+numeral = "I"
+
 [knowledge]
 1 = "Sources of weather data (e.g., National Weather Service, Flight Service) for flight planning purposes."
 2 = "Acceptable weather products and resources utilized for preflight planning, current and forecast weather for departure and en route operations and arrival phases of flight."

@@ -11,6 +11,10 @@ references = [
     "AC 91-74",
 ]
 
+[meta.section]
+name = "Preflight Procedures"
+numeral = "II"
+
 [knowledge]
 1 = "The general operational characteristics and limitations of applicable anti-icing and deicing systems, including airframe, propeller, intake, fuel, and pitot-static systems."
 

@@ -10,6 +10,10 @@ references = [
     "AIM",
 ]
 
+[meta.section]
+name = "Instrument Approach Procedures"
+numeral = "VI"
+
 [knowledge]
 1 = "Elements related to circling approach procedures and limitations including approach categories and related airspeed restrictions."
 

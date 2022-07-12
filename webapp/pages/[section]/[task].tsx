@@ -45,7 +45,10 @@ const TaskPage: NextPage<TaskPageProps> = ({ task }) => {
       </div>
 
       <main className="flex flex-1 flex-col w-[1000px]">
-        <h1 className="text-4xl font-bold font-roboto-mono text-yellow-400 [text-shadow:0_0_30px_rgba(0,0,0,1)] -indent-12 pl-12">
+        <h3 className="text-2xl font-bold font-roboto-mono">
+          Section {meta.section.numeral}. {meta.section.name}
+        </h3>
+        <h1 className="text-4xl font-bold font-roboto-mono text-yellow-400 [text-shadow:0_0_30px_rgba(0,0,0,1)] -indent-12 pl-12 mt-2">
           Task {meta.letter}. {meta.name}
         </h1>
 
