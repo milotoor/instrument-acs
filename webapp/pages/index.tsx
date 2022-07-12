@@ -1,38 +1,34 @@
 import dirTree from 'directory-tree';
-import type { NextPage } from 'next';
+import { NextPage } from 'next';
 import Head from 'next/head';
-import Image from 'next/image';
 
-type ACSSection = { name: string; tasks: string[] };
-type ACSProp = { acs: ACSSection[] };
+import { Link } from '../components';
+import { getSectionStructure, Section } from '../lib/acs_data';
 
-export function getStaticProps() {
-  const tree = dirTree('../areas_of_operation');
-  console.log(tree);
-  const areas = tree?.children?.filter((child) => child.name.match(/\d\./));
+type ACSProp = { sections: Section[] };
+type TOCLinkProps = { href: string; text: string };
+
+export function getStaticProps(): { props: ACSProp } {
   return {
     props: {
-      acs: areas?.map(({ name, children }) => ({
-        name: name.replace(/\d\. /, ''),
-        tasks: children?.map(({ name }) => name.replace(/Task .\. /, '').replace('.toml', '')),
-      })),
+      sections: getSectionStructure(),
     },
   };
 }
 
-const Home: NextPage<ACSProp> = ({ acs }) => {
+const Home: NextPage<ACSProp> = ({ sections }) => {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-2">
       <Head>
-        <title>Create Next App</title>
+        <title>The Instrument ACS</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="flex flex-1 flex-col items-center justify-center text-center">
-        <h1 className="text-6xl font-bold">
+      <main className="flex flex-1 flex-col justify-center w-[750px]">
+        <h1 className="text-7xl font-bold font-fancy pt-5">
           The{' '}
           <a
-            className="text-blue-600"
+            className="text-yellow-400 [text-shadow:0_0_30px_rgba(0,0,0,1)]"
             href="https://www.faa.gov/training_testing/testing/acs/media/instrument_rating_acs_change_1.pdf"
             target="_blank"
           >
@@ -40,7 +36,7 @@ const Home: NextPage<ACSProp> = ({ acs }) => {
           </a>
         </h1>
 
-        <TableOfContents acs={acs} />
+        <TableOfContents sections={sections} />
       </main>
     </div>
   );
@@ -48,32 +44,22 @@ const Home: NextPage<ACSProp> = ({ acs }) => {
 
 export default Home;
 
-const TableOfContents: React.FC<ACSProp> = ({ acs }) => {
+const TableOfContents: React.FC<ACSProp> = ({ sections }) => {
   return (
-    <div className="mt-16 text-left w-full">
-      <ol className="list-decimal leading-7 ml-8 mt-4">
-        {acs.map(({ name, tasks }) => {
-          const sectionUri = '/' + name.toLowerCase().replaceAll(/\s/g, '-');
-          return (
-            <li key={name}>
-              <a className="text-blue-600" href={sectionUri}>
-                {name}
-              </a>
-              <ol className="ml-8" css={{ listStyleType: 'lower-alpha' }}>
-                {tasks.map((task) => (
-                  <li key={name}>
-                    <a
-                      className="text-blue-600"
-                      href={sectionUri + '/' + task.toLowerCase().replaceAll(/\s+/g, '-')}
-                    >
-                      {task}
-                    </a>
-                  </li>
-                ))}
-              </ol>
-            </li>
-          );
-        })}
+    <div className="my-10 w-full">
+      <ol className="list-decimal leading-8 ml-8 mt-4 text-xl font-roboto">
+        {sections.map(({ name, tasks, uri }) => (
+          <li key={name}>
+            <Link href={uri}>{name}</Link>
+            <ol className="ml-8" css={{ listStyleType: 'lower-alpha' }}>
+              {tasks.map((task) => (
+                <li key={task.name}>
+                  <Link href={task.uri}>{task.name}</Link>
+                </li>
+              ))}
+            </ol>
+          </li>
+        ))}
       </ol>
     </div>
   );
