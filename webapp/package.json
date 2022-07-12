@@ -10,7 +10,8 @@
     "directory-tree": "^3.3.0",
     "next": "latest",
     "react": "18.1.0",
-    "react-dom": "18.1.0"
+    "react-dom": "18.1.0",
+    "toml": "^3.0.0"
   },
   "devDependencies": {
     "@emotion/babel-plugin": "^11.9.2",
