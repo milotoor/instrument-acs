@@ -18,18 +18,9 @@ TaskLines = List[str]
 AGNOSTIC_REGEX = "IR\.{number}\.{task_letter}\.{section_letter}([^\s]*)"
 
 
-@click.command()
-@click.argument("area_number", type=int)
-@click.argument("task_letter")
-def convert_task(area_number: int, task_letter: str):
-    """The entrypoint for the script"""
-    task = TaskFile(area_number, task_letter)
-    task.convert()
-
-
 @attr.s(auto_attribs=True)
 class TaskFile:
-    area_number: int
+    section: int
     letter: str
 
     def convert(self):
@@ -43,7 +34,14 @@ class TaskFile:
         references, _ = self.get_line_starting_with("References")
         references = re.split("; |, ", references)
         objective, _ = self.get_line_starting_with("Objective")
-        return {"meta": {"references": references, "objective": objective}}
+        return {
+            "meta": {
+                "letter": self.letter,
+                "objective": objective,
+                "name": self.raw_path.name[len("Task A. ") : -len(".txt")],
+                "references": references,
+            }
+        }
 
     def extract_section(self, section: str):
         data = {}
@@ -90,7 +88,7 @@ class TaskFile:
     @property
     def roman_numeral(self):
         numerals = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII"]
-        return numerals[self.area_number - 1]
+        return numerals[self.section - 1]
 
     @cached_property
     def task_lines(self) -> TaskLines:
@@ -119,12 +117,12 @@ class TaskFile:
         areas_path = os.path.join(file_dir, "../areas_of_operation/raw")
         areas_path = Path(os.path.normpath(areas_path))
         for dir_path in areas_path.iterdir():
-            if dir_path.name.startswith(str(self.area_number)) and dir_path.is_dir():
+            if dir_path.name.startswith(str(self.section)) and dir_path.is_dir():
                 area_dir = dir_path
                 break
 
         if area_dir is None:
-            raise ModuleNotFoundError(f"No area of operation {self.area_number} found")
+            raise ModuleNotFoundError(f"No area of operation {self.section} found")
 
         # Find the task in the area directory with the expected number
         file_name = f"Task {self.letter.upper()}."
@@ -133,7 +131,7 @@ class TaskFile:
                 return task_path
 
         raise ModuleNotFoundError(
-            f"No task {self.letter.upper()} found for area of operation {self.area_number}"
+            f"No task {self.letter.upper()} found for area of operation {self.section}"
         )
 
     @cached_property
@@ -146,4 +144,8 @@ class TaskFile:
 
 
 if __name__ == "__main__":
-    convert_task()
+    tasks_by_section = [3, 3, 2, 2, 2, 5, 4, 1]
+    letters = "ABCDE"
+    for i, num_tasks in enumerate(tasks_by_section):
+        for j in range(num_tasks):
+            TaskFile(i + 1, letters[j]).convert()

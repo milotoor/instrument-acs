@@ -1,11 +1,13 @@
 [meta]
+letter = "A"
+objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with the requirements to act as PIC under instrument flight rules."
+name = "Pilot Qualifications"
 references = [
     "14 CFR part 61",
     "FAA-H-8083-2",
     "FAA-H-8083-15",
     "AC 68-1",
 ]
-objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with the requirements to act as PIC under instrument flight rules."
 
 [knowledge]
 k1 = "Certification requirements, recency of experience, and recordkeeping."

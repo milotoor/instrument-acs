@@ -1,4 +1,7 @@
 [meta]
+letter = "B"
+objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with IFR departure, en route, and arrival operations solely by reference to instruments."
+name = "Departure, En Route, and Arrival Operations"
 references = [
     "14 CFR parts 61",
     "91",
@@ -8,7 +11,6 @@ references = [
     "AFM",
     "AIM",
 ]
-objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with IFR departure, en route, and arrival operations solely by reference to instruments."
 
 [knowledge]
 k1 = "Elements related to ATC routes, including departure procedures (DPs) and associated climb gradients; arrival procedures (STARs) and associated constraints."

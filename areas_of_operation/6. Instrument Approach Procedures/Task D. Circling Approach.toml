@@ -1,4 +1,7 @@
 [meta]
+letter = "D"
+objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with performing a circling approach procedure."
+name = "Circling Approach"
 references = [
     "14 CFR parts 61",
     "91",
@@ -6,7 +9,6 @@ references = [
     "IFP",
     "AIM",
 ]
-objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with performing a circling approach procedure."
 
 [knowledge]
 k1 = "Elements related to circling approach procedures and limitations including approach categories and related airspeed restrictions."

@@ -1,11 +1,13 @@
 [meta]
+letter = "E"
+objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with performing the procedures for a landing from an instrument approach."
+name = "Landing from an Instrument Approach"
 references = [
     "14 CFR parts 61",
     "91",
     "FAA-H-8083-15",
     "AIM",
 ]
-objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with performing the procedures for a landing from an instrument approach."
 
 [knowledge]
 k1 = "Elements related to the pilot’s responsibilities, and the environmental, operational, and meteorological factors that affect landing from a straight-in or circling approach."

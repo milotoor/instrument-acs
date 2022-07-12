@@ -1,4 +1,7 @@
 [meta]
+letter = "C"
+objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with conducting a preflight check on the airplane’s instruments necessary for an IFR flight."
+name = "Instrument Flight Deck Check"
 references = [
     "14 CFR part 91",
     "FAA-8083-2",
@@ -8,7 +11,6 @@ references = [
     "AC 91.21-1",
     "POH/AFM",
 ]
-objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with conducting a preflight check on the airplane’s instruments necessary for an IFR flight."
 
 [knowledge]
 k1 = "Purpose of performing an instrument flight deck check and how to detect possible defects."

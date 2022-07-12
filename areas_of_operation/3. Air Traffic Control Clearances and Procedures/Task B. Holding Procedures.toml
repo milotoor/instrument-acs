@@ -1,4 +1,7 @@
 [meta]
+letter = "B"
+objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with holding procedures solely by reference to instruments."
+name = "Holding Procedures"
 references = [
     "14 CFR parts 61",
     "91",
@@ -6,7 +9,6 @@ references = [
     "FAA-H-8083-16",
     "AIM",
 ]
-objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with holding procedures solely by reference to instruments."
 
 [knowledge]
 k1 = "Elements related to holding procedures, including reporting criteria, appropriate speeds, and recommended entry procedures for standard, nonstandard, published, and nonpublished holding patterns."

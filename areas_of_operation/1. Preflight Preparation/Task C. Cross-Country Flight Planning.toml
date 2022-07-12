@@ -1,4 +1,7 @@
 [meta]
+letter = "C"
+objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with planning an IFR cross-country and filing an IFR flight plan."
+name = "Cross-Country Flight Planning"
 references = [
     "14 CFR part 91",
     "FAA-H-8083-2",
@@ -10,7 +13,6 @@ references = [
     "AIM",
     "NOTAMs",
 ]
-objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with planning an IFR cross-country and filing an IFR flight plan."
 
 [knowledge]
 k1 = "Route planning, including consideration of the available navigational facilities, special use airspace, preferred routes, and alternate airports."

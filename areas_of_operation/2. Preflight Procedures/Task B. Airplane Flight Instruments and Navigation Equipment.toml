@@ -1,11 +1,13 @@
 [meta]
+letter = "B"
+objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with managing instruments appropriate for an IFR flight."
+name = "Airplane Flight Instruments and Navigation Equipment"
 references = [
     "14 CFR parts 61",
     "91",
     "FAA-H-8083-15",
     "AIM",
 ]
-objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with managing instruments appropriate for an IFR flight."
 
 [knowledge]
 k1 = "Operation of their airplane’s applicable flight instrument system(s) including:"

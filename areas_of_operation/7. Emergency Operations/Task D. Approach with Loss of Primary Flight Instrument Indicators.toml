@@ -1,11 +1,13 @@
 [meta]
+letter = "D"
+objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with performing an approach solely by reference to instruments with the loss of primary flight control instruments."
+name = "Approach with Loss of Primary Flight Instrument Indicators"
 references = [
     "14 CFR parts 61",
     "91",
     "FAA-H-8083-15",
     "IFP",
 ]
-objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with performing an approach solely by reference to instruments with the loss of primary flight control instruments."
 
 [knowledge]
 k1 = "Recognizing if primary flight instruments are inaccurate or inoperative, and advising ATC or the evaluator."

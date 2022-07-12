@@ -1,4 +1,7 @@
 [meta]
+letter = "A"
+objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with anti-icing and de-icing systems."
+name = "Airplane Systems Related to IFR Operations"
 references = [
     "14 CFR parts 61",
     "91",
@@ -7,7 +10,6 @@ references = [
     "AFM",
     "AC 91-74",
 ]
-objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with anti-icing and de-icing systems."
 
 [knowledge]
 k1 = "The general operational characteristics and limitations of applicable anti-icing and deicing systems, including airframe, propeller, intake, fuel, and pitot-static systems."

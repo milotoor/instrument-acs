@@ -1,4 +1,7 @@
 [meta]
+letter = "B"
+objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with obtaining, understanding, and applying weather information for a flight under IFR."
+name = "Weather Information"
 references = [
     "14 CFR part 91",
     "FAA-H-8083-25",
@@ -6,7 +9,6 @@ references = [
     "AC 00-45",
     "AIM",
 ]
-objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with obtaining, understanding, and applying weather information for a flight under IFR."
 
 [knowledge]
 k1 = "Sources of weather data (e.g., National Weather Service, Flight Service) for flight planning purposes."

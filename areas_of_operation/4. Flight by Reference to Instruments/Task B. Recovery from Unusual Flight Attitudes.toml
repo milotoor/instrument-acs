@@ -1,9 +1,11 @@
 [meta]
+letter = "B"
+objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with recovering from unusual flight attitudes solely by reference to instruments."
+name = "Recovery from Unusual Flight Attitudes"
 references = [
     "14 CFR part 61",
     "FAA-H-8083-15",
 ]
-objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with recovering from unusual flight attitudes solely by reference to instruments."
 
 [knowledge]
 k1 = "Procedures for recovery from unusual flight attitudes."

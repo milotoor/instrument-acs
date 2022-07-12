@@ -1,4 +1,7 @@
 [meta]
+letter = "A"
+objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with performing nonprecision approach procedures solely by reference to instruments."
+name = "Nonprecision Approach"
 references = [
     "14 CFR parts 61",
     "91",
@@ -8,7 +11,6 @@ references = [
     "AIM",
     "AC 120-108",
 ]
-objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with performing nonprecision approach procedures solely by reference to instruments."
 
 [knowledge]
 k1 = "Procedures and limitations associated with a nonprecision approach, including the differences between Localizer Performance (LP) and Lateral Navigation (LNAV) approach guidance."

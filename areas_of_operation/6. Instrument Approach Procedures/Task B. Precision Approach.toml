@@ -1,4 +1,7 @@
 [meta]
+letter = "B"
+objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with performing precision approach procedures solely by reference to instruments."
+name = "Precision Approach"
 references = [
     "14 CFR parts 61",
     "91",
@@ -7,7 +10,6 @@ references = [
     "IFP",
     "AIM",
 ]
-objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with performing precision approach procedures solely by reference to instruments."
 
 [knowledge]
 k1 = "Procedures and limitations associated with a precision approach, including determining required descent rates and adjusting minimums in the case of inoperative equipment."

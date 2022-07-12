@@ -1,10 +1,12 @@
 [meta]
+letter = "B"
+objective = "To determine the applicant exhibits satisfactory knowledge, risk management and skills associated with flight solely by reference to instruments with one engine inoperative."
+name = "One Engine Inoperative (Simulated) during Straight-and-Level Flight and Turns (AMEL, AMES)"
 references = [
     "14 CFR 61",
     "FAA-H-8083-3",
     "FAA-H-8083-15",
 ]
-objective = "To determine the applicant exhibits satisfactory knowledge, risk management and skills associated with flight solely by reference to instruments with one engine inoperative."
 
 [knowledge]
 k1 = "Procedures used if engine failure occurs during straight-and-level flight and turns while on instruments."

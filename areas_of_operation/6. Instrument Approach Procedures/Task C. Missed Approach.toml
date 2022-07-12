@@ -1,4 +1,7 @@
 [meta]
+letter = "C"
+objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with performing a missed approach procedure solely by reference to instruments."
+name = "Missed Approach"
 references = [
     "14 CFR parts 61",
     "91",
@@ -6,7 +9,6 @@ references = [
     "IFP",
     "AIM",
 ]
-objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with performing a missed approach procedure solely by reference to instruments."
 
 [knowledge]
 k1 = "Elements related to missed approach procedures and limitations associated with standard instrument approaches, including while using an FMS or autopilot, if equipped."
