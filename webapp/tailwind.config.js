@@ -10,6 +10,9 @@ module.exports = {
         'fancy': ['Lobster'],
         'roboto': ['Roboto'],
         'roboto-mono': ['"Roboto Mono"']
+      },
+      listStyleType: {
+        'alpha': 'lower-alpha',
       }
     },
   },
