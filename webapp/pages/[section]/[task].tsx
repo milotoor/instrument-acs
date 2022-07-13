@@ -65,7 +65,7 @@ const TaskPage: NextPage<TaskPageProps> = ({ taskJSON }) => {
         <h3 className="text-xl md:text-2xl font-bold font-roboto-mono">
           Section {meta.section.numeral}. {meta.section.name}
         </h3>
-        <h1 className="text-2xl md:text-4xl font-bold font-roboto-mono text-yellow-400 [text-shadow:0_0_30px_rgba(0,0,0,1)] -indent-12 pl-12 mt-2">
+        <h1 className="text-2xl md:text-4xl font-bold font-roboto-mono text-title -indent-12 pl-12 mt-2">
           Task {meta.letter}. {meta.name}
         </h1>
 

@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+    .text-title {
+        text-shadow: 0 0 30px rgba(0,0,0,1);
+        @apply text-yellow-400;
+    }
+  }
