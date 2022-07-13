@@ -1,6 +1,6 @@
 export type TaskLetter = 'A' | 'B' | 'C' | 'D' | 'E';
 export type GroupHeading = 'Knowledge' | 'Risk Management' | 'Skills';
-export type NoteID = [GroupHeading, number];
+export type NoteID = [GroupHeading, string];
 
 export namespace TaskTOML {
   type Section = { numeral: string; name: string };
@@ -12,7 +12,9 @@ export namespace TaskTOML {
     section: Section;
   };
 
-  export type DataList = Record<number, string>;
+  type Datum = string | { general: string; specific: string[] };
+  export type DataList = Record<string, Datum>;
+  export type NoteList = Record<string, string>;
 
   export interface JSON {
     meta: Meta;
@@ -22,9 +24,9 @@ export namespace TaskTOML {
   }
 
   export interface Notes {
-    knowledge: DataList;
-    risk_management: DataList;
-    skills: DataList;
+    knowledge: NoteList;
+    risk_management: NoteList;
+    skills: NoteList;
   }
 }
 
@@ -62,9 +64,9 @@ export class Task {
     }
   }
 
-  getNote([groupName, number]: NoteID) {
+  getNote([groupName, id]: NoteID) {
     const [, notes] = this.getGroup(groupName);
-    return notes ? notes[number] : null;
+    return notes ? notes[id] : null;
   }
 
   toJSON(): TaskJSON {

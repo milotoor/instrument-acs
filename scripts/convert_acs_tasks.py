@@ -77,7 +77,24 @@ class TaskFile:
             if match:
                 element_id = match.groups()[0].lower()
                 element_text = re.sub(regex, "", line).strip()
-                data[element_id] = element_text
+
+                # Check if it's part of a sub-list
+                match = re.search(r"(\d)[a-z]$", element_id)
+                if match:
+                    element_text = re.sub("^[a-z]\. ", "", element_text)
+                    element_num = match.groups()[0]
+                    element_data = data[element_num]
+
+                    # If the data is already a list, add to it; if not, reformat its entry
+                    if type(element_data) == dict:
+                        element_data["specific"].append(element_text)
+                    else:
+                        data[element_num] = {
+                            "general": element_data,
+                            "specific": [element_text],
+                        }
+                else:
+                    data[element_id] = element_text
         return {section: data}
 
     def get_line_starting_with(self, text: str | re.Pattern, remove: bool = True):

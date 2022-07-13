@@ -21,12 +21,16 @@ numeral = "I"
 [knowledge]
 1 = "Route planning, including consideration of the available navigational facilities, special use airspace, preferred routes, and alternate airports."
 2 = "Altitude selection accounting for terrain and obstacles, glide distance of airplane, IFR cruising altitudes, effect of wind, and oxygen requirements."
-3 = "Calculating:"
-3a = "a. Time, climb and descent rates, course, distance, heading, true airspeed, and groundspeed"
-3b = "b. Estimated time of arrival to include conversion to universal coordinated time (UTC)"
-3c = "c. Fuel requirements, to include reserve"
 4 = "Elements of an IFR flight plan."
 5 = "Procedures for activating and closing an IFR flight plan in controlled and uncontrolled airspace."
+
+[knowledge.3]
+general = "Calculating:"
+specific = [
+    "Time, climb and descent rates, course, distance, heading, true airspeed, and groundspeed",
+    "Estimated time of arrival to include conversion to universal coordinated time (UTC)",
+    "Fuel requirements, to include reserve",
+]
 
 [risk_management]
 1 = "Pilot."

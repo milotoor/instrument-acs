@@ -10,11 +10,20 @@ import { GroupHeading, NoteID, Task, TaskJSON } from '../../lib/task';
 type Position = number;
 type ActiveNoteArgs = { id: NoteID; position: Position };
 type ActiveNoteProps = { note?: ActiveNoteArgs; task: Task };
+type SetActiveNoteProp = (args: ActiveNoteArgs) => void;
 type DataSectionProps = {
   activeNoteID?: NoteID;
   heading: GroupHeading;
-  setActiveNote: (args: ActiveNoteArgs) => void;
+  setActiveNote: SetActiveNoteProp;
   task: Task;
+};
+
+type ListItemProps = {
+  hasNote: boolean;
+  id: NoteID;
+  isActive: boolean;
+  setActiveNote: SetActiveNoteProp;
+  text: string;
 };
 
 type ReferencesSectionProps = { references: string[] };
@@ -187,36 +196,27 @@ function ReferencesSection({ references }: ReferencesSectionProps) {
 function DataSection({ activeNoteID, heading, setActiveNote, task }: DataSectionProps) {
   const [data, notes] = task.getGroup(heading);
   const sorted = Object.entries(data).sort((a, b) => parseInt(a[0]) - parseInt(b[0]));
-  const activeColor = 'bg-yellow-500/75';
   return (
     <SectionContainer heading={heading}>
       <ol className="list-decimal ml-8">
         {sorted.map(([num, datum]) => {
-          const noteId: NoteID = [heading, parseInt(num)];
-          const hasNote = Boolean(notes && num in notes);
-          const isActive = Boolean(activeNoteID?.every((v, i) => v === noteId[i]));
+          // If the datum is not the beginning of a sub-list, render it
+          if (typeof datum === 'string') {
+            return <ListItem {...getListItemProps(datum, [heading, num])} />;
+          }
+
+          // Otherwise we need to render the sublist
+          const { general, specific } = datum;
           return (
             <li key={num}>
-              <span
-                onClick={
-                  hasNote
-                    ? (e) => {
-                        e.stopPropagation();
-                        setActiveNote({
-                          id: noteId,
-                          position: getPosition(e.target as HTMLElement),
-                        });
-                      }
-                    : undefined
-                }
-                className={cn({
-                  'cursor-pointer': hasNote,
-                  [activeColor]: isActive,
-                  [`bg-yellow-500/50 hover:${activeColor}`]: hasNote && !isActive,
+              {general}
+              <ol className="list-alpha ml-8">
+                {specific.map((text, i) => {
+                  // Char code 97 is "a", 98 is "b", etc.
+                  const sectionId = num + String.fromCharCode(97 + i);
+                  return <ListItem {...getListItemProps(text, [heading, sectionId])} />;
                 })}
-              >
-                {datum}
-              </span>
+              </ol>
             </li>
           );
         })}
@@ -224,9 +224,45 @@ function DataSection({ activeNoteID, heading, setActiveNote, task }: DataSection
     </SectionContainer>
   );
 
-  function getPosition(el: HTMLElement): Position {
-    return el.offsetTop!;
+  function getListItemProps(text: string, noteId: NoteID) {
+    const sectionId = noteId[1];
+    return {
+      hasNote: Boolean(notes && sectionId in notes),
+      id: noteId,
+      isActive: Boolean(activeNoteID?.every((v, i) => v === noteId[i])),
+      key: sectionId,
+      setActiveNote,
+      text,
+    };
   }
+}
+
+function ListItem({ hasNote, id, isActive, setActiveNote, text }: ListItemProps) {
+  const activeColor = 'bg-yellow-500/75';
+  return (
+    <li>
+      <span
+        onClick={
+          hasNote
+            ? (e) => {
+                e.stopPropagation();
+                setActiveNote({
+                  id: id,
+                  position: (e.target as HTMLElement).offsetTop,
+                });
+              }
+            : undefined
+        }
+        className={cn({
+          'cursor-pointer': hasNote,
+          [activeColor]: isActive,
+          [`bg-yellow-500/50 hover:${activeColor}`]: hasNote && !isActive,
+        })}
+      >
+        {text}
+      </span>
+    </li>
+  );
 }
 
 function SectionContainer({ children, heading }: SectionContainerProps) {

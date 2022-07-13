@@ -12,15 +12,21 @@ references = [
 name = "Preflight Procedures"
 numeral = "II"
 
-[knowledge]
-1 = "Operation of their airplane’s applicable flight instrument system(s) including:"
-1a = "a. Pitot-static instrument system: altimeter, airspeed indicator, vertical speed indicator"
-1b = "b. Gyroscopic/electric/vacuum instrument system: attitude indicator, heading indicator, turn-and-slip indicator/turn coordinator"
-1c = "c. Electrical systems, electronic flight instrument displays (PFD, MFD), transponder, and ADS-B"
-1d = "d. Magnetic compass"
-2 = "Operation of their airplane’s applicable navigation system(s) including:"
-2a = "a. VOR, DME, ILS, marker beacon receiver/indicators"
-2b = "b. RNAV, GPS, Wide Area Augmentation System (WAAS), FMS, autopilot"
+[knowledge.1]
+general = "Operation of their airplane’s applicable flight instrument system(s) including:"
+specific = [
+    "Pitot-static instrument system: altimeter, airspeed indicator, vertical speed indicator",
+    "Gyroscopic/electric/vacuum instrument system: attitude indicator, heading indicator, turn-and-slip indicator/turn coordinator",
+    "Electrical systems, electronic flight instrument displays (PFD, MFD), transponder, and ADS-B",
+    "Magnetic compass",
+]
+
+[knowledge.2]
+general = "Operation of their airplane’s applicable navigation system(s) including:"
+specific = [
+    "VOR, DME, ILS, marker beacon receiver/indicators",
+    "RNAV, GPS, Wide Area Augmentation System (WAAS), FMS, autopilot",
+]
 
 [risk_management]
 1 = "Failure to monitor and manage automated systems."

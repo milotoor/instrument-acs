@@ -17,30 +17,40 @@ numeral = "I"
 [knowledge]
 1 = "Sources of weather data (e.g., National Weather Service, Flight Service) for flight planning purposes."
 2 = "Acceptable weather products and resources utilized for preflight planning, current and forecast weather for departure and en route operations and arrival phases of flight."
-3 = "Meteorology applicable to the departure, en route, alternate, and destination for flights conducted under Instrument Flight Rules (IFR) to include expected climate and hazardous conditions such as:"
-3a = "a. Atmospheric composition and stability"
-3b = "b. Wind (e.g., crosswind, tailwind, windshear, mountain wave, etc.)"
-3c = "c. Temperature"
-3d = "d. Moisture/precipitation"
-3e = "e. Weather system formation, including air masses and fronts"
-3f = "f. Clouds"
-3g = "g. Turbulence"
-3h = "h. Thunderstorms and microbursts"
-3i = "i. Icing and freezing level information"
-3j = "j. Fog/mist"
-3k = "k. Frost"
-3l = "l. Obstructions to visibility (e.g., smoke, haze, volcanic ash, etc.)"
 4 = "Flight deck displays of digital weather and aeronautical information."
 
-[risk_management]
-1 = "Factors involved in making the go/no-go and continue/divert decisions, to include:"
-1a = "a. Circumstances that would make diversion prudent"
-1b = "b. Personal Weather Minimums"
-1c = "c. Hazardous weather conditions to include known or forecast icing or turbulence aloft"
-2 = "Limitations of:"
-2a = "a. Onboard weather equipment"
-2b = "b. Aviation weather reports and forecasts"
-2c = "c. Inflight weather resources"
+[knowledge.3]
+general = "Meteorology applicable to the departure, en route, alternate, and destination for flights conducted under Instrument Flight Rules (IFR) to include expected climate and hazardous conditions such as:"
+specific = [
+    "Atmospheric composition and stability",
+    "Wind (e.g., crosswind, tailwind, windshear, mountain wave, etc.)",
+    "Temperature",
+    "Moisture/precipitation",
+    "Weather system formation, including air masses and fronts",
+    "Clouds",
+    "Turbulence",
+    "Thunderstorms and microbursts",
+    "Icing and freezing level information",
+    "Fog/mist",
+    "Frost",
+    "Obstructions to visibility (e.g., smoke, haze, volcanic ash, etc.)",
+]
+
+[risk_management.1]
+general = "Factors involved in making the go/no-go and continue/divert decisions, to include:"
+specific = [
+    "Circumstances that would make diversion prudent",
+    "Personal Weather Minimums",
+    "Hazardous weather conditions to include known or forecast icing or turbulence aloft",
+]
+
+[risk_management.2]
+general = "Limitations of:"
+specific = [
+    "Onboard weather equipment",
+    "Aviation weather reports and forecasts",
+    "Inflight weather resources",
+]
 
 [skills]
 1 = "Use available aviation weather resources to obtain an adequate weather briefing."
