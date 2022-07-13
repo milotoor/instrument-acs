@@ -4,7 +4,7 @@ objective = "To determine the applicant exhibits satisfactory knowledge, risk ma
 name = "Instrument Flight Deck Check"
 references = [
     "14 CFR part 91",
-    "FAA-8083-2",
+    "FAA-H-8083-2",
     "FAA-H-8083-3",
     "FAA-H-8083-15",
     "FAA-H-8083-25",

@@ -4,7 +4,7 @@ objective = "To determine the applicant exhibits satisfactory knowledge, risk ma
 name = "Instrument Flight"
 references = [
     "14 CFR part 61",
-    "FAA-8083-2",
+    "FAA-H-8083-2",
     "FAA-H-8083-15",
 ]
 

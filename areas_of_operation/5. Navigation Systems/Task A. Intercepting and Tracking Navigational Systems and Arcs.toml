@@ -3,8 +3,7 @@ letter = "A"
 objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with intercepting and tracking navigation aids and arcs solely by reference to instruments."
 name = "Intercepting and Tracking Navigational Systems and Arcs"
 references = [
-    "14 CFR parts 61",
-    "91",
+    "14 CFR parts 61, 91",
     "FAA-H-8083-15",
     "FAA-H-8083-16",
     "AFM",

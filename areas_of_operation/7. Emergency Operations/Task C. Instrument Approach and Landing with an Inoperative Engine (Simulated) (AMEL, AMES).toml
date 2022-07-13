@@ -3,7 +3,7 @@ letter = "C"
 objective = "To determine that the applicant exhibits satisfactory knowledge, risk management, and skills associated with executing a published instrument approach solely by reference to instruments with one engine inoperative."
 name = "Instrument Approach and Landing with an Inoperative Engine (Simulated) (AMEL, AMES)"
 references = [
-    "14 CFR parts 61,91",
+    "14 CFR parts 61 and 91",
     "FAA-H-8083-3",
     "FAA-H-8083-15",
     "IFP",

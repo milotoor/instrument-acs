@@ -32,14 +32,36 @@ class TaskFile:
 
     def extract_meta(self):
         references, _ = self.get_line_starting_with("References")
-        references = re.split("; |, ", references)
+
+        # Extract the "14 CFR parts..." initial portion
+        cfr_parts_end = references.find(";")
+        if cfr_parts_end == -1:
+            parsed_references = [references]
+        else:
+            parsed_references = [references[:cfr_parts_end]]
+            references = references[cfr_parts_end + 1 :].strip()
+
+            # Split the rest of the references by semicolon- or comma-delimitations
+            parsed_references.extend(re.split("; |, ", references))
+
+        # Linting...
+        substitutions = {
+            "14 CFR 61": "14 CFR part 61",
+            "14 CFR parts 61,91": "14 CFR parts 61 and 91",
+            "FAA-8083-2": "FAA-H-8083-2",
+        }
+
+        for i, r in enumerate(parsed_references):
+            if r in substitutions:
+                parsed_references[i] = substitutions[r]
+
         objective, _ = self.get_line_starting_with("Objective")
         return {
             "meta": {
                 "letter": self.letter,
                 "objective": objective,
                 "name": self.raw_path.name[len("Task A. ") : -len(".txt")],
-                "references": references,
+                "references": parsed_references,
                 "section": {
                     "name": self.parsed_path.parts[-2][3:],
                     "numeral": self.roman_numeral,

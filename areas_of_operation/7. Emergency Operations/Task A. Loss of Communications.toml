@@ -3,8 +3,7 @@ letter = "A"
 objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with loss of communications while operating solely by reference to instruments."
 name = "Loss of Communications"
 references = [
-    "14 CFR parts 61",
-    "91",
+    "14 CFR parts 61, 91",
     "AIM",
 ]
 

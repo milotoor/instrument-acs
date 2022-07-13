@@ -17,6 +17,7 @@ type DataSectionProps = {
   task: Task;
 };
 
+type ReferencesSectionProps = { references: string[] };
 type SectionContainerProps = { children: React.ReactNode; heading: string };
 type TaskDynamicPath = { section: string; task: string };
 type TaskPageProps = { taskJSON: TaskJSON };
@@ -70,7 +71,7 @@ const TaskPage: NextPage<TaskPageProps> = ({ taskJSON }) => {
 
         <div className="grid grid-cols-2 gap-4 relative">
           <div>
-            <SectionContainer heading="References">{meta.references.join(', ')}</SectionContainer>
+            <ReferencesSection references={meta.references} />
             <SectionContainer heading="Objective">{meta.objective}</SectionContainer>
             <DataSection heading="Knowledge" {...dataSectionProps} />
             <DataSection heading="Risk Management" {...dataSectionProps} />
@@ -87,6 +88,101 @@ const TaskPage: NextPage<TaskPageProps> = ({ taskJSON }) => {
 };
 
 export default TaskPage;
+
+const acURI = (acNum: string) =>
+  `https://www.faa.gov/documentLibrary/media/Advisory_Circular/AC_${acNum}.pdf`;
+
+const farURIs = {
+  61: 'https://www.law.cornell.edu/cfr/text/14/part-61',
+  91: 'https://www.law.cornell.edu/cfr/text/14/part-91',
+};
+
+const referenceURIs = {
+  '14 CFR part 61': farURIs[61],
+  '14 CFR part 91': farURIs[91],
+  'AC 00-45': acURI('00-45H'),
+  'AC 00-6': acURI('00-6b'),
+  'AC 120-108': acURI('120-108'),
+  'AC 68-1': acURI('68-1'),
+  'AC 91-74': acURI('91-74B'),
+  'AC 91.21-1': acURI('91.21-1D'),
+  'AIM': 'https://www.faa.gov/air_traffic/publications/atpubs/aim_html/',
+  'FAA-H-8083-2': 'https://www.faa.gov/sites/faa.gov/files/2022-06/risk_management_handbook_2A.pdf',
+  'FAA-H-8083-3':
+    'https://www.faa.gov/sites/faa.gov/files/regulations_policies/handbooks_manuals/aviation/airplane_handbook/00_afh_full.pdf',
+  'FAA-H-8083-15':
+    'https://www.faa.gov/sites/faa.gov/files/regulations_policies/handbooks_manuals/aviation/FAA-H-8083-15B.pdf',
+  'FAA-H-8083-16':
+    'https://www.faa.gov/sites/faa.gov/files/regulations_policies/handbooks_manuals/aviation/instrument_procedures_handbook/FAA-H-8083-16B.pdf',
+  'FAA-H-8083-25': 'https://www.faa.gov/sites/faa.gov/files/2022-03/pilot_handbook.pdf',
+  'IFP': 'https://www.faa.gov/air_traffic/flight_info/aeronav/procedures/',
+};
+
+const referenceNames = {
+  'AC 00-45': 'Aviation Weather Services',
+  'AC 00-6': 'Aviation Weather',
+  'AC 120-108': 'Continuous Descent Final Approach',
+  'AC 68-1': 'Alternative Pilot Physical Examination and Education Requirements',
+  'AC 91-74': 'Pilot Guide: Flight in Icing Conditions',
+  'AC 91.21-1': 'Use of Portable Electronic Devices Aboard Aircraft',
+  'FAA-H-8083-2': 'Risk Management Handbook',
+  'FAA-H-8083-3': 'Airplane Flying Handbook',
+  'FAA-H-8083-15': 'Instrument Flying Handbook',
+  'FAA-H-8083-16': 'Instrument Procedures Handbook',
+  'FAA-H-8083-25': 'PHAK',
+  'IFP': 'Instrument Flight Procedures',
+};
+
+function objectHasProperty<T>(obj: T, prop: any): prop is keyof T {
+  return prop in obj;
+}
+
+function ReferencesSection({ references }: ReferencesSectionProps) {
+  return (
+    <SectionContainer heading="References">
+      {references.map((reference, i, arr) => {
+        let name = reference;
+        if (objectHasProperty(referenceNames, reference)) {
+          if (reference.startsWith('AC')) {
+            name = `${reference} (${referenceNames[reference]})`;
+          } else {
+            name = referenceNames[reference];
+          }
+        }
+
+        let link: React.ReactNode = name;
+        const linkColor = 'text-emerald-500';
+        if (objectHasProperty(referenceURIs, reference)) {
+          link = (
+            <Link color={linkColor} href={referenceURIs[reference]}>
+              {name}
+            </Link>
+          );
+        } else if (reference === '14 CFR parts 61, 91') {
+          link = (
+            <span>
+              14 CFR parts{' '}
+              <Link color={linkColor} href={farURIs[61]}>
+                61
+              </Link>{' '}
+              and{' '}
+              <Link color={linkColor} href={farURIs[61]}>
+                91
+              </Link>
+            </span>
+          );
+        }
+
+        return (
+          <>
+            {link}
+            {i === arr.length - 1 ? '' : ', '}
+          </>
+        );
+      })}
+    </SectionContainer>
+  );
+}
 
 function DataSection({ activeNoteID, heading, setActiveNote, task }: DataSectionProps) {
   const [data, notes] = task.getGroup(heading);

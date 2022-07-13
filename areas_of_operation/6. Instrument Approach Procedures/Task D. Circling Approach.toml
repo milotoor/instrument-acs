@@ -3,8 +3,7 @@ letter = "D"
 objective = "To determine the applicant exhibits satisfactory knowledge, risk management, and skills associated with performing a circling approach procedure."
 name = "Circling Approach"
 references = [
-    "14 CFR parts 61",
-    "91",
+    "14 CFR parts 61, 91",
     "FAA-H-8083-15",
     "IFP",
     "AIM",
