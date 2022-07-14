@@ -11,12 +11,7 @@ const WeatherInformation: NextPage<Task> = (task) => {
   return (
     <TaskPage
       task={task}
-      notes={{
-        objective: 'Hellloooo',
-        knowledge: (id) => {
-          if (id === '1') return <span className="text-sm">Wowowowow</span>;
-        },
-      }}
+      notes={{}}
     />
   );
 };
