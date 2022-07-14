@@ -1,10 +1,10 @@
 import dirTree from 'directory-tree';
 import toml from 'toml';
 
-import { Task, TaskLetter, TaskTOML } from './task';
+import { Section, Task } from './task';
 
 export interface TaskStructure {
-  letter: TaskLetter;
+  letter: Task.Letter;
   name: string;
   path: string;
   uri: string;
@@ -13,7 +13,7 @@ export interface TaskStructure {
 
 export interface Section {
   name: string;
-  number: number;
+  number: Section.Number;
   tasks: TaskStructure[];
   uri: string;
   uriComponent: string;
@@ -26,13 +26,13 @@ export function getSectionStructure(): Section[] {
     const strippedSectionName = name.replace(/\d\. /, '');
     return {
       name: strippedSectionName,
-      number: parseInt(name.match(/([1-8])/)![1]),
+      number: parseInt(name.match(/([1-8])/)![1]) as Section.Number,
       uri: makeURI(strippedSectionName),
       uriComponent: encodeURIComponentACS(strippedSectionName),
       tasks: children!.map(({ name, path }) => {
         const strippedTaskName = name.replace(/Task .\. /, '').replace('.toml', '');
         return {
-          letter: name.match(/Task ([A-E])/)![1] as TaskLetter,
+          letter: name.match(/Task ([A-E])/)![1] as Task.Letter,
           name: strippedTaskName,
           path,
           uri: makeURI(strippedSectionName, strippedTaskName),
@@ -63,7 +63,7 @@ export function getTaskFromNames(sectionName: string, taskName: string) {
   return getTaskFromSectionLetter(section.number, task.letter);
 }
 
-export function getTaskFromSectionLetter(section: number, letter: string) {
+export function getTaskFromSectionLetter(section: Section.Number, letter: Task.Letter): Task {
   const fs = require('fs');
 
   // Load the .toml file
@@ -71,17 +71,5 @@ export function getTaskFromSectionLetter(section: number, letter: string) {
   const task = sections[section - 1].tasks.find((t) => t.letter === letter);
   if (!task) throw Error(`Invalid task identifiers (section: ${section}, letter: "${letter}")`);
   const fileContent = fs.readFileSync(task.path).toString();
-  const json: TaskTOML.JSON = toml.parse(fileContent);
-
-  // Load the notes
-  const notesPath = task.path.replace('/areas_of_operation', '/areas_of_operation/notes');
-  let notes;
-  try {
-    const notesContent = fs.readFileSync(notesPath).toString();
-    notes = toml.parse(notesContent) as TaskTOML.Notes;
-  } catch (e: unknown) {
-    notes = null;
-  }
-
-  return new Task({ section, letter, json, notes });
+  return toml.parse(fileContent);
 }
