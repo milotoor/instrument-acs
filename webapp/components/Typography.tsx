@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from './Link';
 
+import { farURI } from '../lib/references';
+
 type ChildProp<C = string> = { children: C };
 type FARSectionProps = {
   section: [number, number, ...(string | number)[]];
@@ -24,7 +26,7 @@ export function FAR({ section: fullSection }: FARSectionProps) {
   const [part, section, ...paragraph] = fullSection;
   const paraArray = Array.isArray(paragraph) ? paragraph : [paragraph];
 
-  let uri = `https://www.law.cornell.edu/cfr/text/14/${part}.${section}`;
+  let uri = farURI(part, section);
   if (paraArray && paraArray.length) {
     uri += `#${paraArray.join('_')}`;
   }
