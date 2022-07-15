@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import Head from 'next/head';
 import React from 'react';
 
@@ -19,7 +20,7 @@ type RenderNoteProps = Partial<{
   skills: RenderNoteListFunction;
 }>;
 
-type RenderNoteElementProp = { note?: React.ReactNode };
+type RenderNoteElementProp = { note?: React.ReactNode | React.ReactNode[] };
 type RenderNoteListProp = { notes?: RenderNoteListFunction };
 
 export const TaskPage: React.FC<TaskPageProps> = ({ task, notes }) => {
@@ -220,10 +221,33 @@ function SectionContainer({ children, heading }: SectionContainerProps) {
 }
 
 function NoteCard({ note }: RenderNoteElementProp) {
-  if (!note) return null;
+  if (!note || (Array.isArray(note) && note.length === 0)) return null;
+
+  const cardContent = (() => {
+    if (!Array.isArray(note)) return note;
+    return note.map((paragraph, i) => {
+      // If the child is an element (e.g. the note is wrapped in a <p> tag) then we simply extend
+      // its className to provide margin with the paragraph above. If not, we wrap the child in a
+      // <p> tag with that same margin
+      const marginTop = 'mt-3';
+      if (React.isValidElement(paragraph)) {
+        return React.cloneElement(paragraph, {
+          className: cn(paragraph.props.className, { [marginTop]: i !== 0 }),
+          key: i,
+        });
+      } else {
+        return (
+          <p key={i} className={marginTop}>
+            {paragraph}
+          </p>
+        );
+      }
+    });
+  })();
+
   return (
     <div className="w-full bg-white text-black p-2 my-5 rounded-lg shadow-[0px_5px_25px] shadow-yellow-400">
-      {note}
+      {cardContent}
     </div>
   );
 }
