@@ -1,9 +1,12 @@
 import React from 'react';
 import { Link } from './Link';
 
-import { farURI } from '../lib/references';
+import { farURI, referenceNames, referenceURIs } from '../lib/references';
+import { objectHasProperty } from '../lib/util';
 
 type ChildProp<C = string> = { children: C };
+type LinkableReference = keyof typeof referenceURIs;
+type ReferenceLinkProps = { reference: LinkableReference; color?: string; text?: React.ReactNode };
 type FARSectionProps = {
   section: [number, number, ...(string | number)[]];
 };
@@ -36,6 +39,19 @@ export function FAR({ section: fullSection }: FARSectionProps) {
     <Link href={uri}>
       §{part}.{section}
       {paraText}
+    </Link>
+  );
+}
+
+export function ReferenceLink({ reference, color, text }: ReferenceLinkProps) {
+  let linkContent = text ?? reference;
+  if (objectHasProperty(referenceNames, reference)) {
+    linkContent = referenceNames[reference];
+  }
+
+  return (
+    <Link color={color} href={referenceURIs[reference]}>
+      {linkContent}
     </Link>
   );
 }

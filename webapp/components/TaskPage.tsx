@@ -2,9 +2,11 @@ import cn from 'classnames';
 import Head from 'next/head';
 import React from 'react';
 
-import { farURI, referenceNames, referenceURIs } from '../lib/references';
+import { referenceURIs } from '../lib/references';
 import { Item, Section, Task } from '../lib/task';
+import { objectHasProperty } from '../lib/util';
 import { Link } from './Link';
+import { ReferenceLink } from './Typography';
 
 type DataSectionProps = { heading: Section.Headings.List; task: Task } & RenderNoteListProp;
 type ObjectiveSectionProps = { objective: string } & RenderNoteElementProp;
@@ -56,42 +58,19 @@ export const TaskPage: React.FC<TaskPageProps> = ({ task, notes }) => {
   );
 };
 
-function objectHasProperty<T>(obj: T, prop: any): prop is keyof T {
-  return prop in obj;
-}
-
 function ReferencesSection({ references, note }: ReferencesSectionProps) {
+  const linkColor = 'text-emerald-500';
   return (
     <SectionContainer heading="References">
       {references.map((reference, i, arr) => {
-        let name = reference;
-        if (objectHasProperty(referenceNames, reference)) {
-          if (reference.startsWith('AC')) {
-            name = `${reference} (${referenceNames[reference]})`;
-          } else {
-            name = referenceNames[reference];
-          }
-        }
-
-        let link: React.ReactNode = name;
-        const linkColor = 'text-emerald-500';
+        let link: React.ReactNode = reference;
         if (objectHasProperty(referenceURIs, reference)) {
-          link = (
-            <Link color={linkColor} href={referenceURIs[reference]}>
-              {name}
-            </Link>
-          );
+          link = <ReferenceLink color={linkColor} reference={reference} />;
         } else if (reference === '14 CFR parts 61, 91') {
           link = (
             <span>
-              14 CFR parts{' '}
-              <Link color={linkColor} href={farURI(61)}>
-                61
-              </Link>{' '}
-              and{' '}
-              <Link color={linkColor} href={farURI(91)}>
-                91
-              </Link>
+              14 CFR parts <ReferenceLink color={linkColor} reference="14 CFR part 61" text={61} />{' '}
+              and <ReferenceLink color={linkColor} reference="14 CFR part 91" text={91} />
             </span>
           );
         }

@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import React from 'react';
 
-import { Link, TaskPage } from '../../components';
+import { Link, TaskPage, ReferenceLink } from '../../components';
 import { getTaskFromSectionLetter } from '../../lib/data_loaders';
 import { acURI, referenceNames } from '../../lib/references';
 import { Task } from '../../lib/task';
@@ -16,7 +16,7 @@ const WeatherInformation: NextPage<Task> = (task) => {
         knowledge(id) {
           switch (id) {
             case '3b':
-              return <Link href={acURI('00-54')}>AC 00-54 ({referenceNames['AC 00-54']})</Link>;
+              return <ReferenceLink reference="AC 00-54" />;
             default:
               return null;
           }
