@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import React from 'react';
 
-import { Bold, BulletList, FAR, Quote, TaskPage } from '../../components';
+import { Bold, DetailList, FAR, ReferenceLink, TaskPage } from '../../components';
 import { getTaskFromSectionLetter } from '../../lib/data_loaders';
 import { Task } from '../../lib/task';
 
@@ -18,11 +18,16 @@ const PilotQualifications: NextPage<Task> = (task) => {
               return [
                 <div>
                   <Bold>Recency of experience requirements</Bold> are clearly described in{' '}
-                  <FAR section={[61, 57, 'c', 1]} />. These include recording, in the last 6 months:{' '}
-                  <Quote>
-                    six instrument approaches; holding procedures and tasks; and intercepting and
-                    tracking courses through the use of navigational electronic systems.
-                  </Quote>
+                  <FAR section={[61, 57, 'c', 1]} />. These include recording in the last 6 months:{' '}
+                  <DetailList type="inline">
+                    <>six instrument approaches</>
+                    <>holding procedures and tasks</>
+                    <>
+                      intercepting and tracking courses through the use of navigational electronic
+                      systems
+                    </>
+                  </DetailList>
+                  .
                 </div>,
 
                 <div>
@@ -45,7 +50,7 @@ const PilotQualifications: NextPage<Task> = (task) => {
                 <div>
                   Per <FAR section={[61, 3]} />, having an instrument rating allows a pilot to
                   operate:
-                  <BulletList>
+                  <DetailList type="bullet">
                     <>under IFR</>
                     <>in weather conditions less than the minima for VFR flight; and</>
                     <>in Class A airspace</>
@@ -53,25 +58,25 @@ const PilotQualifications: NextPage<Task> = (task) => {
                       for hire (assuming the pilot has a commercial license) at night or
                       cross-country beyond 50 nautical miles
                     </>
-                  </BulletList>
+                  </DetailList>
                 </div>,
               ];
             case '3':
               return [
                 <div>
                   Per <FAR section={[61, 113, 'i']} />, a private pilot with a U.S. driver's license
-                  but no medical certificate may act as PIC of an aircraft if it:
-                  <BulletList>
-                    <>is authorized to carry 6 or fewer occupants; and</>
+                  but no medical certificate may act as PIC of an aircraft if it{' '}
+                  <DetailList type="inline">
+                    <>is authorized to carry 6 or fewer occupants</>
                     <>weighs at most 6,000 pounds</>
-                  </BulletList>
+                  </DetailList>
                 </div>,
                 <div>
-                  The flight may not:
-                  <BulletList>
-                    <>be carried out at or above 18,000 feet; or'</>
-                    <>attain an indicated airspeed of 250 knots or greater'</>
-                  </BulletList>
+                  The flight may not{' '}
+                  <DetailList type="inline" logic="or">
+                    <>be carried out at or above 18,000 feet</>
+                    <>attain an indicated airspeed of 250 knots or greater</>
+                  </DetailList>
                 </div>,
                 <div>
                   They are required to have the <Bold>medical examination checklist</Bold> required
