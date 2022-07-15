@@ -33,7 +33,34 @@ const PilotQualifications: NextPage<Task> = (task) => {
                 <div>
                   For recordkeeping, the pilot must log the{' '}
                   <Bold>location and type of each instrument approach</Bold> and the name of the
-                  safety pilot if required. See <FAR section={[61, 51, 'g']} />.
+                  safety pilot if required. See <FAR section={[61, 51, 'g']} />. The FAA's{' '}
+                  <ReferenceLink reference="InFO 15012" /> specifies that an approach can only be
+                  logged if{' '}
+                  <DetailList type="bullet">
+                    <>
+                      the aircraft is operated solely by reference to instruments in actual or
+                      simulated IMC (one or both of "Actual IMC" and "Simulated IMC" must also be
+                      logged)
+                    </>
+                    <>the simulated IMC continues to MDA or DA</>
+                    <>
+                      the approach is flown to minimums (i.e. going missed before MDA or DA is not
+                      allowed)
+                    </>
+                    <>
+                      the aircraft breaks out of IMC after the FAF, prior to or upon reaching MDA or
+                      DA
+                    </>
+                  </DetailList>
+                </div>,
+
+                <div>
+                  A <Bold>safety pilot</Bold> must{' '}
+                  <DetailList type="inline">
+                    <>possess a current medical certificate</>
+                    <>sit in the other control seat</>
+                    <>be appropriately rated in the aircraft's category and class</>
+                  </DetailList>
                 </div>,
 
                 <div>

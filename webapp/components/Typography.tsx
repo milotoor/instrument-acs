@@ -41,7 +41,7 @@ export function DetailList({ children, delimeter = ',', logic = 'and', type }: D
     );
 
   return (
-    <ol className="list-decimal ml-10">
+    <ol className="list-decimal ml-12 mt-2">
       {children.map((child, i) => (
         <li key={i}>
           <span className={bgColor}>{child}</span>

@@ -45,5 +45,5 @@ export const referenceNames = {
   'FAA-H-8083-16': 'Instrument Procedures Handbook',
   'FAA-H-8083-25': 'PHAK',
   'IFP': 'Instrument Flight Procedures',
-  'InFO 15012': 'Logging Instrument Approach Procedures',
+  'InFO 15012': 'InFO 15012: Logging Instrument Approach Procedures',
 };

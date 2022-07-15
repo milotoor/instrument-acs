@@ -188,7 +188,7 @@ function NoteCard({ note }: RenderNoteElementProp) {
       // If the child is an element (e.g. the note is wrapped in a <p> tag) then we simply extend
       // its className to provide margin with the paragraph above. If not, we wrap the child in a
       // <p> tag with that same margin
-      const marginTop = 'mt-3';
+      const marginTop = 'mt-5';
       if (React.isValidElement(paragraph)) {
         return React.cloneElement(paragraph, {
           className: cn(paragraph.props.className, { [marginTop]: i !== 0 }),
