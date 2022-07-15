@@ -12,6 +12,7 @@ const WeatherInformation: NextPage<Task> = (task) => {
   return (
     <TaskPage
       task={task}
+      flags={{ '3i': 'missed' }}
       notes={{
         knowledge(id) {
           switch (id) {

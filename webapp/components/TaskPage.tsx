@@ -8,12 +8,22 @@ import { objectHasProperty } from '../lib/util';
 import { Link } from './Link';
 import { ReferenceLink } from './Typography';
 
-type DataSectionProps = { heading: Section.Headings.List; task: Task } & RenderNoteListProp;
+// Component prop types
 type ObjectiveSectionProps = { objective: string } & RenderNoteElementProp;
 type ReferencesSectionProps = { references: string[] } & RenderNoteElementProp;
 type SectionContainerProps = { children: React.ReactNode; heading: string };
-type TaskPageProps = { task: Task; notes?: RenderNoteProps };
+type TaskPageProps = { task: Task; notes?: RenderNoteProps } & FlagsProp;
+type DataSectionProps = { heading: Section.Headings.List; task: Task } & RenderNoteListProp &
+  FlagsPropInternal;
 
+// Flag types
+type FlagType = 'missed';
+type FlagsProp = { flags?: Record<Item.ID, FlagType> };
+type FlagsPropInternal = { flags?: Map<Item.ID, FlagType> };
+
+// Note types
+type RenderNoteElementProp = { note?: React.ReactNode | React.ReactNode[] };
+type RenderNoteListProp = { notes?: RenderNoteListFunction };
 type RenderNoteListFunction = (id: Item.ID) => React.ReactNode | undefined;
 type RenderNoteProps = Partial<{
   knowledge: RenderNoteListFunction;
@@ -23,11 +33,9 @@ type RenderNoteProps = Partial<{
   skills: RenderNoteListFunction;
 }>;
 
-type RenderNoteElementProp = { note?: React.ReactNode | React.ReactNode[] };
-type RenderNoteListProp = { notes?: RenderNoteListFunction };
-
-export const TaskPage: React.FC<TaskPageProps> = ({ task, notes }) => {
+export const TaskPage: React.FC<TaskPageProps> = ({ task, flags = {}, notes }) => {
   const { meta } = task;
+  const flagMap = React.useMemo(() => new Map(Object.entries(flags)), [flags]);
   return (
     <div className="flex min-h-screen flex-col items-center justify-start py-16">
       <Head>
@@ -49,7 +57,7 @@ export const TaskPage: React.FC<TaskPageProps> = ({ task, notes }) => {
         <div>
           <ReferencesSection references={meta.references} note={notes?.references} />
           <ObjectiveSection objective={meta.objective} note={notes?.objective} />
-          <DataSection heading="Knowledge" task={task} notes={notes?.knowledge} />
+          <DataSection heading="Knowledge" task={task} flags={flagMap} notes={notes?.knowledge} />
           <DataSection heading="Risk Management" task={task} notes={notes?.risk} />
           <DataSection heading="Skills" task={task} notes={notes?.skills} />
         </div>
@@ -96,7 +104,11 @@ function ObjectiveSection({ objective, note }: ObjectiveSectionProps) {
   );
 }
 
-function DataSection({ heading, notes = () => null, task }: DataSectionProps) {
+const flagClasses = {
+  missed: ['bg-red-500/50', 'Missed on knowledge test!'],
+};
+
+function DataSection({ flags, heading, notes = () => null, task }: DataSectionProps) {
   const data = (() => {
     switch (heading) {
       case 'Knowledge':
@@ -117,7 +129,7 @@ function DataSection({ heading, notes = () => null, task }: DataSectionProps) {
           if (typeof datum === 'string')
             return (
               <li key={num}>
-                {datum}
+                {applyFlags(num, datum)}
                 <NoteCard note={notes(num)} />
               </li>
             );
@@ -133,7 +145,7 @@ function DataSection({ heading, notes = () => null, task }: DataSectionProps) {
                   const itemId = num + String.fromCharCode(97 + i);
                   return (
                     <li key={i}>
-                      {text}
+                      {applyFlags(itemId, text)}
                       <NoteCard note={notes(itemId)} />
                     </li>
                   );
@@ -145,6 +157,17 @@ function DataSection({ heading, notes = () => null, task }: DataSectionProps) {
       </ol>
     </SectionContainer>
   );
+
+  function applyFlags(id: Item.ID, text: string) {
+    const itemFlag = flags?.get(id);
+    if (!itemFlag) return text;
+    const [className, description] = flagClasses[itemFlag];
+    return (
+      <span className={className} title={description}>
+        {text}
+      </span>
+    );
+  }
 }
 
 function SectionContainer({ children, heading }: SectionContainerProps) {

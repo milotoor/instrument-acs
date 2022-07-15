@@ -8,12 +8,7 @@ import { Task } from '../../lib/task';
 export const getStaticProps = () => ({ props: getTaskFromSectionLetter(7, 'A') });
 
 const LossOfComm: NextPage<Task> = (task) => {
-  return (
-    <TaskPage
-      task={task}
-      notes={{}}
-    />
-  );
+  return <TaskPage task={task} flags={{ 1: 'missed' }} notes={{}} />;
 };
 
 export default LossOfComm;
