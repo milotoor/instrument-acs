@@ -31,3 +31,20 @@ export interface Task {
   risk_management: Item.List;
   skills: Item.List;
 }
+
+export namespace Structure {
+  export interface Section {
+    name: string;
+    number: Section.Number;
+    tasks: Task[];
+    uri: string;
+  }
+
+  export interface Task {
+    letter: Task.Letter;
+    name: string;
+    path: string;
+    section: Section.Number;
+    uri: string;
+  }
+}

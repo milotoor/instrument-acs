@@ -2,21 +2,7 @@ import dirTree from 'directory-tree';
 import path from 'path';
 import toml from 'toml';
 
-import { Section, Task } from './task';
-
-export interface TaskStructure {
-  letter: Task.Letter;
-  name: string;
-  path: string;
-  uri: string;
-}
-
-export interface Section {
-  name: string;
-  number: Section.Number;
-  tasks: TaskStructure[];
-  uri: string;
-}
+import { Section, Structure, Task } from './task';
 
 const sectionURIs = {
   1: 'preflight-preparation',
@@ -40,7 +26,7 @@ const taskURIs = {
   8: { A: 'checking-equipment' },
 } as Record<Section.Number, Record<Task.Letter, string>>;
 
-export function getSectionStructure(pathToRoot: string = '..'): Section[] {
+export function getSectionStructure(pathToRoot: string = '..'): Structure.Section[] {
   const tree = dirTree(path.join(pathToRoot, 'areas_of_operation'));
   const areas = tree?.children?.filter((child) => child.name.match(/\d\./));
   const makeURI = (...components: string[]) => '/' + components.join('/');
@@ -59,6 +45,7 @@ export function getSectionStructure(pathToRoot: string = '..'): Section[] {
           letter,
           name: name.replace(/Task .\. /, '').replace('.toml', ''),
           path,
+          section: number,
           uri: makeURI(sectionURIComponent, `${letter}-${taskURIs[number][letter]}`),
         };
       }),
