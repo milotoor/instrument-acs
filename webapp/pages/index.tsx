@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import Head from 'next/head';
 
-import { Link } from '../components';
+import { Layout, Link } from '../components';
 import { getSectionStructure } from '../lib/data_loaders';
 import { Structure } from '../lib/task';
 
@@ -17,7 +17,7 @@ export function getStaticProps(): { props: ACSProp } {
 
 const Home: NextPage<ACSProp> = ({ taskStructure }) => {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
+    <Layout>
       <Head>
         <title>The Instrument ACS</title>
         <link rel="icon" href="/favicon.ico" />
@@ -36,7 +36,7 @@ const Home: NextPage<ACSProp> = ({ taskStructure }) => {
 
         <TableOfContents taskStructure={taskStructure} />
       </main>
-    </div>
+    </Layout>
   );
 };
 

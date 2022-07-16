@@ -13,6 +13,9 @@ module.exports = {
       },
       listStyleType: {
         'alpha': 'lower-alpha',
+      },
+      height: {
+        'top-bar': '3rem'
       }
     },
   },

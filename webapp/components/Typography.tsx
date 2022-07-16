@@ -1,9 +1,9 @@
+import cn from 'classnames';
 import React from 'react';
-import { Link } from './Link';
 
 import { farURI, referenceNames, referenceURIs } from '../lib/references';
 import { objectHasProperty } from '../lib/util';
-import classNames from 'classnames';
+import { Link } from './Link';
 
 type ChildProp<C = string> = { children: C };
 type DetailListProps = ChildProp<React.ReactNode[]> & {
@@ -30,7 +30,7 @@ export function DetailList({ children, delimeter = ',', logic = 'and', type }: D
         {children.flatMap((child, i) => (
           <span key={i}>
             {i > 0 ? ' ' : ''}
-            <span className={classNames('italic', bgColor)}>
+            <span className={cn('italic', bgColor)}>
               {child}
               {i === children.length - 1 ? '' : delimeter}
             </span>

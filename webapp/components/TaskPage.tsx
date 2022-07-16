@@ -3,16 +3,16 @@ import Head from 'next/head';
 import React from 'react';
 
 import { referenceURIs } from '../lib/references';
-import { Item, Section, Task } from '../lib/task';
+import { Item, Section, Structure, Task } from '../lib/task';
 import { objectHasProperty } from '../lib/util';
-import { Link } from './Link';
+import { Layout } from './Layout';
 import { ReferenceLink } from './Typography';
 
 // Component prop types
 type ObjectiveSectionProps = { objective: string } & RenderNoteElementProp;
 type ReferencesSectionProps = { references: string[] } & RenderNoteElementProp;
 type SectionContainerProps = { children: React.ReactNode; heading: string };
-type TaskPageProps = { task: Task; notes?: RenderNoteProps } & FlagsProp;
+type TaskPageProps = TaskPage.TopLevelProps & FlagsProp & { notes?: RenderNoteProps };
 type DataSectionProps = { heading: Section.Headings.List; task: Task } & RenderNoteListProp &
   FlagsPropInternal;
 
@@ -33,18 +33,14 @@ type RenderNoteProps = Partial<{
   skills: RenderNoteListFunction;
 }>;
 
-export const TaskPage: React.FC<TaskPageProps> = ({ task, flags = {}, notes }) => {
+export const TaskPage: React.FC<TaskPageProps> = ({ task, structure, flags = {}, notes }) => {
   const { meta } = task;
   const flagMap = React.useMemo(() => new Map(Object.entries(flags)), [flags]);
   return (
-    <div className="flex min-h-screen flex-col items-center justify-start py-16">
+    <Layout structure={structure} task={task}>
       <Head>
         <title>{meta.name}</title>
       </Head>
-
-      <div className="fixed top-2 left-3 font-roboto text-lg">
-        <Link href="/">← Home</Link>
-      </div>
 
       <main className="flex flex-1 flex-col md:w-[1000px] px-4">
         <h3 className="text-xl md:text-2xl font-bold font-roboto-mono">
@@ -62,7 +58,7 @@ export const TaskPage: React.FC<TaskPageProps> = ({ task, flags = {}, notes }) =
           <DataSection heading="Skills" task={task} notes={notes?.skills} />
         </div>
       </main>
-    </div>
+    </Layout>
   );
 };
 
@@ -209,4 +205,9 @@ function NoteCard({ note }: RenderNoteElementProp) {
       {cardContent}
     </div>
   );
+}
+
+// Exported under the same name as the component so only one import is required
+export namespace TaskPage {
+  export type TopLevelProps = { task: Task; structure: Structure.Section[] };
 }
