@@ -2,18 +2,14 @@ import { NextPage } from 'next';
 import React from 'react';
 
 import { TaskPage } from '../../components';
-import { getTaskFromSectionLetter } from '../../lib/data_loaders';
-import { Task } from '../../lib/task';
+import { getSectionStructure, getTaskFromSectionLetter } from '../../lib/data_loaders';
 
-export const getStaticProps = () => ({ props: getTaskFromSectionLetter(2, 'B') });
+export const getStaticProps = () => ({
+  props: { structure: getSectionStructure(), task: getTaskFromSectionLetter(2, 'B') },
+});
 
-const Instruments: NextPage<Task> = (task) => {
-  return (
-    <TaskPage
-      task={task}
-      notes={{}}
-    />
-  );
+const Instruments: NextPage<TaskPage.TopLevelProps> = (props) => {
+  return <TaskPage {...props} notes={{}} />;
 };
 
 export default Instruments;

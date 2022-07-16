@@ -25,10 +25,10 @@ sections?.forEach(({ number, tasks, uri }) => {
   });
 });
 
-function makeFileContent(n: number, l: string, name: string) {
+function makeFileContent(n: number, l: string, uri: string) {
   // Converts a URI like "/preflight-preparation/pilot-qualifications" into "PilotQualifications"
   // which is suitable for a React component name
-  const name2 = name
+  const name = uri
     .split('/')
     .at(-1)!
     .split('-')
@@ -40,20 +40,17 @@ function makeFileContent(n: number, l: string, name: string) {
 import React from 'react';
 
 import { TaskPage } from '../../components';
-import { getTaskFromSectionLetter } from '../../lib/data_loaders';
+import { getSectionStructure, getTaskFromSectionLetter } from '../../lib/data_loaders';
 import { Task } from '../../lib/task';
 
-export const getStaticProps = () => ({ props: getTaskFromSectionLetter(${n}, '${l}') });
+export const getStaticProps = () => ({
+  props: { structure: getSectionStructure(), task: getTaskFromSectionLetter(${n}, '${l}') },
+});
 
-const ${name2}: NextPage<Task> = (task) => {
-  return (
-    <TaskPage
-      task={task}
-      notes={{}}
-    />
-  );
+const ${name}: NextPage<TaskPage.TopLevelProps> = (props) => {
+  return <TaskPage {...props} notes={{}} />;
 };
 
-export default ${name2};
+export default ${name};
 `;
 }

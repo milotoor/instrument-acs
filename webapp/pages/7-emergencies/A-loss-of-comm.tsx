@@ -2,13 +2,14 @@ import { NextPage } from 'next';
 import React from 'react';
 
 import { TaskPage } from '../../components';
-import { getTaskFromSectionLetter } from '../../lib/data_loaders';
-import { Task } from '../../lib/task';
+import { getSectionStructure, getTaskFromSectionLetter } from '../../lib/data_loaders';
 
-export const getStaticProps = () => ({ props: getTaskFromSectionLetter(7, 'A') });
+export const getStaticProps = () => ({
+  props: { structure: getSectionStructure(), task: getTaskFromSectionLetter(7, 'A') },
+});
 
-const LossOfComm: NextPage<Task> = (task) => {
-  return <TaskPage task={task} flags={{ 1: 'missed' }} notes={{}} />;
+const LossOfComm: NextPage<TaskPage.TopLevelProps> = (props) => {
+  return <TaskPage {...props} flags={{ 1: 'missed' }} notes={{}} />;
 };
 
 export default LossOfComm;

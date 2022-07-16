@@ -1,17 +1,17 @@
 import { NextPage } from 'next';
 import React from 'react';
 
-import { Link, TaskPage, ReferenceLink } from '../../components';
-import { getTaskFromSectionLetter } from '../../lib/data_loaders';
-import { acURI, referenceNames } from '../../lib/references';
-import { Task } from '../../lib/task';
+import { TaskPage, ReferenceLink } from '../../components';
+import { getSectionStructure, getTaskFromSectionLetter } from '../../lib/data_loaders';
 
-export const getStaticProps = () => ({ props: getTaskFromSectionLetter(1, 'B') });
+export const getStaticProps = () => ({
+  props: { structure: getSectionStructure(), task: getTaskFromSectionLetter(1, 'B') },
+});
 
-const WeatherInformation: NextPage<Task> = (task) => {
+const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
   return (
     <TaskPage
-      task={task}
+      {...props}
       flags={{ '3i': 'missed' }}
       notes={{
         knowledge(id) {
