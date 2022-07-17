@@ -8,7 +8,7 @@ import { objectHasProperty } from '../lib/util';
 type ChildProp<C = string> = { children: C };
 type DetailListProps = ChildProp<React.ReactNode[]> & {
   delimeter?: string;
-  logic?: 'and' | 'or';
+  logic?: 'and' | 'or' | null;
   type: 'bullet' | 'inline';
 };
 
@@ -19,7 +19,7 @@ type FARSectionProps = {
   section: [number, number, ...(string | number)[]];
 };
 
-export function Bold({ children }: ChildProp) {
+export function Bold({ children }: ChildProp<React.ReactNode>) {
   return <span className="font-bold">{children}</span>;
 }
 
@@ -35,7 +35,7 @@ export function DetailList({ children, delimeter = ',', logic = 'and', type }: D
               {child}
               {i === children.length - 1 ? '' : delimeter}
             </span>
-            {i === children.length - 2 ? ` ${logic}` : ''}
+            {logic && i === children.length - 2 ? ` ${logic}` : ''}
           </span>
         ))}
       </>

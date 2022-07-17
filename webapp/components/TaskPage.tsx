@@ -42,7 +42,7 @@ export const TaskPage: React.FC<TaskPageProps> = ({ task, structure, flags = {},
         <title>{meta.name}</title>
       </Head>
 
-      <main className="flex flex-1 flex-col md:w-[1000px] px-4">
+      <main className="flex flex-1 flex-col md:w-[1000px] px-4 mb-8">
         <h3 className="text-xl md:text-2xl font-bold font-roboto-mono">
           Section {meta.section.numeral}. {meta.section.name}
         </h3>
@@ -61,6 +61,11 @@ export const TaskPage: React.FC<TaskPageProps> = ({ task, structure, flags = {},
     </Layout>
   );
 };
+
+// Exported under the same name as the component so only one import is required
+export namespace TaskPage {
+  export type TopLevelProps = { task: Task; structure: Structure.Section[] };
+}
 
 function ReferencesSection({ references, note }: ReferencesSectionProps) {
   const linkColor = 'text-emerald-500';
@@ -135,6 +140,7 @@ function DataSection({ flags, heading, notes = () => null, task }: DataSectionPr
           return (
             <li key={num}>
               {general}
+              <NoteCard note={notes(num)} />
               <ol className="list-alpha ml-8">
                 {specific.map((text, i) => {
                   // Char code 97 is "a", 98 is "b", etc.
@@ -201,13 +207,8 @@ function NoteCard({ note }: RenderNoteElementProp) {
   })();
 
   return (
-    <div className="w-full bg-white text-black p-2 my-5 rounded-lg shadow-[0px_5px_25px] shadow-yellow-400">
+    <div className="w-full bg-white text-black p-2 my-5 rounded-lg shadow-[0px_5px_25px] shadow-yellow-400 text-sm">
       {cardContent}
     </div>
   );
-}
-
-// Exported under the same name as the component so only one import is required
-export namespace TaskPage {
-  export type TopLevelProps = { task: Task; structure: Structure.Section[] };
 }
