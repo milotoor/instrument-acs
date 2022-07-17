@@ -2,7 +2,7 @@ import cn from 'classnames';
 import React from 'react';
 
 import { Structure } from '../lib/task';
-import { Link } from './Link';
+import { Link } from './Typography';
 import type { TaskPage } from './TaskPage';
 
 type LayoutProps = { children: React.ReactNode } & Partial<TaskPage.TopLevelProps>;

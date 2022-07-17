@@ -1,9 +1,9 @@
 import cn from 'classnames';
+import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import React from 'react';
 
 import { farURI, referenceNames, referenceURIs } from '../lib/references';
 import { objectHasProperty } from '../lib/util';
-import { Link } from './Link';
 
 type ChildProp<C = string> = { children: C };
 type DetailListProps = ChildProp<React.ReactNode[]> & {
@@ -12,6 +12,7 @@ type DetailListProps = ChildProp<React.ReactNode[]> & {
   type: 'bullet' | 'inline';
 };
 
+type LinkProps = NextLinkProps & { children?: React.ReactNode; color?: string; title?: string };
 type LinkableReference = keyof typeof referenceURIs;
 type ReferenceLinkProps = { reference: LinkableReference; color?: string; text?: React.ReactNode };
 type FARSectionProps = {
@@ -69,14 +70,32 @@ export function FAR({ section: fullSection }: FARSectionProps) {
   );
 }
 
+export const Link: React.FC<LinkProps> = ({ color = 'text-fuchsia-500', href, ...rest }) => (
+  <span className={cn(color, 'hover:underline')}>
+    {href.toString().startsWith('/') ? (
+      <NextLink href={href} {...rest} />
+    ) : (
+      <a target="_blank" href={href.toString()} {...rest} />
+    )}
+  </span>
+);
+
 export function ReferenceLink({ reference, color, text }: ReferenceLinkProps) {
-  let linkContent = text ?? reference;
+  let linkContent: React.ReactNode = reference;
+  let title;
+
+  if (text) linkContent = text;
   if (objectHasProperty(referenceNames, reference)) {
-    linkContent = referenceNames[reference];
+    const name = referenceNames[reference];
+    if (text) {
+      title = name;
+    } else {
+      linkContent = name;
+    }
   }
 
   return (
-    <Link color={color} href={referenceURIs[reference]}>
+    <Link color={color} href={referenceURIs[reference]} title={title}>
       {linkContent}
     </Link>
   );
