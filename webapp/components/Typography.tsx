@@ -12,12 +12,11 @@ type DetailListProps = ChildProp<React.ReactNode[]> & {
   type: 'bullet' | 'inline';
 };
 
+type FARSectionProps = { section: [number, number, ...(string | number)[]] };
 type LinkProps = NextLinkProps & { children?: React.ReactNode; color?: string; title?: string };
 type LinkableReference = keyof typeof referenceURIs;
 type ReferenceLinkProps = { reference: LinkableReference; color?: string; text?: React.ReactNode };
-type FARSectionProps = {
-  section: [number, number, ...(string | number)[]];
-};
+type TooltipProps = ChildProp<React.ReactNode> & { message?: string };
 
 export function Bold({ children }: ChildProp<React.ReactNode>) {
   return <span className="font-bold">{children}</span>;
@@ -95,8 +94,34 @@ export function ReferenceLink({ reference, color, text }: ReferenceLinkProps) {
   }
 
   return (
-    <Link color={color} href={referenceURIs[reference]} title={title}>
-      {linkContent}
-    </Link>
+    <Tooltip message={title}>
+      <Link color={color} href={referenceURIs[reference]}>
+        {linkContent}
+      </Link>
+    </Tooltip>
   );
 }
+
+export const Tooltip = ({ message, children }: TooltipProps) => {
+  const backgroundColor = 'gray-600';
+  return (
+    <div className="inline-block">
+      <div className="relative flex flex-col items-center group">
+        {children}
+        {message && (
+          <div className="absolute bottom-0 hidden mb-6 group-hover:block">
+            <div
+              className={`py-1 px-2 text-xs text-white rounded-md [width:max-content] shadow-md shadow-slate-700 bg-${backgroundColor}`}
+            >
+              {message}
+            </div>
+            <span
+              className={`absolute top-[100%] left-1/2 -ml-[6px] border-[6px] border-solid border-transparent border-t-${backgroundColor}`}
+            />
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+1;
