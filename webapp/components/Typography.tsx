@@ -17,10 +17,8 @@ type DetailListProps = ChildProp<React.ReactNode[]> & {
 type AIMParagraphProps = { paragraph: [number, number, number] };
 type FARSectionProps = { section: [number, number, ...(string | number)[]] };
 type ImageProps = NextImageProps;
-type KatexProps = ChildProp<string> & { inline?: boolean };
 type LinkProps = NextLinkProps & ChildProp & { color?: string; title?: string };
 type LinkableReference = keyof typeof referenceURIs;
-type ParagraphProps = ChildProp & { heading?: string; hr?: boolean };
 type ReferenceLinkProps = { reference: LinkableReference; color?: string; text?: React.ReactNode };
 type TooltipProps = ChildProp & { message?: string };
 
