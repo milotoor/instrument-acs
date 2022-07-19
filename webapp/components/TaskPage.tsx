@@ -6,7 +6,7 @@ import { referenceURIs } from '../lib/references';
 import { Item, Section, Structure, Task } from '../lib/task';
 import { objectHasProperty } from '../lib/util';
 import { Layout } from './Layout';
-import { ReferenceLink } from './Typography';
+import { Paragraph, ReferenceLink } from './Typography';
 
 // Component prop types
 type ObjectiveSectionProps = { objective: string } & RenderNoteElementProp;
@@ -187,22 +187,13 @@ function NoteCard({ note }: RenderNoteElementProp) {
   const cardContent = (() => {
     if (!Array.isArray(note)) return note;
     return note.map((paragraph, i) => {
-      // If the child is an element (e.g. the note is wrapped in a <p> tag) then we simply extend
-      // its className to provide margin with the paragraph above. If not, we wrap the child in a
-      // <p> tag with that same margin
-      const marginTop = 'mt-5';
       if (React.isValidElement(paragraph)) {
-        return React.cloneElement(paragraph, {
-          className: cn(paragraph.props.className, { [marginTop]: i !== 0 }),
-          key: i,
-        });
-      } else {
-        return (
-          <p key={i} className={marginTop}>
-            {paragraph}
-          </p>
-        );
+        if (paragraph.type === Paragraph) {
+          return React.cloneElement(paragraph, { key: i });
+        }
       }
+
+      return <Paragraph key={i}>{paragraph}</Paragraph>;
     });
   })();
 

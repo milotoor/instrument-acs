@@ -5,24 +5,28 @@ import React from 'react';
 import { farURI, referenceNames, referenceURIs } from '../lib/references';
 import { objectHasProperty } from '../lib/util';
 
-type ChildProp<C = string> = { children: C };
+type ChildProp<C = React.ReactNode> = { children: C };
 type DetailListProps = ChildProp<React.ReactNode[]> & {
+  bullet?: 'alpha' | 'decimal';
   delimeter?: string;
   logic?: 'and' | 'or' | null;
   type: 'bullet' | 'inline';
 };
 
 type FARSectionProps = { section: [number, number, ...(string | number)[]] };
-type LinkProps = NextLinkProps & { children?: React.ReactNode; color?: string; title?: string };
+type KatexProps = ChildProp<string> & { inline?: boolean };
+type LinkProps = NextLinkProps & ChildProp & { color?: string; title?: string };
 type LinkableReference = keyof typeof referenceURIs;
+type ParagraphProps = ChildProp & { heading?: string };
 type ReferenceLinkProps = { reference: LinkableReference; color?: string; text?: React.ReactNode };
-type TooltipProps = ChildProp<React.ReactNode> & { message?: string };
+type TooltipProps = ChildProp & { message?: string };
 
-export function Bold({ children }: ChildProp<React.ReactNode>) {
+export function Bold({ children }: ChildProp) {
   return <span className="font-bold">{children}</span>;
 }
 
-export function DetailList({ children, delimeter = ',', logic = 'and', type }: DetailListProps) {
+export function DetailList(props: DetailListProps) {
+  const { bullet = 'decimal', children, delimeter = ',', logic = 'and', type } = props;
   const bgColor = 'bg-slate-200 hover:bg-slate-300';
   if (type === 'inline')
     return (
@@ -41,11 +45,9 @@ export function DetailList({ children, delimeter = ',', logic = 'and', type }: D
     );
 
   return (
-    <ol className="list-decimal ml-12 mt-2">
+    <ol className={`list-${bullet} ml-12 mt-2`}>
       {children.map((child, i) => (
-        <li key={i}>
-          <span className={bgColor}>{child}</span>
-        </li>
+        <li key={i}>{child}</li>
       ))}
     </ol>
   );
@@ -69,15 +71,30 @@ export function FAR({ section: fullSection }: FARSectionProps) {
   );
 }
 
-export const Link: React.FC<LinkProps> = ({ color = 'text-fuchsia-500', href, ...rest }) => (
-  <span className={cn(color, 'hover:underline')}>
-    {href.toString().startsWith('/') ? (
-      <NextLink href={href} {...rest} />
-    ) : (
-      <a target="_blank" href={href.toString()} {...rest} />
-    )}
-  </span>
-);
+export function Link({ color = 'text-fuchsia-500', href, ...rest }: LinkProps) {
+  return (
+    <span className={cn(color, 'hover:underline')}>
+      {href.toString().startsWith('/') ? (
+        <NextLink href={href} {...rest} />
+      ) : (
+        <a target="_blank" href={href.toString()} {...rest} />
+      )}
+    </span>
+  );
+}
+
+export function Paragraph({ children, heading, ...rest }: ParagraphProps) {
+  return (
+    <div className="mt-5 first:mt-0">
+      <div className={cn({ hidden: !heading })}>
+        <span className="bg-indigo-500 px-2 py-1 inline-block rounded-xl mb-1 text-white text-xs">
+          <Bold>{heading}</Bold>
+        </span>
+      </div>
+      {children}
+    </div>
+  );
+}
 
 export function ReferenceLink({ reference, color, text }: ReferenceLinkProps) {
   let linkContent: React.ReactNode = reference;
@@ -124,4 +141,3 @@ export const Tooltip = ({ message, children }: TooltipProps) => {
     </div>
   );
 };
-1;
