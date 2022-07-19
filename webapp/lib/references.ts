@@ -1,6 +1,12 @@
 export const acURI = (acNum: string, prefix: string = 'AC_') =>
   `https://www.faa.gov/documentLibrary/media/Advisory_Circular/${prefix}${acNum}.pdf`;
 
+const aimURIBase = 'https://www.faa.gov/air_traffic/publications/atpubs/aim_html/';
+export const aimURI = (chapter: number, section: number, paragraph: number) => {
+  const paraSuffix = [chapter, section, paragraph].join('-');
+  return aimURIBase + `/chap${chapter}_section_${section}.html#$paragraph${paraSuffix}`;
+};
+
 const farURIBase = 'https://www.law.cornell.edu/cfr/text/14';
 export const farURI = (part: number, section?: number) => {
   if (typeof section === 'undefined') return farURIBase + `/part-${part}`;

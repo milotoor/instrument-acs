@@ -1,11 +1,12 @@
 import cn from 'classnames';
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
+import NextImage, { ImageProps as NextImageProps } from 'next/image';
 import React from 'react';
 
-import { farURI, referenceNames, referenceURIs } from '../lib/references';
+import { aimURI, farURI, referenceNames, referenceURIs } from '../lib/references';
+import { ChildProp } from '../lib/types';
 import { objectHasProperty } from '../lib/util';
 
-type ChildProp<C = React.ReactNode> = { children: C };
 type DetailListProps = ChildProp<React.ReactNode[]> & {
   bullet?: 'alpha' | 'decimal';
   delimeter?: string;
@@ -13,13 +14,29 @@ type DetailListProps = ChildProp<React.ReactNode[]> & {
   type: 'bullet' | 'inline';
 };
 
+type AIMParagraphProps = { paragraph: [number, number, number] };
 type FARSectionProps = { section: [number, number, ...(string | number)[]] };
+type ImageProps = NextImageProps;
 type KatexProps = ChildProp<string> & { inline?: boolean };
 type LinkProps = NextLinkProps & ChildProp & { color?: string; title?: string };
 type LinkableReference = keyof typeof referenceURIs;
-type ParagraphProps = ChildProp & { heading?: string };
+type ParagraphProps = ChildProp & { heading?: string; hr?: boolean };
 type ReferenceLinkProps = { reference: LinkableReference; color?: string; text?: React.ReactNode };
 type TooltipProps = ChildProp & { message?: string };
+
+export function AIM({ paragraph: fullParagraph }: AIMParagraphProps) {
+  const [chapter, section, paragraph] = fullParagraph;
+
+  let uri = aimURI(chapter, section, paragraph);
+  return (
+    <Link href={uri}>
+      AIM{' '}
+      <span className="whitespace-nowrap">
+        {chapter}-{section}-{paragraph}
+      </span>
+    </Link>
+  );
+}
 
 export function Bold({ children }: ChildProp) {
   return <span className="font-bold">{children}</span>;
@@ -71,6 +88,14 @@ export function FAR({ section: fullSection }: FARSectionProps) {
   );
 }
 
+export function Image(props: ImageProps) {
+  return (
+    <div className="w-fit h-fit shadow-lg shadow-slate-900 m-auto mb-10">
+      <NextImage {...props} />
+    </div>
+  );
+}
+
 export function Link({ color = 'text-fuchsia-500', href, ...rest }: LinkProps) {
   return (
     <span className={cn(color, 'hover:underline')}>
@@ -80,19 +105,6 @@ export function Link({ color = 'text-fuchsia-500', href, ...rest }: LinkProps) {
         <a target="_blank" href={href.toString()} {...rest} />
       )}
     </span>
-  );
-}
-
-export function Paragraph({ children, heading, ...rest }: ParagraphProps) {
-  return (
-    <div className="mt-5 first:mt-0">
-      <div className={cn({ hidden: !heading })}>
-        <span className="bg-indigo-500 px-2 py-1 inline-block rounded-xl mb-1 text-white text-xs">
-          <Bold>{heading}</Bold>
-        </span>
-      </div>
-      {children}
-    </div>
   );
 }
 

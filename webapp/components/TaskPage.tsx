@@ -3,13 +3,14 @@ import Head from 'next/head';
 import React from 'react';
 
 import { referenceURIs } from '../lib/references';
-import { Item, Section, Structure, Task } from '../lib/task';
+import { ChildProp, Item, Section, Structure, Task } from '../lib/types';
 import { objectHasProperty } from '../lib/util';
 import { Layout } from './Layout';
-import { Paragraph, ReferenceLink } from './Typography';
+import { Bold, ReferenceLink } from './Typography';
 
 // Component prop types
 type ObjectiveSectionProps = { objective: string } & RenderNoteElementProp;
+type ParagraphProps = ChildProp & { heading?: string; hr?: boolean };
 type ReferencesSectionProps = { references: string[] } & RenderNoteElementProp;
 type SectionContainerProps = { children: React.ReactNode; heading: string };
 type TaskPageProps = TaskPage.TopLevelProps & FlagsProp & { notes?: RenderNoteProps };
@@ -200,6 +201,20 @@ function NoteCard({ note }: RenderNoteElementProp) {
   return (
     <div className="w-full bg-white text-black p-2 my-5 rounded-lg shadow-[0px_5px_25px] shadow-yellow-400 text-sm">
       {cardContent}
+    </div>
+  );
+}
+
+export function Paragraph({ children, heading, hr }: ParagraphProps) {
+  return (
+    <div className="mt-5 first:mt-0">
+      {hr ? <hr className="w-4/5 m-auto mb-5" /> : null}
+      <div className={cn({ hidden: !heading })}>
+        <span className="bg-indigo-500 px-2 py-1 inline-block rounded-xl mb-1 text-white text-xs">
+          <Bold>{heading}</Bold>
+        </span>
+      </div>
+      {children}
     </div>
   );
 }

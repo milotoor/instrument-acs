@@ -1,3 +1,6 @@
+export type ChildProp<C = React.ReactNode> = { children: C };
+
+/** Task types */
 export namespace Item {
   type Content = string | { general: string; specific: string[] };
   export type ID = string;
