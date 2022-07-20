@@ -1,5 +1,10 @@
 export type ChildProp<C = React.ReactNode> = { children: C };
 
+export namespace Colors {
+  type FrontColors = 'cold-front' | 'occluded-front' | 'warm-front';
+  export type TextColor = FrontColors;
+}
+
 /** Task types */
 export namespace Item {
   type Content = string | { general: string; specific: string[] };

@@ -4,6 +4,7 @@ import React from 'react';
 import {
   AIM,
   Bold,
+  Color,
   DetailList,
   FAR,
   Image,
@@ -82,7 +83,23 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                   displace upwards won't cool as quickly as the air around it and thus will be
                   pushed further upwards. This is an unstable parcel.
                 </>,
-                <>The general characteristics of </>,
+                <>
+                  The general characteristics of unstable air include{' '}
+                  <DetailList type="inline">
+                    <>good visibility</>
+                    <>showery precipitation</>
+                    <>cumuliform-type clouds</>
+                    <>turbulent air</>
+                  </DetailList>
+                  . By contrast, characteristics of stable air include{' '}
+                  <DetailList type="inline">
+                    <>poor visibility</>
+                    <>steady precipitation</>
+                    <>stratus-type clouds</>
+                    <>smooth air</>
+                  </DetailList>
+                  .
+                </>,
               ];
             case '3b': // Wind
               return [
@@ -144,7 +161,48 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                 </>,
               ];
             case '3e': // Weather system formation
-              return null;
+              return [
+                <>
+                  An air mass is{' '}
+                  <Bold>
+                    a body of air that covers an extensive area and has fairly uniform properties of
+                    temperature and moisture
+                  </Bold>
+                  . They form when air is allowed to rest or move slowly over a large geographical
+                  area, when the air acquires the properties of the ground. When an air mass then
+                  leaves its formation area, it comes into contact with other air masses with
+                  different properties. The interface between the two masses is known as a{' '}
+                  <Bold>frontal zone</Bold> or simply a <Bold>front</Bold>.
+                </>,
+                <>
+                  Across a front, temperature, humidity and wind often change rapidly over short
+                  distances. The three typical types of fronts are the{' '}
+                  <Bold color="cold-front">cold front</Bold>, the{' '}
+                  <Bold color="warm-front">warm front</Bold> and the{' '}
+                  <Bold>
+                    {'stationary front'.split('').map((l, i) => (
+                      <Color color={i % 2 === 0 ? 'cold-front' : 'warm-front'}>{l}</Color>
+                    ))}
+                  </Bold>
+                  . An <Bold color="occluded-front">occluded front</Bold> forms when a fast-moving
+                  cold front catches up to a slower-moving warm front.
+                </>,
+                <>
+                  Quoting from <ReferenceLink reference="AC 00-6" /> (chapter 10.3): "A{' '}
+                  <Bold>wave cyclone</Bold> is a low pressure circulation that forms and moves along
+                  a front. The circulation about the cyclone center tends to produce a wavelike kink
+                  along the front.{' '}
+                  <Bold>Wave cyclones are the primary weather producers in the mid-latitudes</Bold>.
+                  They are large lows that generally travel from west to east along a front. They
+                  last from a few days to more than a week."
+                </>,
+                <Image
+                  src="/img/cyclogenesis.webp"
+                  dimensions={[1600, 810]}
+                  width={700}
+                  noMargin
+                />,
+              ];
             case '3f': // Clouds
               return [
                 <>
@@ -258,7 +316,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                   it's not as easy to decipher and approaches with standard minima aren't included
                   at all.
                 </>,
-                <Image width={795} src="/img/jeppesen-10-9.png" height={165} />,
+                <Image src="/img/jeppesen-10-9.webp" dimensions={[1590, 330]} width={800} />,
                 <Paragraph heading="GPS and WAAS" hr>
                   This is where things get a little messy.
                   <DetailList type="bullet">
