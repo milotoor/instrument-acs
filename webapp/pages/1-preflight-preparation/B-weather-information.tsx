@@ -4,7 +4,9 @@ import React from 'react';
 import {
   AIM,
   Bold,
+  Danger,
   DetailList,
+  Emphasize,
   FAR,
   Image,
   Katex,
@@ -33,7 +35,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                   The most reliable way to get weather information is to call Flight Service at
                   1-800-WX-BRIEF; this way you will speak with a weather specialist who knows your
                   area/route of flight well. There are also online resources, such as ForeFlight (my
-                  go-to), the <Link href={references.awc}>Aviation Weather Center</Link> and{' '}
+                  go-to), the <Link href={references.awc.home}>Aviation Weather Center</Link> and{' '}
                   <Link href={references.wx_brief}>1800wxbrief.com</Link> (run by Leidos).
                 </>,
                 <>
@@ -246,21 +248,197 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                 </>,
               ];
             case '3h': // Thunderstorms/microbursts
-              return null;
+              return [
+                <>
+                  Thunderstorms are extremely hazardous to all aircraft and great care should be
+                  taken to avoid them. There are three necessary ingredients:{' '}
+                  <DetailList type="inline">
+                    <>sufficiently moist air</>
+                    <>an unstable atmosphere (i.e. a steep lapse rate)</>
+                    <>a lifting force</>
+                  </DetailList>
+                  .
+                </>,
+                <>
+                  There are three stages to thunderstorms:{' '}
+                  <DetailList type="inline">
+                    <>
+                      the cumulus stage (characterized by updrafts and low pressure at the surface)
+                    </>
+                    <>
+                      the mature stage (the most intense stage, characterized by updrafts,
+                      downdrafts and precipitation)
+                    </>
+                    <>the dissipating stage (characterized by downdrafts)</>
+                  </DetailList>
+                </>,
+                <>
+                  A <Bold>squall line</Bold> is a nonfrontal band of thunderstorms, typically
+                  preceding a cold front in moist, unstable air. These multicell or supercell
+                  thunderstorms are extremely hazardous and difficult to navigate around (due to
+                  their height and breadth).
+                </>,
+                <>
+                  The most significant hazards associated with thunderstorms are{' '}
+                  <DetailList type="inline">
+                    <>turbulence</>
+                    <>microbursts</>
+                    <>
+                      hail, particularly beneath the <Bold>anvil</Bold>
+                    </>
+                  </DetailList>
+                  . Additionally, lighting can damage avionics equipment, temporarily blind the
+                  pilot and induce permanent errors in the magnetic compass. Near the ground (i.e.
+                  after takeoff, on an approach or while landing){' '}
+                  <Bold>adverse winds and windshear</Bold> can be catastrophic.
+                </>,
+                <>
+                  Finally, <Bold>embedded thunderstorms</Bold> are especially dangerous to IFR
+                  aircraft because they are, by their nature, difficult to foresee and avoid. If you
+                  do end up inside a thunderstorm, the recommended recover procedure is:
+                  <DetailList type="bullet">
+                    <>
+                      Try to maintain a constant <Emphasize italic>attitude</Emphasize>; do not try
+                      to maintain a constant <Emphasize italic>altitude</Emphasize> as this will
+                      only add stress to the aircraft
+                    </>
+                    <>
+                      The way out is through; making a 180° turn likely prolongs your time in the
+                      storm and places additional stress on the aircraft
+                    </>
+                    <>Maintain power settings for a reduced airspeed (maneuvering speed or less)</>
+                    <>
+                      Keep your eyes inside and on the instruments; looking outside can be blinding
+                    </>
+                  </DetailList>
+                </>,
+                <Paragraph heading="Microbursts">
+                  Microbursts are short-lived, intense downdrafts which become strong horizontal
+                  winds near the surface. The downdrafts may be up to <Bold>6,000fpm</Bold>!
+                  Microbursts are particularly hazardous because an aircraft transiting through one
+                  will first experience a sudden increase in airspeed and performance followed by an
+                  equally sudden (and even more dramatic) decrease. The horizontal winds may be up
+                  to 45 knots, which means that the{' '}
+                  <Danger>
+                    headwind-to-tailwind shear experienced in the middle of the microburst may be as
+                    much as 90 knots!
+                  </Danger>
+                </Paragraph>,
+                <>
+                  An individual microburst typically does not last more than 15 minutes. The most
+                  intense horizontal winds last only a few minutes.
+                </>,
+                <Image src="/img/microburst.webp" dimensions={[968, 535]} width={600} noMargin />,
+              ];
             case '3i': // Icing and freezing level
               return [
                 <>
+                  The Aviation Weather Center provides information about current icing conditions (
+                  <Link href={references.awc.icing_sigmet}>SIGMETs</Link> and{' '}
+                  <Link href={references.awc.icing_pirep}>PIREPs</Link>),{' '}
+                  <Link href={references.awc.forecast_icing}>forecast icing</Link> and{' '}
+                  <Link href={references.awc.freezing_level}>freezing level</Link>
+                </>,
+                <Paragraph heading="Icing Conditions">
+                  For ice to form, there must be <Bold>visible moisture</Bold> and the air must be{' '}
+                  <Bold>cooled to a temperature of 0°C or less</Bold>. Even if the ambient air
+                  temperature is greater than 0°C, aerodynamic cooling can lower the temperature of
+                  an airfoil below freezing.
+                </Paragraph>,
+                <Paragraph heading="Types of Icing" hr>
+                  There are three types of structural icing:
+                  <DetailList type="bullet">
+                    <>
+                      Clear ice forms when{' '}
+                      <Bold>
+                        large droplets or freezing rain contact the airframe and spread over the
+                        surfaces
+                      </Bold>
+                      . This is the most dangerous form of icing as it is{' '}
+                      <Danger>difficult to see</Danger>.
+                    </>
+                    <>
+                      Rime ice forms{' '}
+                      <Bold>
+                        if the droplets are small and freeze immediately when contacting the
+                        airframe
+                      </Bold>
+                      . It has a rough appearance and tends to accumulate on leading-edge surfaces.
+                    </>
+                    <>
+                      Mixed ice is a mixture of clear and rime ice and forms when the conditions for
+                      both clear and rime ice are present simultaneously.
+                    </>
+                  </DetailList>
+                </Paragraph>,
+                <>
                   When certain weather phenomena are encountered, it's possible to make inferences
-                  about the air temperature at a greater altitude:{' '}
+                  about the air temperature at a higher altitude:{' '}
                   <DetailList type="inline" delimeter=";" logic={null}>
+                    <>
+                      freezing rain indicates higher temperatures above you; the rain forms as
+                      liquid water and then falls into a freezing layer but does not itself freeze
+                      until making contact with the aircraft
+                    </>
                     <>wet snow indicates that the freezing level is above you</>
                     <>ice pellets indicate freezing rain above</>
                   </DetailList>
                   .
                 </>,
+                <Paragraph heading="Hazards of Structural Icing" hr>
+                  There are numerous hazards associated with structural icing:
+                  <DetailList type="bullet" bullet="alpha">
+                    <>
+                      Ice affects the shape of the airfoil, which in turn reduces the coefficient of
+                      lift and the critical angle of attack;{' '}
+                      <Danger>the aircraft can stall at significantly higher airspeeds</Danger>.
+                    </>
+                    <>
+                      Ice simultaneously <Danger>reduces the amount of lift</Danger> produced by the
+                      airfoil and <Danger>increases the drag</Danger> dramatically.
+                    </>
+                    <>
+                      Ice can <Danger>restrict or completely lock control surfaces.</Danger>
+                    </>
+                    <>
+                      Water is heavy! The added weight can{' '}
+                      <Danger>prevent an aircraft from taking off or maintaining altitude</Danger>.{' '}
+                      <Bold>
+                        Regulations prohibit takeoff when snow, ice or frost is on the wings.
+                      </Bold>
+                    </>
+                    <>
+                      Severe ice accumulation in front of the ailerons may result in a{' '}
+                      <Danger>roll upset</Danger>, in which the aircraft experiences an uncommanded
+                      and uncontrolled roll. This is primarily a concern for pilots of aircraft with
+                      FIKI capability.
+                    </>
+                    <>
+                      Ice on the horizontal stabilizer can lead to a{' '}
+                      <Danger>tailplane stall</Danger>, in which the airplane experiences an
+                      uncommanded pitch down (because the tailplane is no longer applying its
+                      compensatory up force).
+                    </>
+                  </DetailList>
+                </Paragraph>,
+                <>
+                  <Bold italic>Changing the flap configuration may aggrevate the problem!</Bold>{' '}
+                  When your airplane is not approved for FIKI and you are accumulating ice,{' '}
+                  <Danger>you are now a test pilot!</Danger> If you are concerned that the aircraft
+                  is contaminated, but it is currently under control,{' '}
+                  <Bold>do not jeopardize that by making unnecessary configuration changes</Bold>.
+                </>,
               ];
             case '3j': // Fog/mist
             case '3k': // Frost
+              return (
+                <>
+                  Frost is defined as ice deposits formed on a surface when the surface temperature
+                  is at or below the dew point and the dew point is below freezing. Frost must be
+                  removed prior to flight, as it can reduce lift up to 30% and increase drag up to
+                  40%.
+                </>
+              );
             case '3l': // Obstructions to visibility
               return null;
           }
@@ -380,7 +558,13 @@ const references = {
     'https://www.aopa.org/news-and-media/all-news/2019/october/flight-training-magazine/weather-ads-b-and-fis-b',
   aim_waas:
     'https://www.faa.gov/air_traffic/publications/atpubs/aim_html/chap1_section_1.html#$paragraph1-1-18',
-  awc: 'https://www.aviationweather.gov/',
+  awc: {
+    home: 'https://www.aviationweather.gov/',
+    forecast_icing: 'https://www.aviationweather.gov/icing/fip',
+    freezing_level: 'https://www.aviationweather.gov/icing/frzlvl',
+    icing_pirep: 'https://www.aviationweather.gov/airep/plot?region=us&type=ice',
+    icing_sigmet: 'https://www.aviationweather.gov/sigmet/plot?type=icing',
+  },
   gfa: 'https://www.aviationweather.gov/gfa',
   gfa_symbols: 'https://www.aviationweather.gov/metar/symbol',
   isa: 'https://en.wikipedia.org/wiki/International_Standard_Atmosphere#:~:text=The%20International%20Standard%20Atmosphere%20(ISA,range%20of%20altitudes%20or%20elevations.',
