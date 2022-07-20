@@ -15,6 +15,13 @@ type DetailListProps = ChildProp<React.ReactNode[]> & {
   type: 'bullet' | 'inline';
 };
 
+type EmphasizeProps = ChildProp & {
+  bold?: boolean;
+  color?: Colors.TextColor;
+  gray?: boolean;
+  italic?: boolean;
+};
+
 type ImageProps = Pick<NextImageProps, 'src'> & {
   dimensions: [number, number];
   width?: number;
@@ -23,7 +30,6 @@ type ImageProps = Pick<NextImageProps, 'src'> & {
 };
 
 type AIMParagraphProps = { paragraph: [number, number, number] };
-type ColorProps = ChildProp & { color?: Colors.TextColor };
 type FARSectionProps = { section: [number, number, ...(string | number)[]] };
 type KatexProps = ChildProp<string> & { inline?: boolean };
 type LinkProps = NextLinkProps & ChildProp & { color?: string; title?: string };
@@ -45,41 +51,26 @@ export function AIM({ paragraph: fullParagraph }: AIMParagraphProps) {
   );
 }
 
-export function Bold({ children, color }: ColorProps) {
-  return (
-    <span className="font-bold">
-      <Color color={color}>{children}</Color>
-    </span>
-  );
+export function Bold(props: Omit<EmphasizeProps, 'bold'>) {
+  return <Emphasize bold {...props} />;
 }
 
-export function Color({ children, color }: ColorProps) {
-  return (
-    <span
-      className={cn({
-        'text-blue-500': color === 'cold-front',
-        'text-red-500': color === 'warm-front',
-        'text-fuchsia-500': color === 'occluded-front',
-      })}
-    >
-      {children}
-    </span>
-  );
+export function Danger(props: Omit<EmphasizeProps, 'bold' | 'color'>) {
+  return <Emphasize bold color="danger" {...props} />;
 }
 
 export function DetailList(props: DetailListProps) {
   const { bullet = 'decimal', children, delimeter = ',', logic = 'and', type } = props;
-  const bgColor = 'bg-slate-200 hover:bg-slate-300';
   if (type === 'inline')
     return (
       <>
         {children.flatMap((child, i) => (
           <span key={i}>
             {i > 0 ? ' ' : ''}
-            <span className={cn('italic', bgColor)}>
+            <Emphasize italic gray>
               {child}
               {i === children.length - 1 ? '' : delimeter}
-            </span>
+            </Emphasize>
             {logic && i === children.length - 2 ? ` ${logic}` : ''}
           </span>
         ))}
@@ -92,6 +83,29 @@ export function DetailList(props: DetailListProps) {
         <li key={i}>{child}</li>
       ))}
     </ol>
+  );
+}
+
+export function Emphasize({
+  bold = false,
+  children,
+  color,
+  gray = false,
+  italic = false,
+}: EmphasizeProps) {
+  return (
+    <span
+      className={cn({
+        'font-bold': bold,
+        italic,
+        'bg-slate-200 hover:bg-slate-300': gray,
+        'text-blue-500': color === 'cold-front',
+        'text-red-500': color && ['danger', 'warm-front'].includes(color),
+        'text-fuchsia-500': color === 'occluded-front',
+      })}
+    >
+      {children}
+    </span>
   );
 }
 
@@ -123,12 +137,13 @@ export function Image({ src, dimensions, width, height, noMargin = false }: Imag
 
   return (
     <div
-      className={cn('w-fit h-fit shadow-lg shadow-slate-500 m-auto', {
+      className={cn(`shadow-lg shadow-slate-500 m-auto relative`, {
         'mb-10': !noMargin,
-        'mb-1': noMargin,
+        'mb-2': noMargin,
       })}
+      style={{ width: w, height: h }}
     >
-      <NextImage src={src} width={w} height={h} />
+      <NextImage src={src} layout="fill" />
     </div>
   );
 }

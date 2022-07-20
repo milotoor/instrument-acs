@@ -4,7 +4,6 @@ import React from 'react';
 import {
   AIM,
   Bold,
-  Color,
   DetailList,
   FAR,
   Image,
@@ -180,11 +179,11 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                   distances. The three typical types of fronts are the{' '}
                   <Bold color="cold-front">cold front</Bold>, the{' '}
                   <Bold color="warm-front">warm front</Bold> and the{' '}
-                  <Bold>
-                    {'stationary front'.split('').map((l, i) => (
-                      <Color color={i % 2 === 0 ? 'cold-front' : 'warm-front'}>{l}</Color>
-                    ))}
-                  </Bold>
+                  {'stationary front'.split('').map((l, i) => (
+                    <Bold color={i % 2 === 0 ? 'cold-front' : 'warm-front'} key={i}>
+                      {l}
+                    </Bold>
+                  ))}
                   . An <Bold color="occluded-front">occluded front</Bold> forms when a fast-moving
                   cold front catches up to a slower-moving warm front.
                 </>,
