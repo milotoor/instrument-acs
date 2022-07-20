@@ -1,3 +1,4 @@
+import 'katex/dist/katex.min.css';
 import type { AppProps } from 'next/app';
 import '../styles/globals.css';
 

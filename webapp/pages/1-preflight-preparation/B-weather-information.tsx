@@ -8,6 +8,7 @@ import {
   DetailList,
   FAR,
   Image,
+  Katex,
   Link,
   Paragraph,
   ReferenceLink,
@@ -224,6 +225,27 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                 </>,
               ];
             case '3g': // Turbulence
+              return [
+                <>
+                  Turbulence is reported with four intensity levels:{' '}
+                  <DetailList type="inline">
+                    <>light</>
+                    <>moderate</>
+                    <>severe</>
+                    <>extreme</>
+                  </DetailList>
+                  . Severe turbulence causes the aircraft to be momentarily out of control, while
+                  extreme turbulence may cause structural damage.
+                </>,
+                <>
+                  When encountering severe or extreme turbulence, it's important to reduce aircraft
+                  speed to the{' '}
+                  <Bold>
+                    design maneuvering speed (<Katex inline>V_a</Katex>)
+                  </Bold>{' '}
+                  to lessen airframe stresses.
+                </>,
+              ];
             case '3h': // Thunderstorms/microbursts
               return null;
             case '3i': // Icing and freezing level

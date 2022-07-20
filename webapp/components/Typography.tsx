@@ -1,4 +1,5 @@
 import cn from 'classnames';
+import katex from 'katex';
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import NextImage, { ImageProps as NextImageProps } from 'next/image';
 import React from 'react';
@@ -24,6 +25,7 @@ type ImageProps = Pick<NextImageProps, 'src'> & {
 type AIMParagraphProps = { paragraph: [number, number, number] };
 type ColorProps = ChildProp & { color?: Colors.TextColor };
 type FARSectionProps = { section: [number, number, ...(string | number)[]] };
+type KatexProps = ChildProp<string> & { inline?: boolean };
 type LinkProps = NextLinkProps & ChildProp & { color?: string; title?: string };
 type LinkableReference = keyof typeof referenceURIs;
 type ReferenceLinkProps = { reference: LinkableReference; color?: string; text?: React.ReactNode };
@@ -188,3 +190,10 @@ export const Tooltip = ({ message, children }: TooltipProps) => {
     </div>
   );
 };
+
+export function Katex({ children, inline = false, ...rest }: KatexProps) {
+  return React.createElement(inline ? 'span' : 'div', {
+    ...rest,
+    dangerouslySetInnerHTML: { __html: katex.renderToString(children) },
+  });
+}
