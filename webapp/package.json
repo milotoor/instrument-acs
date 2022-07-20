@@ -6,7 +6,6 @@
     "start": "next start"
   },
   "dependencies": {
-    "@emotion/react": "^11.9.3",
     "classnames": "^2.3.1",
     "directory-tree": "^3.3.0",
     "next": "latest",
@@ -15,7 +14,6 @@
     "toml": "^3.0.0"
   },
   "devDependencies": {
-    "@emotion/babel-plugin": "^11.9.2",
     "@types/node": "^18.0.5",
     "@types/react": "18.0.9",
     "@types/react-dom": "18.0.5",
