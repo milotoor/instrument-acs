@@ -130,6 +130,24 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                   with the tropopause. It shifts seasonally, extending farther south (and blowing
                   more strongly) in the winter.
                 </>,
+                <>
+                  For reasons not entirely clear to me, <Bold>wind shear</Bold> patterns vary
+                  between front types:
+                  <DetailList type="bullet" bullet="alpha">
+                    <>
+                      with a <Bold color="cold-front">cold front</Bold>, it occurs just after the
+                      front passes and for a short period thereafter
+                    </>
+                    <>
+                      with a <Bold color="warm-front">warm front</Bold>, it occurs just before the
+                      front passes
+                    </>
+                    <>
+                      <Bold color="warm-front">warm fronts</Bold> seem to produce much greater wind
+                      shear than <Bold color="cold-front">cold fronts</Bold> do
+                    </>
+                  </DetailList>
+                </>,
               ];
             case '3c': // Temperature
               return [
@@ -290,7 +308,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                   . Additionally, lighting can damage avionics equipment, temporarily blind the
                   pilot and induce permanent errors in the magnetic compass. Near the ground (i.e.
                   after takeoff, on an approach or while landing){' '}
-                  <Bold>adverse winds and windshear</Bold> can be catastrophic.
+                  <Bold>adverse winds and wind shear</Bold> can be catastrophic.
                 </>,
                 <>
                   Finally, <Bold>embedded thunderstorms</Bold> are especially dangerous to IFR
@@ -421,12 +439,30 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                     </>
                   </DetailList>
                 </Paragraph>,
+                <Paragraph heading="Pilot Response to Icing" hr>
+                  If still on the ground, the response is simple: don't take off until all the ice,
+                  frost and snow is cleared, and seriously consider not flying at all. If in the air
+                  in an aircraft unequipped with FIKI capabilities, the first priority is exiting
+                  icing conditions. <Bold>The fastest way out is not always a descent</Bold>. Flying
+                  up through a temperature inversion or into a region cooler than -10°C is
+                  sufficient.
+                </Paragraph>,
+                <>
+                  Periodically disconnecting the autopilot and hand-flying is a good idea whenever
+                  flying in the vicinity of icing conditions. The autopilot may mask an abnormal
+                  control surface state; disconnecting it will make this apparent.
+                </>,
                 <>
                   <Bold italic>Changing the flap configuration may aggrevate the problem!</Bold>{' '}
                   When your airplane is not approved for FIKI and you are accumulating ice,{' '}
                   <Danger>you are now a test pilot!</Danger> If you are concerned that the aircraft
                   is contaminated, but it is currently under control,{' '}
                   <Bold>do not jeopardize that by making unnecessary configuration changes</Bold>.
+                </>,
+                <>
+                  Finally, carry a bit of extra speed on approach. With ice contaminatio the
+                  aircraft's stall speed may be significantly higher, potentially greater than the
+                  typical final approach speed. Discovering this 300 feet AGL is bad.
                 </>,
               ];
             case '3j': // Fog/mist

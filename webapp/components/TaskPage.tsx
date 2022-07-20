@@ -130,7 +130,7 @@ function DataSection({ flags, heading, notes = () => null, task }: DataSectionPr
           // If the datum is not the beginning of a sub-list, render it
           if (typeof datum === 'string')
             return (
-              <li key={num}>
+              <li key={num} id={makeID(num)}>
                 {applyFlags(num, datum)}
                 <NoteCard note={notes(num)} />
               </li>
@@ -139,7 +139,7 @@ function DataSection({ flags, heading, notes = () => null, task }: DataSectionPr
           // Otherwise we need to render the sublist
           const { general, specific } = datum;
           return (
-            <li key={num}>
+            <li key={num} id={makeID(num)}>
               {general}
               <NoteCard note={notes(num)} />
               <ol className="list-alpha ml-8">
@@ -147,7 +147,7 @@ function DataSection({ flags, heading, notes = () => null, task }: DataSectionPr
                   // Char code 97 is "a", 98 is "b", etc.
                   const itemId = num + String.fromCharCode(97 + i);
                   return (
-                    <li key={i}>
+                    <li key={i} id={makeID(itemId)}>
                       {applyFlags(itemId, text)}
                       <NoteCard note={notes(itemId)} />
                     </li>
@@ -170,6 +170,10 @@ function DataSection({ flags, heading, notes = () => null, task }: DataSectionPr
         {text}
       </span>
     );
+  }
+
+  function makeID(id: Item.ID) {
+    return `element-${id}`;
   }
 }
 
