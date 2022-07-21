@@ -69,18 +69,22 @@ export namespace TaskPage {
 }
 
 function ReferencesSection({ references, note }: ReferencesSectionProps) {
-  const linkColor = 'text-emerald-500';
+  const linkProps = {
+    bold: true,
+    color: 'text-cyan-500',
+  };
+
   return (
     <SectionContainer heading="References">
       {references.map((reference, i, arr) => {
         let link: React.ReactNode = reference;
         if (objectHasProperty(referenceURIs, reference)) {
-          link = <ReferenceLink color={linkColor} reference={reference} />;
+          link = <ReferenceLink reference={reference} {...linkProps} />;
         } else if (reference === '14 CFR parts 61, 91') {
           link = (
             <span>
-              14 CFR parts <ReferenceLink color={linkColor} reference="14 CFR part 61" text={61} />{' '}
-              and <ReferenceLink color={linkColor} reference="14 CFR part 91" text={91} />
+              14 CFR parts <ReferenceLink reference="14 CFR part 61" text={61} {...linkProps} /> and{' '}
+              <ReferenceLink reference="14 CFR part 91" text={91} {...linkProps} />
             </span>
           );
         }
