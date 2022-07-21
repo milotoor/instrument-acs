@@ -16,6 +16,7 @@ import {
   TaskPage,
 } from '../../components';
 import { getSectionStructure, getTaskFromSectionLetter } from '../../lib/data_loaders';
+import { uri } from '../../lib/references';
 
 export const getStaticProps = () => ({
   props: { structure: getSectionStructure(), task: getTaskFromSectionLetter(1, 'B') },
@@ -592,21 +593,20 @@ export default WeatherInformation;
 const references = {
   ads_b_fis_b:
     'https://www.aopa.org/news-and-media/all-news/2019/october/flight-training-magazine/weather-ads-b-and-fis-b',
-  aim_waas:
-    'https://www.faa.gov/air_traffic/publications/atpubs/aim_html/chap1_section_1.html#$paragraph1-1-18',
+  aim_waas: uri.aim(1, 1, 18),
   awc: {
-    home: 'https://www.aviationweather.gov/',
-    forecast_icing: 'https://www.aviationweather.gov/icing/fip',
-    freezing_level: 'https://www.aviationweather.gov/icing/frzlvl',
-    icing_pirep: 'https://www.aviationweather.gov/airep/plot?region=us&type=ice',
-    icing_sigmet: 'https://www.aviationweather.gov/sigmet/plot?type=icing',
+    home: uri.awc(),
+    forecast_icing: uri.awc('icing/fip'),
+    freezing_level: uri.awc('icing/frzlvl'),
+    icing_pirep: uri.awc('airep/plot?region=us&type=ice'),
+    icing_sigmet: uri.awc('sigmet/plot?type=icing'),
   },
-  gfa: 'https://www.aviationweather.gov/gfa',
-  gfa_symbols: 'https://www.aviationweather.gov/metar/symbol',
-  isa: 'https://en.wikipedia.org/wiki/International_Standard_Atmosphere#:~:text=The%20International%20Standard%20Atmosphere%20(ISA,range%20of%20altitudes%20or%20elevations.',
+  fog_types: uri.wikipedia('Fog#Types'),
+  gfa: uri.awc('gfa'),
+  gfa_symbols: uri.awc('metar/symbol'),
+  isa: uri.wikipedia('International_Standard_Atmosphere'),
   jeppesen10_9:
     'https://www.boldmethod.com/learn-to-fly/navigation/how-to-use-the-jeppesen-airport-10-9-page/',
-  taf_metar_key:
-    'https://www.faa.gov/air_traffic/publications/atpubs/aim_html/chap7_section_1.html#mnH1e0JACK',
+  taf_metar_key: uri.aim(7, 1, 28),
   wx_brief: 'https://www.1800wxbrief.com/',
 };

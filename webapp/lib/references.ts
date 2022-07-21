@@ -1,33 +1,45 @@
-export const acURI = (acNum: string, prefix: string = 'AC_') =>
-  `https://www.faa.gov/documentLibrary/media/Advisory_Circular/${prefix}${acNum}.pdf`;
+export const uri = {
+  ac: (acNum: string, prefix: string = 'AC_') =>
+    `https://www.faa.gov/documentLibrary/media/Advisory_Circular/${prefix}${acNum}.pdf`,
 
-const aimURIBase = 'https://www.faa.gov/air_traffic/publications/atpubs/aim_html/';
-export const aimURI = (chapter: number, section: number, paragraph: number) => {
-  const paraSuffix = [chapter, section, paragraph].join('-');
-  return aimURIBase + `/chap${chapter}_section_${section}.html#$paragraph${paraSuffix}`;
-};
+  aim: (chapter?: number, section?: number, paragraph?: number) => {
+    const aimURIBase = 'https://www.faa.gov/air_traffic/publications/atpubs/aim_html/';
+    if (typeof chapter === 'undefined') return aimURIBase;
+    if (typeof section === 'undefined') return aimURIBase + `chap_${chapter}.html`;
 
-const farURIBase = 'https://www.law.cornell.edu/cfr/text/14';
-export const farURI = (part: number, section?: number) => {
-  if (typeof section === 'undefined') return farURIBase + `/part-${part}`;
-  return farURIBase + `/${part}.${section}`;
+    let sectionURI = aimURIBase + `/chap${chapter}_section_${section}.html`;
+    if (typeof chapter === 'undefined') return sectionURI;
+
+    const paraSuffix = [chapter, section, paragraph].join('-');
+    return aimURIBase + `/chap${chapter}_section_${section}.html#$paragraph${paraSuffix}`;
+  },
+
+  awc: (r?: string) => `https://www.aviationweather.gov/${r ? r : ''}`,
+
+  far: (part: number, section?: number) => {
+    const farURIBase = 'https://www.law.cornell.edu/cfr/text/14';
+    if (typeof section === 'undefined') return farURIBase + `/part-${part}`;
+    return farURIBase + `/${part}.${section}`;
+  },
+
+  wikipedia: (article: string) => `https://en.wikipedia.org/wiki/${article}`,
 };
 
 const handbooksURIBase =
   'https://www.faa.gov/sites/faa.gov/files/regulations_policies/handbooks_manuals/aviation';
 
 export const referenceURIs = {
-  '14 CFR part 61': farURI(61),
-  '14 CFR part 91': farURI(91),
-  'AC 00-6': acURI('00-6b'),
-  'AC 00-45': acURI('00-45H'),
-  'AC 00-54': acURI('00-54', 'AC'),
-  'AC 00-57': acURI('00-57', ''),
-  'AC 120-108': acURI('120-108'),
-  'AC 68-1': acURI('68-1'),
-  'AC 91-74': acURI('91-74B'),
-  'AC 91.21-1': acURI('91.21-1D'),
-  'AIM': 'https://www.faa.gov/air_traffic/publications/atpubs/aim_html/',
+  '14 CFR part 61': uri.far(61),
+  '14 CFR part 91': uri.far(91),
+  'AC 00-6': uri.ac('00-6b'),
+  'AC 00-45': uri.ac('00-45H'),
+  'AC 00-54': uri.ac('00-54', 'AC'),
+  'AC 00-57': uri.ac('00-57', ''),
+  'AC 120-108': uri.ac('120-108'),
+  'AC 68-1': uri.ac('68-1'),
+  'AC 91-74': uri.ac('91-74B'),
+  'AC 91.21-1': uri.ac('91.21-1D'),
+  'AIM': uri.aim(),
   'FAA-H-8083-2': 'https://www.faa.gov/sites/faa.gov/files/2022-06/risk_management_handbook_2A.pdf',
   'FAA-H-8083-3': `${handbooksURIBase}/airplane_handbook/00_afh_full.pdf`,
   'FAA-H-8083-15': `${handbooksURIBase}/FAA-H-8083-15B.pdf`,

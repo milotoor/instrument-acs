@@ -4,7 +4,7 @@ import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import NextImage, { ImageProps as NextImageProps } from 'next/image';
 import React from 'react';
 
-import { aimURI, farURI, referenceNames, referenceURIs } from '../lib/references';
+import { referenceNames, referenceURIs, uri } from '../lib/references';
 import { ChildProp, Colors } from '../lib/types';
 import { objectHasProperty } from '../lib/util';
 
@@ -40,9 +40,9 @@ type TooltipProps = ChildProp & { message?: string };
 export function AIM({ paragraph: fullParagraph }: AIMParagraphProps) {
   const [chapter, section, paragraph] = fullParagraph;
 
-  let uri = aimURI(chapter, section, paragraph);
+  let aimURI = uri.aim(chapter, section, paragraph);
   return (
-    <Link href={uri}>
+    <Link href={aimURI}>
       AIM{' '}
       <span className="whitespace-nowrap">
         {chapter}-{section}-{paragraph}
@@ -113,14 +113,14 @@ export function FAR({ section: fullSection }: FARSectionProps) {
   const [part, section, ...paragraph] = fullSection;
   const paraArray = Array.isArray(paragraph) ? paragraph : [paragraph];
 
-  let uri = farURI(part, section);
+  let farURI = uri.far(part, section);
   if (paraArray && paraArray.length) {
-    uri += `#${paraArray.join('_')}`;
+    farURI += `#${paraArray.join('_')}`;
   }
 
   const paraText = paraArray.length ? ' ' + paraArray.map((t) => `(${t})`).join('') : null;
   return (
-    <Link href={uri}>
+    <Link href={farURI}>
       §{part}.{section}
       {paraText}
     </Link>
