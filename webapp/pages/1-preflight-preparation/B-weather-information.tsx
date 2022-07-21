@@ -467,6 +467,41 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                 </>,
               ];
             case '3j': // Fog/mist
+              return [
+                <>
+                  Fog is, in effect, a cloud at ground level. It is particularly common in
+                  industrial areas to the prevalence of condensation nuclei from combustion
+                  products.
+                </>,
+                <>
+                  Fog is <Link href={references.fog.types}>classified by the way it's formed</Link>:
+                  <DetailList type="bullet">
+                    <>
+                      <Bold>Radiation fog</Bold> is formed by the cooling of land after sunset by
+                      infrared thermal radiation in calm conditions with a clear sky. The cooling
+                      ground then cools adjacent air by conduction, causing the air temperature to
+                      fall and reach the dew point, forming fog. Radiation fog occurs at night, and
+                      usually does not last long after sunrise, but it can persist all day in the
+                      winter months, especially in areas bounded by high ground.{' '}
+                      <Link href={references.fog.tule}>Tule fog</Link> is an example of radiation
+                      fog.
+                    </>
+                    <>
+                      <Bold>Advection fog</Bold> is formed when moist air passes over a cool surface
+                      by advection (wind) and is cooled. It is common at sea when moist air
+                      encounters cooler waters, including areas of cold water upwelling, such as
+                      along the California coast; it's also common as a warm front passes over an
+                      area with significant snow-pack.{' '}
+                      <Link href={references.fog.sf}>San Francisco fog</Link> is an example of
+                      advection fog.
+                    </>
+                    <>
+                      <Bold>Upslope fog</Bold> is formed when moist air is forced up hill and cools
+                      due to <Link href={references.adiabatic_process}>adiabatic cooling</Link>.
+                    </>
+                  </DetailList>
+                </>,
+              ];
             case '3k': // Frost
               return (
                 <>
@@ -599,6 +634,7 @@ function WarmFront({ plural = false }: FrontProps) {
 }
 
 const references = {
+  adiabatic_process: uri.wikipedia('Adiabatic_process#Adiabatic_heating_and_cooling'),
   ads_b_fis_b:
     'https://www.aopa.org/news-and-media/all-news/2019/october/flight-training-magazine/weather-ads-b-and-fis-b',
   aim_waas: uri.aim(1, 1, 18),
@@ -609,7 +645,11 @@ const references = {
     icing_pirep: uri.awc('airep/plot?region=us&type=ice'),
     icing_sigmet: uri.awc('sigmet/plot?type=icing'),
   },
-  fog_types: uri.wikipedia('Fog#Types'),
+  fog: {
+    types: uri.wikipedia('Fog#Types'),
+    sf: uri.wikipedia('San_Francisco_fog'),
+    tule: uri.wikipedia('Tule_fog'),
+  },
   gfa: uri.awc('gfa'),
   gfa_symbols: uri.awc('metar/symbol'),
   isa: uri.wikipedia('International_Standard_Atmosphere'),
