@@ -72,9 +72,9 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
               return [
                 <>
                   The{' '}
-                  <Link href={references.isa}>
-                    <Bold>International Standard Atmosphere (ISA)</Bold>{' '}
-                  </Link>
+                  <Link bold href={references.isa}>
+                    International Standard Atmosphere (ISA)
+                  </Link>{' '}
                   is central to understanding how the FAA talks about the atmosphere. On a "standard
                   day" the sea level pressure is 29.92"Hg and the air temperature is 15°C. For every
                   thousand feet of elevation gain, the pressure drops 1"Hg and the temperature drops
@@ -115,18 +115,11 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                   down or simply blow you off course.
                 </>,
                 <>
-                  {' '}
-                  Phenomena like{' '}
-                  <Bold>
-                    <ReferenceLink reference="AC 00-54" text="wind shear" />
-                  </Bold>{' '}
-                  or{' '}
-                  <Bold>
-                    <ReferenceLink reference="AC 00-57" text="mountain wave" />
-                  </Bold>{' '}
-                  can be extremely hazardous: countless GA accidents have occurred simply because
-                  pilots (especially instrument pilots!) forget that downwind of a mountain range is
-                  a high-risk environment.
+                  Phenomena like <ReferenceLink bold reference="AC 00-54" text="wind shear" /> or{' '}
+                  <ReferenceLink bold reference="AC 00-57" text="mountain wave" /> can be extremely
+                  hazardous: countless GA accidents have occurred simply because pilots (especially
+                  instrument pilots!) forget that downwind of a mountain range is a high-risk
+                  environment.
                 </>,
                 <>
                   The <Bold>jetstream</Bold> is defined as a wind of 50 knots or greater associated

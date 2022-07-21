@@ -29,12 +29,19 @@ type ImageProps = Pick<NextImageProps, 'src'> & {
   noMargin?: boolean;
 };
 
+type ReferenceLinkProps = {
+  bold?: boolean;
+  color?: string | null;
+  reference: LinkableReference;
+  text?: React.ReactNode;
+  title?: string;
+};
+
 type AIMParagraphProps = { paragraph: [number, number, number] };
 type FARSectionProps = { section: [number, number, ...(string | number)[]] };
 type KatexProps = ChildProp<string> & { inline?: boolean };
-type LinkProps = NextLinkProps & ChildProp & { color?: string; title?: string };
+type LinkProps = NextLinkProps & ChildProp & Omit<ReferenceLinkProps, 'reference' | 'text'>;
 type LinkableReference = keyof typeof referenceURIs;
-type ReferenceLinkProps = { reference: LinkableReference; color?: string; text?: React.ReactNode };
 type TooltipProps = ChildProp & { message?: string };
 
 export function AIM({ paragraph: fullParagraph }: AIMParagraphProps) {
@@ -148,19 +155,21 @@ export function Image({ src, dimensions, width, height, noMargin = false }: Imag
   );
 }
 
-export function Link({ color = 'text-fuchsia-500', href, ...rest }: LinkProps) {
+export function Link({ bold, color = 'text-fuchsia-500', href, ...rest }: LinkProps) {
   return (
-    <span className={cn(color, 'hover:underline')}>
-      {href.toString().startsWith('/') ? (
-        <NextLink href={href} {...rest} />
-      ) : (
-        <a target="_blank" href={href.toString()} {...rest} />
-      )}
+    <span className={cn('hover:underline', color, { 'text-inherit': color === null })}>
+      <Emphasize bold={bold}>
+        {href.toString().startsWith('/') ? (
+          <NextLink href={href} {...rest} />
+        ) : (
+          <a target="_blank" href={href.toString()} {...rest} />
+        )}
+      </Emphasize>
     </span>
   );
 }
 
-export function ReferenceLink({ reference, color, text }: ReferenceLinkProps) {
+export function ReferenceLink({ reference, text, ...rest }: ReferenceLinkProps) {
   let linkContent: React.ReactNode = reference;
   let title;
 
@@ -176,7 +185,7 @@ export function ReferenceLink({ reference, color, text }: ReferenceLinkProps) {
 
   return (
     <Tooltip message={title}>
-      <Link color={color} href={referenceURIs[reference]}>
+      <Link href={referenceURIs[reference]} {...rest}>
         {linkContent}
       </Link>
     </Tooltip>
@@ -184,21 +193,16 @@ export function ReferenceLink({ reference, color, text }: ReferenceLinkProps) {
 }
 
 export const Tooltip = ({ message, children }: TooltipProps) => {
-  const backgroundColor = 'gray-600';
   return (
     <div className="inline-block">
       <div className="relative flex flex-col items-center group">
         {children}
         {message && (
           <div className="absolute bottom-0 hidden mb-6 group-hover:block">
-            <div
-              className={`py-1 px-2 text-xs text-white rounded-md [width:max-content] shadow-md shadow-slate-700 bg-${backgroundColor}`}
-            >
-              {message}
+            <div className="py-1 px-2 text-xs text-white rounded-md [width:max-content] shadow-md shadow-slate-700 bg-gray-600">
+              <Bold>{message}</Bold>
             </div>
-            <span
-              className={`absolute top-[100%] left-1/2 -ml-[6px] border-[6px] border-solid border-transparent border-t-${backgroundColor}`}
-            />
+            <span className="absolute top-[100%] left-1/2 -ml-[6px] border-[6px] border-solid border-transparent border-t-gray-600" />
           </div>
         )}
       </div>
