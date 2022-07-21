@@ -41,7 +41,7 @@ import React from 'react';
 
 import { TaskPage } from '../../components';
 import { getSectionStructure, getTaskFromSectionLetter } from '../../lib/data_loaders';
-import { Task } from '../../lib/task';
+import { Task } from '../../lib/types';
 
 export const getStaticProps = () => ({
   props: { structure: getSectionStructure(), task: getTaskFromSectionLetter(${n}, '${l}') },

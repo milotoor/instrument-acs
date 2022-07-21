@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import React from 'react';
 
-import { Structure } from '../lib/task';
+import { Structure } from '../lib/types';
 import { Link } from './Typography';
 import type { TaskPage } from './TaskPage';
 

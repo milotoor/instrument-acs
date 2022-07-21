@@ -2,7 +2,7 @@ import dirTree from 'directory-tree';
 import path from 'path';
 import toml from 'toml';
 
-import { Section, Structure, Task } from './task';
+import { Section, Structure, Task } from './types';
 
 const sectionURIs = {
   1: 'preflight-preparation',
