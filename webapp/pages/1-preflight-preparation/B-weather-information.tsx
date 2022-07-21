@@ -51,14 +51,66 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                 </>,
               ];
             case '2': // Weather products
-              return (
+              return [
                 <>
                   A very large variety of weather products exist to aid in flight planning. Many of
                   these are available in ForeFlight; additionally, the NWS provides the{' '}
                   <Link href={references.gfa}>Graphical Forecasts for Aviation</Link> (GFA for
                   short).
-                </>
-              );
+                </>,
+                <>
+                  To focus on a few:{' '}
+                  <DetailList type="bullet">
+                    <>
+                      <Link bold href={references.awc.graphical_airmet}>
+                        Graphical AIRMET
+                      </Link>{' '}
+                      and{' '}
+                      <Link bold href={references.awc.sigmet}>
+                        SIGMET
+                      </Link>{' '}
+                      charts indicate the location and boundaries for active AIRMETs and SIGMETs. As
+                      a reminder, SIGMETs are issued for significant weather hazards that are of
+                      concern to all aircraft, while AIRMETs are primarily of concern to lighter
+                      aircraft; the AWC is responsible for issuing both AIRMETs and SIGMETs. AIRMETs
+                      come in three flavors:{' '}
+                      <DetailList type="inline">
+                        <>Sierra (mountain obscuration or IFR)</>
+                        <>Tango (turbulence)</>
+                        <>Zulu (icing)</>
+                      </DetailList>
+                      .
+                    </>
+                    <>
+                      <Bold>Significant Weather charts</Bold> come in{' '}
+                      <Link bold href={references.awc.sigwx.low}>
+                        low (below FL240)
+                      </Link>{' '}
+                      and{' '}
+                      <Link bold href={references.awc.sigwx.high}>
+                        high
+                      </Link>{' '}
+                      varieties. The low SIGWX chart shows freezing levels, turbulence, and low
+                      cloud ceilings. The high SIGWX chart shows thunderstorms, tropical cyclones,
+                      moderate or severe turbulence, jetstreams, volcanic eruptions and more.
+                    </>
+                    <>
+                      The{' '}
+                      <Link bold href={references.awc.surface_analysis}>
+                        Surface Analysis Chart
+                      </Link>{' '}
+                      shows useful information regarding front positions, pressure systems, wind
+                      intensities and precipitation.
+                    </>
+                  </DetailList>
+                </>,
+                <Image
+                  src="surface_analysis_chart"
+                  dimensions={[1160, 802]}
+                  width={700}
+                  noMargin
+                />,
+              ];
             case '3': // Meteorology in general
               return (
                 <>
@@ -627,11 +679,18 @@ const references = {
     'https://www.aopa.org/news-and-media/all-news/2019/october/flight-training-magazine/weather-ads-b-and-fis-b',
   aim_waas: uri.aim(1, 1, 18),
   awc: {
+    graphical_airmet: uri.awc('gairmet'),
     home: uri.awc(),
     forecast_icing: uri.awc('icing/fip'),
     freezing_level: uri.awc('icing/frzlvl'),
     icing_pirep: uri.awc('airep/plot?region=us&type=ice'),
     icing_sigmet: uri.awc('sigmet/plot?type=icing'),
+    sigmet: uri.awc('sigmet'),
+    sigwx: {
+      high: uri.awc('progchart/high'),
+      low: uri.awc('progchart/low'),
+    },
+    surface_analysis: uri.awc('progchart/sfc'),
   },
   fog: {
     types: uri.wikipedia('Fog#Types'),
