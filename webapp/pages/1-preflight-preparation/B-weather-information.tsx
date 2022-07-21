@@ -18,6 +18,8 @@ import {
 import { getSectionStructure, getTaskFromSectionLetter } from '../../lib/data_loaders';
 import { uri } from '../../lib/references';
 
+type FrontProps = { plural?: boolean };
+
 export const getStaticProps = () => ({
   props: { structure: getSectionStructure(), task: getTaskFromSectionLetter(1, 'B') },
 });
@@ -136,16 +138,15 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                   between front types:
                   <DetailList type="bullet" bullet="alpha">
                     <>
-                      with a <Bold color="cold-front">cold front</Bold>, it occurs just after the
-                      front passes and for a short period thereafter
+                      with a <ColdFront />, it occurs just after the front passes and for a short
+                      period thereafter
                     </>
                     <>
-                      with a <Bold color="warm-front">warm front</Bold>, it occurs just before the
-                      front passes
+                      with a <WarmFront />, it occurs just before the front passes
                     </>
                     <>
-                      <Bold color="warm-front">warm fronts</Bold> seem to produce much greater wind
-                      shear than <Bold color="cold-front">cold fronts</Bold> do
+                      <WarmFront plural /> seem to produce much greater wind shear than{' '}
+                      <ColdFront plural /> do
                     </>
                   </DetailList>
                 </>,
@@ -197,9 +198,8 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                 </>,
                 <>
                   Across a front, temperature, humidity and wind often change rapidly over short
-                  distances. The three typical types of fronts are the{' '}
-                  <Bold color="cold-front">cold front</Bold>, the{' '}
-                  <Bold color="warm-front">warm front</Bold> and the{' '}
+                  distances. The three typical types of fronts are the <ColdFront />, the{' '}
+                  <WarmFront /> and the{' '}
                   {'stationary front'.split('').map((l, i) => (
                     <Bold color={i % 2 === 0 ? 'cold-front' : 'warm-front'} key={i}>
                       {l}
@@ -589,6 +589,14 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
 };
 
 export default WeatherInformation;
+
+function ColdFront({ plural = false }: FrontProps) {
+  return <Bold color="cold-front">cold front{plural && 's'}</Bold>;
+}
+
+function WarmFront({ plural = false }: FrontProps) {
+  return <Bold color="warm-front">warm front{plural && 's'}</Bold>;
+}
 
 const references = {
   ads_b_fis_b:
