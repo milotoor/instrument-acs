@@ -5,12 +5,12 @@ import { Structure } from '../lib/types';
 import { Link } from './Typography';
 import type { TaskPage } from './TaskPage';
 
-type LayoutProps = { children: React.ReactNode } & Partial<TaskPage.TopLevelProps>;
+type LayoutProps = { children: React.ReactNode; home?: boolean } & Partial<TaskPage.TopLevelProps>;
 type MaybeTask = Structure.Task | undefined;
 
 const sectionNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];
 
-export function Layout({ children, structure, task }: LayoutProps) {
+export function Layout({ children, home = false, structure, task }: LayoutProps) {
   const tasks = React.useMemo(() => structure?.flatMap((s) => s.tasks), [structure]);
   const meta = task?.meta;
   const [section, letter] = meta
@@ -31,20 +31,30 @@ export function Layout({ children, structure, task }: LayoutProps) {
   const navLinkClasses = 'absolute h-top-bar flex flex-col justify-center';
   return (
     <div className="flex h-screen flex-col items-center justify-start">
-      <div className="w-full h-top-bar flex-shrink-0 bg-slate-900 shadow-lg flex flex-row justify-center items-center relative">
-        <span className={cn(navLinkClasses, 'left-5')}>
-          {prevTask && <Link href={prevTask.uri}>← Previous</Link>}
-        </span>
-        <div className="font-fancy text-2xl hover:text-title">
-          <Link color="white" href="/">
-            The Instrument ACS
-          </Link>
+      {!home && (
+        <div className="w-full h-top-bar z-10 flex-shrink-0 shadow-xl shadow-slate-800 flex flex-row justify-center items-center relative bg-gradient-to-r from-cyan-500 to-blue-500">
+          <span className={cn(navLinkClasses, 'left-5')}>
+            {prevTask && (
+              <Link color="white" href={prevTask.uri}>
+                ← Previous
+              </Link>
+            )}
+          </span>
+          <div className="font-fancy text-2xl hover:text-title">
+            <Link color="white" href="/">
+              The Instrument ACS
+            </Link>
+          </div>
+          <span className={cn(navLinkClasses, 'right-5')}>
+            {nextTask && (
+              <Link color="white" href={nextTask.uri}>
+                Next →
+              </Link>
+            )}
+          </span>
         </div>
-        <span className={cn(navLinkClasses, 'right-5')}>
-          {nextTask && <Link href={nextTask.uri}>Next →</Link>}
-        </span>
-      </div>
-      <div className="w-full py-2 flex-grow overflow-auto  flex flex-col items-center">
+      )}
+      <div className="w-full pt-4 pb-2 flex-grow overflow-auto  flex flex-col items-center">
         {children}
       </div>
     </div>

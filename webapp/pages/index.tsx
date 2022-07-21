@@ -17,7 +17,7 @@ export function getStaticProps(): { props: ACSProp } {
 
 const Home: NextPage<ACSProp> = ({ taskStructure }) => {
   return (
-    <Layout>
+    <Layout home>
       <Head>
         <title>The Instrument ACS</title>
         <link rel="icon" href="/favicon.ico" />
