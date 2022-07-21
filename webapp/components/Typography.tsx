@@ -150,7 +150,7 @@ export function Image({ src, dimensions, width, height, noMargin = false }: Imag
       })}
       style={{ width: w, height: h }}
     >
-      <NextImage src={src} layout="fill" />
+      <NextImage src={`/img/${src}.webp`} layout="fill" />
     </div>
   );
 }
