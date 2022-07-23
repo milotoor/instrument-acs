@@ -9,7 +9,7 @@ import { ChildProp, Colors } from '../lib/types';
 import { objectHasProperty } from '../lib/util';
 
 type DetailListProps = ChildProp<React.ReactNode[]> & {
-  bullet?: 'alpha' | 'decimal';
+  bullet?: 'alpha' | 'decimal' | 'disc';
   delimeter?: string;
   logic?: 'and' | 'or' | null;
   type: 'bullet' | 'inline';
