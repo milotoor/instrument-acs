@@ -16,6 +16,10 @@ module.exports = {
       },
       height: {
         'top-bar': '3rem'
+      },
+      transitionProperty: {
+        'border': 'border-color',
+        'height': 'height'
       }
     },
   },
