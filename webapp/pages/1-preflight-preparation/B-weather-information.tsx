@@ -301,7 +301,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                   When encountering severe or extreme turbulence, it's important to reduce aircraft
                   speed to the{' '}
                   <Bold>
-                    design maneuvering speed (<Katex inline>V_a</Katex>)
+                    design maneuvering speed (<Katex>V_a</Katex>)
                   </Bold>{' '}
                   to lessen airframe stresses.
                 </>,

@@ -39,7 +39,7 @@ type ReferenceLinkProps = {
 
 type AIMParagraphProps = { paragraph: [number, number, number] };
 type FARSectionProps = { section: [number, number, ...(string | number)[]] };
-type KatexProps = ChildProp<string> & { inline?: boolean };
+type KatexProps = ChildProp<string> & { block?: boolean } & React.HTMLAttributes<HTMLDivElement>;
 type LinkProps = NextLinkProps & ChildProp & Omit<ReferenceLinkProps, 'reference' | 'text'>;
 type LinkableReference = keyof typeof referenceURIs;
 type TooltipProps = ChildProp & { message?: string };
@@ -155,6 +155,14 @@ export function Image({ src, dimensions, width, height, noMargin = false }: Imag
   );
 }
 
+export function Katex({ block = false, children, ...rest }: KatexProps) {
+  const tex = children.replaceAll('[', '{').replaceAll(']', '}');
+  return React.createElement(block ? 'div' : 'span', {
+    ...rest,
+    dangerouslySetInnerHTML: { __html: katex.renderToString(tex, { output: 'html' }) },
+  });
+}
+
 export function Link({ bold, color = 'text-fuchsia-500', href, ...rest }: LinkProps) {
   return (
     <span className={cn('hover:underline', color, { 'text-inherit': color === null })}>
@@ -209,10 +217,3 @@ export const Tooltip = ({ message, children }: TooltipProps) => {
     </div>
   );
 };
-
-export function Katex({ children, inline = false, ...rest }: KatexProps) {
-  return React.createElement(inline ? 'span' : 'div', {
-    ...rest,
-    dangerouslySetInnerHTML: { __html: katex.renderToString(children) },
-  });
-}
