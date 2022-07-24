@@ -1,6 +1,6 @@
 export const uri = {
   ac: (acNum: string, prefix: string = 'AC_') =>
-    `https://www.faa.gov/documentLibrary/media/Advisory_Circular/${prefix}${acNum}.pdf`,
+    uri.faa_docs('Advisory_Circular', `${prefix}${acNum}.pdf`),
 
   aim: (chapter?: number, section?: number, paragraph?: number) => {
     const aimURIBase = 'https://www.faa.gov/air_traffic/publications/atpubs/aim_html/';
@@ -15,6 +15,9 @@ export const uri = {
   },
 
   awc: (r?: string) => `https://www.aviationweather.gov/${r ? r : ''}`,
+
+  faa_docs: (...components: string[]) =>
+    `https://www.faa.gov/documentLibrary/media/${components.join('/')}`,
 
   far: (part: number, section?: number) => {
     const farURIBase = 'https://www.law.cornell.edu/cfr/text/14';
