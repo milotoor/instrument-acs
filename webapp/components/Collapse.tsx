@@ -3,9 +3,9 @@ import * as React from 'react';
 
 import { ChildProp } from '../lib/types';
 
-type CollapseProps = ChildProp & { header: string; startOpen?: boolean };
+type CollapseProps = ChildProp & { heading: string; startOpen?: boolean };
 
-export function Collapse({ children, header, startOpen = false }: CollapseProps) {
+export function Collapse({ children, heading, startOpen = false }: CollapseProps) {
   const [contentEl, setContentEl] = React.useState<HTMLDivElement | null>(null);
   const [open, setOpen] = React.useState(startOpen);
   const transitionClasses = 'ease-in-out duration-500';
@@ -16,7 +16,7 @@ export function Collapse({ children, header, startOpen = false }: CollapseProps)
         onClick={() => setOpen((state) => !state)}
       >
         <div className={cn('text-2xl transition', { 'rotate-90': open })}>›</div>
-        <div className="text-lg ml-3">{header}</div>
+        <div className="text-lg ml-3">{heading}</div>
       </div>
       <div
         ref={(ref) => setContentEl(ref)}

@@ -109,7 +109,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
               ];
             case '3a':
               return [
-                <Collapse header="Calculating true airspeed">
+                <Collapse heading="Calculating true airspeed">
                   <Paragraph>
                     To calculate true airspeed (TAS), you first need to know the pressure at
                     altitude, <Katex>\rho</Katex>. To calculate <Katex>\rho</Katex>, use the
