@@ -85,7 +85,13 @@ export function DetailList(props: DetailListProps) {
     );
 
   return (
-    <ol className={`list-${bullet} ml-12 mt-2`}>
+    <ol
+      className={cn('ml-12 mt-2', {
+        'list-decimal': bullet === 'decimal',
+        'list-alpha': bullet === 'alpha',
+        'list-disc': bullet === 'disc',
+      })}
+    >
       {children.map((child, i) => (
         <li key={i}>{child}</li>
       ))}
