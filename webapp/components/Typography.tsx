@@ -208,6 +208,10 @@ export function ReferenceLink({ reference, text, ...rest }: ReferenceLinkProps) 
   );
 }
 
+export function ToDo() {
+  return <span className="bg-yellow-300">To do</span>;
+}
+
 export const Tooltip = ({ message, children }: TooltipProps) => {
   return (
     <div className="inline-block">

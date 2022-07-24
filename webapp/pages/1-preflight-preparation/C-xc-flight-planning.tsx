@@ -10,6 +10,7 @@ import {
   Katex,
   Paragraph,
   TaskPage,
+  ToDo,
 } from '../../components';
 import { getSectionStructure, getTaskFromSectionLetter } from '../../lib/data_loaders';
 
@@ -55,6 +56,56 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                   Once you have identified the NAVAIDs that you'll be using, check for any NOTAMs
                   pertaining to them
                 </>,
+              ];
+            case '2':
+              return [
+                <Paragraph heading="Altitude Types">
+                  There are several different types of altitude relevant to VFR and IFR flight:
+                  <DetailList type="bullet">
+                    <>
+                      <Bold>Indicated altitude</Bold> is the altitude read off the altimeter when
+                      it's set to the local setting. It's important that all pilots in a shared
+                      vicinity use the same or similar altimeter setting, or else vertical
+                      separation can be compromised.
+                    </>
+                    <>
+                      <Bold>Pressure altitude</Bold> is the altitude indicated when the altimeter is
+                      set to 29.92"Hg. It is the aircraft's height above the standard datum plane.
+                      In the flight levels, all aircraft navigate by pressure altitude.
+                    </>
+                    <>
+                      <Bold>Density altitude</Bold> is the pressure altitude corrected for
+                      temperature. In simple terms it is the altitude the aircraft "feels" like it's
+                      flying at: density altitude is what really determines aircraft performance,
+                      hence it is strongly emphasized in mountain flying and other environments
+                      where performance is critical.
+                    </>
+                    <>
+                      <Bold>True altitude</Bold> is the exact height above mean sea level. The local
+                      altimeter setting yields true altitude when at field level.
+                    </>
+                  </DetailList>
+                </Paragraph>,
+                <Paragraph heading="Terrain and Obstacles">
+                  Safe cruise altitudes can be selected by paying attention to the route's{' '}
+                  <DetailList type="inline">
+                    <>Minimum Enroute Altitude (MEA)</>
+                    <>Minimum Obstacle Clearance Altitude (MOCA)</>
+                    <>Off-Route Obstacle Clearence Altitudes (OROCAs)</>
+                  </DetailList>
+                  . The MEA guarantees obstacle clearance and adequate signal reception to maintain
+                  positive course guidance between NAVAIDs. The MOCA also guarantees obstacle
+                  clearance but only provides adequate signal reception within 22 nautical miles (25
+                  statute miles) of a VOR; pilots may operate below the MEA but no lower than the
+                  MOCA, and only when they're able to receive the required navigational signals. The
+                  OROCA
+                </Paragraph>,
+                <Paragraph heading="IFR Cruise Altitudes">
+                  <ToDo />
+                </Paragraph>,
+                <Paragraph heading="Oxygen Requirements">
+                  <ToDo />
+                </Paragraph>,
               ];
             case '3a':
               return [
