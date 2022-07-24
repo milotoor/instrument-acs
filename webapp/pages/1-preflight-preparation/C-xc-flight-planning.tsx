@@ -6,6 +6,7 @@ import {
   Collapse,
   DetailList,
   Emphasize,
+  Gray,
   Katex,
   Paragraph,
   TaskPage,
@@ -34,10 +35,10 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                       are routes between large terminal areas in the country, and are mostly geared
                       towards larger aircraft flying in the flight levels.
                     </>
-                    <Emphasize gray italic>
+                    <Gray italic>
                       Many EFB's provide lists of recently-cleared routes from the departure airport
                       to a destination.
-                    </Emphasize>
+                    </Gray>
                     <>
                       There may be <Bold>Tower en route control (TEC)</Bold> routes available. These
                       keep you in approach control airspace and can be efficient for flying from one

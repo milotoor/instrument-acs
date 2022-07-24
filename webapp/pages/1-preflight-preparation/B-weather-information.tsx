@@ -9,6 +9,7 @@ import {
   Emphasize,
   FAR,
   Image,
+  Italic,
   Katex,
   Link,
   Paragraph,
@@ -357,9 +358,9 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                   do end up inside a thunderstorm, the recommended recover procedure is:
                   <DetailList type="bullet">
                     <>
-                      Try to maintain a constant <Emphasize italic>attitude</Emphasize>; do not try
-                      to maintain a constant <Emphasize italic>altitude</Emphasize> as this will
-                      only add stress to the aircraft
+                      Try to maintain a constant <Italic>attitude</Italic>; do not try to maintain a
+                      constant <Italic>altitude</Italic> as this will only add stress to the
+                      aircraft
                     </>
                     <>
                       The way out is through; making a 180° turn likely prolongs your time in the

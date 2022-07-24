@@ -74,10 +74,10 @@ export function DetailList(props: DetailListProps) {
         {children.flatMap((child, i) => (
           <span key={i}>
             {i > 0 ? ' ' : ''}
-            <Emphasize italic gray>
+            <Gray italic>
               {child}
               {i === children.length - 1 ? '' : delimeter}
-            </Emphasize>
+            </Gray>
             {logic && i === children.length - 2 ? ` ${logic}` : ''}
           </span>
         ))}
@@ -134,6 +134,10 @@ export function FAR({ section: fullSection }: FARSectionProps) {
   );
 }
 
+export function Gray(props: Omit<EmphasizeProps, 'gray'>) {
+  return <Emphasize gray {...props} />;
+}
+
 export function Image({ src, dimensions, width, height, noMargin = false }: ImageProps) {
   const [w, h] = (() => {
     if (typeof width === 'number' && typeof height === 'number') return [width, height];
@@ -153,6 +157,10 @@ export function Image({ src, dimensions, width, height, noMargin = false }: Imag
       <NextImage src={`/img/${src}.webp`} layout="fill" />
     </div>
   );
+}
+
+export function Italic(props: Omit<EmphasizeProps, 'italic'>) {
+  return <Emphasize italic {...props} />;
 }
 
 export function Katex({ block = false, children, ...rest }: KatexProps) {
