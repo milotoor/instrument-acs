@@ -105,7 +105,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                   </DetailList>
                 </>,
                 <Image
-                  src="surface_analysis_chart"
+                  src="1/surface_analysis_chart"
                   dimensions={[1160, 802]}
                   width={700}
                   noMargin
@@ -262,7 +262,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                   They are large lows that generally travel from west to east along a front. They
                   last from a few days to more than a week."
                 </>,
-                <Image src="cyclogenesis" dimensions={[1600, 810]} width={700} noMargin />,
+                <Image src="1/cyclogenesis" dimensions={[1600, 810]} width={700} noMargin />,
               ];
             case '3f': // Clouds
               return [
@@ -387,7 +387,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                   An individual microburst typically does not last more than 15 minutes. The most
                   intense horizontal winds last only a few minutes.
                 </>,
-                <Image src="microburst" dimensions={[968, 535]} width={600} noMargin />,
+                <Image src="1/microburst" dimensions={[968, 535]} width={600} noMargin />,
               ];
             case '3i': // Icing and freezing level
               return [
@@ -627,7 +627,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                   it's not as easy to decipher and approaches with standard minima aren't included
                   at all.
                 </>,
-                <Image src="jeppesen-10-9" dimensions={[1590, 330]} width={800} />,
+                <Image src="1/jeppesen-10-9" dimensions={[1590, 330]} width={800} />,
                 <Paragraph heading="GPS and WAAS" hr>
                   This is where things get a little messy.
                   <DetailList type="bullet">
