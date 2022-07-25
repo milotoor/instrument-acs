@@ -38,7 +38,7 @@ type ReferenceLinkProps = {
   title?: string;
 };
 
-type AIMParagraphProps = { paragraph: [number, number, number] };
+type AIMParagraphProps = { paragraph: [number, number, number, ...(string | number)[]] };
 type FARSectionProps = { section: [number, number, ...(string | number)[]] };
 type KatexProps = ChildProp<string> & { block?: boolean } & React.HTMLAttributes<HTMLDivElement>;
 type LinkProps = NextLinkProps & ChildProp & Omit<ReferenceLinkProps, 'reference' | 'text'>;
@@ -46,16 +46,20 @@ type LinkableReference = keyof typeof referenceURIs;
 type TooltipProps = ChildProp & { message?: string };
 
 export function AIM({ paragraph: fullParagraph }: AIMParagraphProps) {
-  const [chapter, section, paragraph] = fullParagraph;
+  const [chapter, section, paragraph, ...rest] = fullParagraph;
 
   let aimURI = uri.aim(chapter, section, paragraph);
+  const subsectionID = rest.length ? ' ' + rest.map((id) => `(${id})`).join('') : '';
   return (
-    <Link href={aimURI}>
-      AIM{' '}
-      <span className="whitespace-nowrap">
-        {chapter}-{section}-{paragraph}
-      </span>
-    </Link>
+    <span>
+      <Link href={aimURI}>
+        AIM{' '}
+        <span className="whitespace-nowrap">
+          {chapter}-{section}-{paragraph}
+        </span>
+      </Link>
+      {subsectionID}
+    </span>
   );
 }
 
@@ -125,14 +129,13 @@ export function Emphasize({
 
 export function FAR({ section: fullSection }: FARSectionProps) {
   const [part, section, ...paragraph] = fullSection;
-  const paraArray = Array.isArray(paragraph) ? paragraph : [paragraph];
 
   let farURI = uri.far(part, section);
-  if (paraArray && paraArray.length) {
-    farURI += `#${paraArray.join('_')}`;
+  if (paragraph && paragraph.length) {
+    farURI += `#${paragraph.join('_')}`;
   }
 
-  const paraText = paraArray.length ? ' ' + paraArray.map((t) => `(${t})`).join('') : null;
+  const paraText = paragraph.length ? ' ' + paragraph.map((t) => `(${t})`).join('') : null;
   return (
     <Link href={farURI}>
       §{part}.{section}

@@ -645,7 +645,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                       </Bold>
                       . Additionally, the aircraft must be equipped with fault detection and
                       exclusion (FDE) and the pilot must perform a preflight RAIM check. See{' '}
-                      <AIM paragraph={[1, 1, 17]} /> (b)(5)(c).
+                      <AIM paragraph={[1, 1, 17, 'b', 5, 'c']} />.
                     </>
                   </DetailList>{' '}
                 </Paragraph>,
