@@ -12,10 +12,10 @@ import {
   TaskPage,
   ToDo,
 } from '../../components';
-import { getSectionStructure, getTaskFromSectionLetter } from '../../lib/data_loaders';
+import { getStructure, getTaskFromSectionLetter } from '../../lib/data_loaders';
 
 export const getStaticProps = () => ({
-  props: { structure: getSectionStructure(), task: getTaskFromSectionLetter(1, 'C') },
+  props: { structure: getStructure(), task: getTaskFromSectionLetter(1, 'C') },
 });
 
 const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {

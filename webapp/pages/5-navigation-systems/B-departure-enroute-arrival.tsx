@@ -2,11 +2,11 @@ import { NextPage } from 'next';
 import React from 'react';
 
 import { Bold, Gray, Image, Link, Paragraph, TaskPage, ToDo, Tooltip } from '../../components';
-import { getSectionStructure, getTaskFromSectionLetter } from '../../lib/data_loaders';
+import { getStructure, getTaskFromSectionLetter } from '../../lib/data_loaders';
 import { uri } from '../../lib/references';
 
 export const getStaticProps = () => ({
-  props: { structure: getSectionStructure(), task: getTaskFromSectionLetter(5, 'B') },
+  props: { structure: getStructure(), task: getTaskFromSectionLetter(5, 'B') },
 });
 
 const DepartureEnrouteArrival: NextPage<TaskPage.TopLevelProps> = (props) => {

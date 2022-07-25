@@ -7,6 +7,7 @@ import React from 'react';
 import { referenceNames, referenceURIs, uri } from '../lib/references';
 import { ChildProp, Colors } from '../lib/types';
 import { objectHasProperty } from '../lib/util';
+import { AppContext } from './context';
 
 type DetailListProps = ChildProp<React.ReactNode[]> & {
   bullet?: 'alpha' | 'decimal' | 'disc';
@@ -22,8 +23,8 @@ type EmphasizeProps = ChildProp & {
   italic?: boolean;
 };
 
-type ImageProps = Pick<NextImageProps, 'src'> & {
-  dimensions: [number, number];
+type ImageProps = Partial<ChildProp> & {
+  src: string;
   width?: number;
   height?: number;
   noMargin?: boolean;
@@ -144,23 +145,38 @@ export function Gray(props: Omit<EmphasizeProps, 'gray'>) {
   return <Emphasize gray {...props} />;
 }
 
-export function Image({ src, dimensions, width, height, noMargin = false }: ImageProps) {
+export function Image({ children: caption, src, width, height, noMargin = false }: ImageProps) {
+  const { images } = React.useContext(AppContext);
+  const dimensions = images && images[src];
+  const hasCaption = !!caption;
+
+  // If the image is not present in the `images` context, return null
+  if (!dimensions) return null;
+
   const [w, h] = (() => {
     if (typeof width === 'number' && typeof height === 'number') return [width, height];
-    if (typeof width === 'number') return [width, (width / dimensions[0]) * dimensions[1]];
-    if (typeof height === 'number') return [(height / dimensions[1]) * dimensions[0], height];
-    return dimensions;
+    if (typeof width === 'number') return [width, (width / dimensions.width) * dimensions.height];
+    if (typeof height === 'number')
+      return [(height / dimensions.height) * dimensions.width, height];
+    return [dimensions.width, dimensions.height];
   })();
 
   return (
     <div
-      className={cn(`shadow-lg shadow-slate-500 m-auto relative`, {
-        'mb-10': !noMargin,
+      className={cn({
+        'mb-10': !noMargin && !hasCaption,
+        'mb-5': !noMargin && hasCaption,
         'mb-2': noMargin,
       })}
-      style={{ width: w, height: h }}
     >
-      <NextImage src={`/img/${src}.webp`} layout="fill" />
+      <div className="shadow-lg shadow-slate-500 m-auto relative" style={{ width: w, height: h }}>
+        <NextImage src={`/img/${src}.webp`} layout="fill" />
+      </div>
+      {hasCaption && (
+        <div className="m-auto px-3 text-xs mt-4" style={{ width: w }}>
+          {caption}
+        </div>
+      )}
     </div>
   );
 }

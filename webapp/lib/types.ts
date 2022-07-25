@@ -56,4 +56,7 @@ export namespace Structure {
     section: Section.Number;
     uri: string;
   }
+
+  export type Image = { width: number; height: number; type?: string };
+  export type Images = Record<string, Image>;
 }

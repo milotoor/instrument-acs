@@ -65,7 +65,10 @@ export const TaskPage: React.FC<TaskPageProps> = ({ task, structure, flags = {},
 
 // Exported under the same name as the component so only one import is required
 export namespace TaskPage {
-  export type TopLevelProps = { task: Task; structure: Structure.Section[] };
+  export type TopLevelProps = {
+    task: Task;
+    structure: { images: Structure.Images; sections: Structure.Section[] };
+  };
 }
 
 function ReferencesSection({ references, note }: ReferencesSectionProps) {

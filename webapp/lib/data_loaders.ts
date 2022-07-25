@@ -1,4 +1,5 @@
 import dirTree from 'directory-tree';
+import imageSize from 'image-size';
 import path from 'path';
 import toml from 'toml';
 
@@ -26,7 +27,14 @@ const taskURIs = {
   8: { A: 'checking-equipment' },
 } as Record<Section.Number, Record<Task.Letter, string>>;
 
-export function getSectionStructure(pathToRoot: string = '..'): Structure.Section[] {
+export function getStructure(pathToRoot: string = '..') {
+  return {
+    images: getImageData(pathToRoot),
+    sections: getSectionStructure(pathToRoot),
+  };
+}
+
+function getSectionStructure(pathToRoot: string = '..'): Structure.Section[] {
   const tree = dirTree(path.join(pathToRoot, 'areas_of_operation'));
   const areas = tree?.children?.filter((child) => child.name.match(/\d\./));
   const makeURI = (...components: string[]) => '/' + components.join('/');
@@ -62,4 +70,18 @@ export function getTaskFromSectionLetter(section: Section.Number, letter: Task.L
   if (!task) throw Error(`Invalid task identifiers (section: ${section}, letter: "${letter}")`);
   const fileContent = fs.readFileSync(task.path).toString();
   return toml.parse(fileContent);
+}
+
+function getImageData(pathToRoot: string = '..'): Structure.Images {
+  const tree = dirTree(path.join(pathToRoot, 'webapp/public/img'), { extensions: /webp/ });
+  const sections = tree?.children?.filter((child) => child.name.match(/^\d$/)) ?? [];
+  return Object.fromEntries(
+    sections.flatMap((section) => {
+      return (section.children ?? []).map((img) => {
+        const { name, path } = img;
+        const nameNoSuffix = name.slice(0, name.lastIndexOf('.'));
+        return [`${section.name}/${nameNoSuffix}`, imageSize(path) as Structure.Image];
+      });
+    })
+  );
 }

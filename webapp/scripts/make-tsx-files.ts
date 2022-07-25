@@ -3,10 +3,10 @@
 import fs from 'fs';
 import path from 'path';
 
-import { getSectionStructure } from '../lib/data_loaders';
+import { getStructure } from '../lib/data_loaders';
 
 const rootPath = path.join(__dirname, '..');
-const sections = getSectionStructure(rootPath);
+const { sections } = getStructure(rootPath);
 
 // For each section...
 sections?.forEach(({ number, tasks, uri }) => {
@@ -40,11 +40,11 @@ function makeFileContent(n: number, l: string, uri: string) {
 import React from 'react';
 
 import { TaskPage } from '../../components';
-import { getSectionStructure, getTaskFromSectionLetter } from '../../lib/data_loaders';
+import { getStructure, getTaskFromSectionLetter } from '../../lib/data_loaders';
 import { Task } from '../../lib/types';
 
 export const getStaticProps = () => ({
-  props: { structure: getSectionStructure(), task: getTaskFromSectionLetter(${n}, '${l}') },
+  props: { structure: getStructure(), task: getTaskFromSectionLetter(${n}, '${l}') },
 });
 
 const ${name}: NextPage<TaskPage.TopLevelProps> = (props) => {

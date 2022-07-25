@@ -2,7 +2,7 @@ import { NextPage } from 'next';
 import Head from 'next/head';
 
 import { Layout, Link } from '../components';
-import { getSectionStructure } from '../lib/data_loaders';
+import { getStructure } from '../lib/data_loaders';
 import { Structure } from '../lib/types';
 
 type ACSProp = { taskStructure: Structure.Section[] };
@@ -10,7 +10,7 @@ type ACSProp = { taskStructure: Structure.Section[] };
 export function getStaticProps(): { props: ACSProp } {
   return {
     props: {
-      taskStructure: getSectionStructure(),
+      taskStructure: getStructure().sections,
     },
   };
 }

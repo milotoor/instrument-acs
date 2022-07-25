@@ -2,10 +2,10 @@ import { NextPage } from 'next';
 import React from 'react';
 
 import { Bold, DetailList, FAR, ReferenceLink, TaskPage } from '../../components';
-import { getSectionStructure, getTaskFromSectionLetter } from '../../lib/data_loaders';
+import { getStructure, getTaskFromSectionLetter } from '../../lib/data_loaders';
 
 export const getStaticProps = () => ({
-  props: { structure: getSectionStructure(), task: getTaskFromSectionLetter(1, 'A') },
+  props: { structure: getStructure(), task: getTaskFromSectionLetter(1, 'A') },
 });
 
 const PilotQualifications: NextPage<TaskPage.TopLevelProps> = (props) => {
