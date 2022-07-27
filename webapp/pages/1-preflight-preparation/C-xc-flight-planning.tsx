@@ -2,13 +2,18 @@ import { NextPage } from 'next';
 import React from 'react';
 
 import {
+  AIM,
   Bold,
   Collapse,
   DetailList,
-  Emphasize,
+  FAR,
   Gray,
+  Image,
   Katex,
+  Link,
   Paragraph,
+  Tabs,
+  Tab,
   TaskPage,
   ToDo,
 } from '../../components';
@@ -56,6 +61,104 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                   Once you have identified the NAVAIDs that you'll be using, check for any NOTAMs
                   pertaining to them
                 </>,
+                <Paragraph heading="Alternate Airports" hr>
+                  Use the <Bold>1-2-3</Bold> rule to determine if you need to file an alternate: If,
+                  within <Bold>1 hour</Bold> before or after your ETA, the ceiling at your
+                  destination is less than <Bold>2000 feet</Bold> or the visibility less than{' '}
+                  <Bold>3 statute miles</Bold>, you must file an alternate. Additionally, you must
+                  file an alternate{' '}
+                  <Bold>if your destination doesn't have any instrument approaches</Bold>.
+                </Paragraph>,
+                <Tabs>
+                  <Tab name="Regulatory requirements">
+                    <Paragraph>
+                      The process looks like this:
+                      <DetailList type="bullet">
+                        <>
+                          Determine the forecast weather at the proposed alternate at the time you
+                          would arrive there
+                        </>
+                        <>
+                          Determine which runway(s) would be acceptable for landing given the
+                          forecast winds and runway lengths
+                        </>
+                        <>
+                          Determine which procedures to these runways you and your aircraft are able
+                          to fly
+                        </>
+                        <>
+                          Of these procedures, determine which has the lowest ceiling and visibility
+                          minimums. Standard minimums are{' '}
+                          <DetailList type="inline">
+                            <>
+                              ceiling 600 feet and visibility 2 statute miles for a precision
+                              approach
+                            </>
+                            <>
+                              ceiling 800 feet and visibility 2 statute miles for a nonprecision
+                              approach
+                            </>
+                          </DetailList>
+                        </>
+                        <>
+                          <Bold>
+                            If these lowest minima are less than the forecast ceiling and visibility
+                            at the proposed alternate, then the airport is legally acceptable as an
+                            alternate.
+                          </Bold>
+                        </>
+                      </DetailList>
+                    </Paragraph>
+
+                    <Paragraph>
+                      If the proposed alternate doesn't have any IAPs, it may still be filed as an
+                      alternate if the ceiling and visibility at the time of arrival at the
+                      alternate would allow a descent from the MEA under basic VFR. See{' '}
+                      <FAR section={[91, 169, 'c', 2]} />
+                    </Paragraph>
+
+                    <Paragraph>
+                      Jeppesen charts are great for determining if an airport is suitable as an
+                      alternate, because their{' '}
+                      <Link href={references.jeppesen10_9}>10-9 pages</Link> list out all approaches
+                      at the airport and their associated minima. The FAA makes this information
+                      available too, in the "Alternate Minimums" section of TERPS, but it's not as
+                      easy to decipher and approaches with standard minima aren't included at all.
+                    </Paragraph>
+
+                    <Paragraph>
+                      <Image src="1/jeppesen-10-9" width={800} noMargin />
+                    </Paragraph>
+                  </Tab>
+
+                  <Tab name="GPS and WAAS">
+                    <Paragraph>
+                      This is where things get a little messy.
+                      <DetailList type="bullet">
+                        <>
+                          If you have a WAAS-capable aircraft,{' '}
+                          <Bold>
+                            you are allowed to plan to use an RNAV approach at both the destination
+                            and alternate
+                          </Bold>
+                          , though you must use nonprecision minima for planning purposes. See{' '}
+                          <AIM paragraph={[1, 1, 18]} />.
+                        </>
+                        <>
+                          If your aircraft is not WAAS capable, you are allowed to plan to use an
+                          RNAV approach at{' '}
+                          <Bold>
+                            either the destination or the alternate,{' '}
+                            <span className="italic">but not both</span>
+                          </Bold>
+                          . Additionally, the aircraft must be equipped with fault detection and
+                          exclusion (FDE) and the pilot must perform a preflight RAIM check. See{' '}
+                          <AIM paragraph={[1, 1, 17, 'b', 5, 'c']} />.
+                        </>
+                      </DetailList>
+                    </Paragraph>
+                  </Tab>
+                </Tabs>,
               ];
             case '2':
               return [
@@ -178,3 +281,8 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
 };
 
 export default XcFlightPlanning;
+
+const references = {
+  jeppesen10_9:
+    'https://www.boldmethod.com/learn-to-fly/navigation/how-to-use-the-jeppesen-airport-10-9-page/',
+};
