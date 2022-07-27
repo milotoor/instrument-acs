@@ -67,7 +67,7 @@ export const TaskPage: React.FC<TaskPageProps> = ({ task, structure, flags = {},
 export namespace TaskPage {
   export type TopLevelProps = {
     task: Task;
-    structure: { images: Structure.Images; sections: Structure.Section[] };
+    structure: Structure.AppData;
   };
 }
 

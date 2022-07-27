@@ -5,19 +5,15 @@ import { Layout, Link } from '../components';
 import { getStructure } from '../lib/data_loaders';
 import { Structure } from '../lib/types';
 
-type ACSProp = { taskStructure: Structure.Section[] };
+type ACSProp = { structure: Structure.AppData };
 
-export function getStaticProps(): { props: ACSProp } {
-  return {
-    props: {
-      taskStructure: getStructure().sections,
-    },
-  };
-}
+export const getStaticProps = () => ({
+  props: { structure: getStructure() },
+});
 
-const Home: NextPage<ACSProp> = ({ taskStructure }) => {
+const Home: NextPage<ACSProp> = ({ structure }) => {
   return (
-    <Layout home>
+    <Layout home structure={structure}>
       <Head>
         <title>The Instrument ACS</title>
         <link rel="icon" href="/favicon.ico" />
@@ -34,7 +30,7 @@ const Home: NextPage<ACSProp> = ({ taskStructure }) => {
           </Link>
         </h1>
 
-        <TableOfContents taskStructure={taskStructure} />
+        <TableOfContents structure={structure} />
       </main>
     </Layout>
   );
@@ -42,11 +38,11 @@ const Home: NextPage<ACSProp> = ({ taskStructure }) => {
 
 export default Home;
 
-const TableOfContents: React.FC<ACSProp> = ({ taskStructure }) => {
+const TableOfContents: React.FC<ACSProp> = ({ structure }) => {
   return (
     <div className="my-10 w-full">
       <ol className="list-decimal leading-8 ml-8 mt-4 text-xl font-roboto">
-        {taskStructure.map(({ name, tasks, uri }) => (
+        {structure.sections.map(({ name, tasks, uri }) => (
           <li key={name}>
             <Link href={uri}>{name}</Link>
             <ol className="list-alpha ml-8">
