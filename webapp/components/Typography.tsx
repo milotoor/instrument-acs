@@ -51,15 +51,12 @@ export function AIM({ paragraph: fullParagraph }: AIMParagraphProps) {
   let aimURI = uri.aim(chapter, section, paragraph);
   const subsectionID = rest.length ? ' ' + rest.map((id) => `(${id})`).join('') : '';
   return (
-    <span>
-      <Link href={aimURI}>
-        AIM{' '}
-        <span className="whitespace-nowrap">
-          {chapter}-{section}-{paragraph}
-        </span>
-      </Link>
-      {subsectionID}
-    </span>
+    <Link href={aimURI}>
+      AIM{' '}
+      <span className="whitespace-nowrap">
+        {chapter}-{section}-{paragraph} {subsectionID}
+      </span>
+    </Link>
   );
 }
 
