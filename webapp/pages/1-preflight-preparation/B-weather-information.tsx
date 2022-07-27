@@ -11,6 +11,7 @@ import {
   Link,
   Paragraph,
   ReferenceLink,
+  TaskLink,
   TaskPage,
 } from '../../components';
 import { getStructure, getTaskFromSectionLetter } from '../../lib/data_loaders';
@@ -560,6 +561,11 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                 </>
               );
             case '4':
+              return (
+                <>
+                  See <TaskLink section={1} task="C" id="k1" /> for details on alternate planning.
+                </>
+              );
             default:
               return null;
           }

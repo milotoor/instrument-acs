@@ -5,14 +5,16 @@ import React from 'react';
 import { referenceURIs } from '../lib/references';
 import { ChildProp, Item, Section, Structure, Task } from '../lib/types';
 import { objectHasProperty } from '../lib/util';
+import { AppContext } from './context';
 import { Layout } from './Layout';
-import { Bold, ReferenceLink } from './Typography';
+import { Bold, Link, ReferenceLink, Tooltip } from './Typography';
 
 // Component prop types
 type ObjectiveSectionProps = { objective: string } & RenderNoteElementProp;
 type ParagraphProps = ChildProp & { heading?: string; hr?: boolean };
 type ReferencesSectionProps = { references: string[] } & RenderNoteElementProp;
 type SectionContainerProps = { children: React.ReactNode; heading: string };
+type TaskLinkProps = { section: Section.Number; task: Task.Letter; id: Item.ID };
 type TaskPageProps = TaskPage.TopLevelProps & FlagsProp & { notes?: RenderNoteProps };
 type DataSectionProps = { heading: Section.Headings.List; task: Task } & RenderNoteListProp &
   FlagsPropInternal;
@@ -117,6 +119,11 @@ const flagClasses = {
   missed: ['bg-red-500/50', 'Missed on knowledge test!'],
 };
 
+function makeItemID(heading: Section.Headings.List, id: Item.ID) {
+  const shorthand = heading === 'Risk Management' ? 'risk' : heading.toLowerCase();
+  return [shorthand, id].join('-');
+}
+
 function DataSection({ flags, heading, notes = () => null, task }: DataSectionProps) {
   const data = (() => {
     switch (heading) {
@@ -137,7 +144,7 @@ function DataSection({ flags, heading, notes = () => null, task }: DataSectionPr
           // If the datum is not the beginning of a sub-list, render it
           if (typeof datum === 'string')
             return (
-              <li key={num} id={makeID(num)}>
+              <li key={num} id={makeItemID(heading, num)}>
                 {applyFlags(num, datum)}
                 <NoteCard note={notes(num)} />
               </li>
@@ -146,7 +153,7 @@ function DataSection({ flags, heading, notes = () => null, task }: DataSectionPr
           // Otherwise we need to render the sublist
           const { general, specific } = datum;
           return (
-            <li key={num} id={makeID(num)}>
+            <li key={num} id={makeItemID(heading, num)}>
               {general}
               <NoteCard note={notes(num)} />
               <ol className="list-alpha ml-8">
@@ -154,7 +161,7 @@ function DataSection({ flags, heading, notes = () => null, task }: DataSectionPr
                   // Char code 97 is "a", 98 is "b", etc.
                   const itemId = num + String.fromCharCode(97 + i);
                   return (
-                    <li key={i} id={makeID(itemId)}>
+                    <li key={i} id={makeItemID(heading, itemId)}>
                       {applyFlags(itemId, text)}
                       <NoteCard note={notes(itemId)} />
                     </li>
@@ -177,10 +184,6 @@ function DataSection({ flags, heading, notes = () => null, task }: DataSectionPr
         {text}
       </span>
     );
-  }
-
-  function makeID(id: Item.ID) {
-    return `element-${id}`;
   }
 }
 
@@ -227,5 +230,26 @@ export function Paragraph({ children, heading, hr }: ParagraphProps) {
       </div>
       {children}
     </div>
+  );
+}
+
+export function TaskLink({ section, task, id }: TaskLinkProps) {
+  const { sections } = React.useContext(AppContext);
+  const taskData = sections[section].tasks.find(({ letter }) => letter === task);
+  if (!taskData) return null;
+
+  const dataSection = id[0].toLowerCase();
+  const itemId = id.slice(1);
+  const heading =
+    dataSection === 'k' ? 'Knowledge' : dataSection === 'r' ? 'Risk Management' : 'Skills';
+
+  return (
+    <Tooltip message={taskData.name}>
+      <Link href={`${taskData.uri}#${makeItemID(heading, itemId)}`}>
+        <span>
+          Section {section}, Task {task}
+        </span>
+      </Link>
+    </Tooltip>
   );
 }

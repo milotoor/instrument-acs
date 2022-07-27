@@ -193,14 +193,18 @@ export function Katex({ block = false, children, ...rest }: KatexProps) {
   });
 }
 
-export function Link({ bold, color = 'text-fuchsia-500', href, ...rest }: LinkProps) {
+export function Link({ bold, children, color = 'text-fuchsia-500', href, ...rest }: LinkProps) {
   return (
     <span className={cn('hover:underline', color, { 'text-inherit': color === null })}>
       <Emphasize bold={bold}>
         {href.toString().startsWith('/') ? (
-          <NextLink href={href} {...rest} />
+          <NextLink href={href} {...rest}>
+            <span className="cursor-pointer">{children}</span>
+          </NextLink>
         ) : (
-          <a target="_blank" href={href.toString()} {...rest} />
+          <a target="_blank" href={href.toString()} {...rest}>
+            {children}
+          </a>
         )}
       </Emphasize>
     </span>
