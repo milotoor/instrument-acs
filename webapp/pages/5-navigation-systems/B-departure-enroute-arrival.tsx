@@ -5,6 +5,7 @@ import {
   AIM,
   Bold,
   Collapse,
+  Danger,
   DetailList,
   FAR,
   Image,
@@ -104,7 +105,10 @@ const DepartureEnrouteArrival: NextPage<TaskPage.TopLevelProps> = (props) => {
                     <DetailList type="inline">
                       <>ATC clearance is required to fly a SID</>
                       <>they are always depicted graphically</>
-                      <>takeoff minimums are mandatory even for part 91 operators</>
+                      <Danger>
+                        takeoff minimums and published climb gradients are mandatory even for part
+                        91 operators
+                      </Danger>
                     </DetailList>
                     . Similar to ODPs, SIDs must be designed to terminate at{' '}
                     <DetailList type="inline" logic="or">
@@ -145,10 +149,12 @@ const DepartureEnrouteArrival: NextPage<TaskPage.TopLevelProps> = (props) => {
                   <Paragraph>
                     <Image src="5/departure_procedure" width={800}>
                       In the procedure above, the VCOA has a minimum ceiling of 4400' and visibility
-                      of 3 statute miles. Pilots flying the VCOA procedure are expected to remain
-                      within 3 statute miles of the airport until reaching the "at or above"
-                      altitude (in this case 9400'), after which they may proceed on course
-                      according to their clearance.
+                      of 3 statute miles. Pilots flying the VCOA procedure are{' '}
+                      <Bold>
+                        expected to remain within 3 statute miles of the airport until reaching the
+                        "at or above" altitude (in this case 9400')
+                      </Bold>
+                      , after which they may proceed on course according to their clearance.
                     </Image>
                   </Paragraph>
 

@@ -58,8 +58,12 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                   </DetailList>
                 </>,
                 <>
-                  Once you have identified the NAVAIDs that you'll be using, check for any NOTAMs
-                  pertaining to them
+                  The Chart Supplement will have the most recent information about an airport and
+                  should always be referenced. Check for <Bold>NOTAM(D)s</Bold> pertaining to all
+                  NAVAIDs on the route as well as the departure, destination and alternate airports.
+                  Furthermore, <Bold>FDC NOTAMs</Bold> should be sought out as these may have
+                  implications for planned IAPs. This information can be obtained from FSS or an
+                  EFB.
                 </>,
                 <Paragraph heading="Alternate Airports" hr>
                   Use the <Bold>1-2-3</Bold> rule to determine if you need to file an alternate: If,
