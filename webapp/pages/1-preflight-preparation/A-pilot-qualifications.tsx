@@ -28,7 +28,10 @@ const PilotQualifications: NextPage<TaskPage.TopLevelProps> = (props) => {
                       systems
                     </>
                   </DetailList>
-                  .
+                  . These things may be accomplished in an aircraft, a full flight simulator, flight
+                  training device (FTD), aviation training device (ATD) or a combination thereof,
+                  provided the device represents the category of aircraft for the instrument rating
+                  privileges.
                 </>,
 
                 <>
@@ -56,15 +59,6 @@ const PilotQualifications: NextPage<TaskPage.TopLevelProps> = (props) => {
                 </>,
 
                 <>
-                  A <Bold>safety pilot</Bold> must{' '}
-                  <DetailList type="inline">
-                    <>possess a current medical certificate</>
-                    <>sit in the other control seat</>
-                    <>be appropriately rated in the aircraft's category and class</>
-                  </DetailList>
-                </>,
-
-                <>
                   If your recent experience lapses, you have another six months to regain currency.
                   This can be done with a CFI or safety pilot, but until currency is regained you
                   may not operate as PIC under IFR. If <span className="italic">those</span> six
@@ -80,13 +74,27 @@ const PilotQualifications: NextPage<TaskPage.TopLevelProps> = (props) => {
                   operate:
                   <DetailList type="bullet">
                     <>under IFR</>
-                    <>in weather conditions less than the minima for VFR flight; and</>
+                    <>in weather conditions less than the minima for VFR flight</>
                     <>in Class A airspace</>
                     <>
                       for hire (assuming the pilot has a commercial license) at night or
                       cross-country beyond 50 nautical miles
                     </>
                   </DetailList>
+                </>,
+
+                <>
+                  A <Bold>safety pilot</Bold> must{' '}
+                  <DetailList type="inline">
+                    <>possess at least a private pilot certificate</>
+                    <>sit in the other control seat</>
+                    <>be appropriately rated in the aircraft's category and class</>
+                    <>
+                      possess a current medical certificate (because the FAA considers them a
+                      required crewmember)
+                    </>
+                  </DetailList>
+                  . See <FAR section={[91, 109, 'c', 1]} /> and <FAR section={[61, 3, 'c', 1]} />.
                 </>,
               ];
             case '3':
@@ -109,7 +117,8 @@ const PilotQualifications: NextPage<TaskPage.TopLevelProps> = (props) => {
                 <>
                   They are required to have the <Bold>medical examination checklist</Bold> required
                   by <FAR section={[68, 7]} /> and <Bold>medical education course certificate</Bold>{' '}
-                  (see <FAR section={[68, 3]} />) in their logbook.
+                  (see <FAR section={[68, 3]} />) in their logbook. To act as PIC on an IFR flight
+                  plan they must have an instrument rating and be current.
                 </>,
               ];
             default:

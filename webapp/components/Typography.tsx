@@ -76,10 +76,8 @@ export function DetailList(props: DetailListProps) {
         {children.flatMap((child, i) => (
           <span key={i}>
             {i > 0 ? ' ' : ''}
-            <Gray italic>
-              {child}
-              {i === children.length - 1 ? '' : delimeter}
-            </Gray>
+            <Gray italic>{child}</Gray>
+            {i >= children.length - 2 ? '' : delimeter}
             {logic && i === children.length - 2 ? ` ${logic}` : ''}
           </span>
         ))}
