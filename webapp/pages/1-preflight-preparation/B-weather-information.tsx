@@ -2,6 +2,7 @@ import { NextPage } from 'next';
 import React from 'react';
 
 import {
+  AIM,
   Bold,
   Danger,
   DetailList,
@@ -11,6 +12,8 @@ import {
   Link,
   Paragraph,
   ReferenceLink,
+  Tab,
+  Tabs,
   TaskLink,
   TaskPage,
 } from '../../components';
@@ -52,15 +55,80 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
             case '2': // Weather products
               return [
                 <>
-                  A very large variety of weather products exist to aid in flight planning. Many of
-                  these are available in ForeFlight; additionally, the NWS provides the{' '}
-                  <Link href={references.gfa}>Graphical Forecasts for Aviation</Link> (GFA for
-                  short).
+                  A very large variety of weather products exist to aid in flight planning. There
+                  are many prognostic charts; a sampling is shown in the tabs below. Additionally,
+                  some of the best weather information is provided by pilots themselves in the form
+                  of <Bold>PIREPs</Bold>, which are great for providing information on conditions as
+                  they actually are.
                 </>,
-                <>
-                  To focus on a few:{' '}
-                  <DetailList type="bullet">
-                    <>
+                <Tabs>
+                  <Tab name="GFA">
+                    <Paragraph>
+                      The NWS provides the{' '}
+                      <Link bold href={references.gfa}>
+                        Graphical Forecasts for Aviation
+                      </Link>{' '}
+                      (GFA) to provide pilots with the necessary aviation weather information to
+                      develop a complete picture of the weather that may impact flight in the
+                      continental United States. It's a great product for observing the general
+                      weather conditions over a large area.
+                    </Paragraph>
+
+                    <Paragraph>
+                      Know how to read the most common symbols on the charts; the legend is availabe{' '}
+                      <Link href={references.gfa_symbols}>here</Link>.
+                    </Paragraph>
+
+                    <Paragraph>
+                      <Image src="1/gfa" noMargin />
+                    </Paragraph>
+                  </Tab>
+
+                  <Tab name="METARs & TAFs">
+                    <Paragraph>
+                      <Bold>Aviation Routine Weather Report (METARs)</Bold> and{' '}
+                      <Bold>Terminal Aerodrome Forecasts (TAFs)</Bold> are perhaps the most commonly
+                      encounterd source of weather information. <AIM paragraph={[7, 1, 28]} />{' '}
+                      provides a key for the products' coded language.
+                    </Paragraph>
+
+                    <Paragraph heading="TAFs">
+                      METARs are most thoroughly defined by <ReferenceLink reference="AC 00-45" />{' '}
+                      paragraph 3.1.1 (page 3-1, 29 overall).
+                    </Paragraph>
+
+                    <Paragraph heading="TAFs" hr>
+                      TAFs are most thoroughly defined by <ReferenceLink reference="AC 00-45" />{' '}
+                      paragraph 5.11 (page 5-75, 204 overall). Miscellaneous facts:
+                      <DetailList type="bullet" bullet="disc">
+                        <>
+                          They describe aviation weather expected to occur during a specific period,{' '}
+                          <Bold>within 5 statute miles</Bold> of the center of the airport's runway
+                          complex.
+                        </>
+                        <>
+                          Scheduled 24- and 30-hour TAFs are issued four times per day, at 0000,
+                          0600, 1200, and 1800Z.
+                        </>
+                        <>
+                          A <Bold>TEMPO</Bold> group is included in the TAF only when forecast
+                          meteorological conditions are expected to:
+                          <DetailList type="inline">
+                            <>
+                              have a high percentage (greater than 50 percent) probability of
+                              occurrence
+                            </>
+                            <>last for one hour or less in each instance</>
+                            <>in the aggregate, cover less than half of the period</>
+                          </DetailList>
+                          .
+                        </>
+                      </DetailList>
+                    </Paragraph>
+                  </Tab>
+
+                  <Tab name="AIRMETs & SIGMETs">
+                    <Paragraph>
                       <Link bold href={references.awc.graphical_airmet}>
                         Graphical AIRMET
                       </Link>{' '}
@@ -68,19 +136,40 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                       <Link bold href={references.awc.sigmet}>
                         SIGMET
                       </Link>{' '}
-                      charts indicate the location and boundaries for active AIRMETs and SIGMETs. As
-                      a reminder, SIGMETs are issued for significant weather hazards that are of
-                      concern to all aircraft, while AIRMETs are primarily of concern to lighter
-                      aircraft; the AWC is responsible for issuing both AIRMETs and SIGMETs. AIRMETs
-                      come in three flavors:{' '}
+                      charts indicate the location and boundaries for active AIRMETs and SIGMETs.
+                      Both AIRMETs and SIGMETs are issued by the AWC, and both are considered
+                      “widespread” because they must be either affecting or be forecasted to affect
+                      an area of <Bold>at least 3,000 square miles at any one time.</Bold>
+                    </Paragraph>
+
+                    <Paragraph heading="AIRMETs">
+                      AIRMETs are primarily of concern to lighter aircraft. They come in three
+                      flavors:{' '}
                       <DetailList type="inline">
                         <>Sierra (mountain obscuration or IFR)</>
                         <>Tango (turbulence)</>
                         <>Zulu (icing)</>
                       </DetailList>
-                      .
-                    </>
-                    <>
+                      . Per <AIM paragraph={[7, 1, 6, 'b']} /> they are issued every 6 hours, with a
+                      maximum forecast period of 6 hours.
+                    </Paragraph>
+
+                    <Paragraph heading="SIGMETs">
+                      SIGMETs are issued for significant weather hazards that are of concern to all
+                      aircraft. Examples include:
+                      <DetailList type="bullet" bullet="disc">
+                        <>Widespread sand or dust storms</>
+                        <>Thunderstorms</>
+                      </DetailList>
+                    </Paragraph>
+
+                    <Paragraph>
+                      <Image src="1/graphical_airmets" noMargin />
+                    </Paragraph>
+                  </Tab>
+
+                  <Tab name="SIGWX">
+                    <Paragraph>
                       <Bold>Significant Weather charts</Bold> come in{' '}
                       <Link bold href={references.awc.sigwx.low}>
                         low (below FL240)
@@ -90,20 +179,78 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                         high
                       </Link>{' '}
                       varieties. The low SIGWX chart shows freezing levels, turbulence, and low
-                      cloud ceilings. The high SIGWX chart shows thunderstorms, tropical cyclones,
-                      moderate or severe turbulence, jetstreams, volcanic eruptions and more.
-                    </>
-                    <>
-                      The{' '}
-                      <Link bold href={references.awc.surface_analysis}>
-                        Surface Analysis Chart
-                      </Link>{' '}
-                      shows useful information regarding front positions, pressure systems, wind
-                      intensities and precipitation.
-                    </>
-                  </DetailList>
-                </>,
-                <Image src="1/surface_analysis_chart" width={700} noMargin />,
+                      cloud ceilings:
+                    </Paragraph>
+
+                    <Paragraph>
+                      <Image src="1/sigwx_low" />
+                    </Paragraph>
+
+                    <Paragraph>
+                      The high SIGWX chart shows thunderstorms, tropical cyclones, moderate or
+                      severe turbulence, jetstreams, volcanic eruptions and more:
+                    </Paragraph>
+                    <Paragraph>
+                      <Image src="1/sigwx_high" noMargin />
+                    </Paragraph>
+                  </Tab>
+
+                  <Tab name="Miscellaneous Charts">
+                    <Tabs>
+                      <Tab name="Surface Analysis">
+                        <Paragraph>
+                          The{' '}
+                          <Link bold href={references.awc.surface_analysis}>
+                            Surface Analysis Chart
+                          </Link>{' '}
+                          shows useful information regarding front positions, pressure systems, wind
+                          intensities and precipitation.
+                        </Paragraph>
+
+                        <Paragraph>
+                          <Image src="1/surface_analysis_chart" noMargin />
+                        </Paragraph>
+                      </Tab>
+
+                      <Tab name="Convective Outlooks">
+                        <Paragraph>
+                          <Bold>Convective Outlook</Bold> charts describe prospects for general and
+                          severe thunderstorm activity during the following 24 hours. They should be
+                          utilized primarily for planning flights later in the day (other products
+                          are better suited for getting current weather information)
+                        </Paragraph>
+
+                        <Paragraph>
+                          <Image src="1/convective_outlook" noMargin />
+                        </Paragraph>
+                      </Tab>
+
+                      <Tab name="Constant Pressure">
+                        <Paragraph>
+                          See <ReferenceLink reference="AC 00-45" /> paragraph 5.15.1 (page 5-103,
+                          232 overall). Constant pressure forecasts depict select weather (e.g.
+                          wind) at a specified pressure level (e.g. 300 MB) and the altitudes (in
+                          meters) of that level.{' '}
+                          <Bold>
+                            When considered together, constant pressure level forecasts describe the
+                            three-dimensional aspect of pressure systems
+                          </Bold>
+                          , which in turn cause and characterize much of the weather.{' '}
+                          <Bold>
+                            Typically, lows and troughs are associated with clouds and precipitation
+                            while highs and ridges are associated with fair weather
+                          </Bold>
+                          , except in winter when valley fog may occur. The location and strength of
+                          the jet stream can be viewed at 300 MB, 250 MB, and 200 MB levels.
+                        </Paragraph>
+
+                        <Paragraph>
+                          <Image src="1/constant_pressure" noMargin />
+                        </Paragraph>
+                      </Tab>
+                    </Tabs>
+                  </Tab>
+                </Tabs>,
               ];
             case '3': // Meteorology in general
               return (
@@ -547,19 +694,18 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
               );
             case '3l': // Obstructions to visibility
               return null;
+            case '4':
+              return (
+                <>
+                  Airborn radar is limited in both range and direction (you can only see what's
+                  directly in front of you). Furthermore, radar returns only detect precipitation.{' '}
+                  <Danger>It provides no assurance of avoiding IMC or turbulence.</Danger>
+                </>
+              );
           }
         },
         skills(id) {
           switch (id) {
-            case '2':
-              return (
-                <>
-                  It's important to understand the coded language of{' '}
-                  <Link href={references.taf_metar_key}>METARs and TAFs</Link>. Know how to read the
-                  most common symbols on the graphical forecast charts; the legend is availabe{' '}
-                  <Link href={references.gfa_symbols}>here</Link>.
-                </>
-              );
             case '4':
               return (
                 <>
@@ -589,7 +735,6 @@ const references = {
   adiabatic_process: uri.wikipedia('Adiabatic_process#Adiabatic_heating_and_cooling'),
   ads_b_fis_b:
     'https://www.aopa.org/news-and-media/all-news/2019/october/flight-training-magazine/weather-ads-b-and-fis-b',
-  aim_waas: uri.aim(1, 1, 18),
   awc: {
     graphical_airmet: uri.awc('gairmet'),
     home: uri.awc(),
@@ -612,6 +757,5 @@ const references = {
   gfa: uri.awc('gfa'),
   gfa_symbols: uri.awc('metar/symbol'),
   isa: uri.wikipedia('International_Standard_Atmosphere'),
-  taf_metar_key: uri.aim(7, 1, 28),
   wx_brief: 'https://www.1800wxbrief.com/',
 };
