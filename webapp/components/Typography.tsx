@@ -112,9 +112,10 @@ export function Emphasize({
         'font-bold': bold,
         italic,
         'bg-slate-200 hover:bg-slate-300': gray,
-        'text-blue-500': color === 'cold-front',
-        'text-red-500': color && ['danger', 'warm-front'].includes(color),
-        'text-fuchsia-500': color === 'occluded-front',
+        'text-blue-500': color === 'cold',
+        'text-amber-500': color === 'warm',
+        'text-red-500': color && ['danger', 'hot'].includes(color),
+        'text-fuchsia-500': color === 'occluded',
       })}
     >
       {children}

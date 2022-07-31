@@ -131,7 +131,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                   to vertical perturbation." If the ambient lapse rate is greater than the{' '}
                   <Bold>dry adiabatic lapse rate of 3°C per thousand feet</Bold>--that is, if air
                   temperature decreases at a rate greater than 3°C/1000ft--then a parcel of air
-                  displace upwards won't cool as quickly as the air around it and thus will be
+                  displaced upwards won't cool as quickly as the air around it and thus will be
                   pushed further upwards. This is an unstable parcel.
                 </>,
                 <>
@@ -240,12 +240,12 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                   distances. The three typical types of fronts are the <ColdFront />, the{' '}
                   <WarmFront /> and the{' '}
                   {'stationary front'.split('').map((l, i) => (
-                    <Bold color={i % 2 === 0 ? 'cold-front' : 'warm-front'} key={i}>
+                    <Bold color={i % 2 === 0 ? 'cold' : 'hot'} key={i}>
                       {l}
                     </Bold>
                   ))}
-                  . An <Bold color="occluded-front">occluded front</Bold> forms when a fast-moving
-                  cold front catches up to a slower-moving warm front.
+                  . An <Bold color="occluded">occluded front</Bold> forms when a fast-moving cold
+                  front catches up to a slower-moving warm front.
                 </>,
                 <>
                   Quoting from <ReferenceLink reference="AC 00-6" /> (chapter 10.3): "A{' '}
@@ -578,11 +578,11 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
 export default WeatherInformation;
 
 function ColdFront({ plural = false }: FrontProps) {
-  return <Bold color="cold-front">cold front{plural && 's'}</Bold>;
+  return <Bold color="cold">cold front{plural && 's'}</Bold>;
 }
 
 function WarmFront({ plural = false }: FrontProps) {
-  return <Bold color="warm-front">warm front{plural && 's'}</Bold>;
+  return <Bold color="hot">warm front{plural && 's'}</Bold>;
 }
 
 const references = {
