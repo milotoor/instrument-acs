@@ -16,6 +16,9 @@ export const uri = {
 
   awc: (r?: string) => `https://www.aviationweather.gov/${r ? r : ''}`,
 
+  boldMethod: (section: string, article: string) =>
+    `https://www.boldmethod.com/learn-to-fly/${section}/${article}/`,
+
   faa_docs: (...components: string[]) =>
     `https://www.faa.gov/documentLibrary/media/${components.join('/')}`,
 

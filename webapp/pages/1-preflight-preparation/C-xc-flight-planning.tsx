@@ -18,6 +18,7 @@ import {
   ToDo,
 } from '../../components';
 import { getStructure, getTaskFromSectionLetter } from '../../lib/data_loaders';
+import { uri } from '../../lib/references';
 
 export const getStaticProps = () => ({
   props: { structure: getStructure(), task: getTaskFromSectionLetter(1, 'C') },
@@ -92,7 +93,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                         </>
                         <>
                           Of these procedures, determine which has the lowest ceiling and visibility
-                          minimums. Standard minimums are{' '}
+                          minimums. Standard alternate minimums are{' '}
                           <DetailList type="inline">
                             <>
                               ceiling 600 feet and visibility 2 statute miles for a precision
@@ -108,7 +109,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                           <Bold>
                             If these lowest minima are less than the forecast ceiling and visibility
                             at the proposed alternate, then the airport is legally acceptable as an
-                            alternate.
+                            alternate
                           </Bold>
                         </>
                       </DetailList>
@@ -118,7 +119,11 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                       If the proposed alternate doesn't have any IAPs, it may still be filed as an
                       alternate if the ceiling and visibility at the time of arrival at the
                       alternate would allow a descent from the MEA under basic VFR. See{' '}
-                      <FAR section={[91, 169, 'c', 2]} />
+                      <FAR section={[91, 169, 'c', 2]} />. Of course,{' '}
+                      <Bold>
+                        if you choose to deviate to the alternate, you should use the published
+                        minimums for the approach you choose to fly.
+                      </Bold>
                     </Paragraph>
 
                     <Paragraph>
@@ -193,6 +198,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                     </>
                   </DetailList>
                 </Paragraph>,
+
                 <Paragraph heading="Terrain and Obstacles">
                   Safe cruise altitudes can be selected by paying attention to the route's{' '}
                   <DetailList type="inline">
@@ -207,9 +213,49 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                   MOCA, and only when they're able to receive the required navigational signals. The
                   OROCA
                 </Paragraph>,
+
                 <Paragraph heading="IFR Cruise Altitudes">
                   <ToDo />
                 </Paragraph>,
+
+                <Paragraph heading="VFR-On-Top">
+                  While operating on an IFR flight plan in VMC, a pilot may request a{' '}
+                  <Bold>VFR-on-top clearance</Bold> in lieu of an assigned altitude, permitting them
+                  to select an altitude or flight level of their choice (subject to ATC
+                  constraints). Per a <Link href={references.vfrOnTop}>boldmethod article</Link>,
+                  "this can be helpful if you're slightly above, or in between layers, and you want
+                  to stay out of the clouds" (because extended IMC flying can be fatiguing, the view
+                  is better and there's generally less turbulence). A VFR-on-top clearance permits
+                  operations above, below and between layers, or in areas where there is no
+                  meteorological obstruction at all.
+                </Paragraph>,
+
+                <Paragraph>
+                  Flying VFR-on-top subjects the pilot to regulations for both IFR and VFR flight:
+                  <DetailList type="bullet" bullet="disc">
+                    <>
+                      You must fly at the appropriate VFR altitude as prescribed in{' '}
+                      <FAR section={[91, 159]} />
+                    </>
+                    <>
+                      You must comply with VFR visibility and distance-from-cloud criteria
+                      prescribed in <FAR section={[91, 155]} />
+                    </>
+                    <>
+                      You must comply with IFR regulations applicable to your flight. That means{' '}
+                      <Bold>
+                        you must adhere to minimum IFR altitudes, your ATC clearance, position
+                        reporting, radio communications, course to be flown, etc.
+                      </Bold>
+                    </>
+                    <>
+                      You should advise ATC before any altitude change when operating VFR-on-top so
+                      ATC can provide accurate traffic information and separation.
+                    </>
+                    <>VFR-on-top is not permitted in Class A airspace.</>
+                  </DetailList>
+                </Paragraph>,
+
                 <Paragraph heading="Oxygen Requirements">
                   <ToDo />
                 </Paragraph>,
@@ -287,6 +333,6 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
 export default XcFlightPlanning;
 
 const references = {
-  jeppesen10_9:
-    'https://www.boldmethod.com/learn-to-fly/navigation/how-to-use-the-jeppesen-airport-10-9-page/',
+  jeppesen10_9: uri.boldMethod('navigation', 'how-to-use-the-jeppesen-airport-10-9-page'),
+  vfrOnTop: uri.boldMethod('regulations', 'understanding-vfr-on-top-clearance-requirements'),
 };
