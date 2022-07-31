@@ -256,7 +256,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                   They are large lows that generally travel from west to east along a front. They
                   last from a few days to more than a week."
                 </>,
-                <Image src="1/cyclogenesis" width={700} noMargin />,
+                <Image src="1/cyclogenesis" noMargin />,
               ];
             case '3f': // Clouds
               return [
@@ -381,7 +381,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                   An individual microburst typically does not last more than 15 minutes. The most
                   intense horizontal winds last only a few minutes.
                 </>,
-                <Image src="1/microburst" width={600} noMargin />,
+                <Image src="1/microburst" width={700} noMargin />,
               ];
             case '3i': // Icing and freezing level
               return [

@@ -77,7 +77,7 @@ const DepartureEnrouteArrival: NextPage<TaskPage.TopLevelProps> = (props) => {
                     and Jeppesen 10-9 pages.
                   </Paragraph>
                   <Paragraph>
-                    <Image src="5/departure_procedure" width={800} />
+                    <Image src="5/departure_procedure" />
                   </Paragraph>
                   <Paragraph>
                     An ODP must be developed when obstructions penetrate the 40:1 departure obstacle
@@ -147,7 +147,7 @@ const DepartureEnrouteArrival: NextPage<TaskPage.TopLevelProps> = (props) => {
                   </Paragraph>
 
                   <Paragraph>
-                    <Image src="5/departure_procedure" width={800}>
+                    <Image src="5/departure_procedure">
                       In the procedure above, the VCOA has a minimum ceiling of 4400' and visibility
                       of 3 statute miles. Pilots flying the VCOA procedure are{' '}
                       <Bold>

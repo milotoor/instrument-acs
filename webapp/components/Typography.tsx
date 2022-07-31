@@ -134,7 +134,7 @@ export function FAR({ section: fullSection }: FARSectionProps) {
   const paraText = paragraph.length ? ' ' + paragraph.map((t) => `(${t})`).join('') : null;
   return (
     <Link href={farURI}>
-      §{part}.{section}
+      14 CFR §{part}.{section}
       {paraText}
     </Link>
   );
@@ -154,10 +154,9 @@ export function Image({ children: caption, src, width, height, noMargin = false 
 
   const [w, h] = (() => {
     if (typeof width === 'number' && typeof height === 'number') return [width, height];
-    if (typeof width === 'number') return [width, (width / dimensions.width) * dimensions.height];
     if (typeof height === 'number')
       return [(height / dimensions.height) * dimensions.width, height];
-    return [dimensions.width, dimensions.height];
+    return [width ?? 800, ((width ?? 800) / dimensions.width) * dimensions.height];
   })();
 
   return (

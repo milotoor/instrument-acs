@@ -131,7 +131,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                     </Paragraph>
 
                     <Paragraph>
-                      <Image src="1/jeppesen-10-9" width={800} noMargin />
+                      <Image src="1/jeppesen-10-9" noMargin />
                     </Paragraph>
                   </Tab>
 
