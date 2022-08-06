@@ -6,6 +6,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      flex: {
+        'half': '50%'
+      },
       fontFamily: {
         'fancy': ['Lobster'],
         'roboto': ['Roboto'],

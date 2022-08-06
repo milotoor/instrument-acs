@@ -18,6 +18,7 @@ import {
   Tooltip,
 } from '../../components';
 import { getStructure, getTaskFromSectionLetter } from '../../lib/data_loaders';
+import { useDimensions } from '../../lib/hooks';
 import { uri } from '../../lib/references';
 
 export const getStaticProps = () => ({
@@ -25,6 +26,7 @@ export const getStaticProps = () => ({
 });
 
 const DepartureEnrouteArrival: NextPage<TaskPage.TopLevelProps> = (props) => {
+  const { breakpoints } = useDimensions();
   return (
     <TaskPage
       {...props}
@@ -69,9 +71,9 @@ const DepartureEnrouteArrival: NextPage<TaskPage.TopLevelProps> = (props) => {
                 <Tabs>
                   <Tab heading="ODPs">
                     <Paragraph>
-                      ODPs are DPs whose primary purpose is to{' '}
-                      <Bold>provide obstacle protection.</Bold> They are always provided in textual
-                      form, and{' '}
+                      <Bold>Obstacle Departure Procedures (ODPs)</Bold> are DPs whose primary
+                      purpose is to <Bold>provide obstacle protection.</Bold> They are always
+                      provided in textual form, and{' '}
                       <Tooltip message="If an ODP's instructions require more than one turn, altitude change, or climb gradient, a graphical ODP must be developed.">
                         some are graphical as well.
                       </Tooltip>{' '}
@@ -98,7 +100,8 @@ const DepartureEnrouteArrival: NextPage<TaskPage.TopLevelProps> = (props) => {
                   </Tab>
                   <Tab heading="SIDs">
                     <Paragraph>
-                      SIDs are DPs whose primary purpose is to{' '}
+                      <Bold>Standard Instrument Departures (SIDs)</Bold> are DPs whose primary
+                      purpose is to{' '}
                       <Bold>
                         concisely communicate an ATC clearance and thus expedite the flow of air
                         traffic
@@ -128,9 +131,9 @@ const DepartureEnrouteArrival: NextPage<TaskPage.TopLevelProps> = (props) => {
                     <Paragraph>
                       Per <AIM paragraph={[5, 2, 9, 'b']} />: a{' '}
                       <Bold>
-                        DVA is an area in which ATC may provide random radar vectors during an
-                        uninterrupted climb from the departure runway until above the minimum
-                        vectoring altitude/minimum IFR altitude
+                        Diverse Vector Area (DVA) is an area in which ATC may provide random radar
+                        vectors during an uninterrupted climb from the departure runway until above
+                        the minimum vectoring altitude/minimum IFR altitude
                       </Bold>
                       , established in accordance with the TERPS criteria for diverse departures.
                       The DVA provides obstacle and terrain avoidance in lieu of taking off from the
@@ -140,9 +143,10 @@ const DepartureEnrouteArrival: NextPage<TaskPage.TopLevelProps> = (props) => {
                     <Paragraph>
                       Alternatively, per <AIM paragraph={[5, 2, 9, 'e', 7]} />, a{' '}
                       <Bold>
-                        VCOA procedure enables an aircraft operating in VMC equal to or greater than
-                        the specified visibility and ceiling, to visually conduct climbing turns
-                        over the airport to the published “at or above” altitude
+                        Visual Climb Over Airport (VCOA) procedure enables an aircraft operating in
+                        VMC equal to or greater than the specified visibility and ceiling, to
+                        visually conduct climbing turns over the airport to the published “at or
+                        above” altitude
                       </Bold>
                       . At this point, the pilot may proceed in IMC to the first en route fix using
                       a diverse departure.
@@ -177,6 +181,47 @@ const DepartureEnrouteArrival: NextPage<TaskPage.TopLevelProps> = (props) => {
                 </Tabs>,
                 <Paragraph heading="Standard Arrival Procedures">
                   <ToDo />
+                </Paragraph>,
+                <Paragraph heading="Terminal Arrival Areas">
+                  A <Bold>TAA</Bold>, described in <AIM paragraph={[5, 4, 5, 'd']} />, provides a
+                  transition from the en route structure to the terminal environment with minimal
+                  communication with ATC for aircraft equipped with RNAV systems. TAA's normally
+                  come in a "T" configuration, containing two IAFs at the ends of the T's arms and a
+                  third IAF/IF at the center. There is commonly a hold-in-leiu of PT at the IAF/IF.
+                  The FAF, MAP and sometimes even the missed approach holding fix are all along the
+                  trunk of the T.
+                </Paragraph>,
+                <Paragraph>
+                  The TAA is broken down into three main areas:{' '}
+                  <DetailList type="inline">
+                    <>straight-in area</>
+                    <>right base area</>
+                    <></>left base area
+                  </DetailList>
+                  . All three areas may be broken down into sub-sections using RNAV distance arcs
+                  from the area's associated IAF, and the straight-in section can also be broken
+                  down into multiple pie-slice sectors using a magnetic course to the IAF/IF.
+                  Sometimes the typical "T" shape will be more like a "Y", or even an "L" or "I" if
+                  one or both of the base legs must be removed during procedure planning.
+                </Paragraph>,
+                <div className="flex flex-wrap justify-center">
+                  <div className="md:flex-half">
+                    <Image src="taa1" noMargin={breakpoints.isMedium} />
+                  </div>
+                  <div className="md:flex-half">
+                    <Image src="taa2" noMargin={breakpoints.isMedium} />
+                  </div>
+                </div>,
+                <Paragraph>
+                  Altitudes within the TAA replace the Minimum Safe Altitude (MSA) and{' '}
+                  <Bold>are operationally usable altitudes</Bold>. Once cleared for the approach,
+                  pilots may descend in the TAA sector to the minimum altitude depicted within the
+                  defined area/subdivision. However, a clearance direct to to either IAF or the
+                  IAF/IF{' '}
+                  <Bold color="warning">
+                    does not constitute an approach clearance and is not a clearance to descend
+                  </Bold>
+                  .
                 </Paragraph>,
               ];
           }
