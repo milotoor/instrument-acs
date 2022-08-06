@@ -235,7 +235,7 @@ export function Paragraph({ children, heading, hr }: ParagraphProps) {
 
 export function TaskLink({ section, task, id }: TaskLinkProps) {
   const { sections } = React.useContext(AppContext);
-  const taskData = sections[section].tasks.find(({ letter }) => letter === task);
+  const taskData = sections[section - 1].tasks.find(({ letter }) => letter === task);
   if (!taskData) return null;
 
   const dataSection = id[0].toLowerCase();
