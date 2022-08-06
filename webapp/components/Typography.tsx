@@ -25,8 +25,6 @@ type EmphasizeProps = ChildProp & {
 
 type ImageProps = Partial<ChildProp> & {
   src: string;
-  width?: number;
-  height?: number;
   noMargin?: boolean;
 };
 
@@ -144,7 +142,7 @@ export function Gray(props: Omit<EmphasizeProps, 'gray'>) {
   return <Emphasize gray {...props} />;
 }
 
-export function Image({ children: caption, src, width, height, noMargin = false }: ImageProps) {
+export function Image({ children: caption, src, noMargin = false }: ImageProps) {
   const { section, structure } = React.useContext(AppContext);
   const { images } = structure;
   const fullSrc = [section, src].join('/');

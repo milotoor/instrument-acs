@@ -616,7 +616,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                   An individual microburst typically does not last more than 15 minutes. The most
                   intense horizontal winds last only a few minutes.
                 </>,
-                <Image src="microburst" width={700} noMargin />,
+                <Image src="microburst" noMargin />,
               ];
             case '3i': // Icing and freezing level
               return [
