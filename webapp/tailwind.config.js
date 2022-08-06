@@ -11,11 +11,14 @@ module.exports = {
         'roboto': ['Roboto'],
         'roboto-mono': ['"Roboto Mono"']
       },
+      height: {
+        'top-bar': '3rem'
+      },
       listStyleType: {
         'alpha': 'lower-alpha',
       },
-      height: {
-        'top-bar': '3rem'
+      maxWidth: {
+        'image': '90%'
       },
       transitionProperty: {
         'border': 'border-color',

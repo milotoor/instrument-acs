@@ -157,15 +157,17 @@ export function Image({ children: caption, src, width, height, noMargin = false 
         'mb-2': noMargin,
       })}
     >
-      <div className="w-11/12 m-auto shadow-lg shadow-slate-500 leading-[0]">
-        <NextImage
-          src={`/img/${src}.webp`}
-          layout="intrinsic"
-          width={dimensions.width}
-          height={dimensions.height}
-        />
+      <div className="flex flex-col items-center w-full">
+        <div className="max-w-image shadow-lg shadow-slate-500 leading-[0]">
+          <NextImage
+            src={`/img/${src}.webp`}
+            layout="intrinsic"
+            width={dimensions.width}
+            height={dimensions.height}
+          />
+        </div>
+        {hasCaption && <div className="max-w-image px-3 text-xs mt-4">{caption}</div>}
       </div>
-      {hasCaption && <div className="w-11/12 m-auto px-3 text-xs mt-4">{caption}</div>}
     </div>
   );
 }
