@@ -145,8 +145,10 @@ export function Gray(props: Omit<EmphasizeProps, 'gray'>) {
 }
 
 export function Image({ children: caption, src, width, height, noMargin = false }: ImageProps) {
-  const { images } = React.useContext(AppContext);
-  const dimensions = images && images[src];
+  const { section, structure } = React.useContext(AppContext);
+  const { images } = structure;
+  const fullSrc = [section, src].join('/');
+  const dimensions = images && images[fullSrc];
   const hasCaption = !!caption;
 
   return (
@@ -160,7 +162,7 @@ export function Image({ children: caption, src, width, height, noMargin = false 
       <div className="flex flex-col items-center w-full">
         <div className="max-w-image shadow-lg shadow-slate-500 leading-[0]">
           <NextImage
-            src={`/img/${src}.webp`}
+            src={`/img/${fullSrc}.webp`}
             layout="intrinsic"
             width={dimensions.width}
             height={dimensions.height}

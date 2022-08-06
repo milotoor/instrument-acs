@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import React from 'react';
 
-import { Structure, Task } from '../lib/types';
+import { Section, Structure, Task } from '../lib/types';
 import { AppContext } from './context';
 import { Link } from './Typography';
 
@@ -19,8 +19,8 @@ export function Layout({ children, home = false, structure, task }: LayoutProps)
   const tasks = React.useMemo(() => structure?.sections?.flatMap((s) => s.tasks), [structure]);
   const meta = task?.meta;
   const [section, letter] = meta
-    ? [sectionNumerals.indexOf(meta.section.numeral) + 1, meta.letter]
-    : [null, null];
+    ? [(sectionNumerals.indexOf(meta.section.numeral) + 1) as Section.Number, meta.letter]
+    : [undefined, undefined];
 
   const taskIndex = React.useMemo(
     () => tasks?.findIndex((t) => t.section === section && t.letter === letter),
@@ -35,7 +35,7 @@ export function Layout({ children, home = false, structure, task }: LayoutProps)
 
   const navLinkClasses = 'absolute h-top-bar flex flex-col justify-center';
   return (
-    <AppContext.Provider value={structure}>
+    <AppContext.Provider value={{ section, structure, task: letter }}>
       <div className="flex h-screen flex-col items-center justify-start">
         {!home && (
           <div className="w-full h-top-bar z-10 flex-shrink-0 shadow-xl shadow-slate-800 flex flex-row justify-center items-center relative bg-gradient-to-r from-cyan-500 to-blue-500">

@@ -1,4 +1,12 @@
 import * as React from 'react';
-import { Structure } from '../lib/types';
+import { Section, Structure, Task } from '../lib/types';
 
-export const AppContext = React.createContext<Structure.AppData>({ images: {}, sections: [] });
+type AppContext = {
+  section?: Section.Number;
+  structure: Structure.AppData;
+  task?: Task.Letter;
+};
+
+export const AppContext = React.createContext<AppContext>({
+  structure: { images: {}, sections: [] },
+});

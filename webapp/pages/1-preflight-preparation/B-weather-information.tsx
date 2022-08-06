@@ -81,7 +81,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                     </Paragraph>
 
                     <Paragraph>
-                      <Image src="1/gfa" noMargin />
+                      <Image src="gfa" noMargin />
                     </Paragraph>
                   </Tab>
 
@@ -165,7 +165,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                     </Paragraph>
 
                     <Paragraph>
-                      <Image src="1/graphical_airmets" noMargin />
+                      <Image src="graphical_airmets" noMargin />
                     </Paragraph>
                   </Tab>
 
@@ -184,7 +184,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                     </Paragraph>
 
                     <Paragraph>
-                      <Image src="1/sigwx_low" />
+                      <Image src="sigwx_low" />
                     </Paragraph>
 
                     <Paragraph>
@@ -192,7 +192,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                       severe turbulence, jetstreams, volcanic eruptions and more:
                     </Paragraph>
                     <Paragraph>
-                      <Image src="1/sigwx_high" noMargin />
+                      <Image src="sigwx_high" noMargin />
                     </Paragraph>
                   </Tab>
 
@@ -209,7 +209,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                         </Paragraph>
 
                         <Paragraph>
-                          <Image src="1/surface_analysis_chart" noMargin />
+                          <Image src="surface_analysis_chart" noMargin />
                         </Paragraph>
                       </Tab>
 
@@ -222,7 +222,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                         </Paragraph>
 
                         <Paragraph>
-                          <Image src="1/convective_outlook" noMargin />
+                          <Image src="convective_outlook" noMargin />
                         </Paragraph>
                       </Tab>
 
@@ -246,7 +246,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                         </Paragraph>
 
                         <Paragraph>
-                          <Image src="1/constant_pressure" noMargin />
+                          <Image src="constant_pressure" noMargin />
                         </Paragraph>
                       </Tab>
                     </Tabs>
@@ -354,7 +354,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                     </Paragraph>
 
                     <Paragraph>
-                      <Image src="1/cyclonic_flow" noMargin />
+                      <Image src="cyclonic_flow" noMargin />
                     </Paragraph>
                   </Tab>
 
@@ -473,7 +473,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                   They are large lows that generally travel from west to east along a front. They
                   last from a few days to more than a week."
                 </>,
-                <Image src="1/cyclogenesis" noMargin />,
+                <Image src="cyclogenesis" noMargin />,
               ];
             case '3f': // Clouds
               return [
@@ -616,7 +616,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                   An individual microburst typically does not last more than 15 minutes. The most
                   intense horizontal winds last only a few minutes.
                 </>,
-                <Image src="1/microburst" width={700} noMargin />,
+                <Image src="microburst" width={700} noMargin />,
               ];
             case '3i': // Icing and freezing level
               return [
