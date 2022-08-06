@@ -113,7 +113,7 @@ export function Emphasize({
         italic,
         'bg-slate-200 hover:bg-slate-300': gray,
         'text-blue-500': color === 'cold',
-        'text-amber-500': color === 'warm',
+        'text-amber-500': color && ['warning', 'warm'].includes(color),
         'text-red-500': color && ['danger', 'hot'].includes(color),
         'text-fuchsia-500': color === 'occluded',
       })}
