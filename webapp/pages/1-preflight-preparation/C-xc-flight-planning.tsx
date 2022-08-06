@@ -75,7 +75,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                   <Bold>if your destination doesn't have any instrument approaches</Bold>.
                 </Paragraph>,
                 <Tabs>
-                  <Tab name="Regulatory requirements">
+                  <Tab heading="Regulatory requirements">
                     <Paragraph>
                       The process looks like this:
                       <DetailList type="bullet">
@@ -140,7 +140,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                     </Paragraph>
                   </Tab>
 
-                  <Tab name="GPS and WAAS">
+                  <Tab heading="GPS and WAAS">
                     <Paragraph>
                       This is where things get a little messy.
                       <DetailList type="bullet">

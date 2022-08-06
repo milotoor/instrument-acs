@@ -4,7 +4,7 @@ import * as React from 'react';
 import { ChildProp } from '../lib/types';
 
 type TabsProps = ChildProp<React.ReactElement<TabProps>[]>;
-type TabProps = ChildProp & { active?: boolean; name: string };
+type TabProps = ChildProp & { active?: boolean; heading: string };
 
 export function Tabs({ children }: TabsProps) {
   const [active, setActive] = React.useState(0);
@@ -23,7 +23,7 @@ export function Tabs({ children }: TabsProps) {
               key={i}
               onClick={() => setActive(i)}
             >
-              {tab.props.name}
+              {tab.props.heading}
             </div>
           );
         })}

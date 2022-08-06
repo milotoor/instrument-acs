@@ -6,6 +6,7 @@ import {
   Bold,
   Danger,
   DetailList,
+  Gray,
   Image,
   Italic,
   Katex,
@@ -62,7 +63,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                   they actually are.
                 </>,
                 <Tabs>
-                  <Tab name="GFA">
+                  <Tab heading="GFA">
                     <Paragraph>
                       The NWS provides the{' '}
                       <Link bold href={references.gfa}>
@@ -84,7 +85,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                     </Paragraph>
                   </Tab>
 
-                  <Tab name="METARs & TAFs">
+                  <Tab heading="METARs & TAFs">
                     <Paragraph>
                       <Bold>Aviation Routine Weather Report (METARs)</Bold> and{' '}
                       <Bold>Terminal Aerodrome Forecasts (TAFs)</Bold> are perhaps the most commonly
@@ -127,7 +128,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                     </Paragraph>
                   </Tab>
 
-                  <Tab name="AIRMETs & SIGMETs">
+                  <Tab heading="AIRMETs & SIGMETs">
                     <Paragraph>
                       <Link bold href={references.awc.graphical_airmet}>
                         Graphical AIRMET
@@ -168,7 +169,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                     </Paragraph>
                   </Tab>
 
-                  <Tab name="SIGWX">
+                  <Tab heading="SIGWX">
                     <Paragraph>
                       <Bold>Significant Weather charts</Bold> come in{' '}
                       <Link bold href={references.awc.sigwx.low}>
@@ -195,9 +196,9 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                     </Paragraph>
                   </Tab>
 
-                  <Tab name="Miscellaneous Charts">
+                  <Tab heading="Miscellaneous Charts">
                     <Tabs>
-                      <Tab name="Surface Analysis">
+                      <Tab heading="Surface Analysis">
                         <Paragraph>
                           The{' '}
                           <Link bold href={references.awc.surface_analysis}>
@@ -212,7 +213,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                         </Paragraph>
                       </Tab>
 
-                      <Tab name="Convective Outlooks">
+                      <Tab heading="Convective Outlooks">
                         <Paragraph>
                           <Bold>Convective Outlook</Bold> charts describe prospects for general and
                           severe thunderstorm activity during the following 24 hours. They should be
@@ -225,7 +226,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                         </Paragraph>
                       </Tab>
 
-                      <Tab name="Constant Pressure">
+                      <Tab heading="Constant Pressure">
                         <Paragraph>
                           See <ReferenceLink reference="AC 00-45" /> paragraph 5.15.1 (page 5-103,
                           232 overall). Constant pressure forecasts depict select weather (e.g.
@@ -273,14 +274,14 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                   thousand feet of elevation gain, the pressure drops 1"Hg and the temperature drops
                   2°C.
                 </>,
-                <>
+                <Paragraph heading="Stability">
                   <Bold>Atmospheric stability</Bold> is defined as "the resistance of the atmosphere
                   to vertical perturbation." If the ambient lapse rate is greater than the{' '}
                   <Bold>dry adiabatic lapse rate of 3°C per thousand feet</Bold>--that is, if air
                   temperature decreases at a rate greater than 3°C/1000ft--then a parcel of air
                   displaced upwards won't cool as quickly as the air around it and thus will be
                   pushed further upwards. This is an unstable parcel.
-                </>,
+                </Paragraph>,
                 <>
                   The general characteristics of unstable air include{' '}
                   <DetailList type="inline">
@@ -298,6 +299,26 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                   </DetailList>
                   .
                 </>,
+
+                <Paragraph heading="Composition">
+                  The layer of the atmosphere in which virtually all weather and flying activities
+                  occur is the <Bold>troposphere</Bold>. The layer above that is the{' '}
+                  <Bold>stratosphere</Bold>, which has significantly different characteristics. For
+                  example,{' '}
+                  <Gray italic>
+                    temperature increases with altitude, and it changes relatively slowly
+                  </Gray>
+                  .
+                </Paragraph>,
+
+                <>
+                  The interface between the troposphere and stratosphere is called the{' '}
+                  <Bold>tropopause</Bold>. Its height varies by latitude (
+                  <Bold color="cold">~20,000'</Bold> at the poles, <Bold color="warm">37,000'</Bold>{' '}
+                  in the mid-latitudes and <Bold color="hot">65,000'</Bold> at the equator) and
+                  season (higher in summer). The tropopause is characterized by an abrupt change in
+                  lapse rate and strong winds.
+                </>,
               ];
             case '3b': // Wind
               return [
@@ -307,35 +328,82 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                   consideration for runway selection. En route they can push you faster, slow you
                   down or simply blow you off course.
                 </>,
-                <>
-                  Phenomena like <ReferenceLink bold reference="AC 00-54" text="wind shear" /> or{' '}
-                  <ReferenceLink bold reference="AC 00-57" text="mountain wave" /> can be extremely
-                  hazardous: countless GA accidents have occurred simply because pilots (especially
-                  instrument pilots!) forget that downwind of a mountain range is a high-risk
-                  environment.
-                </>,
-                <>
-                  The <Bold>jetstream</Bold> is defined as a wind of 50 knots or greater associated
-                  with the tropopause. It shifts seasonally, extending farther south (and blowing
-                  more strongly) in the winter.
-                </>,
-                <>
-                  For reasons not entirely clear to me, <Bold>wind shear</Bold> patterns vary
-                  between front types:
-                  <DetailList type="bullet" bullet="alpha">
-                    <>
-                      with a <ColdFront />, it occurs just after the front passes and for a short
-                      period thereafter
-                    </>
-                    <>
-                      with a <WarmFront />, it occurs just before the front passes
-                    </>
-                    <>
-                      <WarmFront plural /> seem to produce much greater wind shear than{' '}
-                      <ColdFront plural /> do
-                    </>
-                  </DetailList>
-                </>,
+                <Tabs>
+                  <Tab heading="Macro-Systems">
+                    <Paragraph>
+                      In the northern hemisphere:
+                      <DetailList type="bullet">
+                        <>
+                          Air circulates clockwise around high pressure systems and counterclockwise
+                          around low pressure systems
+                        </>
+                        <>
+                          The steeper the pressure gradient, the closer the isobars, the stronger
+                          the winds (this is also true in the southern hemisphere)
+                        </>
+                        <>
+                          <Bold>Surface friction</Bold> impacts wind speed and direction up to about
+                          2,000' AGL. Below this altitude the winds are slower and do not parallel
+                          the isobars but rather flow across them from high to low pressure.
+                        </>
+                        <>
+                          The <Bold>Coriolis force</Bold> deflects winds to the right. The faster
+                          the winds, the greater the deflection.
+                        </>
+                      </DetailList>
+                    </Paragraph>
+
+                    <Paragraph>
+                      <Image src="1/cyclonic_flow" noMargin />
+                    </Paragraph>
+                  </Tab>
+
+                  <Tab heading="Jetstream">
+                    The <Bold>jetstream</Bold> is defined as a wind of 50 knots or greater
+                    associated with the tropopause. It shifts seasonally, extending farther south
+                    (and blowing more strongly) in the winter.
+                  </Tab>
+
+                  <Tab heading="Hazards">
+                    <Paragraph>
+                      Phenomena like <ReferenceLink bold reference="AC 00-54" text="wind shear" />{' '}
+                      or <ReferenceLink bold reference="AC 00-57" text="mountain wave" /> can be
+                      extremely hazardous: countless GA accidents have occurred simply because
+                      pilots (especially instrument pilots!) forget that downwind of a mountain
+                      range is a high-risk environment.
+                    </Paragraph>
+
+                    <Paragraph>
+                      <Bold>Thunderstorms</Bold> are a source of extremely hazardous windshear and
+                      microbursts. Windshear can be found on all sides a thunderstorm cell and in
+                      the downdrafts underneath the cell. The gust front from a thunderstorm can
+                      precede the storm itself by <Bold>15 miles or more!</Bold>
+                    </Paragraph>
+
+                    <Paragraph>
+                      For reasons not entirely clear to me, wind shear patterns vary between front
+                      types:
+                      <DetailList type="bullet" bullet="alpha">
+                        <>
+                          with a <ColdFront />, it occurs just after the front passes and for a
+                          short period thereafter
+                        </>
+                        <>
+                          with a <WarmFront />, it occurs just before the front passes
+                        </>
+                        <>
+                          <WarmFront plural /> seem to produce much greater wind shear than{' '}
+                          <ColdFront plural /> do
+                        </>
+                      </DetailList>
+                    </Paragraph>
+
+                    <Paragraph>
+                      Additionally,{' '}
+                      <Bold>low-level temperature inversions are common sources of windshear.</Bold>
+                    </Paragraph>
+                  </Tab>
+                </Tabs>,
               ];
             case '3c': // Temperature
               return [
@@ -364,8 +432,10 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                   have a relative humidity of 100% and thus is saturated.
                 </>,
                 <>
-                  The type of precipitation that forms when water condenses depends on several
-                  factors.
+                  <Bold>Upward air currents enhance the growth rate of precipitation</Bold>. The
+                  turbulent currents cause droplets to collide more frequently, leading rapidly to
+                  larger droplets which the rising air is able to sustain for longer periods of
+                  time.
                 </>,
               ];
             case '3e': // Weather system formation
@@ -428,6 +498,21 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
             case '3g': // Turbulence
               return [
                 <>
+                  Turbulence is defined as irregular motion of an aircraft, especially when
+                  characterized by rapid up-and-down motion caused by a rapid variation of
+                  atmospheric wind velocities. It's caused by{' '}
+                  <DetailList type="inline">
+                    <>
+                      convective currents (<Bold>convective turbulence</Bold>)
+                    </>
+                    <>
+                      obstructions in the wind flow (<Bold>mechanical turbulence</Bold>)
+                    </>
+                    <>wind shear</>
+                  </DetailList>
+                  .
+                </>,
+                <>
                   Turbulence is reported with four intensity levels:{' '}
                   <DetailList type="inline">
                     <>light</>
@@ -444,7 +529,10 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                   <Bold>
                     design maneuvering speed (<Katex>V_a</Katex>)
                   </Bold>{' '}
-                  to lessen airframe stresses.
+                  to lessen airframe stresses. If avoiding severe turbulence becomes impossible, the
+                  FAA advises "riding the waves" and maintaining a level flight attitude. Notably,
+                  this suggestion was contained in AC 00-6a and removed in AC 00-6b -- it's unclear
+                  to me if this remains FAA-endorsed advice.
                 </>,
               ];
             case '3h': // Thunderstorms/microbursts
