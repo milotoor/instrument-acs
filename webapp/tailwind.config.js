@@ -23,6 +23,11 @@ module.exports = {
       transitionProperty: {
         'border': 'border-color',
         'height': 'height'
+      },
+      // These values match the tailwind CSS media breakpoint values
+      width: {
+        large: '1024px',
+        medium: '768px'
       }
     },
   },

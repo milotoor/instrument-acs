@@ -45,7 +45,7 @@ export const TaskPage: React.FC<TaskPageProps> = ({ task, structure, flags = {},
         <title>{meta.name}</title>
       </Head>
 
-      <main className="flex flex-1 flex-col w-full lg:w-[1024px] px-4 mb-8">
+      <main className="flex flex-1 flex-col w-full lg:w-large px-4 mb-8">
         <h3 className="text-xl md:text-2xl font-bold font-roboto-mono">
           Section {meta.section.numeral}. {meta.section.name}
         </h3>
