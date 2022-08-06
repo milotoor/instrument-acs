@@ -19,7 +19,7 @@ const Home: NextPage<ACSProp> = ({ structure }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="flex flex-1 flex-col justify-center md:w-[750px] px-4">
+      <main className="flex flex-1 flex-col justify-center md:w-[768px] px-4">
         <h1 className="text-4xl sm:text-7xl font-bold font-fancy pt-5">
           The{' '}
           <Link
