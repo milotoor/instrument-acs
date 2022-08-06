@@ -11,12 +11,12 @@ export function Tabs({ children }: TabsProps) {
   const [activeTabEl, setActiveTabEl] = React.useState<HTMLDivElement | null>(null);
   return (
     <div className="rounded-md overflow-hidden border border-slate-400">
-      <div className="flex items-center justify-start border-b border-slate-400">
+      <div className="flex items-stretch justify-start border-b border-slate-400">
         {children.map((tab, i) => {
           const isActive = active === i;
           return (
             <div
-              className={cn('text-md cursor-pointer p-2', {
+              className={cn('text-md cursor-pointer p-2 flex items-center', {
                 'hover:bg-indigo-500/30': !isActive,
                 'bg-indigo-500 text-white': isActive,
               })}

@@ -45,7 +45,7 @@ export const TaskPage: React.FC<TaskPageProps> = ({ task, structure, flags = {},
         <title>{meta.name}</title>
       </Head>
 
-      <main className="flex flex-1 flex-col md:w-[1000px] px-4 mb-8">
+      <main className="flex flex-1 flex-col w-full md:w-[1000px] px-4 mb-8">
         <h3 className="text-xl md:text-2xl font-bold font-roboto-mono">
           Section {meta.section.numeral}. {meta.section.name}
         </h3>
@@ -177,10 +177,11 @@ function DataSection({ flags, heading, notes = () => null, task }: DataSectionPr
 
   function applyFlags(id: Item.ID, text: string) {
     const itemFlag = flags?.get(id);
-    if (!itemFlag) return text;
+    const spanClasses = 'text-lg';
+    if (!itemFlag) return <span className={spanClasses}>{text}</span>;
     const [className, description] = flagClasses[itemFlag];
     return (
-      <span className={className} title={description}>
+      <span className={cn(className, spanClasses)} title={description}>
         {text}
       </span>
     );
@@ -191,7 +192,7 @@ function SectionContainer({ children, heading }: SectionContainerProps) {
   return (
     <div className="pt-6">
       <div className="text-3xl font-fancy mb-2 text-fuchsia-500">{heading}</div>
-      <div className="text-lg font-roboto-mono">{children}</div>
+      <div className="font-roboto-mono">{children}</div>
     </div>
   );
 }

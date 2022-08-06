@@ -1,7 +1,6 @@
 import cn from 'classnames';
 import katex from 'katex';
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
-import NextImage, { ImageProps as NextImageProps } from 'next/image';
 import React from 'react';
 
 import { referenceNames, referenceURIs, uri } from '../lib/references';
