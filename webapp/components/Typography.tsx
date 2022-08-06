@@ -1,6 +1,7 @@
 import cn from 'classnames';
 import katex from 'katex';
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
+import NextImage from 'next/image';
 import React from 'react';
 
 import { referenceNames, referenceURIs, uri } from '../lib/references';
@@ -148,16 +149,6 @@ export function Image({ children: caption, src, width, height, noMargin = false 
   const dimensions = images && images[src];
   const hasCaption = !!caption;
 
-  // If the image is not present in the `images` context, return null
-  if (!dimensions) return null;
-
-  const [w, h] = (() => {
-    if (typeof width === 'number' && typeof height === 'number') return [width, height];
-    if (typeof height === 'number')
-      return [(height / dimensions.height) * dimensions.width, height];
-    return [width ?? 800, ((width ?? 800) / dimensions.width) * dimensions.height];
-  })();
-
   return (
     <div
       className={cn({
@@ -166,14 +157,15 @@ export function Image({ children: caption, src, width, height, noMargin = false 
         'mb-2': noMargin,
       })}
     >
-      <div className="shadow-lg shadow-slate-500 m-auto relative" style={{ width: w, height: h }}>
-        <NextImage src={`/img/${src}.webp`} layout="fill" />
+      <div className="w-11/12 m-auto shadow-lg shadow-slate-500 leading-[0]">
+        <NextImage
+          src={`/img/${src}.webp`}
+          layout="intrinsic"
+          width={dimensions.width}
+          height={dimensions.height}
+        />
       </div>
-      {hasCaption && (
-        <div className="m-auto px-3 text-xs mt-4" style={{ width: w }}>
-          {caption}
-        </div>
-      )}
+      {hasCaption && <div className="w-11/12 m-auto px-3 text-xs mt-4">{caption}</div>}
     </div>
   );
 }
