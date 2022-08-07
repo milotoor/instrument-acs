@@ -3,6 +3,7 @@ import React from 'react';
 
 import {
   AIM,
+  Attribution,
   Bold,
   Danger,
   DetailList,
@@ -494,6 +495,45 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                   atmosphere, clouds will tend to grow vertically and be more cumuliform; in a
                   stable atmosphere, clouds will be more stratiform.
                 </>,
+                <Image src="clouds" noMargin />,
+                <Tabs>
+                  <Tab heading="Standing lenticular">
+                    <Paragraph>
+                      <Bold>Altocumulus Standing Lenticular (ACSL)</Bold> clouds are an orographic
+                      type of cloud, often formed in patches in the shape of almonds. They are
+                      caused by wave motions in the atmosphere and are frequently seen in
+                      mountainous or hilly areas. Hills only a few thousand feet high can create
+                      them, and they may extend downwind for more than 60 miles. The cloud elements
+                      form at the windward edge of the cloud and are carried to the downwind edge
+                      where they evaporate. The cloud as a whole is usually stationary or slow
+                      moving.
+                    </Paragraph>
+
+                    <Paragraph>
+                      The ACSL clouds indicate the position of the wave crests, but they do not
+                      necessarily give an indication on the intensity of turbulence or strength of
+                      updrafts and downdrafts. This is because the clouds depend on both lifting and
+                      moisture: an ACSL cloud may be visible in weak updrafts where there is an
+                      adequate supply of moisture, but may not be visible when the environment is
+                      very dry, even if the wave is intense.
+                    </Paragraph>
+
+                    <Paragraph>
+                      <Image src="lenticular_cloud" noMargin>
+                        <Attribution
+                          title="Mayon Volcano with cloudy hat"
+                          author="Patryk Reba"
+                          license="CC BY-SA 4.0"
+                          source="https://commons.wikimedia.org/wiki/File:Mayon_Volcano_with_cloudy_hat.jpg"
+                        />
+                      </Image>
+                    </Paragraph>
+                  </Tab>
+                  <Tab heading="High clouds">
+                    High clouds are mostly made of ice crystals; ironically these are the least
+                    likely to contribute to structural icing.
+                  </Tab>
+                </Tabs>,
               ];
             case '3g': // Turbulence
               return [
