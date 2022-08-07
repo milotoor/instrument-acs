@@ -18,6 +18,7 @@ type DetailListProps = ChildProp<React.ReactNode[]> & {
 
 type EmphasizeProps = ChildProp & {
   bold?: boolean;
+  className?: string;
   color?: Colors.TextColor;
   gray?: boolean;
   italic?: boolean;
@@ -49,12 +50,15 @@ export function AIM({ paragraph: fullParagraph }: AIMParagraphProps) {
   let aimURI = uri.aim(chapter, section, paragraph);
   const subsectionID = rest.length ? ' ' + rest.map((id) => `(${id})`).join('') : '';
   return (
-    <Link href={aimURI}>
-      AIM{' '}
-      <span className="whitespace-nowrap">
-        {chapter}-{section}-{paragraph} {subsectionID}
-      </span>
-    </Link>
+    <Bold>
+      <Link href={aimURI}>
+        AIM{' '}
+        <span className="whitespace-nowrap">
+          {chapter}-{section}-{paragraph}
+          {subsectionID ? ' ' + subsectionID : null}
+        </span>
+      </Link>
+    </Bold>
   );
 }
 
@@ -100,13 +104,14 @@ export function DetailList(props: DetailListProps) {
 export function Emphasize({
   bold = false,
   children,
+  className,
   color,
   gray = false,
   italic = false,
 }: EmphasizeProps) {
   return (
     <span
-      className={cn({
+      className={cn(className, {
         'font-bold': bold,
         italic,
         'bg-slate-200 hover:bg-slate-300': gray,
@@ -131,10 +136,12 @@ export function FAR({ section: fullSection }: FARSectionProps) {
 
   const paraText = paragraph.length ? ' ' + paragraph.map((t) => `(${t})`).join('') : null;
   return (
-    <Link href={farURI}>
-      14 CFR §{part}.{section}
-      {paraText}
-    </Link>
+    <Bold>
+      <Link href={farURI}>
+        14 CFR §{part}.{section}
+        {paraText}
+      </Link>
+    </Bold>
   );
 }
 
