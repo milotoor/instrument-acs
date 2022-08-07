@@ -35,7 +35,7 @@ export function getStructure(pathToRoot: string = '.') {
 }
 
 function getSectionStructure(pathToRoot: string = '.'): Structure.Section[] {
-  const tree = dirTree(path.join(pathToRoot, 'areas_of_operation'));
+  const tree = dirTree(path.join(pathToRoot, 'data/acs'));
   const areas = tree?.children?.filter((child) => child.name.match(/\d\./));
   const makeURI = (...components: string[]) => '/' + components.join('/');
 

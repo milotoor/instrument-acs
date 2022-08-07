@@ -140,8 +140,8 @@ class TaskFile:
         parts[-1] = parts[-1].replace(".txt", ".toml")
 
         # Remove the "raw" directory from the path
-        raw_index = parts.index("raw")
-        parts = parts[:raw_index] + parts[raw_index + 1 :]
+        raw_index = parts.index("raw_acs")
+        parts[raw_index] = "acs"
         return Path(os.path.join(*parts))
 
     @cached_property
@@ -153,7 +153,7 @@ class TaskFile:
         """
         area_dir = None
         file_dir = os.path.dirname(__file__)
-        areas_path = os.path.join(file_dir, "../areas_of_operation/raw")
+        areas_path = os.path.join(file_dir, "../data/raw_acs")
         areas_path = Path(os.path.normpath(areas_path))
         for dir_path in areas_path.iterdir():
             if dir_path.name.startswith(str(self.section)) and dir_path.is_dir():
