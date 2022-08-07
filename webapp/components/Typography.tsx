@@ -1,13 +1,11 @@
 import cn from 'classnames';
 import katex from 'katex';
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
-import NextImage from 'next/image';
 import React from 'react';
 
 import { referenceNames, referenceURIs, uri } from '../lib/references';
 import { ChildProp, Colors } from '../lib/types';
 import { objectHasProperty } from '../lib/util';
-import { AppContext } from './context';
 
 type DetailListProps = ChildProp<React.ReactNode[]> & {
   bullet?: 'alpha' | 'decimal' | 'disc';
@@ -22,11 +20,6 @@ type EmphasizeProps = ChildProp & {
   color?: Colors.TextColor;
   gray?: boolean;
   italic?: boolean;
-};
-
-type ImageProps = Partial<ChildProp> & {
-  src: string;
-  noMargin?: boolean;
 };
 
 type ReferenceLinkProps = {
@@ -147,36 +140,6 @@ export function FAR({ section: fullSection }: FARSectionProps) {
 
 export function Gray(props: Omit<EmphasizeProps, 'gray'>) {
   return <Emphasize gray {...props} />;
-}
-
-export function Image({ children: caption, src, noMargin = false }: ImageProps) {
-  const { section, structure } = React.useContext(AppContext);
-  const { images } = structure;
-  const fullSrc = [section, src].join('/');
-  const dimensions = images && images[fullSrc];
-  const hasCaption = !!caption;
-
-  return (
-    <div
-      className={cn({
-        'mb-10': !noMargin && !hasCaption,
-        'mb-5': !noMargin && hasCaption,
-        'mb-2': noMargin,
-      })}
-    >
-      <div className="flex flex-col items-center w-full">
-        <div className="max-w-image shadow-lg shadow-slate-500 leading-[0]">
-          <NextImage
-            src={`/img/${fullSrc}.webp`}
-            layout="intrinsic"
-            width={dimensions.width}
-            height={dimensions.height}
-          />
-        </div>
-        {hasCaption && <div className="max-w-image px-3 text-xs mt-4">{caption}</div>}
-      </div>
-    </div>
-  );
 }
 
 export function Italic(props: Omit<EmphasizeProps, 'italic'>) {
