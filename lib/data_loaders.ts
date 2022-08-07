@@ -27,14 +27,14 @@ const taskURIs = {
   8: { A: 'checking-equipment' },
 } as Record<Section.Number, Record<Task.Letter, string>>;
 
-export function getStructure(pathToRoot: string = '..') {
+export function getStructure(pathToRoot: string = '.') {
   return {
     images: getImageData(pathToRoot),
     sections: getSectionStructure(pathToRoot),
   };
 }
 
-function getSectionStructure(pathToRoot: string = '..'): Structure.Section[] {
+function getSectionStructure(pathToRoot: string = '.'): Structure.Section[] {
   const tree = dirTree(path.join(pathToRoot, 'areas_of_operation'));
   const areas = tree?.children?.filter((child) => child.name.match(/\d\./));
   const makeURI = (...components: string[]) => '/' + components.join('/');
@@ -72,8 +72,8 @@ export function getTaskFromSectionLetter(section: Section.Number, letter: Task.L
   return toml.parse(fileContent);
 }
 
-function getImageData(pathToRoot: string = '..'): Structure.Images {
-  const tree = dirTree(path.join(pathToRoot, 'webapp/public/img'), { extensions: /webp/ });
+function getImageData(pathToRoot: string = '.'): Structure.Images {
+  const tree = dirTree(path.join(pathToRoot, 'public/img'), { extensions: /webp/ });
   const sections = tree?.children?.filter((child) => child.name.match(/^\d$/)) ?? [];
   return Object.fromEntries(
     sections.flatMap((section) => {

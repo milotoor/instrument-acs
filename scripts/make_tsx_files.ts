@@ -12,7 +12,7 @@ const { sections } = getStructure(rootPath);
 sections?.forEach(({ number, tasks, uri }) => {
   // Create the section directory if it doesn't exist
   const sectionDirName = uri.split('/').at(-1);
-  const sectionPath = path.join(rootPath, `webapp/pages/${sectionDirName}`);
+  const sectionPath = path.join(rootPath, `pages/${sectionDirName}`);
   if (!fs.existsSync(sectionPath)) fs.mkdirSync(sectionPath);
 
   // For each task in the section...
