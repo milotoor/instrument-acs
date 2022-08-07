@@ -530,9 +530,8 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                     design maneuvering speed (<Katex>V_a</Katex>)
                   </Bold>{' '}
                   to lessen airframe stresses. If avoiding severe turbulence becomes impossible, the
-                  FAA advises "riding the waves" and maintaining a level flight attitude. Notably,
-                  this suggestion was contained in AC 00-6a and removed in AC 00-6b -- it's unclear
-                  to me if this remains FAA-endorsed advice.
+                  FAA advises "riding the waves" and maintaining a level flight attitude. See also
+                  the next section on thunderstorms.
                 </>,
               ];
             case '3h': // Thunderstorms/microbursts
@@ -562,7 +561,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                 </>,
                 <>
                   A <Bold>squall line</Bold> is a nonfrontal band of thunderstorms, typically
-                  preceding a cold front in moist, unstable air. These multicell or supercell
+                  preceding a <ColdFront /> in moist, unstable air. These multicell or supercell
                   thunderstorms are extremely hazardous and difficult to navigate around (due to
                   their height and breadth).
                 </>,
@@ -583,20 +582,22 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                 <>
                   Finally, <Bold>embedded thunderstorms</Bold> are especially dangerous to IFR
                   aircraft because they are, by their nature, difficult to foresee and avoid. If you
-                  do end up inside a thunderstorm, the recommended recover procedure is:
+                  cannot avoid penetrating a thunderstorm, <AIM paragraph={[7, 1, 27, 'c']} />{' '}
+                  provides the recommended recovery procedure:{' '}
                   <DetailList type="bullet">
+                    <>
+                      Keep your eyes inside and on the instruments; looking outside can be
+                      temporarily blinding due to lightning
+                    </>
+                    <>Maintain power settings for a reduced airspeed (maneuvering speed or less)</>
                     <>
                       Try to maintain a constant <Italic>attitude</Italic>; do not try to maintain a
                       constant <Italic>altitude</Italic> as this will only add stress to the
                       aircraft
                     </>
                     <>
-                      The way out is through; making a 180° turn likely prolongs your time in the
-                      storm and places additional stress on the aircraft
-                    </>
-                    <>Maintain power settings for a reduced airspeed (maneuvering speed or less)</>
-                    <>
-                      Keep your eyes inside and on the instruments; looking outside can be blinding
+                      Don't turn back; making a 180° turn likely prolongs your time in the storm and
+                      places additional stress on the aircraft
                     </>
                   </DetailList>
                 </>,
@@ -614,9 +615,16 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                 </Paragraph>,
                 <>
                   An individual microburst typically does not last more than 15 minutes. The most
-                  intense horizontal winds last only a few minutes.
+                  intense horizontal winds last only a few minutes. See{' '}
+                  <AIM paragraph={[7, 1, 24]} /> for more information.
                 </>,
-                <Image src="microburst" noMargin />,
+                <Image src="microburst" noMargin>
+                  At Point X, the aircraft enters the microburst zone where a headwind causes it to
+                  balloon above the normal glideslope. At the center of the microburst, point Y,
+                  there is a downdraft which causes the aircraft to sink. At point Z, the aircrafte
+                  enters the most lethal zone where a sudden tailwind causes the aircraft to lose
+                  airspeed.
+                </Image>,
               ];
             case '3i': // Icing and freezing level
               return [
