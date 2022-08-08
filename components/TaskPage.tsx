@@ -142,10 +142,11 @@ function DataSection({ flags, heading, notes = () => null, task }: DataSectionPr
       <ol className="list-decimal ml-8">
         {sorted.map(([num, datum]) => {
           // If the datum is not the beginning of a sub-list, render it
+          const id = makeItemID(heading, num);
           if (typeof datum === 'string')
             return (
-              <li key={num} id={makeItemID(heading, num)}>
-                {applyFlags(num, datum)}
+              <li key={num} id={id}>
+                <a href={`#${id}`}>{applyFlags(num, datum)}</a>
                 <NoteCard note={notes(num)} />
               </li>
             );
@@ -153,16 +154,17 @@ function DataSection({ flags, heading, notes = () => null, task }: DataSectionPr
           // Otherwise we need to render the sublist
           const { general, specific } = datum;
           return (
-            <li key={num} id={makeItemID(heading, num)}>
-              {general}
+            <li key={num} id={id}>
+              <a href={`#${id}`}>{general}</a>
               <NoteCard note={notes(num)} />
               <ol className="list-alpha ml-8">
                 {specific.map((text, i) => {
                   // Char code 97 is "a", 98 is "b", etc.
                   const itemId = num + String.fromCharCode(97 + i);
+                  const id = makeItemID(heading, itemId);
                   return (
-                    <li key={i} id={makeItemID(heading, itemId)}>
-                      {applyFlags(itemId, text)}
+                    <li key={i} id={id}>
+                      <a href={`#${id}`}>{applyFlags(itemId, text)}</a>
                       <NoteCard note={notes(itemId)} />
                     </li>
                   );
