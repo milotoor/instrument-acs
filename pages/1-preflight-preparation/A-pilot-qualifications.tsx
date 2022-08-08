@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import React from 'react';
 
-import { Bold, DetailList, FAR, ReferenceLink, TaskPage } from '../../components';
+import { Bold, DetailList, FAR, Link, TaskPage } from '../../components';
 import { getStructure, getTaskFromSectionLetter } from '../../lib/data_loaders';
 
 export const getStaticProps = () => ({
@@ -38,7 +38,7 @@ const PilotQualifications: NextPage<TaskPage.TopLevelProps> = (props) => {
                   For recordkeeping, the pilot must log the{' '}
                   <Bold>location and type of each instrument approach</Bold> and the name of the
                   safety pilot if required. See <FAR section={[61, 51, 'g']} />. The FAA's{' '}
-                  <ReferenceLink reference="InFO 15012" /> specifies that an approach can only be
+                  <Link.Reference reference="InFO 15012" /> specifies that an approach can only be
                   logged if{' '}
                   <DetailList type="bullet">
                     <>

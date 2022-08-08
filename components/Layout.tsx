@@ -3,7 +3,7 @@ import React from 'react';
 
 import { Section, Structure, Task } from '../lib/types';
 import { AppContext } from './context';
-import { Link } from './Typography';
+import { Link } from './Link';
 
 type MaybeTask = Structure.Task | undefined;
 type LayoutProps = {

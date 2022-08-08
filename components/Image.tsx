@@ -5,7 +5,7 @@ import { getChildByType, removeChildren } from 'react-nanny';
 
 import { ChildProp } from '../lib/types';
 import { AppContext } from './context';
-import { Link } from './Typography';
+import { Link } from './Link';
 
 type License = 'CC BY-SA 4.0';
 

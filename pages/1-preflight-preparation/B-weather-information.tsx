@@ -13,7 +13,6 @@ import {
   Katex,
   Link,
   Paragraph,
-  ReferenceLink,
   Tab,
   Tabs,
   TaskLink,
@@ -95,12 +94,12 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                     </Paragraph>
 
                     <Paragraph heading="TAFs">
-                      METARs are most thoroughly defined by <ReferenceLink reference="AC 00-45" />{' '}
+                      METARs are most thoroughly defined by <Link.Reference reference="AC 00-45" />{' '}
                       paragraph 3.1.1 (page 3-1, 29 overall).
                     </Paragraph>
 
                     <Paragraph heading="TAFs" hr>
-                      TAFs are most thoroughly defined by <ReferenceLink reference="AC 00-45" />{' '}
+                      TAFs are most thoroughly defined by <Link.Reference reference="AC 00-45" />{' '}
                       paragraph 5.11 (page 5-75, 204 overall). Miscellaneous facts:
                       <DetailList type="bullet" bullet="disc">
                         <>
@@ -229,7 +228,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
 
                       <Tab heading="Constant Pressure">
                         <Paragraph>
-                          See <ReferenceLink reference="AC 00-45" /> paragraph 5.15.1 (page 5-103,
+                          See <Link.Reference reference="AC 00-45" /> paragraph 5.15.1 (page 5-103,
                           232 overall). Constant pressure forecasts depict select weather (e.g.
                           wind) at a specified pressure level (e.g. 300 MB) and the altitudes (in
                           meters) of that level.{' '}
@@ -367,8 +366,8 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
 
                   <Tab heading="Hazards">
                     <Paragraph>
-                      Phenomena like <ReferenceLink bold reference="AC 00-54" text="wind shear" />{' '}
-                      or <ReferenceLink bold reference="AC 00-57" text="mountain wave" /> can be
+                      Phenomena like <Link.Reference bold reference="AC 00-54" text="wind shear" />{' '}
+                      or <Link.Reference bold reference="AC 00-57" text="mountain wave" /> can be
                       extremely hazardous: countless GA accidents have occurred simply because
                       pilots (especially instrument pilots!) forget that downwind of a mountain
                       range is a high-risk environment.
@@ -466,7 +465,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                   front catches up to a slower-moving warm front.
                 </>,
                 <>
-                  Quoting from <ReferenceLink reference="AC 00-6" /> (chapter 10.3): "A{' '}
+                  Quoting from <Link.Reference reference="AC 00-6" /> (chapter 10.3): "A{' '}
                   <Bold>wave cyclone</Bold> is a low pressure circulation that forms and moves along
                   a front. The circulation about the cyclone center tends to produce a wavelike kink
                   along the front.{' '}

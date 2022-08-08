@@ -7,7 +7,8 @@ import { ChildProp, Item, Section, Structure, Task } from '../lib/types';
 import { objectHasProperty } from '../lib/util';
 import { AppContext } from './context';
 import { Layout } from './Layout';
-import { Bold, Link, ReferenceLink, Tooltip } from './Typography';
+import { Link } from './Link';
+import { Bold, Tooltip } from './Typography';
 
 // Component prop types
 type ObjectiveSectionProps = { objective: string } & RenderNoteElementProp;
@@ -84,12 +85,12 @@ function ReferencesSection({ references, note }: ReferencesSectionProps) {
       {references.map((reference, i, arr) => {
         let link: React.ReactNode = reference;
         if (objectHasProperty(referenceURIs, reference)) {
-          link = <ReferenceLink reference={reference} {...linkProps} />;
+          link = <Link.Reference reference={reference} {...linkProps} />;
         } else if (reference === '14 CFR parts 61, 91') {
           link = (
             <span>
-              14 CFR parts <ReferenceLink reference="14 CFR part 61" text={61} {...linkProps} /> and{' '}
-              <ReferenceLink reference="14 CFR part 91" text={91} {...linkProps} />
+              14 CFR parts <Link.Reference reference="14 CFR part 61" text={61} {...linkProps} />{' '}
+              and <Link.Reference reference="14 CFR part 91" text={91} {...linkProps} />
             </span>
           );
         }
