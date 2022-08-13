@@ -20,7 +20,7 @@ type EmphasizeProps = ChildProp & {
 };
 
 type KatexProps = ChildProp<string> & { block?: boolean } & React.HTMLAttributes<HTMLDivElement>;
-type TooltipProps = ChildProp & { message?: string };
+type TooltipProps = ChildProp & { message?: string; noUnderline?: boolean };
 
 export function Bold(props: Omit<EmphasizeProps, 'bold'>) {
   return <Emphasize bold {...props} />;
@@ -106,15 +106,19 @@ export function ToDo() {
   return <span className="bg-yellow-300">To do</span>;
 }
 
-export function Tooltip({ message, children }: TooltipProps) {
+export function Tooltip({ message, children, noUnderline = false }: TooltipProps) {
   return (
     <div className="inline-block">
       <div className="relative flex flex-col items-center group">
-        <span className={cn({ 'decoration-dotted decoration-fuchsia-500 underline': !!message })}>
+        <span
+          className={cn({
+            'decoration-dotted decoration-fuchsia-500 underline': !!message && !noUnderline,
+          })}
+        >
           {children}
         </span>
         {message && (
-          <div className="absolute bottom-0 hidden mb-6 group-hover:block">
+          <div className="absolute top-0 hidden mt-[-1.7rem] group-hover:block">
             <div className="py-1 px-2 text-xs text-white rounded-md [width:max-content] shadow-md shadow-slate-700 bg-gray-600 max-w-xl">
               <Bold>{message}</Bold>
             </div>

@@ -29,7 +29,7 @@ export function Tabs({ children }: TabsProps) {
         })}
       </div>
       <div
-        className="transition-height ease-in-out duration-500 overflow-hidden"
+        className="transition-height ease-in-out duration-500"
         style={{ height: activeTabEl?.scrollHeight ?? 0 }}
       >
         {children.map((tab, i) => {
