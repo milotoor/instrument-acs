@@ -32,7 +32,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
   return (
     <TaskPage
       {...props}
-      flags={{ '3i': 'missed' }}
+      flags={{ missed: ['3i'] }}
       notes={{
         knowledge(id) {
           switch (id) {

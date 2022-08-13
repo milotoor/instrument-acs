@@ -18,12 +18,11 @@ type SectionContainerProps = { children: React.ReactNode; heading: string };
 type TaskLinkProps = { section: Section.Number; task: Task.Letter; id: Item.ID };
 type TaskPageProps = TaskPage.TopLevelProps & FlagsProp & { notes?: RenderNoteProps };
 type DataSectionProps = { heading: Section.Headings.List; task: Task } & RenderNoteListProp &
-  FlagsPropInternal;
+  FlagsProp;
 
 // Flag types
 type FlagType = 'missed';
-type FlagsProp = { flags?: Record<Item.ID, FlagType> };
-type FlagsPropInternal = { flags?: Map<Item.ID, FlagType> };
+type FlagsProp = { flags?: Partial<Record<FlagType, Item.ID[]>> };
 
 // Note types
 type RenderNoteElementProp = { note?: React.ReactNode | React.ReactNode[] };
@@ -57,7 +56,7 @@ export const TaskPage: React.FC<TaskPageProps> = ({ task, structure, flags = {},
         <div>
           <ReferencesSection references={meta.references} note={notes?.references} />
           <ObjectiveSection objective={meta.objective} note={notes?.objective} />
-          <DataSection heading="Knowledge" task={task} flags={flagMap} notes={notes?.knowledge} />
+          <DataSection heading="Knowledge" task={task} flags={flags} notes={notes?.knowledge} />
           <DataSection heading="Risk Management" task={task} notes={notes?.risk} />
           <DataSection heading="Skills" task={task} notes={notes?.skills} />
         </div>
@@ -115,10 +114,6 @@ function ObjectiveSection({ objective, note }: ObjectiveSectionProps) {
     </SectionContainer>
   );
 }
-
-const flagClasses = {
-  missed: ['bg-red-500/50', 'Missed on knowledge test!'],
-};
 
 function makeItemID(heading: Section.Headings.List, id: Item.ID) {
   const shorthand = heading === 'Risk Management' ? 'risk' : heading.toLowerCase();
@@ -179,14 +174,12 @@ function DataSection({ flags, heading, notes = () => null, task }: DataSectionPr
   );
 
   function applyFlags(id: Item.ID, text: string) {
-    const itemFlag = flags?.get(id);
-    const spanClasses = 'text-lg';
-    if (!itemFlag) return <span className={spanClasses}>{text}</span>;
-    const [className, description] = flagClasses[itemFlag];
+    const wasMissed = flags?.missed?.includes(id);
+    const hoverText = wasMissed ? 'Missed on knowledge test!' : undefined;
     return (
-      <span className={cn(className, spanClasses)} title={description}>
-        {text}
-      </span>
+      <Tooltip noUnderline message={hoverText}>
+        <span className={cn('text-lg', { 'bg-red-500/50': wasMissed })}>{text}</span>
+      </Tooltip>
     );
   }
 }

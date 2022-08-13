@@ -9,7 +9,7 @@ export const getStaticProps = () => ({
 });
 
 const LossOfComm: NextPage<TaskPage.TopLevelProps> = (props) => {
-  return <TaskPage {...props} flags={{ 1: 'missed' }} notes={{}} />;
+  return <TaskPage {...props} flags={{ missed: ['1'] }} notes={{}} />;
 };
 
 export default LossOfComm;
