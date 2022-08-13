@@ -54,13 +54,13 @@ export const Link = Object.assign(
         }
       }
 
-      return (
-        <Tooltip message={title}>
-          <Link href={referenceURIs[reference]} {...rest}>
-            {linkContent}
-          </Link>
-        </Tooltip>
+      const link = (
+        <Link href={referenceURIs[reference]} {...rest}>
+          {linkContent}
+        </Link>
       );
+
+      return title ? <Tooltip message={title}>{link}</Tooltip> : link;
     },
   }
 );
