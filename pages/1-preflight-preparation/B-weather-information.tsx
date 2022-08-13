@@ -17,6 +17,7 @@ import {
   Tabs,
   TaskLink,
   TaskPage,
+  Warning,
 } from '../../components';
 import { getStructure, getTaskFromSectionLetter } from '../../lib/data_loaders';
 import { uri } from '../../lib/references';
@@ -668,18 +669,47 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
             case '3i': // Icing and freezing level
               return [
                 <>
-                  The Aviation Weather Center provides information about current icing conditions (
-                  <Link href={references.awc.icing_sigmet}>SIGMETs</Link> and{' '}
-                  <Link href={references.awc.icing_pirep}>PIREPs</Link>),{' '}
-                  <Link href={references.awc.forecast_icing}>forecast icing</Link> and{' '}
-                  <Link href={references.awc.freezing_level}>freezing level</Link>
+                  For the best, most thorough discussion of all things icing, see{' '}
+                  <Link.Reference bold reference="AC 91-74" />.
                 </>,
+
                 <Paragraph heading="Icing Conditions">
                   For ice to form, there must be <Bold>visible moisture</Bold> and the air must be{' '}
                   <Bold>cooled to a temperature of 0°C or less</Bold>. Even if the ambient air
                   temperature is greater than 0°C, aerodynamic cooling can lower the temperature of
                   an airfoil below freezing.
                 </Paragraph>,
+
+                <>
+                  Icing intensity should be reported using four standardized terms.{' '}
+                  <AIM paragraph={[7, 1, 19]} /> defines these terms like so:
+                  <DetailList type="bullet">
+                    <>
+                      <Bold>Trace:</Bold> ice becomes noticeable and accumulates at a slow pace
+                      (less than ¼ inch per hour on the outer wing)
+                    </>
+                    <>
+                      <Bold>Light:</Bold> the ice accumulates at a rate quick enough as to require
+                      occasional activation of deicing systems (¼ inch to 1 inch per hour)
+                    </>
+                    <>
+                      <Bold>Moderate:</Bold> the ice accumulates at a rate requiring frequent
+                      activation of deicing systems (1 to 3 inches per hour)
+                    </>
+                    <>
+                      <Bold>Severe:</Bold> the ice accumulates at a rate that deicing systems cannot
+                      combat, resulting in ice accumulations in "locations not normally prone to
+                      icing, such as areas aft of protected surfaces" (greater than 3 inches per
+                      hour). <Danger>By regulation, immediate exit is required.</Danger>
+                    </>
+                  </DetailList>
+                </>,
+
+                <>
+                  See this <Link href={references.icing_intensities}>AOPA article</Link> for a
+                  nuanced discussion of the terms, as well as their history and evolution.
+                </>,
+
                 <Paragraph heading="Types of Icing" hr>
                   There are three types of structural icing:
                   <DetailList type="bullet">
@@ -690,7 +720,14 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                         surfaces
                       </Bold>
                       . This is the most dangerous form of icing as it is{' '}
-                      <Danger>difficult to see</Danger>.
+                      <Danger>difficult to see</Danger>. Conditions conducive to clear icing include{' '}
+                      <DetailList type="inline">
+                        <>temperatures close to the freezing point</>
+                        <>large amounts of liquid water</>
+                        <>high airspeed</>
+                        <>large droplets</>
+                      </DetailList>
+                      .
                     </>
                     <>
                       Rime ice forms{' '}
@@ -709,11 +746,11 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                 <>
                   When certain weather phenomena are encountered, it's possible to make inferences
                   about the air temperature at a higher altitude:{' '}
-                  <DetailList type="inline" delimeter=";" logic={null}>
+                  <DetailList type="inline">
                     <>
-                      freezing rain indicates higher temperatures above you; the rain forms as
+                      freezing rain indicates higher temperatures above you (the rain forms as
                       liquid water and then falls into a freezing layer but does not itself freeze
-                      until making contact with the aircraft
+                      until making contact with the aircraft)
                     </>
                     <>wet snow indicates that the freezing level is above you</>
                     <>ice pellets indicate freezing rain above</>
@@ -722,7 +759,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                 </>,
                 <Paragraph heading="Hazards of Structural Icing" hr>
                   There are numerous hazards associated with structural icing:
-                  <DetailList type="bullet" bullet="alpha">
+                  <DetailList type="bullet" bullet="disc">
                     <>
                       Ice affects the shape of the airfoil, which in turn reduces the coefficient of
                       lift and the critical angle of attack;{' '}
@@ -746,24 +783,48 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                       Severe ice accumulation in front of the ailerons may result in a{' '}
                       <Danger>roll upset</Danger>, in which the aircraft experiences an uncommanded
                       and uncontrolled roll. This is primarily a concern for pilots of aircraft with
-                      FIKI capability.
+                      FIKI capability.{' '}
+                      <Bold>
+                        Proper recovery technique is to reduce the AOA by pitching down and
+                        increasing speed.
+                      </Bold>
                     </>
                     <>
                       Ice on the horizontal stabilizer can lead to a{' '}
                       <Danger>tailplane stall</Danger>, in which the airplane experiences an
                       uncommanded pitch down (because the tailplane is no longer applying its
-                      compensatory up force).
+                      compensatory up force). The tailplane is typically one of the first places ice
+                      will form because it's narrow.{' '}
+                      <Bold>Ice can also collect faster on the tail than on the wing</Bold>, and
+                      because it's harder for the pilot to see it may go undetected until the
+                      problem becomes critical.{' '}
+                      <Warning>
+                        Counterintuitively, lowering the flaps when the tailplane is stalled will
+                        only worsen the problem
+                      </Warning>{' '}
+                      (see <Link href={references.tailplane_icing}>this article</Link> for a
+                      detailed explanation).
                     </>
                   </DetailList>
                 </Paragraph>,
                 <Paragraph heading="Pilot Response to Icing" hr>
+                  Preflight briefing for an IFR flight in IMC should always include checking the
+                  icing forecast and freezing levels. The Aviation Weather Center provides
+                  information about current icing conditions (
+                  <Link href={references.awc.icing_sigmet}>SIGMETs</Link> and{' '}
+                  <Link href={references.awc.icing_pirep}>PIREPs</Link>),{' '}
+                  <Link href={references.awc.forecast_icing}>forecast icing</Link> and{' '}
+                  <Link href={references.awc.freezing_level}>freezing level</Link>.
+                </Paragraph>,
+
+                <>
                   If still on the ground, the response is simple: don't take off until all the ice,
                   frost and snow is cleared, and seriously consider not flying at all. If in the air
                   in an aircraft unequipped with FIKI capabilities, the first priority is exiting
                   icing conditions. <Bold>The fastest way out is not always a descent</Bold>. Flying
                   up through a temperature inversion or into a region cooler than -10°C is
                   sufficient.
-                </Paragraph>,
+                </>,
                 <>
                   Periodically disconnecting the autopilot and hand-flying is a good idea whenever
                   flying in the vicinity of icing conditions. The autopilot may mask an abnormal
@@ -777,7 +838,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                   <Bold>do not jeopardize that by making unnecessary configuration changes</Bold>.
                 </>,
                 <>
-                  Finally, carry a bit of extra speed on approach. With ice contaminatio the
+                  Finally, carry a bit of extra speed on approach. With ice contamination the
                   aircraft's stall speed may be significantly higher, potentially greater than the
                   typical final approach speed. Discovering this 300 feet AGL is bad.
                 </>,
@@ -822,9 +883,13 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
               return (
                 <>
                   Frost is defined as ice deposits formed on a surface when the surface temperature
-                  is at or below the dew point and the dew point is below freezing. Frost must be
-                  removed prior to flight, as it can reduce lift up to 30% and increase drag up to
-                  40%.
+                  is at or below the dew point and the dew point is below freezing. The rough
+                  surface of frost spoils the smooth flow of air, causing the air to slow down and
+                  separate from the airfoil early and leading to a loss of lift.{' '}
+                  <Danger>
+                    Frost must be removed prior to flight, as it can reduce lift up to 30% and
+                    increase drag up to 40%.
+                  </Danger>
                 </>
               );
             case '3l': // Obstructions to visibility
@@ -891,6 +956,9 @@ const references = {
   },
   gfa: uri.awc('gfa'),
   gfa_symbols: uri.awc('metar/symbol'),
+  icing_intensities:
+    'https://www.aopa.org/news-and-media/all-news/2009/december/01/wx-watch-icing-intensities',
   isa: uri.wikipedia('International_Standard_Atmosphere'),
+  tailplane_icing: uri.boldMethod('maneuvers', 'recovering-from-a-tailplane-stall', true),
   wx_brief: 'https://www.1800wxbrief.com/',
 };
