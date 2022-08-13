@@ -125,3 +125,7 @@ export function Tooltip({ message, children }: TooltipProps) {
     </div>
   );
 }
+
+export function Warning(props: Omit<EmphasizeProps, 'bold' | 'color'>) {
+  return <Emphasize bold color="warning" {...props} />;
+}
