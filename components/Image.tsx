@@ -3,6 +3,7 @@ import NextImage from 'next/image';
 import * as React from 'react';
 import { getChildByType, removeChildren } from 'react-nanny';
 
+import { useDimensions } from '../lib/hooks';
 import { ChildProp } from '../lib/types';
 import { AppContext } from './context';
 import { Link } from './Link';
@@ -20,6 +21,9 @@ type ImageProps = Partial<ChildProp> & {
   src: string;
   noMargin?: boolean;
 };
+
+type ImageElement = React.ReactElement<ImageProps>;
+type ImageRowProps = ChildProp<[ImageElement, ImageElement]>;
 
 const licenseHrefs = {
   'CC BY-SA 4.0': 'https://creativecommons.org/licenses/by-sa/4.0/',
@@ -70,6 +74,20 @@ export function Image({ children, src, noMargin = false }: ImageProps) {
           )}
         </div>
         {hasCaption && <div className="max-w-image px-3 text-xs mt-4">{caption}</div>}
+      </div>
+    </div>
+  );
+}
+
+export function ImageRow({ children }: ImageRowProps) {
+  const { breakpoints } = useDimensions();
+  return (
+    <div className="flex flex-wrap justify-center">
+      <div className="md:flex-half">
+        {React.cloneElement(children[0], { noMargin: breakpoints.isMedium })}
+      </div>
+      <div className="md:flex-half">
+        {React.cloneElement(children[1], { noMargin: breakpoints.isMedium })}
       </div>
     </div>
   );
