@@ -12,9 +12,10 @@ type License = 'CC BY-SA 4.0';
 
 type AttributionProps = {
   author: string;
-  license: License;
+  className?: string;
+  license?: License;
   source: string;
-  title: string;
+  title?: string;
 };
 
 type ImageProps = Partial<ChildProp> & {
@@ -29,12 +30,17 @@ const licenseHrefs = {
   'CC BY-SA 4.0': 'https://creativecommons.org/licenses/by-sa/4.0/',
 };
 
-export function Attribution({ author, license, source, title }: AttributionProps) {
-  const licenseHref = licenseHrefs[license];
-  return (
+export function Attribution({ author, license, source, className, title }: AttributionProps) {
+  const sourceText = title ? `"${title}"` : 'Image';
+  const licenseElement = license ? (
     <span>
-      <Link href={source}>"{title}"</Link> by {author} is licensed under{' '}
-      <Link href={licenseHref}>{license}</Link>
+      is licensed under <Link href={licenseHrefs[license]}>{license}</Link>
+    </span>
+  ) : null;
+
+  return (
+    <span className={className}>
+      <Link href={source}>{sourceText}</Link> by {author} {licenseElement}
     </span>
   );
 }
@@ -49,7 +55,7 @@ export function Image({ children, src, noMargin = false }: ImageProps) {
     if (React.isValidElement(child)) return child.type === Attribution;
     return false;
   });
-  const hasCaption = caption.length > 1;
+  const hasCaption = caption.length > 0;
 
   return (
     <div
