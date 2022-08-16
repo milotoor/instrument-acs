@@ -3,7 +3,7 @@ export const uri = {
     uri.faa_docs('Advisory_Circular', `${prefix}${acNum}.pdf`),
 
   aim: (chapter?: number, section?: number, paragraph?: number) => {
-    const aimURIBase = 'https://www.faa.gov/air_traffic/publications/atpubs/aim_html/';
+    const aimURIBase = uri.atc('publications/atpubs/aim_html/');
     if (typeof chapter === 'undefined') return aimURIBase;
     if (typeof section === 'undefined') return aimURIBase + `chap_${chapter}.html`;
 
@@ -13,6 +13,8 @@ export const uri = {
     const paraSuffix = [chapter, section, paragraph].join('-');
     return aimURIBase + `/chap${chapter}_section_${section}.html#$paragraph${paraSuffix}`;
   },
+
+  atc: (rest: string) => `https://www.faa.gov/air_traffic/${rest}`,
 
   awc: (r?: string) => `https://www.aviationweather.gov/${r ? r : ''}`,
 
@@ -51,7 +53,7 @@ export const referenceURIs = {
   'FAA-H-8083-15': `${handbooksURIBase}/FAA-H-8083-15B.pdf`,
   'FAA-H-8083-16': `${handbooksURIBase}/instrument_procedures_handbook/FAA-H-8083-16B.pdf`,
   'FAA-H-8083-25': 'https://www.faa.gov/sites/faa.gov/files/2022-03/pilot_handbook.pdf',
-  'IFP': 'https://www.faa.gov/air_traffic/flight_info/aeronav/procedures/',
+  'IFP': uri.atc('flight_info/aeronav/procedures/'),
   'InFO 15012':
     'https://www.faa.gov/other_visit/aviation_industry/airline_operators/airline_safety/info/all_infos/media/2015/info15012.pdf',
 };
