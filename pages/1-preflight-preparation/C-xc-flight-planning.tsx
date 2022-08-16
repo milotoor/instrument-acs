@@ -214,6 +214,53 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                   OROCA
                 </Paragraph>,
 
+                <>
+                  The minimum altitude for IFR flight depends on the area. In{' '}
+                  <Bold>Designated Mountainous Terrain (DMA)</Bold> the MIA is 2,000 feet above the
+                  highest obstacle in a 4 mile radius. In non-mountainous terrain the MIA is 1,000
+                  feet. At this point in time, virtually the entire western US is considered DMA,
+                  though there is an FAA effort underway to change this (see collapsed section
+                  below). <FAR section={[91, 177, 'a', 2]} /> and <FAR section={[95, 15]} /> are the
+                  relevant regulations.
+                </>,
+
+                <Collapse heading="Designated Mountainous Areas">
+                  <Paragraph>
+                    The FFA, in conjunction with NATCA, is planning to reassess what areas of the
+                    country are considered mountainous. At the 2020 Aeronautical Chart Meeting,
+                    there was a <Link href={references.dma.presentation}>presentation</Link> on the
+                    topic which outlines the new data-driven approach. See{' '}
+                    <Link href={references.dma.explainer}>this article</Link> for a helpful summary.
+                  </Paragraph>
+
+                  <Paragraph>
+                    <Image.Row>
+                      <Image src="dma_current">The old designation</Image>
+                      <Image src="dma_future">The new designation</Image>
+                    </Image.Row>
+                  </Paragraph>
+
+                  <Paragraph>
+                    The new definition is this:{' '}
+                    <Gray italic>
+                      Designated mountainous areas include those areas having a terrain elevation
+                      differential exceeding 3,000 feet within 10 nautical miles within those one
+                      arc-second quadrangles overlying terrain or U.S. territorial waters.
+                    </Gray>{' '}
+                    An image helps:
+                  </Paragraph>
+
+                  <Paragraph>
+                    <Image src="dma_chart">
+                      <Image.Attribution
+                        className="text-black"
+                        author="BruceAir"
+                        source={references.dma.explainer}
+                      />
+                    </Image>
+                  </Paragraph>
+                </Collapse>,
+
                 <Paragraph heading="IFR Cruise Altitudes">
                   <ToDo />
                 </Paragraph>,
@@ -333,6 +380,12 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
 export default XcFlightPlanning;
 
 const references = {
+  dma: {
+    presentation: uri.atc(
+      'flight_info/aeronav/acf/media/Presentations/20-02-Designated-Mountainous-Areas.pdf'
+    ),
+    explainer: 'https://bruceair.wordpress.com/2020/11/10/redefining-designated-mountainous-areas/',
+  },
   jeppesen10_9: uri.boldMethod('navigation', 'how-to-use-the-jeppesen-airport-10-9-page'),
   vfrOnTop: uri.boldMethod('regulations', 'understanding-vfr-on-top-clearance-requirements'),
 };
