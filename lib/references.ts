@@ -15,7 +15,6 @@ export const uri = {
   },
 
   atc: (rest: string) => `https://www.faa.gov/air_traffic/${rest}`,
-
   awc: (r?: string) => `https://www.aviationweather.gov/${r ? r : ''}`,
 
   boldMethod: (section: string, article: string, blog = false) =>
@@ -30,6 +29,7 @@ export const uri = {
     return farURIBase + `/${part}.${section}`;
   },
 
+  tso: (rest: string) => `https://rgl.faa.gov/Regulatory_and_Guidance_Library/rgTSO.nsf/0/${rest}`,
   wikipedia: (article: string) => `https://en.wikipedia.org/wiki/${article}`,
 };
 

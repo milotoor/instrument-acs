@@ -146,7 +146,9 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                       This is where things get a little messy.
                       <DetailList type="bullet">
                         <>
-                          If you have a WAAS-capable aircraft,{' '}
+                          If you have a WAAS-capable aircraft, (i.e. your aircraft is equipped with
+                          a <Link href={references.tso.c145}>TSO-C145</Link> or{' '}
+                          <Link href={references.tso.c146}>TSO-C146</Link> GPS){' '}
                           <Bold>
                             you are allowed to plan to use an RNAV approach at both the destination
                             and alternate
@@ -155,8 +157,10 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                           <AIM paragraph={[1, 1, 18]} />.
                         </>
                         <>
-                          If your aircraft is not WAAS capable, you are allowed to plan to use an
-                          RNAV approach at{' '}
+                          If your aircraft is not WAAS capable, (i.e. your aircraft is only equipped
+                          with a <Link href={references.tso.c129}>TSO-C129</Link> or{' '}
+                          <Link href={references.tso.c196}>TSO-C196</Link> GPS, or you have no GPS
+                          at all) you are allowed to plan to use an RNAV approach at{' '}
                           <Bold>
                             either the destination or the alternate,{' '}
                             <span className="italic">but not both</span>
@@ -468,5 +472,11 @@ const references = {
     explainer: 'https://bruceair.wordpress.com/2020/11/10/redefining-designated-mountainous-areas/',
   },
   jeppesen10_9: uri.boldMethod('navigation', 'how-to-use-the-jeppesen-airport-10-9-page'),
+  tso: {
+    c129: uri.tso('e560cd9c6acf8ba186256dc700717e0f/$FILE/C129a.pdf'),
+    c145: uri.tso('efe54f1e6272a7068625811d0064b679/$FILE/TSO-C145e.pdf'),
+    c146: uri.tso('76fa4ba66612622a86257282006d332a/$FILE/TSO-C146b%20(3-2-07%20Revised).pdf'),
+    c196: uri.tso('43dd92d6f1b61f4686257c4d006b94b8/$FILE/TSO-C196b.pdf'),
+  },
   vfrOnTop: uri.boldMethod('regulations', 'understanding-vfr-on-top-clearance-requirements'),
 };
