@@ -42,9 +42,9 @@ const TableOfContents: React.FC<ACSProp> = ({ structure }) => {
   return (
     <div className="my-10 w-full">
       <ol className="list-decimal leading-8 ml-8 mt-4 text-xl font-roboto">
-        {structure.sections.map(({ name, tasks, uri }) => (
+        {structure.sections.map(({ name, tasks }) => (
           <li key={name}>
-            <Link href={uri}>{name}</Link>
+            {name}
             <ol className="list-alpha ml-8">
               {tasks.map((task) => (
                 <li key={task.name}>
