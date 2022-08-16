@@ -9,11 +9,12 @@ import {
   FAR,
   Gray,
   Image,
+  Italic,
   Katex,
   Link,
   Paragraph,
-  Tabs,
   Tab,
+  Tabs,
   TaskPage,
   ToDo,
 } from '../../components';
@@ -31,7 +32,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
       notes={{
         knowledge(id) {
           switch (id) {
-            case '1':
+            case '1': // Route planning
               return [
                 <>
                   To plan the en route portion of the flight, work backwards from an IAF to the
@@ -169,7 +170,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                   </Tab>
                 </Tabs>,
               ];
-            case '2':
+            case '2': // Altitude selection
               return [
                 <Paragraph heading="Altitude Types">
                   There are several different types of altitude relevant to VFR and IFR flight:
@@ -304,10 +305,32 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                 </Paragraph>,
 
                 <Paragraph heading="Oxygen Requirements">
-                  <ToDo />
+                  The oxygen requirements are no different for IFR than they are for VFR.{' '}
+                  <FAR section={[91, 211]} /> specifies the requirements. Note that these values
+                  refer to <Italic>cabin pressure altitudes</Italic>. If the airplane is pressurized
+                  the rules are different.{' '}
+                  <DetailList type="bullet" bullet="disc">
+                    <>
+                      <Bold>Between 12,000 and 14,500 feet:</Bold> required flight crew members must
+                      have supplemental oxygen if the flight is longer than 30 minutes at those
+                      altitudes
+                    </>
+                    <>
+                      <Bold>Above 14,000 feet:</Bold> the required flight crew must wear
+                      supplemental oxygen at all times. Passengers need not.
+                    </>
+                    <>
+                      <Bold>Above 15,000 feet:</Bold> everyone on the aircraft must be provided with
+                      supplemental oxygen.
+                    </>
+                  </DetailList>
+                </Paragraph>,
+                <Paragraph>
+                  Additionally, the FAA encourages pilots to use supplemental oxygen{' '}
+                  <Bold>above 5,000 feet when flying at night.</Bold>
                 </Paragraph>,
               ];
-            case '3a':
+            case '3a': // XC calculations
               return [
                 <Collapse heading="Calculating true airspeed">
                   <Paragraph>
@@ -367,6 +390,64 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                       feet of altitude.
                     </Bold>
                   </Paragraph>
+                </Collapse>,
+              ];
+            case '3c': // Fuel requirements
+              return [
+                <>
+                  <FAR section={[91, 167]} /> is the relevant regulation. It specifies that "no
+                  person may operate a civil aircraft in IFR conditions unless it carries enough
+                  fuel to:"
+                  <DetailList type="bullet" bullet="decimal">
+                    <>Complete the flight to the first airport of intended landing</>
+                    <>
+                      Fly from that airport to the alternate airport{' '}
+                      <Bold italic>(if an alternate is required)</Bold>
+                    </>
+                    <>Fly after that for 45 minutes at normal cruising speed</>
+                  </DetailList>
+                </>,
+
+                <>
+                  Regarding item (2) above, if the destination has an IAP and the 1-2-3 rule is
+                  satisfied, you are not required to include sufficient fuel to fly to the
+                  alternate, <Italic>even if you choose to file an alternate.</Italic>
+                </>,
+
+                <>
+                  <Gray>
+                    Calculating the fuel requirements is trivial if you know your ETE. Calculating
+                    the ETE is what takes time, as it requires knowing your flight distance and the
+                    winds along each leg at the planned altitude.
+                  </Gray>{' '}
+                  See above for details.
+                </>,
+              ];
+            case '4': // Flight plan elements
+              return [
+                <>
+                  An IFR flight plan and a clearance are required for operating{' '}
+                  <Bold>in controlled airspace</Bold> under IFR. Therefore, no flight plan is
+                  required in class G airspace (but VFR rules require you to remain clear of
+                  clouds). <AIM paragraph={[5, 1, 6]} /> describes how to fill out a flight plan.
+                  Important items include:
+                  <DetailList type="bullet">
+                    <>
+                      ATC issues clearances based on aircraft capabilities filed in Items 10 and 18,
+                      so it behooves the pilot to list all of the equipment suffixes applicable.
+                    </>
+                    <>
+                      Pilots should file IFR flight plans at least 30 minutes prior to ETD (to avoid
+                      clearance delays)
+                    </>
+                    <>You can request to not receive any SIDs or STARs in the flight plan remarks</>
+                  </DetailList>
+                </>,
+
+                <Image src="icao_flight_plan" />,
+
+                <Collapse heading="Equipment suffixes">
+                  <Image src="equipment_codes" noMargin />
                 </Collapse>,
               ];
           }
