@@ -8,7 +8,6 @@ import {
   DetailList,
   FAR,
   Image,
-  ImageRow,
   Italic,
   Link,
   Paragraph,
@@ -204,10 +203,10 @@ const DepartureEnrouteArrival: NextPage<TaskPage.TopLevelProps> = (props) => {
                   one or both of the base legs must be removed during procedure planning.
                 </Paragraph>,
 
-                <ImageRow>
+                <Image.Row>
                   <Image src="taa1" />
                   <Image src="taa2" />
-                </ImageRow>,
+                </Image.Row>,
 
                 <Paragraph>
                   Altitudes within the TAA replace the Minimum Safe Altitude (MSA) and{' '}

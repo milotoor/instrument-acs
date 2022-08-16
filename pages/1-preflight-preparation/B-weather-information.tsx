@@ -3,7 +3,6 @@ import React from 'react';
 
 import {
   AIM,
-  Attribution,
   Bold,
   Danger,
   DetailList,
@@ -520,7 +519,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
 
                     <Paragraph>
                       <Image src="lenticular_cloud" noMargin>
-                        <Attribution
+                        <Image.Attribution
                           title="Mayon Volcano with cloudy hat"
                           author="Patryk Reba"
                           license="CC BY-SA 4.0"
