@@ -20,6 +20,7 @@ type EmphasizeProps = ChildProp & {
 };
 
 type KatexProps = ChildProp<string> & { block?: boolean } & React.HTMLAttributes<HTMLDivElement>;
+type QuotationProps = ChildProp;
 type TooltipProps = ChildProp & { message?: string; noUnderline?: boolean };
 
 export function Bold(props: Omit<EmphasizeProps, 'bold'>) {
@@ -104,6 +105,14 @@ export function Katex({ block = false, children, ...rest }: KatexProps) {
     ...rest,
     dangerouslySetInnerHTML: { __html: katex.renderToString(tex, { output: 'html' }) },
   });
+}
+
+export function Quotation({ children }: QuotationProps) {
+  return (
+    <div className="border-l-gray-300 border-l-[6px] my-2 py-1 pl-3 ml-3 bg-gray-50">
+      <Italic>{children}</Italic>
+    </div>
+  );
 }
 
 export function ToDo() {
