@@ -8,6 +8,7 @@ import {
   DetailList,
   Gray,
   Image,
+  Info,
   Italic,
   Katex,
   Link,
@@ -923,11 +924,11 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
 export default WeatherInformation;
 
 function ColdFront({ plural = false }: FrontProps) {
-  return <Bold color="cold">cold front{plural && 's'}</Bold>;
+  return <Info>cold front{plural && 's'}</Info>;
 }
 
 function WarmFront({ plural = false }: FrontProps) {
-  return <Bold color="hot">warm front{plural && 's'}</Bold>;
+  return <Danger>warm front{plural && 's'}</Danger>;
 }
 
 const references = {
