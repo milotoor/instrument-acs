@@ -2,8 +2,8 @@ export type ChildProp<C = React.ReactNode> = { children: C };
 
 export namespace Colors {
   type FrontColors = 'cold' | 'occluded' | 'warm' | 'hot';
-  type StatusColors = 'danger' | 'warning';
-  export type TextColor = FrontColors | StatusColors;
+  type AlertColors = 'danger' | 'info' | 'warning';
+  export type TextColor = FrontColors | AlertColors;
 }
 
 /** Task types */

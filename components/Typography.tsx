@@ -75,7 +75,7 @@ export function Emphasize({
         'font-bold': bold,
         italic,
         'bg-slate-200 hover:bg-slate-300': gray,
-        'text-blue-500': color === 'cold',
+        'text-blue-500': color && ['cold', 'info'].includes(color),
         'text-amber-500': color && ['warning', 'warm'].includes(color),
         'text-red-500': color && ['danger', 'hot'].includes(color),
         'text-fuchsia-500': color === 'occluded',
@@ -88,6 +88,10 @@ export function Emphasize({
 
 export function Gray(props: Omit<EmphasizeProps, 'gray'>) {
   return <Emphasize gray {...props} />;
+}
+
+export function Info(props: Omit<EmphasizeProps, 'bold' | 'color'>) {
+  return <Emphasize bold color="info" {...props} />;
 }
 
 export function Italic(props: Omit<EmphasizeProps, 'italic'>) {
