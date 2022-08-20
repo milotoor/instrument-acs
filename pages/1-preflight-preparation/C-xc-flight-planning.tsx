@@ -17,6 +17,7 @@ import {
   Tabs,
   TaskPage,
   ToDo,
+  Warning,
 } from '../../components';
 import { getStructure, getTaskFromSectionLetter } from '../../lib/data_loaders';
 import { uri } from '../../lib/references';
@@ -336,6 +337,15 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
               ];
             case '3a': // XC calculations
               return [
+                <>
+                  This is mostly a recap from the private pilot ACS. I will be using ForeFlight for
+                  the test (as I do when flying anywhere), and for the most part this should be
+                  satisfactory for the examiner. It's important to know how to do the calculations
+                  by hand in case it comes to that, but it probably won't.{' '}
+                  <Bold>
+                    Be able to justify the ForeFlight performance profile for your aircraft.
+                  </Bold>
+                </>,
                 <Collapse heading="Calculating true airspeed">
                   <Paragraph>
                     To calculate true airspeed (TAS), you first need to know the pressure at
@@ -396,6 +406,28 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                   </Paragraph>
                 </Collapse>,
               ];
+            case '3b': // ETA calculation
+              return [
+                <>
+                  The ETA is simply the ETD plus the estimated time enroute (ETE). Calculating the
+                  ETE is not complicated, it's just math:
+                  <DetailList type="bullet" bullet="decimal">
+                    <>calculate the time and distance it will take to climb to cruise altitude</>
+                    <>calculate how long the descent will take, and where it should begin</>
+                    <>
+                      calculate how long it will take you to travel from TOC to TOD at cruising
+                      altitude, given the wind conditions; what matters is groundspeed, so you'll
+                      need your trusty E6B.
+                    </>
+                  </DetailList>
+                </>,
+                <>
+                  Converting to UTC is trivial, complicated only by the existence of daylight
+                  savings. During winter (November-March), California is on Pacific Standard Time
+                  (PST) which is UTC-0800. During summer (March-November), California is on Pacific
+                  Daylight Time (PDT) which is UTC-0700.
+                </>,
+              ];
             case '3c': // Fuel requirements
               return [
                 <>
@@ -415,7 +447,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                 <>
                   Regarding item (2) above, if the destination has an IAP and the 1-2-3 rule is
                   satisfied, you are not required to include sufficient fuel to fly to the
-                  alternate, <Italic>even if you choose to file an alternate.</Italic>
+                  alternate, <Warning italic>even if you choose to file an alternate.</Warning>
                 </>,
 
                 <>
@@ -454,8 +486,61 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                   <Image src="equipment_codes" noMargin />
                 </Collapse>,
               ];
+            case '5': // Activating & closing flight plans
+              return [
+                <>
+                  An IFR flight plan may be activated in a number of different ways:{' '}
+                  <DetailList type="bullet" bullet="disc">
+                    <>
+                      When departing an airport with a control tower, you can usually get the
+                      clearance directly from ground control.
+                    </>
+                    <>
+                      When departing an uncontrolled airport, pilots must communicate with{' '}
+                      <Bold>clearance delivery</Bold> to receive their clearance. The Chart
+                      Supplement for the departure airport should provide either a frequency or a
+                      phone number to call. This same frequency/phone number may be used to cancel
+                      IFR after landing. <AIM paragraph={[5, 2, 3]} /> discusses this.
+                    </>
+                    <>
+                      Clearances may sometimes be <Bold>abbreviated</Bold>. In this case the
+                      controller or FSS agent will say <Gray>"Cleared ... as filed."</Gray> This is
+                      only done when the filed route can be approved with little or no revision. The
+                      destination airport will always be included in the clearance, as will the
+                      name/number of the departure procedure (and transition) if applicable.
+                      Importantly,{' '}
+                      <Warning>
+                        “Cleared to (destination) airport as filed” does not include the en route
+                        altitude filed in the flight plan.
+                      </Warning>{' '}
+                      The altitude (or "expect N, M minutes after departure") will be included in
+                      the clearance. If any part of this is unclear,{' '}
+                      <Bold>
+                        do not hesitate to clarify with ATC and request a full route clearance!
+                      </Bold>{' '}
+                      See <AIM paragraph={[5, 2, 6]} /> for more.
+                    </>
+                  </DetailList>
+                </>,
+                <>
+                  It's possible to file a <Bold>composite flight plan</Bold>, which enables the
+                  pilot to fly both VFR and IFR during different portions of the same flight.{' '}
+                  <AIM paragraph={[5, 1, 9]} /> clarifies that this operation requires filing two
+                  separate flight plans. The VFR flight plan must be opened and closed with FSS or
+                  some other facility that's able to do so; ATC{' '}
+                  <Italic>
+                    "does not have the ability to determine if an aircraft is operating on an active
+                    VFR flight plan and cannot process the activation or cancellation of a VFR
+                    flight plan."
+                  </Italic>{' '}
+                  In this case, the IFR flight plan should either begin or end at the fix where
+                  transitioning flight rules is expected to occur. Of course, before transitioning
+                  to IFR the pilot must obtain a clearance.
+                </>,
+              ];
+            default:
+              return null;
           }
-          return null;
         },
       }}
     />
