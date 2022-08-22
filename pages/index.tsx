@@ -47,8 +47,8 @@ const TableOfContents: React.FC<ACSProp> = ({ structure }) => {
             {name}
             <ol className="list-alpha ml-8">
               {tasks.map((task) => (
-                <Link href={task.uri}>
-                  <li key={task.name}>{task.name}</li>
+                <Link href={task.uri} key={task.name}>
+                  <li>{task.name}</li>
                 </Link>
               ))}
             </ol>
