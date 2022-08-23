@@ -10,17 +10,24 @@ import { Link } from './Link';
 
 type License = 'CC BY-SA 4.0';
 
+type VerticalPosition = 'bottom' | 'top';
+type HorizontalPosition = 'left' | 'right';
+type AttributionPosition = `${VerticalPosition}-${HorizontalPosition}`;
 type AttributionProps = {
   author: string;
   className?: string;
   license?: License;
-  source: string;
+  link: string;
+  linkOn?: 'title' | 'author';
+  position?: AttributionPosition;
   title?: string;
+  titleAuthorConnection?: string;
 };
 
 type ImageProps = Partial<ChildProp> & {
-  src: string;
   noMargin?: boolean;
+  noShadow?: boolean;
+  src: string;
 };
 
 type ImageElement = React.ReactElement<ImageProps>;
@@ -30,23 +37,53 @@ const licenseHrefs = {
   'CC BY-SA 4.0': 'https://creativecommons.org/licenses/by-sa/4.0/',
 };
 
-function Attribution({ author, license, source, className, title }: AttributionProps) {
-  const sourceText = title ? `"${title}"` : 'Image';
+function Attribution({
+  author,
+  className,
+  license,
+  link,
+  linkOn = 'title',
+  position = 'bottom-left',
+  title,
+  titleAuthorConnection = 'by',
+}: AttributionProps) {
+  const titleText = title ? `"${title}"` : 'Image';
   const licenseElement = license ? (
     <span>
       is licensed under <Link href={licenseHrefs[license]}>{license}</Link>
     </span>
   ) : null;
 
+  const [titleNode, authorNode] = (() => {
+    if (linkOn === 'title') return [<Link href={link}>{titleText}</Link>, author];
+    return [titleText, <Link href={link}>{author}</Link>];
+  })();
+
+  const [vPosition, hPosition] = position.split('-') as [VerticalPosition, HorizontalPosition];
   return (
-    <span className={className}>
-      <Link href={source}>{sourceText}</Link> by {author} {licenseElement}
-    </span>
+    <div
+      className={cn(
+        className,
+        'absolute px-2 py-1 bg-black/5 backdrop-blur-sm text-xs text-white',
+        {
+          'bottom-0': vPosition === 'bottom',
+          'left-0': hPosition === 'left',
+          'top-0': vPosition === 'top',
+          'right-0': hPosition === 'right',
+          'rounded-tr-lg': position === 'bottom-left',
+          'rounded-tl-lg': position === 'bottom-right',
+          'rounded-br-lg': position === 'top-left',
+          'rounded-bl-lg': position === 'top-right',
+        }
+      )}
+    >
+      {titleNode} {titleAuthorConnection} {authorNode} {licenseElement}
+    </div>
   );
 }
 
 export const Image = Object.assign(
-  function Image({ children, src, noMargin = false }: ImageProps) {
+  function Image({ children, src, noMargin = false, noShadow = false }: ImageProps) {
     const { section, structure } = React.useContext(AppContext);
     const { images } = structure;
     const fullSrc = [section, src].join('/');
@@ -67,18 +104,18 @@ export const Image = Object.assign(
         })}
       >
         <div className="flex flex-col items-center w-full">
-          <div className="max-w-image shadow-lg shadow-slate-500 leading-[0] relative overflow-hidden">
+          <div
+            className={cn('max-w-image leading-[0] relative overflow-hidden', {
+              'shadow-lg shadow-slate-500': !noShadow,
+            })}
+          >
             <NextImage
               src={`/img/${fullSrc}.webp`}
               layout="intrinsic"
               width={dimensions.width}
               height={dimensions.height}
             />
-            {attribution && (
-              <div className="text-xs text-white absolute bottom-0 left-0 px-2 py-1 bg-black/5 backdrop-blur-sm rounded-tr-lg">
-                {attribution}
-              </div>
-            )}
+            {attribution}
           </div>
           {hasCaption && <div className="max-w-image px-3 text-xs mt-4">{caption}</div>}
         </div>
