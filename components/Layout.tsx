@@ -33,7 +33,7 @@ export function Layout({ children, home = false, structure, task }: LayoutProps)
     if (taskIndex !== tasks!.length - 1) nextTask = tasks?.at(taskIndex + 1);
   }
 
-  const navLinkClasses = 'absolute h-top-bar flex flex-col justify-center';
+  const navLinkClasses = 'absolute h-top-bar flex flex-col justify-center font-roboto';
   return (
     <AppContext.Provider value={{ section, structure, task: letter }}>
       <div className="flex h-screen flex-col items-center justify-start">
