@@ -50,8 +50,8 @@ export function Tabs({ children }: TabsProps) {
 
 export const Tab = React.forwardRef<HTMLDivElement, TabProps>(({ active, children }, ref) => {
   return (
-    <div className={cn('p-4', { hidden: !active })} ref={ref}>
-      {children}
+    <div className={cn('overflow-hidden', { 'max-h-0': !active })} ref={ref}>
+      <div className="p-4 ">{children}</div>
     </div>
   );
 });

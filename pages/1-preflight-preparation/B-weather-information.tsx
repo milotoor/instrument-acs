@@ -524,7 +524,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                           title="Mayon Volcano with cloudy hat"
                           author="Patryk Reba"
                           license="CC BY-SA 4.0"
-                          source="https://commons.wikimedia.org/wiki/File:Mayon_Volcano_with_cloudy_hat.jpg"
+                          link="https://commons.wikimedia.org/wiki/File:Mayon_Volcano_with_cloudy_hat.jpg"
                         />
                       </Image>
                     </Paragraph>
