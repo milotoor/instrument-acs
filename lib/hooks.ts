@@ -69,7 +69,7 @@ export function useDimensions() {
 export function useSize(target: React.RefObject<HTMLElement>) {
   const [size, setSize] = React.useState<DOMRect>();
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     setSize(target.current?.getBoundingClientRect());
   }, [target]);
 
