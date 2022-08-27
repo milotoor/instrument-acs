@@ -519,14 +519,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                     </Paragraph>
 
                     <Paragraph>
-                      <Image src="lenticular_cloud" noMargin>
-                        <Image.Attribution
-                          title="Mayon Volcano with cloudy hat"
-                          author="Patryk Reba"
-                          license="CC BY-SA 4.0"
-                          link="https://commons.wikimedia.org/wiki/File:Mayon_Volcano_with_cloudy_hat.jpg"
-                        />
-                      </Image>
+                      <Image src="lenticular_cloud" noMargin />
                     </Paragraph>
                   </Tab>
                   <Tab heading="High clouds">

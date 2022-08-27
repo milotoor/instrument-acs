@@ -16,7 +16,6 @@
     "next": "latest",
     "react": "18.1.0",
     "react-dom": "18.1.0",
-    "react-nanny": "^2.14.0",
     "toml": "^3.0.0"
   },
   "devDependencies": {

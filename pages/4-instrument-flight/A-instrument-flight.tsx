@@ -146,14 +146,6 @@ const InstrumentFlight: NextPage<TaskPage.TopLevelProps> = (props) => {
                 </>,
 
                 <Image noShadow src="pfd_scan">
-                  <Image.Attribution
-                    author="Instrument Flying Handbook"
-                    linkOn="author"
-                    position="bottom-right"
-                    link={referenceURIs['FAA-H-8083-15']}
-                    title="Figure 6-33"
-                    titleAuthorConnection="from the"
-                  />
                   The <Bold>selected radial</Bold> method
                 </Image>,
 

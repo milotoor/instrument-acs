@@ -1,9 +1,9 @@
 import cn from 'classnames';
 import NextImage from 'next/image';
 import * as React from 'react';
-import { getChildByType, removeChildren } from 'react-nanny';
 
 import { useDimensions } from '../lib/hooks';
+import { referenceURIs } from '../lib/references';
 import { ChildProp } from '../lib/types';
 import { AppContext } from './context';
 import { Link } from './Link';
@@ -83,17 +83,20 @@ function Attribution({
 }
 
 export const Image = Object.assign(
-  function Image({ children, src, noMargin = false, noShadow = false }: ImageProps) {
+  function Image({ children: caption, src, noMargin = false, noShadow = false }: ImageProps) {
     const { section, structure } = React.useContext(AppContext);
     const { images } = structure;
     const fullSrc = [section, src].join('/');
     const dimensions = images && images[fullSrc];
-    const attribution = getChildByType(children, Attribution);
-    const caption = removeChildren(children, (child) => {
-      if (React.isValidElement(child)) return child.type === Attribution;
-      return false;
-    });
-    const hasCaption = caption.length > 0;
+    const hasCaption = !!caption;
+
+    const attribution = (() => {
+      if (section && section in attributions) {
+        if (src in attributions[section]) {
+          return <Attribution {...attributions[section][src]} />;
+        }
+      }
+    })();
 
     return (
       <div
@@ -123,7 +126,6 @@ export const Image = Object.assign(
     );
   },
   {
-    Attribution,
     Row: ImageRow,
   }
 );
@@ -141,3 +143,35 @@ function ImageRow({ children }: ImageRowProps) {
     </div>
   );
 }
+
+const references = {
+  dma_explainer:
+    'https://bruceair.wordpress.com/2020/11/10/redefining-designated-mountainous-areas/',
+};
+
+// Contains all attribution information for the images in the application
+const attributions: Record<number, Record<string, AttributionProps>> = {
+  1: {
+    dma_chart: {
+      className: 'text-black',
+      author: 'BruceAir',
+      link: references.dma_explainer,
+    },
+    lenticular_cloud: {
+      title: 'Mayon Volcano with cloudy hat',
+      author: 'Patryk Reba',
+      license: 'CC BY-SA 4.0',
+      link: 'https://commons.wikimedia.org/wiki/File:Mayon_Volcano_with_cloudy_hat.jpg',
+    },
+  },
+  4: {
+    pfd_scan: {
+      author: 'Instrument Flying Handbook',
+      linkOn: 'author',
+      position: 'bottom-right',
+      link: referenceURIs['FAA-H-8083-15'],
+      title: 'Figure 6-33',
+      titleAuthorConnection: 'from the',
+    },
+  },
+};

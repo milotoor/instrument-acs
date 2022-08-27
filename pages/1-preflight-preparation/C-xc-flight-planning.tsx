@@ -257,13 +257,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                   </Paragraph>
 
                   <Paragraph>
-                    <Image src="dma_chart">
-                      <Image.Attribution
-                        className="text-black"
-                        author="BruceAir"
-                        source={references.dma.explainer}
-                      />
-                    </Image>
+                    <Image src="dma_chart" />
                   </Paragraph>
                 </Collapse>,
 
