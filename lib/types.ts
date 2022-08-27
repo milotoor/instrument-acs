@@ -1,4 +1,5 @@
 export type ChildProp<C = React.ReactNode> = { children: C };
+export type OneOrMore<T> = T | T[];
 
 export namespace Colors {
   type FrontColors = 'cold' | 'occluded' | 'warm' | 'hot';

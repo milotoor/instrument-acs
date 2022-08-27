@@ -105,7 +105,8 @@ export function FAR({ appendix, bold = true, section: fullSection, ...rest }: FA
       return [
         farURI,
         <>
-          14 CFR §{part}.{section} {paraText}
+          14 CFR §{part}.{section}
+          {paraText}
         </>,
       ];
     } else if (appendix) {

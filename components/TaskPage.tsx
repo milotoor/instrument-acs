@@ -3,16 +3,17 @@ import Head from 'next/head';
 import React from 'react';
 
 import { referenceURIs } from '../lib/references';
-import { ChildProp, Item, Section, Structure, Task } from '../lib/types';
+import { ChildProp, Item, OneOrMore, Section, Structure, Task } from '../lib/types';
 import { objectHasProperty } from '../lib/util';
 import { AppContext } from './context';
 import { Layout } from './Layout';
-import { Link } from './Link';
+import { Link, LinkProps } from './Link';
 import { Bold, Tooltip } from './Typography';
 
 // Component prop types
 type ObjectiveSectionProps = { objective: string } & RenderNoteElementProp;
-type ParagraphProps = ChildProp & { heading?: string; hr?: boolean };
+type ParagraphReferenceProps = { references?: OneOrMore<React.ReactElement<LinkProps>> };
+type ParagraphProps = ChildProp & ParagraphReferenceProps & { heading?: string; hr?: boolean };
 type ReferencesSectionProps = { references: string[] } & RenderNoteElementProp;
 type SectionContainerProps = { children: React.ReactNode; heading: string };
 type TaskLinkProps = { section: Section.Number; task: Task.Letter; id: Item.ID };
@@ -216,16 +217,44 @@ function NoteCard({ note }: RenderNoteElementProp) {
   );
 }
 
-export function Paragraph({ children, heading, hr }: ParagraphProps) {
+export function Paragraph({ children, heading, hr, references }: ParagraphProps) {
   return (
     <div className="mt-5 first:mt-0">
       {hr ? <hr className="w-4/5 m-auto mb-5" /> : null}
-      <div className={cn({ hidden: !heading })}>
-        <span className="bg-indigo-500 px-2 py-1 inline-block rounded-xl mb-1 text-white text-xs">
+      <div className={cn('flex flex-row items-center mb-1', { hidden: !heading })}>
+        <span className="bg-indigo-500 px-2 py-1 inline-block rounded-xl text-white text-xs">
           <Bold>{heading}</Bold>
         </span>
+        <ParagraphReferences references={references} />
       </div>
       {children}
+    </div>
+  );
+}
+
+function ParagraphReferences({ references }: ParagraphReferenceProps) {
+  if (!references) return null;
+
+  const referenceArray = Array.isArray(references) ? references : [references];
+  if (referenceArray.length === 0) return null;
+
+  return (
+    <div className="inline ml-4">
+      {referenceArray.map((reference, i) => {
+        const isLast = i === referenceArray.length - 1;
+        const textColor = 'text-slate-400';
+        return (
+          <span className={cn('text-xs', textColor, { 'mr-2': !isLast })}>
+            {React.cloneElement(reference, {
+              ...reference.props,
+              bold: false,
+              className: cn('hover:text-slate-500', textColor),
+              key: i,
+            })}
+            {isLast ? null : ','}
+          </span>
+        );
+      })}
     </div>
   );
 }
