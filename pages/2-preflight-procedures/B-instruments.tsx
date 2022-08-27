@@ -14,9 +14,12 @@ import {
   Paragraph,
   Quotation,
   TaskPage,
+  Term,
+  ToDo,
   Warning,
 } from '../../components';
 import { getStructure, getTaskFromSectionLetter } from '../../lib/data_loaders';
+import { uri } from '../../lib/references';
 
 export const getStaticProps = () => ({
   props: { structure: getStructure(), task: getTaskFromSectionLetter(2, 'B') },
@@ -196,6 +199,97 @@ const Instruments: NextPage<TaskPage.TopLevelProps> = (props) => {
                   what do I know.
                 </>,
               ];
+            case '1c': // Electrical system, EFDs, transponder and ADS-B
+              return [
+                <Paragraph heading="Electrical System">
+                  <ToDo />
+                </Paragraph>,
+
+                <Paragraph heading="Electronic Flight Displays">
+                  <ToDo />
+                </Paragraph>,
+
+                <Paragraph
+                  heading="Transponder"
+                  references={[<AIM paragraph={[4, 1, 20]} />, <FAR section={[91, 215]} />]}
+                >
+                  The transponder's role is to provide responses to ATC ground-based{' '}
+                  <Term>Secondary Surveillance Radar (SSR)</Term> and{' '}
+                  <Term>Traffic Alert and Collision Avoidance System (TCAS)</Term> interrogations.
+                  There are several different classes of transponder, colloquially known as Mode A,
+                  C and S transponders; most aircraft these days use Mode S, described by{' '}
+                  <Link href={references.tso_c112}>TSO-C112</Link>. Importantly,{' '}
+                  <Info>
+                    the automated altitude reporting performed by the transponder is using pressure
+                    altitude, so ATC receives an accurate reporting of your altitude even if you set
+                    the altimeter incorrectly.
+                  </Info>
+                </Paragraph>,
+
+                <>
+                  <FAR section={[91, 215, 'b']} /> specifies what airspace is off limits for
+                  aircraft without a functioning transponder:
+                  <DetailList type="bullet" bullet="disc">
+                    <>
+                      <Bold>Class A, B or C airspace.</Bold>{' '}
+                      <Warning>
+                        This includes all airspace within the lateral boundaries of class B and
+                        class C airspace.
+                      </Warning>
+                    </>
+                    <>
+                      <Bold>Within the mode C veil</Bold>, which is technically described as the
+                      airspace within a 30-mile radius of an airport in{' '}
+                      <FAR appendix={[91, 'D']} bold={false} /> section 1 (the class B airports)
+                    </>
+                    <>
+                      <Bold>Above 10,000' MSL</Bold> but not below 2,500' AGL
+                    </>
+                    <>ATC may authorize a deviation from these rules if necessary</>
+                  </DetailList>
+                </>,
+
+                <Paragraph
+                  heading="ADS-B"
+                  hr
+                  references={[
+                    <AIM paragraph={[4, 5, 7]} />,
+                    <FAR section={[91, 225]} />,
+                    <FAR section={[91, 227]} />,
+                  ]}
+                >
+                  <Term>Automatic Dependent Surveillance-Broadcast (ADS-B)</Term> is a relatively
+                  new technology, and was only recently mandated. ADS-B Out periodically broadcasts
+                  the aircraft's GPS-derived position, altitude, velocity and identifier in response
+                  to queries from ground-based equipment. The full set of information that must be
+                  included is defined in <FAR section={[91, 227]} />.
+                </Paragraph>,
+
+                <>
+                  ADS-B In avionics enable aircraft to receive other aircraft's ADS-B Out
+                  transmissions as well as transmissions from ATC ground stations. Other broadcast
+                  services received with ADS-B In equipment include{' '}
+                  <Term>Traffic Information Service-Broadcast (TIS-B)</Term> (
+                  <AIM paragraph={[4, 5, 8]} />) and{' '}
+                  <Term>Flight Information Service-Broadcast (FIS-B)</Term> (
+                  <AIM paragraph={[4, 5, 9]} />
+                  ).
+                </>,
+
+                <>
+                  As of January 1, 2020, aircraft are required to have ADS-B Out in order to fly in
+                  virtually any of the places that require an altitude-reporting transponder (i.e.{' '}
+                  <DetailList type="inline" delimeter=";">
+                    <>class A, B, and C airspace</>
+                    <>within the lateral boundaries of class B and C airspace</>
+                    <>within the mode C veil</>
+                    <>above 10,000' MSL excluding 2,500' AGL</>
+                  </DetailList>
+                  ). If installed, ADS-B Out equipment should be in transmit mode at all times.
+                </>,
+
+                <Image src="ads_b" noMargin />,
+              ];
             case '2': // Operation of nav systems
               return [
                 <>
@@ -225,4 +319,5 @@ export default Instruments;
 
 const references = {
   cold_temperature_airports: 'https://aeronav.faa.gov/d-tpp/Cold_Temp_Airports.pdf',
+  tso_c112: uri.tso('a920c2bd43aa26b786257bf0006e6acd/$FILE/TSO-C112e.pdf'),
 };
