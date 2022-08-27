@@ -49,11 +49,11 @@ const IfrSystems: NextPage<TaskPage.TopLevelProps> = (props) => {
                   When flying in IMC, it is generally good practice to{' '}
                   <Warning>periodically disconnect the autopilot and fly by hand.</Warning> Per{' '}
                   <Link.Reference reference="AC 91-74" />:{' '}
-                  <Italic>
-                    "When the autopilot is engaged, it can mask changes in handling characteristics
+                  <Quotation>
+                    When the autopilot is engaged, it can mask changes in handling characteristics
                     due to aerodynamic effects of icing that would be detected by the pilot if the
-                    airplane were being hand flown."
-                  </Italic>
+                    airplane were being hand flown.
+                  </Quotation>
                 </>,
               ];
             default:
