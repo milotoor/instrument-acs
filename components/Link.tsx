@@ -8,9 +8,8 @@ import { objectHasProperty } from '../lib/util';
 
 import { Bold, Emphasize, Tooltip } from './Typography';
 
-type ReferenceLinkProps = {
-  bold?: boolean;
-  color?: string | null;
+type CommonLinkProps = { bold?: boolean; className?: string | null };
+type ReferenceLinkProps = CommonLinkProps & {
   reference: LinkableReference;
   text?: React.ReactNode;
   title?: string;
@@ -21,13 +20,17 @@ type FARReference = [number, number, ...(string | number)[]];
 export type AIMParagraphProps = { paragraph: AIMReference };
 export type FARSectionProps = { appendix?: [number, string]; section?: FARReference };
 
-type LinkProps = NextLinkProps & ChildProp & Omit<ReferenceLinkProps, 'reference' | 'text'>;
+export type LinkProps = NextLinkProps & ChildProp & CommonLinkProps;
 type LinkableReference = keyof typeof referenceURIs;
 
 export const Link = Object.assign(
-  function Link({ bold, children, color = 'text-fuchsia-500', href, ...rest }: LinkProps) {
+  function Link({ bold, children, className, href, ...rest }: LinkProps) {
     return (
-      <span className={cn('hover:underline', color, { 'text-inherit': color === null })}>
+      <span
+        className={cn('hover:underline text-fuchsia-500', className, {
+          'text-inherit': className === null,
+        })}
+      >
         <Emphasize bold={bold}>
           {href.toString().startsWith('/') ? (
             <NextLink href={href} {...rest}>

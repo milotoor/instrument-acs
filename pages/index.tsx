@@ -23,7 +23,7 @@ const Home: NextPage<ACSProp> = ({ structure }) => {
         <h1 className="text-4xl sm:text-7xl font-bold font-fancy pt-5">
           The{' '}
           <Link
-            color="text-title"
+            className="text-title"
             href="https://www.faa.gov/training_testing/testing/acs/media/instrument_rating_acs_change_1.pdf"
           >
             Instrument ACS

@@ -41,19 +41,19 @@ export function Layout({ children, home = false, structure, task }: LayoutProps)
           <div className="w-full h-top-bar z-10 flex-shrink-0 shadow-xl shadow-slate-800 flex flex-row justify-center items-center relative bg-gradient-to-r from-cyan-500 to-blue-500">
             <span className={cn(navLinkClasses, 'left-5')}>
               {prevTask && (
-                <Link bold color={null} href={prevTask.uri}>
+                <Link bold className={null} href={prevTask.uri}>
                   ← Previous
                 </Link>
               )}
             </span>
             <div className="font-fancy text-2xl hover:text-title">
-              <Link color={null} href="/">
+              <Link className={null} href="/">
                 The Instrument ACS
               </Link>
             </div>
             <span className={cn(navLinkClasses, 'right-5')}>
               {nextTask && (
-                <Link bold color={null} href={nextTask.uri}>
+                <Link bold className={null} href={nextTask.uri}>
                   Next →
                 </Link>
               )}
