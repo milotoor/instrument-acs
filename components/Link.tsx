@@ -16,8 +16,11 @@ type ReferenceLinkProps = {
   title?: string;
 };
 
-type AIMParagraphProps = { paragraph: [number, number, number, ...(string | number)[]] };
-type FARSectionProps = { section: [number, number, ...(string | number)[]] };
+type AIMReference = [number, number, number, ...(string | number)[]];
+type FARReference = [number, number, ...(string | number)[]];
+export type AIMParagraphProps = { paragraph: AIMReference };
+export type FARSectionProps = { appendix?: [number, string]; section?: FARReference };
+
 type LinkProps = NextLinkProps & ChildProp & Omit<ReferenceLinkProps, 'reference' | 'text'>;
 type LinkableReference = keyof typeof referenceURIs;
 
@@ -71,33 +74,50 @@ export function AIM({ paragraph: fullParagraph }: AIMParagraphProps) {
   let aimURI = uri.aim(chapter, section, paragraph);
   const subsectionID = rest.length ? ' ' + rest.map((id) => `(${id})`).join('') : '';
   return (
-    <Bold>
-      <Link href={aimURI}>
-        AIM{' '}
-        <span className="whitespace-nowrap">
-          {chapter}-{section}-{paragraph}
-          {subsectionID ? ' ' + subsectionID : null}
-        </span>
-      </Link>
-    </Bold>
+    <Link bold href={aimURI}>
+      AIM{' '}
+      <span className="whitespace-nowrap">
+        {chapter}-{section}-{paragraph}
+        {subsectionID ? ' ' + subsectionID : null}
+      </span>
+    </Link>
   );
 }
 
-export function FAR({ section: fullSection }: FARSectionProps) {
-  const [part, section, ...paragraph] = fullSection;
+export function FAR({ appendix, section: fullSection }: FARSectionProps) {
+  const [farURI, linkText] = (() => {
+    if (fullSection) {
+      const [part, section, ...paragraph] = fullSection;
 
-  let farURI = uri.far(part, section);
-  if (paragraph && paragraph.length) {
-    farURI += `#${paragraph.join('_')}`;
-  }
+      let farURI = uri.far(part, section);
+      if (paragraph && paragraph.length) {
+        farURI += `#${paragraph.join('_')}`;
+      }
 
-  const paraText = paragraph.length ? ' ' + paragraph.map((t) => `(${t})`).join('') : null;
+      const paraText = paragraph.length ? ' ' + paragraph.map((t) => `(${t})`).join('') : null;
+      return [
+        farURI,
+        <>
+          14 CFR §{part}.{section} {paraText}
+        </>,
+      ];
+    } else if (appendix) {
+      const [part, letter] = appendix;
+      const farURI = uri.farAppendix(part, letter);
+      return [
+        farURI,
+        <>
+          14 CFR §{part} Appendix {letter}
+        </>,
+      ];
+    } else {
+      throw Error('FAR component must be provided with `appendix` or `section` prop!');
+    }
+  })();
+
   return (
-    <Bold>
-      <Link href={farURI}>
-        14 CFR §{part}.{section}
-        {paraText}
-      </Link>
-    </Bold>
+    <Link bold href={farURI}>
+      {linkText}
+    </Link>
   );
 }

@@ -1,3 +1,4 @@
+const cornell14CFR = 'https://www.law.cornell.edu/cfr/text/14';
 export const uri = {
   ac: (acNum: string, prefix: string = 'AC_') =>
     uri.faa_docs('Advisory_Circular', `${prefix}${acNum}.pdf`),
@@ -24,9 +25,12 @@ export const uri = {
     `https://www.faa.gov/documentLibrary/media/${components.join('/')}`,
 
   far: (part: number, section?: number) => {
-    const farURIBase = 'https://www.law.cornell.edu/cfr/text/14';
-    if (typeof section === 'undefined') return farURIBase + `/part-${part}`;
-    return farURIBase + `/${part}.${section}`;
+    if (typeof section === 'undefined') return cornell14CFR + `/part-${part}`;
+    return cornell14CFR + `/${part}.${section}`;
+  },
+
+  farAppendix: (part: number, letter: string) => {
+    return cornell14CFR + `/appendix-${letter}_to_part_${part}`;
   },
 
   tso: (rest: string) => `https://rgl.faa.gov/Regulatory_and_Guidance_Library/rgTSO.nsf/0/${rest}`,
