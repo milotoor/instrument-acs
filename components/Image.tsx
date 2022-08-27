@@ -173,6 +173,13 @@ const attributions: Record<number, Record<string, AttributionProps>> = {
       title: 'Figure 4-5-7',
       titleAuthorConnection: 'from the',
     },
+    efd: {
+      author: 'Instrument Flying Handbook',
+      linkOn: 'author',
+      link: referenceURIs['FAA-H-8083-15'],
+      title: 'Figure 6-21/6-22',
+      titleAuthorConnection: 'from the',
+    },
   },
   4: {
     pfd_scan: {

@@ -205,9 +205,33 @@ const Instruments: NextPage<TaskPage.TopLevelProps> = (props) => {
                   <ToDo />
                 </Paragraph>,
 
-                <Paragraph heading="Electronic Flight Displays">
-                  <ToDo />
+                <Paragraph
+                  heading="Electronic Flight Displays"
+                  references={<Link href={references.g1000}>G1000 Pilot's Guide</Link>}
+                >
+                  EFDs such as the G1000 are tremendously powerful flight tools which integrate many
+                  individual instruments into a coherent presentation.
                 </Paragraph>,
+
+                <Image src="efd" />,
+
+                <>
+                  Chapter 6, Section II and Chapter 7, Section II of the{' '}
+                  <Link.Reference reference="FAA-H-8083-15" /> does a fantastic job of describing
+                  attitude instrument flight using the PFD and MFD so I will not go into it here.
+                  However, there are numerous other functions of the PFD/MFD relevant to IFR flight,
+                  including the autopilot (GFC-700 is the native system for the G1000, both made by
+                  Garmin) and IAP charts.{' '}
+                  <Warning>
+                    Building familiarity and fluency with the capabilities of the EFD is a
+                    significant portion of IFR training in glass cockpits.
+                  </Warning>{' '}
+                  Check out the{' '}
+                  <Link bold href={references.g1000}>
+                    G1000 Pilot's Guide
+                  </Link>{' '}
+                  for specifics.
+                </>,
 
                 <Paragraph
                   heading="Transponder"
@@ -319,5 +343,6 @@ export default Instruments;
 
 const references = {
   cold_temperature_airports: 'https://aeronav.faa.gov/d-tpp/Cold_Temp_Airports.pdf',
+  g1000: 'http://static.garmin.com/pumac/190-00498-08_0A_Web.pdf',
   tso_c112: uri.tso('a920c2bd43aa26b786257bf0006e6acd/$FILE/TSO-C112e.pdf'),
 };
