@@ -6,7 +6,7 @@ import { referenceNames, referenceURIs, uri } from '../lib/references';
 import { ChildProp } from '../lib/types';
 import { objectHasProperty } from '../lib/util';
 
-import { Bold, Emphasize, Tooltip } from './Typography';
+import { Emphasize, Tooltip } from './Typography';
 
 type CommonLinkProps = { bold?: boolean; className?: string | null };
 type ReferenceLinkProps = CommonLinkProps & {
@@ -16,9 +16,13 @@ type ReferenceLinkProps = CommonLinkProps & {
 };
 
 type AIMReference = [number, number, number, ...(string | number)[]];
+type AIMProps = CommonLinkProps & { bold?: boolean; paragraph: AIMReference };
 type FARReference = [number, number, ...(string | number)[]];
-export type AIMParagraphProps = { paragraph: AIMReference };
-export type FARSectionProps = { appendix?: [number, string]; section?: FARReference };
+type FARProps = CommonLinkProps & {
+  appendix?: [number, string];
+  bold?: boolean;
+  section?: FARReference;
+};
 
 export type LinkProps = NextLinkProps & ChildProp & CommonLinkProps;
 type LinkableReference = keyof typeof referenceURIs;
@@ -71,23 +75,23 @@ export const Link = Object.assign(
   }
 );
 
-export function AIM({ paragraph: fullParagraph }: AIMParagraphProps) {
-  const [chapter, section, paragraph, ...rest] = fullParagraph;
+export function AIM({ bold = true, paragraph, ...rest }: AIMProps) {
+  const [chapter, section, subsection, ...components] = paragraph;
 
-  let aimURI = uri.aim(chapter, section, paragraph);
-  const subsectionID = rest.length ? ' ' + rest.map((id) => `(${id})`).join('') : '';
+  let aimURI = uri.aim(chapter, section, subsection);
+  const subsectionID = components.length ? ' ' + components.map((id) => `(${id})`).join('') : '';
   return (
-    <Link bold href={aimURI}>
+    <Link bold={bold} href={aimURI} {...rest}>
       AIM{' '}
       <span className="whitespace-nowrap">
-        {chapter}-{section}-{paragraph}
+        {chapter}-{section}-{subsection}
         {subsectionID ? ' ' + subsectionID : null}
       </span>
     </Link>
   );
 }
 
-export function FAR({ appendix, section: fullSection }: FARSectionProps) {
+export function FAR({ appendix, bold = true, section: fullSection, ...rest }: FARProps) {
   const [farURI, linkText] = (() => {
     if (fullSection) {
       const [part, section, ...paragraph] = fullSection;
@@ -119,7 +123,7 @@ export function FAR({ appendix, section: fullSection }: FARSectionProps) {
   })();
 
   return (
-    <Link bold href={farURI}>
+    <Link bold={bold} href={farURI} {...rest}>
       {linkText}
     </Link>
   );
