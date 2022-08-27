@@ -15,7 +15,6 @@ import {
   Paragraph,
   Tab,
   Tabs,
-  TaskLink,
   TaskPage,
   Warning,
 } from '../../components';
@@ -902,7 +901,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
             case '4':
               return (
                 <>
-                  See <TaskLink section={1} task="C" id="k1" /> for details on alternate planning.
+                  See <Link.Task section={1} task="C" id="k1" /> for details on alternate planning.
                 </>
               );
             default:

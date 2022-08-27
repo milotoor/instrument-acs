@@ -4,8 +4,7 @@ import React from 'react';
 
 import { referenceURIs } from '../lib/references';
 import { ChildProp, Item, OneOrMore, Section, Structure, Task } from '../lib/types';
-import { objectHasProperty } from '../lib/util';
-import { AppContext } from './context';
+import { makeItemID, objectHasProperty } from '../lib/util';
 import { Layout } from './Layout';
 import { Link, LinkProps } from './Link';
 import { Bold, Tooltip } from './Typography';
@@ -16,7 +15,6 @@ type ParagraphReferenceProps = { references?: OneOrMore<React.ReactElement<LinkP
 type ParagraphProps = ChildProp & ParagraphReferenceProps & { heading?: string; hr?: boolean };
 type ReferencesSectionProps = { references: string[] } & RenderNoteElementProp;
 type SectionContainerProps = { children: React.ReactNode; heading: string };
-type TaskLinkProps = { section: Section.Number; task: Task.Letter; id: Item.ID };
 type TaskPageProps = TaskPage.TopLevelProps & FlagsProp & { notes?: RenderNoteProps };
 type DataSectionProps = { heading: Section.Headings.List; task: Task } & RenderNoteListProp &
   FlagsProp;
@@ -39,7 +37,6 @@ type RenderNoteProps = Partial<{
 
 export const TaskPage: React.FC<TaskPageProps> = ({ task, structure, flags = {}, notes }) => {
   const { meta } = task;
-  const flagMap = React.useMemo(() => new Map(Object.entries(flags)), [flags]);
   return (
     <Layout structure={structure} task={task}>
       <Head>
@@ -114,11 +111,6 @@ function ObjectiveSection({ objective, note }: ObjectiveSectionProps) {
       <NoteCard note={note} />
     </SectionContainer>
   );
-}
-
-function makeItemID(heading: Section.Headings.List, id: Item.ID) {
-  const shorthand = heading === 'Risk Management' ? 'risk' : heading.toLowerCase();
-  return [shorthand, id].join('-');
 }
 
 function DataSection({ flags, heading, notes = () => null, task }: DataSectionProps) {
@@ -256,26 +248,5 @@ function ParagraphReferences({ references }: ParagraphReferenceProps) {
         );
       })}
     </div>
-  );
-}
-
-export function TaskLink({ section, task, id }: TaskLinkProps) {
-  const { sections } = React.useContext(AppContext).structure;
-  const taskData = sections[section - 1].tasks.find(({ letter }) => letter === task);
-  if (!taskData) return null;
-
-  const dataSection = id[0].toLowerCase();
-  const itemId = id.slice(1);
-  const heading =
-    dataSection === 'k' ? 'Knowledge' : dataSection === 'r' ? 'Risk Management' : 'Skills';
-
-  return (
-    <Tooltip message={taskData.name}>
-      <Link href={`${taskData.uri}#${makeItemID(heading, itemId)}`}>
-        <span>
-          Section {section}, Task {task}
-        </span>
-      </Link>
-    </Tooltip>
   );
 }

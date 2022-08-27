@@ -3,9 +3,10 @@ import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import React from 'react';
 
 import { referenceNames, referenceURIs, uri } from '../lib/references';
-import { ChildProp } from '../lib/types';
-import { objectHasProperty } from '../lib/util';
+import { ChildProp, Item, Section, Task } from '../lib/types';
+import { makeItemID, objectHasProperty } from '../lib/util';
 
+import { AppContext } from './context';
 import { Emphasize, Tooltip } from './Typography';
 
 type CommonLinkProps = { bold?: boolean; className?: string | null };
@@ -23,6 +24,8 @@ type FARProps = CommonLinkProps & {
   bold?: boolean;
   section?: FARReference;
 };
+
+type TaskLinkProps = { section: Section.Number; task: Task.Letter; id: Item.ID };
 
 export type LinkProps = NextLinkProps & ChildProp & CommonLinkProps;
 type LinkableReference = keyof typeof referenceURIs;
@@ -71,6 +74,27 @@ export const Link = Object.assign(
       );
 
       return title ? <Tooltip message={title}>{link}</Tooltip> : link;
+    },
+
+    Task({ section, task, id }: TaskLinkProps) {
+      const { sections } = React.useContext(AppContext).structure;
+      const taskData = sections[section - 1].tasks.find(({ letter }) => letter === task);
+      if (!taskData) return null;
+
+      const dataSection = id[0].toLowerCase();
+      const itemId = id.slice(1);
+      const heading =
+        dataSection === 'k' ? 'Knowledge' : dataSection === 'r' ? 'Risk Management' : 'Skills';
+
+      return (
+        <Tooltip message={taskData.name}>
+          <Link href={`${taskData.uri}#${makeItemID(heading, itemId)}`}>
+            <span>
+              Section {section}, Task {task}
+            </span>
+          </Link>
+        </Tooltip>
+      );
     },
   }
 );
