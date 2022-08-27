@@ -7,6 +7,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@react-hook/resize-observer": "^1.2.6",
     "classnames": "^2.3.1",
     "core-js": "^3.24.1",
     "directory-tree": "^3.3.0",

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import useResizeObserver from '@react-hook/resize-observer';
 
 import { tailwindBreakpoints } from './util';
 
@@ -62,4 +63,17 @@ export function useDimensions() {
       return typeof width === 'number' && width >= size;
     }
   }
+}
+
+/** Returns the DOMRect of a targeted HTMLElement, observing resize */
+export function useSize(target: React.RefObject<HTMLElement>) {
+  const [size, setSize] = React.useState<DOMRect>();
+
+  React.useLayoutEffect(() => {
+    setSize(target.current?.getBoundingClientRect());
+  }, [target]);
+
+  // Where the magic happens
+  useResizeObserver(target, (entry) => setSize(entry.contentRect));
+  return size;
 }

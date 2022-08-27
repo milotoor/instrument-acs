@@ -1,6 +1,7 @@
 import cn from 'classnames';
 import * as React from 'react';
 
+import { useSize } from '../lib/hooks';
 import { ChildProp } from '../lib/types';
 
 type TabsProps = ChildProp<React.ReactElement<TabProps>[]>;
@@ -8,7 +9,9 @@ type TabProps = ChildProp & { active?: boolean; heading: string };
 
 export function Tabs({ children }: TabsProps) {
   const [active, setActive] = React.useState(0);
-  const [activeTabEl, setActiveTabEl] = React.useState<HTMLDivElement | null>(null);
+  const resizeTarget = React.useRef(null);
+  const size = useSize(resizeTarget);
+
   return (
     <div className="rounded-md overflow-hidden border border-slate-400">
       <div className="flex items-stretch justify-start border-b border-slate-400">
@@ -30,19 +33,13 @@ export function Tabs({ children }: TabsProps) {
       </div>
       <div
         className="transition-height ease-in-out duration-500"
-        style={{ height: activeTabEl?.scrollHeight ?? 0 }}
+        style={{ height: size?.height ?? 0 }}
       >
-        {children.map((tab, i) => {
-          const isActive = active === i;
-          return (
-            <Tab
-              {...tab.props}
-              active={isActive}
-              key={i}
-              ref={(ref) => isActive && setActiveTabEl(ref)}
-            />
-          );
-        })}
+        <div ref={resizeTarget}>
+          {children.map((tab, i) => (
+            <Tab {...tab.props} active={active === i} key={i} />
+          ))}
+        </div>
       </div>
     </div>
   );
