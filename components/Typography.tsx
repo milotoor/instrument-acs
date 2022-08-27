@@ -115,6 +115,10 @@ export function Quotation({ children }: QuotationProps) {
   );
 }
 
+export function Term(props: any) {
+  return <Bold {...props} />;
+}
+
 export function ToDo() {
   return <span className="bg-yellow-300">To do</span>;
 }
