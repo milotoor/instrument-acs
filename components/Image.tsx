@@ -3,7 +3,7 @@ import NextImage from 'next/image';
 import * as React from 'react';
 
 import { useDimensions } from '../lib/hooks';
-import { referenceURIs } from '../lib/references';
+import { referenceURIs, uri } from '../lib/references';
 import { ChildProp } from '../lib/types';
 import { AppContext } from './context';
 import { Link } from './Link';
@@ -162,6 +162,16 @@ const attributions: Record<number, Record<string, AttributionProps>> = {
       author: 'Patryk Reba',
       license: 'CC BY-SA 4.0',
       link: 'https://commons.wikimedia.org/wiki/File:Mayon_Volcano_with_cloudy_hat.jpg',
+    },
+  },
+  2: {
+    ads_b: {
+      author: 'Aeronautical Information Manual',
+      className: 'text-black',
+      linkOn: 'author',
+      link: uri.aim(4, 5, 7),
+      title: 'Figure 4-5-7',
+      titleAuthorConnection: 'from the',
     },
   },
   4: {
