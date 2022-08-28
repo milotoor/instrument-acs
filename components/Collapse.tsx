@@ -12,11 +12,11 @@ export function Collapse({ children, heading, startOpen = false }: CollapseProps
   return (
     <div className="shadow-md shadow-slate-500 rounded-lg overflow-hidden border border-slate-400">
       <div
-        className="cursor-pointer flex items-center justify-start p-4 hover:bg-slate-100"
+        className="cursor-pointer flex items-center justify-start pl-4 py-1 hover:bg-slate-100"
         onClick={() => setOpen((state) => !state)}
       >
-        <div className={cn('text-2xl transition', { 'rotate-90': open })}>›</div>
-        <div className="text-lg ml-3">{heading}</div>
+        <div className={cn('text-lg transition', { 'rotate-90': open })}>›</div>
+        <div className="text-md ml-3">{heading}</div>
       </div>
       <div
         ref={(ref) => setContentEl(ref)}
