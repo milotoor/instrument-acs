@@ -11,8 +11,12 @@ import { Bold, Tooltip } from './Typography';
 
 // Component prop types
 type ObjectiveSectionProps = { objective: string } & RenderNoteElementProp;
-type ParagraphReferenceProps = { references?: OneOrMore<React.ReactElement<LinkProps>> };
 type ParagraphProps = ChildProp & ParagraphReferenceProps & { heading?: string; hr?: boolean };
+type ParagraphReferenceProps = {
+  className?: string;
+  references?: OneOrMore<React.ReactElement<LinkProps>>;
+};
+
 type ReferencesSectionProps = { references: string[] } & RenderNoteElementProp;
 type SectionContainerProps = { children: React.ReactNode; heading: string };
 type TaskPageProps = TaskPage.TopLevelProps & FlagsProp & { notes?: RenderNoteProps };
@@ -217,21 +221,21 @@ export function Paragraph({ children, heading, hr, references }: ParagraphProps)
         <span className="bg-indigo-500 px-2 py-1 inline-block rounded-xl text-white text-xs">
           <Bold>{heading}</Bold>
         </span>
-        <ParagraphReferences references={references} />
+        <ReferenceList className="ml-4" references={references} />
       </div>
       {children}
     </div>
   );
 }
 
-function ParagraphReferences({ references }: ParagraphReferenceProps) {
+export function ReferenceList({ className, references }: ParagraphReferenceProps) {
   if (!references) return null;
 
   const referenceArray = Array.isArray(references) ? references : [references];
   if (referenceArray.length === 0) return null;
 
   return (
-    <div className="inline ml-4">
+    <div className={cn('inline', className)}>
       {referenceArray.map((reference, i) => {
         const isLast = i === referenceArray.length - 1;
         const textColor = 'text-slate-400';
