@@ -5,3 +5,4 @@ export * from './Link';
 export * from './Tabs';
 export * from './TaskPage';
 export * from './Typography';
+export * from './YouTube';
