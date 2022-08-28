@@ -19,7 +19,7 @@ type ParagraphReferenceProps = {
 
 type ReferencesSectionProps = { references: string[] } & RenderNoteElementProp;
 type SectionContainerProps = { children: React.ReactNode; heading: string };
-type TaskPageProps = TaskPage.TopLevelProps & FlagsProp & { notes?: RenderNoteProps };
+type TaskPageProps = TaskPage.TopLevelProps & FlagsProp & { notes?: NotesObject };
 type DataSectionProps = { heading: Section.Headings.List; task: Task } & RenderNoteListProp &
   FlagsProp;
 
@@ -29,8 +29,9 @@ type FlagsProp = { flags?: Partial<Record<FlagType, Item.ID[]>> };
 
 // Note types
 type RenderNoteElementProp = { note?: React.ReactNode | React.ReactNode[] };
-type RenderNoteListProp = { notes?: RenderNoteListFunction };
+type RenderNoteListProp = { notes?: NotesObject };
 type RenderNoteListFunction = (id: Item.ID) => React.ReactNode | undefined;
+type NotesObject = Record<Item.ID, React.ReactNode>;
 type RenderNoteProps = Partial<{
   knowledge: RenderNoteListFunction;
   objective: React.ReactNode;
@@ -41,6 +42,7 @@ type RenderNoteProps = Partial<{
 
 export const TaskPage: React.FC<TaskPageProps> = ({ task, structure, flags = {}, notes }) => {
   const { meta } = task;
+  const dataSectionProps = { task, notes };
   return (
     <Layout structure={structure} task={task}>
       <Head>
@@ -58,9 +60,9 @@ export const TaskPage: React.FC<TaskPageProps> = ({ task, structure, flags = {},
         <div>
           <ReferencesSection references={meta.references} note={notes?.references} />
           <ObjectiveSection objective={meta.objective} note={notes?.objective} />
-          <DataSection heading="Knowledge" task={task} flags={flags} notes={notes?.knowledge} />
-          <DataSection heading="Risk Management" task={task} notes={notes?.risk} />
-          <DataSection heading="Skills" task={task} notes={notes?.skills} />
+          <DataSection heading="Knowledge" flags={flags} {...dataSectionProps} />
+          <DataSection heading="Risk Management" {...dataSectionProps} />
+          <DataSection heading="Skills" {...dataSectionProps} />
         </div>
       </main>
     </Layout>
@@ -117,7 +119,7 @@ function ObjectiveSection({ objective, note }: ObjectiveSectionProps) {
   );
 }
 
-function DataSection({ flags, heading, notes = () => null, task }: DataSectionProps) {
+function DataSection({ flags, heading, notes = {}, task }: DataSectionProps) {
   const data = (() => {
     switch (heading) {
       case 'Knowledge':
@@ -129,6 +131,7 @@ function DataSection({ flags, heading, notes = () => null, task }: DataSectionPr
     }
   })();
 
+  const notePrefix = heading[0].toLowerCase();
   const sorted = Object.entries(data).sort((a, b) => parseInt(a[0]) - parseInt(b[0]));
   return (
     <SectionContainer heading={heading}>
@@ -140,7 +143,7 @@ function DataSection({ flags, heading, notes = () => null, task }: DataSectionPr
             return (
               <li key={num} id={id}>
                 <a href={`#${id}`}>{applyFlags(num, datum)}</a>
-                <NoteCard note={notes(num)} />
+                <NoteCard note={getNote(num)} />
               </li>
             );
 
@@ -149,7 +152,7 @@ function DataSection({ flags, heading, notes = () => null, task }: DataSectionPr
           return (
             <li key={num} id={id}>
               <a href={`#${id}`}>{general}</a>
-              <NoteCard note={notes(num)} />
+              <NoteCard note={getNote(num)} />
               <ol className="list-alpha ml-8">
                 {specific.map((text, i) => {
                   // Char code 97 is "a", 98 is "b", etc.
@@ -158,7 +161,7 @@ function DataSection({ flags, heading, notes = () => null, task }: DataSectionPr
                   return (
                     <li key={i} id={id}>
                       <a href={`#${id}`}>{applyFlags(itemId, text)}</a>
-                      <NoteCard note={notes(itemId)} />
+                      <NoteCard note={getNote(itemId)} />
                     </li>
                   );
                 })}
@@ -178,6 +181,10 @@ function DataSection({ flags, heading, notes = () => null, task }: DataSectionPr
         <span className={cn('text-lg', { 'bg-red-500/50': wasMissed })}>{text}</span>
       </Tooltip>
     );
+  }
+
+  function getNote(id: Item.ID) {
+    return notes[`${notePrefix}${id}`];
   }
 }
 
