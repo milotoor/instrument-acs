@@ -30,15 +30,7 @@ type FlagsProp = { flags?: Partial<Record<FlagType, Item.ID[]>> };
 // Note types
 type RenderNoteElementProp = { note?: React.ReactNode | React.ReactNode[] };
 type RenderNoteListProp = { notes?: NotesObject };
-type RenderNoteListFunction = (id: Item.ID) => React.ReactNode | undefined;
 type NotesObject = Record<Item.ID, React.ReactNode>;
-type RenderNoteProps = Partial<{
-  knowledge: RenderNoteListFunction;
-  objective: React.ReactNode;
-  references: React.ReactNode;
-  risk: RenderNoteListFunction;
-  skills: RenderNoteListFunction;
-}>;
 
 export const TaskPage: React.FC<TaskPageProps> = ({ task, structure, flags = {}, notes }) => {
   const { meta } = task;
