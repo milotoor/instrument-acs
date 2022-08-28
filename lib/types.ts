@@ -3,7 +3,7 @@ export type OneOrMore<T> = T | T[];
 
 export namespace Colors {
   type FrontColors = 'cold' | 'occluded' | 'warm' | 'hot';
-  type AlertColors = 'danger' | 'info' | 'warning';
+  type AlertColors = 'danger' | 'info' | 'success' | 'warning';
   export type TextColor = FrontColors | AlertColors;
 }
 

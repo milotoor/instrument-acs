@@ -60,10 +60,11 @@ export function Emphasize({
         'font-bold': bold,
         italic,
         'bg-slate-200 hover:bg-slate-300': gray,
-        'text-blue-500': color && ['cold', 'info'].includes(color),
         'text-amber-500': color && ['warning', 'warm'].includes(color),
-        'text-red-500': color && ['danger', 'hot'].includes(color),
+        'text-blue-500': color && ['cold', 'info'].includes(color),
         'text-fuchsia-500': color === 'occluded',
+        'text-green-600': color === 'success',
+        'text-red-500': color && ['danger', 'hot'].includes(color),
       })}
     >
       {children}
@@ -112,6 +113,10 @@ export function Quotation({ children }: QuotationProps) {
       <Italic>{children}</Italic>
     </div>
   );
+}
+
+export function Success(props: Omit<EmphasizeProps, 'bold' | 'color'>) {
+  return <Emphasize bold color="success" {...props} />;
 }
 
 export function Term(props: any) {
