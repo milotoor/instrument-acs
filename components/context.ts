@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Section, Structure, Task } from '../lib/types';
+import { Item, Section, Structure, Task } from '../lib/types';
 
 type AppContext = {
   section?: Section.Number;
@@ -9,4 +9,15 @@ type AppContext = {
 
 export const AppContext = React.createContext<AppContext>({
   structure: { images: {}, sections: [] },
+});
+
+type NoteContext = {
+  heading: Section.Headings.List;
+  item: Item.ID;
+};
+
+// Default values are completely arbitrary-- really annoying that React requires this
+export const NoteContext = React.createContext<NoteContext>({
+  heading: 'Knowledge',
+  item: '1',
 });

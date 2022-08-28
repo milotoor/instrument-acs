@@ -4,7 +4,7 @@ import React from 'react';
 
 import { referenceNames, referenceURIs, uri } from '../lib/references';
 import { ChildProp, Item, Section, Task } from '../lib/types';
-import { makeItemID, objectHasProperty } from '../lib/util';
+import { makeAnchorId, objectHasProperty } from '../lib/util';
 
 import { AppContext } from './context';
 import { Emphasize, Tooltip } from './Typography';
@@ -88,7 +88,7 @@ export const Link = Object.assign(
 
       return (
         <Tooltip message={taskData.name}>
-          <Link href={`${taskData.uri}#${makeItemID(heading, itemId)}`}>
+          <Link href={`${taskData.uri}#${makeAnchorId(heading, itemId)}`}>
             <span>
               Section {section}, Task {task}
             </span>

@@ -4,32 +4,34 @@ import React from 'react';
 
 import { referenceURIs } from '../lib/references';
 import { ChildProp, Item, OneOrMore, Section, Structure, Task } from '../lib/types';
-import { makeItemID, objectHasProperty } from '../lib/util';
+import { makeAnchorId, objectHasProperty } from '../lib/util';
+import { NoteContext } from './context';
 import { Layout } from './Layout';
 import { Link, LinkProps } from './Link';
 import { Bold, Tooltip } from './Typography';
 
 // Component prop types
-type ObjectiveSectionProps = { objective: string } & RenderNoteElementProp;
 type ParagraphProps = ChildProp & ParagraphReferenceProps & { heading?: string; hr?: boolean };
 type ParagraphReferenceProps = {
   className?: string;
   references?: OneOrMore<React.ReactElement<LinkProps>>;
 };
 
-type ReferencesSectionProps = { references: string[] } & RenderNoteElementProp;
+type ReferencesSectionProps = { references: string[] };
 type SectionContainerProps = { children: React.ReactNode; heading: string };
 type TaskPageProps = TaskPage.TopLevelProps & FlagsProp & { notes?: NotesObject };
-type DataSectionProps = { heading: Section.Headings.List; task: Task } & RenderNoteListProp &
-  FlagsProp;
+type DataSectionProps = FlagsProp & {
+  heading: Section.Headings.List;
+  notes?: NotesObject;
+  task: Task;
+};
 
 // Flag types
 type FlagType = 'missed';
 type FlagsProp = { flags?: Partial<Record<FlagType, Item.ID[]>> };
 
 // Note types
-type RenderNoteElementProp = { note?: React.ReactNode | React.ReactNode[] };
-type RenderNoteListProp = { notes?: NotesObject };
+type NoteCardProps = { heading: Section.Headings.List; id: Item.ID; notes: NotesObject };
 type NotesObject = Record<Item.ID, React.ReactNode>;
 
 export const TaskPage: React.FC<TaskPageProps> = ({ task, structure, flags = {}, notes }) => {
@@ -50,8 +52,8 @@ export const TaskPage: React.FC<TaskPageProps> = ({ task, structure, flags = {},
         </h1>
 
         <div>
-          <ReferencesSection references={meta.references} note={notes?.references} />
-          <ObjectiveSection objective={meta.objective} note={notes?.objective} />
+          <ReferencesSection references={meta.references} />
+          <SectionContainer heading="Objective">{meta.objective}</SectionContainer>
           <DataSection heading="Knowledge" flags={flags} {...dataSectionProps} />
           <DataSection heading="Risk Management" {...dataSectionProps} />
           <DataSection heading="Skills" {...dataSectionProps} />
@@ -69,7 +71,7 @@ export namespace TaskPage {
   };
 }
 
-function ReferencesSection({ references, note }: ReferencesSectionProps) {
+function ReferencesSection({ references }: ReferencesSectionProps) {
   const linkProps = {
     bold: true,
     color: 'text-cyan-500',
@@ -97,16 +99,6 @@ function ReferencesSection({ references, note }: ReferencesSectionProps) {
           </span>
         );
       })}
-      <NoteCard note={note} />
-    </SectionContainer>
-  );
-}
-
-function ObjectiveSection({ objective, note }: ObjectiveSectionProps) {
-  return (
-    <SectionContainer heading="Objective">
-      {objective}
-      <NoteCard note={note} />
     </SectionContainer>
   );
 }
@@ -123,19 +115,19 @@ function DataSection({ flags, heading, notes = {}, task }: DataSectionProps) {
     }
   })();
 
-  const notePrefix = heading[0].toLowerCase();
   const sorted = Object.entries(data).sort((a, b) => parseInt(a[0]) - parseInt(b[0]));
+  const noteCardProps = { heading, notes };
   return (
     <SectionContainer heading={heading}>
       <ol className="list-decimal ml-8">
         {sorted.map(([num, datum]) => {
           // If the datum is not the beginning of a sub-list, render it
-          const id = makeItemID(heading, num);
+          const id = makeAnchorId(heading, num);
           if (typeof datum === 'string')
             return (
               <li key={num} id={id}>
                 <a href={`#${id}`}>{applyFlags(num, datum)}</a>
-                <NoteCard note={getNote(num)} />
+                <NoteCard {...noteCardProps} id={num} />
               </li>
             );
 
@@ -144,16 +136,16 @@ function DataSection({ flags, heading, notes = {}, task }: DataSectionProps) {
           return (
             <li key={num} id={id}>
               <a href={`#${id}`}>{general}</a>
-              <NoteCard note={getNote(num)} />
+              <NoteCard {...noteCardProps} id={num} />
               <ol className="list-alpha ml-8">
                 {specific.map((text, i) => {
                   // Char code 97 is "a", 98 is "b", etc.
                   const itemId = num + String.fromCharCode(97 + i);
-                  const id = makeItemID(heading, itemId);
+                  const id = makeAnchorId(heading, itemId);
                   return (
                     <li key={i} id={id}>
                       <a href={`#${id}`}>{applyFlags(itemId, text)}</a>
-                      <NoteCard note={getNote(itemId)} />
+                      <NoteCard {...noteCardProps} id={itemId} />
                     </li>
                   );
                 })}
@@ -174,10 +166,6 @@ function DataSection({ flags, heading, notes = {}, task }: DataSectionProps) {
       </Tooltip>
     );
   }
-
-  function getNote(id: Item.ID) {
-    return notes[`${notePrefix}${id}`];
-  }
 }
 
 function SectionContainer({ children, heading }: SectionContainerProps) {
@@ -189,7 +177,9 @@ function SectionContainer({ children, heading }: SectionContainerProps) {
   );
 }
 
-function NoteCard({ note }: RenderNoteElementProp) {
+function NoteCard({ heading, id, notes }: NoteCardProps) {
+  const notePrefix = heading[0].toLowerCase();
+  const note = notes[`${notePrefix}${id}`];
   if (!note || (Array.isArray(note) && note.length === 0)) return null;
 
   const cardContent = (() => {
@@ -207,19 +197,29 @@ function NoteCard({ note }: RenderNoteElementProp) {
 
   return (
     <div className="w-full bg-white text-black p-2 my-5 rounded-lg shadow-[0px_5px_25px] shadow-yellow-400 text-sm">
-      {cardContent}
+      <NoteContext.Provider value={{ heading, item: id }}>{cardContent}</NoteContext.Provider>
     </div>
   );
 }
 
 export function Paragraph({ children, heading, hr, references }: ParagraphProps) {
+  const { heading: sectionHeading, item } = React.useContext(NoteContext);
+
+  let id;
+  if (heading) {
+    const sanitizedHeading = heading.toLowerCase().split(' ').join('_');
+    id = makeAnchorId(sectionHeading, item, sanitizedHeading);
+  }
+
   return (
-    <div className="mt-5 first:mt-0">
+    <div className="mt-5 first:mt-0" id={id}>
       {hr ? <hr className="w-4/5 m-auto mb-5" /> : null}
       <div className={cn('flex flex-row items-center mb-1', { hidden: !heading })}>
-        <span className="bg-indigo-500 px-2 py-1 inline-block rounded-xl text-white text-xs">
-          <Bold>{heading}</Bold>
-        </span>
+        <a href={`#${id}`}>
+          <span className="bg-indigo-500 px-2 py-1 inline-block rounded-xl text-white text-xs">
+            <Bold>{heading}</Bold>
+          </span>
+        </a>
         <ReferenceList className="ml-4" references={references} />
       </div>
       {children}
