@@ -5,8 +5,8 @@ import {
   AIM,
   Bold,
   Danger,
-  DetailList,
   Info,
+  InlineList,
   Link,
   Paragraph,
   Quotation,
@@ -90,13 +90,13 @@ const Nonprecision: NextPage<TaskPage.TopLevelProps> = (props) => {
                     [Emphasis added]
                   </Quotation>
                   Unfortunately, not all NPAs have defined VDP's because{' '}
-                  <DetailList type="inline" logic="or">
+                  <InlineList logic="or">
                     <>
                       an obstacle penetrates the visual surface between the MDA and runway threshold
                     </>
                     <>DME equipment is unavailable</>
                     <>the procedure design prevents a VDP to be identified</>
-                  </DetailList>
+                  </InlineList>
                   , among other reasons. In this case a simple rule of thumb may be used:{' '}
                   <Info>find the chart's lowest MDA and divide its AGL altitude by 300.</Info> This
                   yields the number of nautical miles before the runway threshold from which to

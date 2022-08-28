@@ -4,11 +4,12 @@ import React from 'react';
 import {
   AIM,
   Bold,
+  BulletList,
   Danger,
-  DetailList,
   FAR,
   Image,
   Info,
+  InlineList,
   Italic,
   Link,
   Paragraph,
@@ -39,11 +40,11 @@ const Instruments: NextPage<TaskPage.TopLevelProps> = (props) => {
                   airspeed. It can be adjusted inputting the current altimeter setting in the{' '}
                   <Bold>Kollsman window</Bold>. Observing the altimeter error should be a part of
                   every preflight check:{' '}
-                  <DetailList type="inline">
+                  <InlineList>
                     <>apply the current altimeter setting</>
                     <>read the indicated value from the instrument</>
                     <>compare it with the known field elevation</>
-                  </DetailList>
+                  </InlineList>
                   . According to <AIM paragraph={[7, 2, 3, 'a']} />,{' '}
                   <Warning>
                     if the error is more than 75 feet the altimeter should be evaluated and/or
@@ -88,7 +89,7 @@ const Instruments: NextPage<TaskPage.TopLevelProps> = (props) => {
                   altimeters (at least in light, GA aircraft) can not be set below 28 or above 31
                   "Hg. When the barometric pressure is outside of this range, special procedures
                   should be used:
-                  <DetailList type="bullet" bullet="disc">
+                  <BulletList bullet="disc">
                     <>
                       <Info>High barometric pressure (above 31 "Hg)</Info> may be caused by{' '}
                       <Info>cold, dry air masses</Info>. When an aircraft's altimeter cannot be set
@@ -97,7 +98,7 @@ const Instruments: NextPage<TaskPage.TopLevelProps> = (props) => {
                       <FAR section={[91, 144]} />. Procedures for operating in the NOTAM's
                       geographic area are described by <AIM paragraph={[7, 2, 3, 'c', 1, 'b']} />;
                       in short, IFR aircraft should{' '}
-                      <DetailList type="inline">
+                      <InlineList>
                         <>
                           determine destination/alternate airports' suitability{' '}
                           <Bold>during flight planning</Bold> by increasing the approach's DA/MDA
@@ -113,7 +114,7 @@ const Instruments: NextPage<TaskPage.TopLevelProps> = (props) => {
                           <Bold>published DA/MDA</Bold> (its true altitude will be higher, but the
                           pilot <Danger>should not cheat at this!</Danger>)
                         </>
-                      </DetailList>
+                      </InlineList>
                     </>
                     <>
                       <Danger>Low barometric pressure (below 28 "Hg)</Danger> is especially
@@ -126,7 +127,7 @@ const Instruments: NextPage<TaskPage.TopLevelProps> = (props) => {
                       inherently unsafe to fly with a too-high altimeter setting and they don't want
                       to encourage/endorse the practice.
                     </>
-                  </DetailList>
+                  </BulletList>
                 </Paragraph>,
 
                 <Paragraph heading="Cold Temperature Corrections" hr>
@@ -167,7 +168,7 @@ const Instruments: NextPage<TaskPage.TopLevelProps> = (props) => {
                   </Bold>{' '}
                   The correction is applied like so (this is technically called the "All Segments
                   Method"):
-                  <DetailList type="bullet" bullet="decimal">
+                  <BulletList bullet="decimal">
                     <>
                       <Bold>From the IAF to the FAF:</Bold> Calculate the correction by taking the
                       FAF altitude and subtracting the airport elevation. Use this number to enter
@@ -187,7 +188,7 @@ const Instruments: NextPage<TaskPage.TopLevelProps> = (props) => {
                       missed approach holding altitude. Round the result from the table as needed
                       and then add to the final MA holding altitude only.
                     </>
-                  </DetailList>
+                  </BulletList>
                 </>,
 
                 <>
@@ -253,7 +254,7 @@ const Instruments: NextPage<TaskPage.TopLevelProps> = (props) => {
                 <>
                   <FAR section={[91, 215, 'b']} /> specifies what airspace is off limits for
                   aircraft without a functioning transponder:
-                  <DetailList type="bullet" bullet="disc">
+                  <BulletList bullet="disc">
                     <>
                       <Bold>Class A, B or C airspace.</Bold>{' '}
                       <Warning>
@@ -270,7 +271,7 @@ const Instruments: NextPage<TaskPage.TopLevelProps> = (props) => {
                       <Bold>Above 10,000' MSL</Bold> but not below 2,500' AGL
                     </>
                     <>ATC may authorize a deviation from these rules if necessary</>
-                  </DetailList>
+                  </BulletList>
                 </>,
 
                 <Paragraph
@@ -303,12 +304,12 @@ const Instruments: NextPage<TaskPage.TopLevelProps> = (props) => {
                 <>
                   As of January 1, 2020, aircraft are required to have ADS-B Out in order to fly in
                   virtually any of the places that require an altitude-reporting transponder (i.e.{' '}
-                  <DetailList type="inline" delimeter=";">
+                  <InlineList delimeter=";">
                     <>class A, B, and C airspace</>
                     <>within the lateral boundaries of class B and C airspace</>
                     <>within the mode C veil</>
                     <>above 10,000' MSL excluding 2,500' AGL</>
-                  </DetailList>
+                  </InlineList>
                   ). If installed, ADS-B Out equipment should be in transmit mode at all times.
                 </>,
 
@@ -325,10 +326,10 @@ const Instruments: NextPage<TaskPage.TopLevelProps> = (props) => {
                     the navigation or communication system of the aircraft."
                   </Italic>{' '}
                   Curiously, the regulation also does not apply to{' '}
-                  <DetailList type="inline" logic="or">
+                  <InlineList logic="or">
                     <>portable voice recorders</>
                     <>electric shavers</>
-                  </DetailList>
+                  </InlineList>
                   .
                 </>,
               ];

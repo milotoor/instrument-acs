@@ -4,19 +4,18 @@ import React from 'react';
 
 import { ChildProp, Colors } from '../lib/types';
 
-type DetailListProps = ChildProp<React.ReactNode[]> & {
-  bullet?: 'alpha' | 'decimal' | 'disc';
-  delimeter?: string;
-  logic?: 'and' | 'or' | null;
-  type: 'bullet' | 'inline';
-};
-
+type BulletListProps = ChildProp<React.ReactNode[]> & { bullet?: 'alpha' | 'decimal' | 'disc' };
 type EmphasizeProps = ChildProp & {
   bold?: boolean;
   className?: string;
   color?: Colors.TextColor;
   gray?: boolean;
   italic?: boolean;
+};
+
+type InlineListProps = ChildProp<React.ReactNode[]> & {
+  delimeter?: string;
+  logic?: 'and' | 'or' | null;
 };
 
 type KatexProps = ChildProp<string> & { block?: boolean } & React.HTMLAttributes<HTMLDivElement>;
@@ -27,26 +26,7 @@ export function Bold(props: Omit<EmphasizeProps, 'bold'>) {
   return <Emphasize bold {...props} />;
 }
 
-export function Danger(props: Omit<EmphasizeProps, 'bold' | 'color'>) {
-  return <Emphasize bold color="danger" {...props} />;
-}
-
-export function DetailList(props: DetailListProps) {
-  const { bullet = 'decimal', children, delimeter = ',', logic = 'and', type } = props;
-  if (type === 'inline')
-    return (
-      <>
-        {children.flatMap((child, i) => (
-          <span key={i}>
-            {i > 0 ? ' ' : ''}
-            <Gray italic>{child}</Gray>
-            {i >= children.length - 2 ? '' : delimeter}
-            {logic && i === children.length - 2 ? ` ${logic}` : ''}
-          </span>
-        ))}
-      </>
-    );
-
+export function BulletList({ bullet = 'decimal', children }: BulletListProps) {
   return (
     <ol
       className={cn('ml-12 mt-2', {
@@ -60,6 +40,10 @@ export function DetailList(props: DetailListProps) {
       ))}
     </ol>
   );
+}
+
+export function Danger(props: Omit<EmphasizeProps, 'bold' | 'color'>) {
+  return <Emphasize bold color="danger" {...props} />;
 }
 
 export function Emphasize({
@@ -93,6 +77,21 @@ export function Gray(props: Omit<EmphasizeProps, 'gray'>) {
 
 export function Info(props: Omit<EmphasizeProps, 'bold' | 'color'>) {
   return <Emphasize bold color="info" {...props} />;
+}
+
+export function InlineList({ children, delimeter = ',', logic = 'and' }: InlineListProps) {
+  return (
+    <>
+      {children.flatMap((child, i) => (
+        <span key={i}>
+          {i > 0 ? ' ' : ''}
+          <Gray italic>{child}</Gray>
+          {i >= children.length - 2 ? '' : delimeter}
+          {logic && i === children.length - 2 ? ` ${logic}` : ''}
+        </span>
+      ))}
+    </>
+  );
 }
 
 export function Italic(props: Omit<EmphasizeProps, 'italic'>) {

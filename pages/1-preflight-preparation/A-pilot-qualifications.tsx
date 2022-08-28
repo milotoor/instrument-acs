@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import React from 'react';
 
-import { Bold, DetailList, FAR, Link, TaskPage } from '../../components';
+import { Bold, BulletList, FAR, InlineList, Link, TaskPage } from '../../components';
 import { getStructure, getTaskFromSectionLetter } from '../../lib/data_loaders';
 
 export const getStaticProps = () => ({
@@ -20,14 +20,14 @@ const PilotQualifications: NextPage<TaskPage.TopLevelProps> = (props) => {
                 <>
                   <Bold>Recency of experience requirements</Bold> are clearly described in{' '}
                   <FAR section={[61, 57, 'c', 1]} />. These include recording in the last 6 months:{' '}
-                  <DetailList type="inline">
+                  <InlineList>
                     <>six instrument approaches</>
                     <>holding procedures and tasks</>
                     <>
                       intercepting and tracking courses through the use of navigational electronic
                       systems
                     </>
-                  </DetailList>
+                  </InlineList>
                   . These things may be accomplished in an aircraft, a full flight simulator, flight
                   training device (FTD), aviation training device (ATD) or a combination thereof,
                   provided the device represents the category of aircraft for the instrument rating
@@ -40,7 +40,7 @@ const PilotQualifications: NextPage<TaskPage.TopLevelProps> = (props) => {
                   safety pilot if required. See <FAR section={[61, 51, 'g']} />. The FAA's{' '}
                   <Link.Reference reference="InFO 15012" /> specifies that an approach can only be
                   logged if{' '}
-                  <DetailList type="bullet">
+                  <BulletList>
                     <>
                       the aircraft is operated solely by reference to instruments in actual or
                       simulated IMC (one or both of "Actual IMC" and "Simulated IMC" must also be
@@ -55,7 +55,7 @@ const PilotQualifications: NextPage<TaskPage.TopLevelProps> = (props) => {
                       the aircraft breaks out of IMC after the FAF, prior to or upon reaching MDA or
                       DA
                     </>
-                  </DetailList>
+                  </BulletList>
                 </>,
 
                 <>
@@ -72,7 +72,7 @@ const PilotQualifications: NextPage<TaskPage.TopLevelProps> = (props) => {
                 <>
                   Per <FAR section={[61, 3]} />, having an instrument rating allows a pilot to
                   operate:
-                  <DetailList type="bullet">
+                  <BulletList>
                     <>under IFR</>
                     <>in weather conditions less than the minima for VFR flight</>
                     <>in Class A airspace</>
@@ -80,12 +80,12 @@ const PilotQualifications: NextPage<TaskPage.TopLevelProps> = (props) => {
                       for hire (assuming the pilot has a commercial license) at night or
                       cross-country beyond 50 nautical miles
                     </>
-                  </DetailList>
+                  </BulletList>
                 </>,
 
                 <>
                   A <Bold>safety pilot</Bold> must{' '}
-                  <DetailList type="inline">
+                  <InlineList>
                     <>possess at least a private pilot certificate</>
                     <>sit in the other control seat</>
                     <>be appropriately rated in the aircraft's category and class</>
@@ -93,7 +93,7 @@ const PilotQualifications: NextPage<TaskPage.TopLevelProps> = (props) => {
                       possess a current medical certificate (because the FAA considers them a
                       required crewmember)
                     </>
-                  </DetailList>
+                  </InlineList>
                   . See <FAR section={[91, 109, 'c', 1]} /> and <FAR section={[61, 3, 'c', 1]} />.
                 </>,
               ];
@@ -102,17 +102,17 @@ const PilotQualifications: NextPage<TaskPage.TopLevelProps> = (props) => {
                 <>
                   Per <FAR section={[61, 113, 'i']} />, a private pilot with a U.S. driver's license
                   but no medical certificate may act as PIC of an aircraft if it{' '}
-                  <DetailList type="inline">
+                  <InlineList>
                     <>is authorized to carry 6 or fewer occupants</>
                     <>weighs at most 6,000 pounds</>
-                  </DetailList>
+                  </InlineList>
                 </>,
                 <>
                   The flight may not{' '}
-                  <DetailList type="inline" logic="or">
+                  <InlineList logic="or">
                     <>be carried out at or above 18,000 feet</>
                     <>attain an indicated airspeed of 250 knots or greater</>
-                  </DetailList>
+                  </InlineList>
                 </>,
                 <>
                   They are required to have the <Bold>medical examination checklist</Bold> required

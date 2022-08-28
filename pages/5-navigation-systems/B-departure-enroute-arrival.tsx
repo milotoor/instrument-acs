@@ -4,10 +4,11 @@ import React from 'react';
 import {
   AIM,
   Bold,
+  BulletList,
   Danger,
-  DetailList,
   FAR,
   Image,
+  InlineList,
   Italic,
   Link,
   Paragraph,
@@ -45,7 +46,7 @@ const DepartureEnrouteArrival: NextPage<TaskPage.TopLevelProps> = (props) => {
                 <>
                   Both ODPs and SIDS have associated minimum visibility and climb gradients, and may
                   have minimum ceilings as well.{' '}
-                  <DetailList type="bullet" bullet="disc">
+                  <BulletList bullet="disc">
                     <>
                       <Bold>The standard takeoff weather minimum is 1 mile visibility</Bold> (for 1
                       & 2 engine aircraft; 3 & 4 engine aircraft use half a mile). Notably, this
@@ -64,7 +65,7 @@ const DepartureEnrouteArrival: NextPage<TaskPage.TopLevelProps> = (props) => {
                       off if the ceiling is above 300 feet; this limitation ensures that
                       underpowered aircraft can see and avoid the obstacles of concern.
                     </>
-                  </DetailList>
+                  </BulletList>
                 </>,
                 <Tabs>
                   <Tab heading="ODPs">
@@ -87,13 +88,13 @@ const DepartureEnrouteArrival: NextPage<TaskPage.TopLevelProps> = (props) => {
                       <Link href={references.terps}>TERPS</Link>. Any given runway gets at most one
                       ODP, which is to be considered the default DP for that runway, to be used in
                       the absence of ATC vectors or a SID. ODPs must be designed to terminate at{' '}
-                      <DetailList type="inline" logic="or">
+                      <InlineList logic="or">
                         <>a fix/NAVAID located within the IFR en route structure</>
                         <>
                           an altitude that will allow random IFR flight (minimum diverse vectoring
                           altitude)
                         </>
-                      </DetailList>
+                      </InlineList>
                     </Paragraph>
                   </Tab>
                   <Tab heading="SIDs">
@@ -105,23 +106,23 @@ const DepartureEnrouteArrival: NextPage<TaskPage.TopLevelProps> = (props) => {
                         traffic
                       </Bold>
                       . Unlike ODPs,{' '}
-                      <DetailList type="inline">
+                      <InlineList>
                         <>ATC clearance is required to fly a SID</>
                         <>they are always depicted graphically</>
                         <Danger>
                           takeoff minimums and published climb gradients are mandatory even for part
                           91 operators
                         </Danger>
-                      </DetailList>
+                      </InlineList>
                       . Similar to ODPs, SIDs must be designed to terminate at{' '}
-                      <DetailList type="inline" logic="or">
+                      <InlineList logic="or">
                         <>a fix/NAVAID located within the IFR en route structure</>
                         <>
                           an altitude that will allow random IFR flight (minimum diverse vectoring
                           altitude)
                         </>
                         <>a position and altitude where ATC radar service is provided</>
-                      </DetailList>{' '}
+                      </InlineList>{' '}
                       (this last is not an option for ODP terminations).
                     </Paragraph>
                   </Tab>
@@ -191,11 +192,11 @@ const DepartureEnrouteArrival: NextPage<TaskPage.TopLevelProps> = (props) => {
                 </Paragraph>,
                 <Paragraph>
                   The TAA is broken down into three main areas:{' '}
-                  <DetailList type="inline">
+                  <InlineList>
                     <>straight-in area</>
                     <>right base area</>
                     <></>left base area
-                  </DetailList>
+                  </InlineList>
                   . All three areas may be broken down into sub-sections using RNAV distance arcs
                   from the area's associated IAF, and the straight-in section can also be broken
                   down into multiple pie-slice sectors using a magnetic course to the IAF/IF.

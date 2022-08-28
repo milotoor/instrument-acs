@@ -3,8 +3,8 @@ import React from 'react';
 
 import {
   Bold,
+  BulletList,
   Danger,
-  DetailList,
   Image,
   Info,
   Italic,
@@ -15,7 +15,6 @@ import {
   Warning,
 } from '../../components';
 import { getStructure, getTaskFromSectionLetter } from '../../lib/data_loaders';
-import { referenceURIs } from '../../lib/references';
 
 export const getStaticProps = () => ({
   props: { structure: getStructure(), task: getTaskFromSectionLetter(4, 'A') },
@@ -43,7 +42,7 @@ const InstrumentFlight: NextPage<TaskPage.TopLevelProps> = (props) => {
                   <Tab heading="Control and Performance Method">
                     <Paragraph>
                       This method divides the instruments into three categories:{' '}
-                      <DetailList type="bullet">
+                      <BulletList>
                         <>
                           <Bold>Control instruments</Bold> depict immediate attitude and power
                           changes; these include the attitude indicator, manifold pressure gauge and
@@ -61,12 +60,12 @@ const InstrumentFlight: NextPage<TaskPage.TopLevelProps> = (props) => {
                           aircraft's position relative to navigational facilities or fixes, using
                           ground- or space-based radio signals.
                         </>
-                      </DetailList>
+                      </BulletList>
                     </Paragraph>
 
                     <Paragraph>
                       This method also emphasizes a four step process for changing attitude:{' '}
-                      <DetailList type="bullet">
+                      <BulletList>
                         <>
                           <Bold>Establish:</Bold> change the aircraft's pitch and/or bank in
                           conjunction with power. Reference the AI and the tach/MPG while doing so.
@@ -84,7 +83,7 @@ const InstrumentFlight: NextPage<TaskPage.TopLevelProps> = (props) => {
                           during the cross-check, make adjustments in{' '}
                           <Italic>small increments</Italic>
                         </>
-                      </DetailList>
+                      </BulletList>
                     </Paragraph>
                   </Tab>
 
@@ -100,7 +99,7 @@ const InstrumentFlight: NextPage<TaskPage.TopLevelProps> = (props) => {
                         duration of a maneuver; the supporting instruments indicate a flight
                         parameter's trend.
                       </Bold>
-                      <DetailList type="bullet" bullet="disc">
+                      <BulletList bullet="disc">
                         <>
                           <Bold>Pitch:</Bold> during straight and level flight, the primary
                           instrument is the <Info>altimeter</Info>. Supporting instruments include
@@ -125,7 +124,7 @@ const InstrumentFlight: NextPage<TaskPage.TopLevelProps> = (props) => {
                           <Bold>Power:</Bold> primary instrument is the <Info>ASI</Info>, as the
                           main purpose of power is to maintain a desired airspeed.
                         </>
-                      </DetailList>
+                      </BulletList>
                     </>
                   </Tab>
                 </Tabs>,

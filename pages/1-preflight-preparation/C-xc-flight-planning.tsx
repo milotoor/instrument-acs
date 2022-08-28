@@ -4,11 +4,12 @@ import React from 'react';
 import {
   AIM,
   Bold,
+  BulletList,
   Collapse,
-  DetailList,
   FAR,
   Gray,
   Image,
+  InlineList,
   Italic,
   Katex,
   Link,
@@ -38,7 +39,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                 <>
                   To plan the en route portion of the flight, work backwards from an IAF to the
                   departure airport. Consider the following during the planning:{' '}
-                  <DetailList type="bullet">
+                  <BulletList>
                     <>
                       The Chart Supplement publishes a list of <Bold>Preferred Routes</Bold>. These
                       are routes between large terminal areas in the country, and are mostly geared
@@ -58,7 +59,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                       <Bold>Standard Terminal Arrivals (STARs)</Bold> that could simplify your
                       transition to/from the en route structure.
                     </>
-                  </DetailList>
+                  </BulletList>
                 </>,
                 <>
                   The Chart Supplement will have the most recent information about an airport and
@@ -80,7 +81,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                   <Tab heading="Regulatory requirements">
                     <Paragraph>
                       The process looks like this:
-                      <DetailList type="bullet">
+                      <BulletList>
                         <>
                           Determine the forecast weather at the proposed alternate at the time you
                           would arrive there
@@ -96,7 +97,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                         <>
                           Of these procedures, determine which has the lowest ceiling and visibility
                           minimums. Standard alternate minimums are{' '}
-                          <DetailList type="inline">
+                          <InlineList>
                             <>
                               ceiling 600 feet and visibility 2 statute miles for a precision
                               approach
@@ -105,7 +106,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                               ceiling 800 feet and visibility 2 statute miles for a nonprecision
                               approach
                             </>
-                          </DetailList>
+                          </InlineList>
                         </>
                         <>
                           <Bold>
@@ -114,7 +115,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                             alternate
                           </Bold>
                         </>
-                      </DetailList>
+                      </BulletList>
                     </Paragraph>
 
                     <Paragraph>
@@ -145,7 +146,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                   <Tab heading="GPS and WAAS">
                     <Paragraph>
                       This is where things get a little messy.
-                      <DetailList type="bullet">
+                      <BulletList>
                         <>
                           If you have a WAAS-capable aircraft, (i.e. your aircraft is equipped with
                           a <Link href={references.tso.c145}>TSO-C145</Link> or{' '}
@@ -170,7 +171,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                           exclusion (FDE) and the pilot must perform a preflight RAIM check. See{' '}
                           <AIM paragraph={[1, 1, 17, 'b', 5, 'c']} />.
                         </>
-                      </DetailList>
+                      </BulletList>
                     </Paragraph>
                   </Tab>
                 </Tabs>,
@@ -179,7 +180,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
               return [
                 <Paragraph heading="Altitude Types">
                   There are several different types of altitude relevant to VFR and IFR flight:
-                  <DetailList type="bullet">
+                  <BulletList>
                     <>
                       <Bold>Indicated altitude</Bold> is the altitude read off the altimeter when
                       it's set to the local setting. It's important that all pilots in a shared
@@ -202,16 +203,16 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                       <Bold>True altitude</Bold> is the exact height above mean sea level. The local
                       altimeter setting yields true altitude when at field level.
                     </>
-                  </DetailList>
+                  </BulletList>
                 </Paragraph>,
 
                 <Paragraph heading="Terrain and Obstacles">
                   Safe cruise altitudes can be selected by paying attention to the route's{' '}
-                  <DetailList type="inline">
+                  <InlineList>
                     <>Minimum Enroute Altitude (MEA)</>
                     <>Minimum Obstacle Clearance Altitude (MOCA)</>
                     <>Off-Route Obstacle Clearence Altitudes (OROCAs)</>
-                  </DetailList>
+                  </InlineList>
                   . The MEA guarantees obstacle clearance and adequate signal reception to maintain
                   positive course guidance between NAVAIDs. The MOCA also guarantees obstacle
                   clearance but only provides adequate signal reception within 22 nautical miles (25
@@ -279,7 +280,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
 
                 <Paragraph>
                   Flying VFR-on-top subjects the pilot to regulations for both IFR and VFR flight:
-                  <DetailList type="bullet" bullet="disc">
+                  <BulletList bullet="disc">
                     <>
                       You must fly at the appropriate VFR altitude as prescribed in{' '}
                       <FAR section={[91, 159]} />
@@ -300,7 +301,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                       ATC can provide accurate traffic information and separation.
                     </>
                     <>VFR-on-top is not permitted in Class A airspace.</>
-                  </DetailList>
+                  </BulletList>
                 </Paragraph>,
 
                 <Paragraph heading="Oxygen Requirements">
@@ -308,7 +309,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                   <FAR section={[91, 211]} /> specifies the requirements. Note that these values
                   refer to <Italic>cabin pressure altitudes</Italic>. If the airplane is pressurized
                   the rules are different.{' '}
-                  <DetailList type="bullet" bullet="disc">
+                  <BulletList bullet="disc">
                     <>
                       <Bold>Between 12,000 and 14,500 feet:</Bold> required flight crew members must
                       have supplemental oxygen if the flight is longer than 30 minutes at those
@@ -322,7 +323,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                       <Bold>Above 15,000 feet:</Bold> everyone on the aircraft must be provided with
                       supplemental oxygen.
                     </>
-                  </DetailList>
+                  </BulletList>
                 </Paragraph>,
                 <Paragraph>
                   Additionally, the FAA encourages pilots to use supplemental oxygen{' '}
@@ -353,7 +354,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                   </Paragraph>
                   <Paragraph>
                     where:
-                    <DetailList type="bullet" bullet="disc">
+                    <BulletList bullet="disc">
                       <>
                         <Katex>h</Katex> is the altitude at which we want to calculate the pressure,
                         expressed in meters.
@@ -382,7 +383,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                         <Katex>T</Katex> is the temperature at altitude <Katex>h</Katex>, expressed
                         in Kelvins
                       </>
-                    </DetailList>
+                    </BulletList>
                   </Paragraph>
                   <Paragraph>Given that, we can calculate TAS like so:</Paragraph>
                   <Paragraph>
@@ -405,7 +406,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                 <>
                   The ETA is simply the ETD plus the estimated time enroute (ETE). Calculating the
                   ETE is not complicated, it's just math:
-                  <DetailList type="bullet" bullet="decimal">
+                  <BulletList bullet="decimal">
                     <>calculate the time and distance it will take to climb to cruise altitude</>
                     <>calculate how long the descent will take, and where it should begin</>
                     <>
@@ -413,7 +414,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                       altitude, given the wind conditions; what matters is groundspeed, so you'll
                       need your trusty E6B.
                     </>
-                  </DetailList>
+                  </BulletList>
                 </>,
                 <>
                   Converting to UTC is trivial, complicated only by the existence of daylight
@@ -428,14 +429,14 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                   <FAR section={[91, 167]} /> is the relevant regulation. It specifies that "no
                   person may operate a civil aircraft in IFR conditions unless it carries enough
                   fuel to:"
-                  <DetailList type="bullet" bullet="decimal">
+                  <BulletList bullet="decimal">
                     <>Complete the flight to the first airport of intended landing</>
                     <>
                       Fly from that airport to the alternate airport{' '}
                       <Bold italic>(if an alternate is required)</Bold>
                     </>
                     <>Fly after that for 45 minutes at normal cruising speed</>
-                  </DetailList>
+                  </BulletList>
                 </>,
 
                 <>
@@ -461,7 +462,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                   required in class G airspace (but VFR rules require you to remain clear of
                   clouds). <AIM paragraph={[5, 1, 6]} /> describes how to fill out a flight plan.
                   Important items include:
-                  <DetailList type="bullet">
+                  <BulletList>
                     <>
                       ATC issues clearances based on aircraft capabilities filed in Items 10 and 18,
                       so it behooves the pilot to list all of the equipment suffixes applicable.
@@ -471,7 +472,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                       clearance delays)
                     </>
                     <>You can request to not receive any SIDs or STARs in the flight plan remarks</>
-                  </DetailList>
+                  </BulletList>
                 </>,
 
                 <Image src="icao_flight_plan" />,
@@ -484,7 +485,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
               return [
                 <>
                   An IFR flight plan may be activated in a number of different ways:{' '}
-                  <DetailList type="bullet" bullet="disc">
+                  <BulletList bullet="disc">
                     <>
                       When departing an airport with a control tower, you can usually get the
                       clearance directly from ground control.
@@ -514,7 +515,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                       </Bold>{' '}
                       See <AIM paragraph={[5, 2, 6]} /> for more.
                     </>
-                  </DetailList>
+                  </BulletList>
                 </>,
                 <>
                   It's possible to file a <Bold>composite flight plan</Bold>, which enables the

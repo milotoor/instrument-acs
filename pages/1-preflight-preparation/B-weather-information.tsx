@@ -4,11 +4,12 @@ import React from 'react';
 import {
   AIM,
   Bold,
+  BulletList,
   Danger,
-  DetailList,
   Gray,
   Image,
   Info,
+  InlineList,
   Italic,
   Katex,
   Link,
@@ -101,7 +102,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                     <Paragraph heading="TAFs" hr>
                       TAFs are most thoroughly defined by <Link.Reference reference="AC 00-45" />{' '}
                       paragraph 5.11 (page 5-75, 204 overall). Miscellaneous facts:
-                      <DetailList type="bullet" bullet="disc">
+                      <BulletList bullet="disc">
                         <>
                           They describe aviation weather expected to occur during a specific period,{' '}
                           <Bold>within 5 statute miles</Bold> of the center of the airport's runway
@@ -114,17 +115,17 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                         <>
                           A <Bold>TEMPO</Bold> group is included in the TAF only when forecast
                           meteorological conditions are expected to:
-                          <DetailList type="inline">
+                          <InlineList>
                             <>
                               have a high percentage (greater than 50 percent) probability of
                               occurrence
                             </>
                             <>last for one hour or less in each instance</>
                             <>in the aggregate, cover less than half of the period</>
-                          </DetailList>
+                          </InlineList>
                           .
                         </>
-                      </DetailList>
+                      </BulletList>
                     </Paragraph>
                   </Tab>
 
@@ -146,11 +147,11 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                     <Paragraph heading="AIRMETs">
                       AIRMETs are primarily of concern to lighter aircraft. They come in three
                       flavors:{' '}
-                      <DetailList type="inline">
+                      <InlineList>
                         <>Sierra (mountain obscuration or IFR)</>
                         <>Tango (turbulence)</>
                         <>Zulu (icing)</>
-                      </DetailList>
+                      </InlineList>
                       . Per <AIM paragraph={[7, 1, 6, 'b']} /> they are issued every 6 hours, with a
                       maximum forecast period of 6 hours.
                     </Paragraph>
@@ -158,10 +159,10 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                     <Paragraph heading="SIGMETs">
                       SIGMETs are issued for significant weather hazards that are of concern to all
                       aircraft. Examples include:
-                      <DetailList type="bullet" bullet="disc">
+                      <BulletList bullet="disc">
                         <>Widespread sand or dust storms</>
                         <>Thunderstorms</>
-                      </DetailList>
+                      </BulletList>
                     </Paragraph>
 
                     <Paragraph>
@@ -284,19 +285,19 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                 </Paragraph>,
                 <>
                   The general characteristics of unstable air include{' '}
-                  <DetailList type="inline">
+                  <InlineList>
                     <>good visibility</>
                     <>showery precipitation</>
                     <>cumuliform-type clouds</>
                     <>turbulent air</>
-                  </DetailList>
+                  </InlineList>
                   . By contrast, characteristics of stable air include{' '}
-                  <DetailList type="inline">
+                  <InlineList>
                     <>poor visibility</>
                     <>steady precipitation</>
                     <>stratus-type clouds</>
                     <>smooth air</>
-                  </DetailList>
+                  </InlineList>
                   .
                 </>,
 
@@ -332,7 +333,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                   <Tab heading="Macro-Systems">
                     <Paragraph>
                       In the northern hemisphere:
-                      <DetailList type="bullet">
+                      <BulletList>
                         <>
                           Air circulates clockwise around high pressure systems and counterclockwise
                           around low pressure systems
@@ -350,7 +351,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                           The <Bold>Coriolis force</Bold> deflects winds to the right. The faster
                           the winds, the greater the deflection.
                         </>
-                      </DetailList>
+                      </BulletList>
                     </Paragraph>
 
                     <Paragraph>
@@ -383,7 +384,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                     <Paragraph>
                       For reasons not entirely clear to me, wind shear patterns vary between front
                       types:
-                      <DetailList type="bullet" bullet="alpha">
+                      <BulletList bullet="alpha">
                         <>
                           with a <ColdFront />, it occurs just after the front passes and for a
                           short period thereafter
@@ -395,7 +396,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                           <WarmFront plural /> seem to produce much greater wind shear than{' '}
                           <ColdFront plural /> do
                         </>
-                      </DetailList>
+                      </BulletList>
                     </Paragraph>
 
                     <Paragraph>
@@ -409,11 +410,11 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
               return [
                 <>
                   Temperature has multiple profound effects on aviation, including{' '}
-                  <DetailList type="inline">
+                  <InlineList>
                     <>density altitude</>
                     <>atmospheric stability</>
                     <>water absorption</>
-                  </DetailList>
+                  </InlineList>
                   .
                 </>,
                 <>
@@ -479,12 +480,12 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
               return [
                 <>
                   Clouds are grouped into four families:{' '}
-                  <DetailList type="inline">
+                  <InlineList>
                     <>high</>
                     <>middle</>
                     <>low</>
                     <>those with extensive vertical development</>
-                  </DetailList>
+                  </InlineList>
                   . High clouds are mostly ice crystals and the least likely to be an icing concern.
                   Clouds with extensive vertical development are indications of unstable air and are
                   very turbulent.
@@ -533,7 +534,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                   Turbulence is defined as irregular motion of an aircraft, especially when
                   characterized by rapid up-and-down motion caused by a rapid variation of
                   atmospheric wind velocities. It's caused by{' '}
-                  <DetailList type="inline">
+                  <InlineList>
                     <>
                       convective currents (<Bold>convective turbulence</Bold>)
                     </>
@@ -541,17 +542,17 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                       obstructions in the wind flow (<Bold>mechanical turbulence</Bold>)
                     </>
                     <>wind shear</>
-                  </DetailList>
+                  </InlineList>
                   .
                 </>,
                 <>
                   Turbulence is reported with four intensity levels:{' '}
-                  <DetailList type="inline">
+                  <InlineList>
                     <>light</>
                     <>moderate</>
                     <>severe</>
                     <>extreme</>
-                  </DetailList>
+                  </InlineList>
                   . Severe turbulence causes the aircraft to be momentarily out of control, while
                   extreme turbulence may cause structural damage.
                 </>,
@@ -571,16 +572,16 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                 <>
                   Thunderstorms are extremely hazardous to all aircraft and great care should be
                   taken to avoid them. There are three necessary ingredients:{' '}
-                  <DetailList type="inline">
+                  <InlineList>
                     <>sufficiently moist air</>
                     <>an unstable atmosphere (i.e. a steep lapse rate)</>
                     <>a lifting force</>
-                  </DetailList>
+                  </InlineList>
                   .
                 </>,
                 <>
                   There are three stages to thunderstorms:{' '}
-                  <DetailList type="inline">
+                  <InlineList>
                     <>
                       the cumulus stage (characterized by updrafts and low pressure at the surface)
                     </>
@@ -589,7 +590,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                       downdrafts and precipitation)
                     </>
                     <>the dissipating stage (characterized by downdrafts)</>
-                  </DetailList>
+                  </InlineList>
                 </>,
                 <>
                   A <Bold>squall line</Bold> is a nonfrontal band of thunderstorms, typically
@@ -599,13 +600,13 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                 </>,
                 <>
                   The most significant hazards associated with thunderstorms are{' '}
-                  <DetailList type="inline">
+                  <InlineList>
                     <>turbulence</>
                     <>microbursts</>
                     <>
                       hail, particularly beneath the <Bold>anvil</Bold>
                     </>
-                  </DetailList>
+                  </InlineList>
                   . Additionally, lighting can damage avionics equipment, temporarily blind the
                   pilot and induce permanent errors in the magnetic compass. Near the ground (i.e.
                   after takeoff, on an approach or while landing){' '}
@@ -616,7 +617,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                   aircraft because they are, by their nature, difficult to foresee and avoid. If you
                   cannot avoid penetrating a thunderstorm, <AIM paragraph={[7, 1, 27, 'c']} />{' '}
                   provides the recommended recovery procedure:{' '}
-                  <DetailList type="bullet">
+                  <BulletList>
                     <>
                       Keep your eyes inside and on the instruments; looking outside can be
                       temporarily blinding due to lightning
@@ -631,7 +632,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                       Don't turn back; making a 180° turn likely prolongs your time in the storm and
                       places additional stress on the aircraft
                     </>
-                  </DetailList>
+                  </BulletList>
                 </>,
                 <Paragraph heading="Microbursts">
                   Microbursts are short-lived, intense downdrafts which become strong horizontal
@@ -675,7 +676,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                 <>
                   Icing intensity should be reported using four standardized terms.{' '}
                   <AIM paragraph={[7, 1, 19]} /> defines these terms like so:
-                  <DetailList type="bullet">
+                  <BulletList>
                     <>
                       <Bold>Trace:</Bold> ice becomes noticeable and accumulates at a slow pace
                       (less than ¼ inch per hour on the outer wing)
@@ -694,7 +695,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                       icing, such as areas aft of protected surfaces" (greater than 3 inches per
                       hour). <Danger>By regulation, immediate exit is required.</Danger>
                     </>
-                  </DetailList>
+                  </BulletList>
                 </>,
 
                 <>
@@ -704,7 +705,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
 
                 <Paragraph heading="Types of Icing" hr>
                   There are three types of structural icing:
-                  <DetailList type="bullet">
+                  <BulletList>
                     <>
                       Clear ice forms when{' '}
                       <Bold>
@@ -713,12 +714,12 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                       </Bold>
                       . This is the most dangerous form of icing as it is{' '}
                       <Danger>difficult to see</Danger>. Conditions conducive to clear icing include{' '}
-                      <DetailList type="inline">
+                      <InlineList>
                         <>temperatures close to the freezing point</>
                         <>large amounts of liquid water</>
                         <>high airspeed</>
                         <>large droplets</>
-                      </DetailList>
+                      </InlineList>
                       .
                     </>
                     <>
@@ -733,12 +734,12 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                       Mixed ice is a mixture of clear and rime ice and forms when the conditions for
                       both clear and rime ice are present simultaneously.
                     </>
-                  </DetailList>
+                  </BulletList>
                 </Paragraph>,
                 <>
                   When certain weather phenomena are encountered, it's possible to make inferences
                   about the air temperature at a higher altitude:{' '}
-                  <DetailList type="inline">
+                  <InlineList>
                     <>
                       freezing rain indicates higher temperatures above you (the rain forms as
                       liquid water and then falls into a freezing layer but does not itself freeze
@@ -746,12 +747,12 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                     </>
                     <>wet snow indicates that the freezing level is above you</>
                     <>ice pellets indicate freezing rain above</>
-                  </DetailList>
+                  </InlineList>
                   .
                 </>,
                 <Paragraph heading="Hazards of Structural Icing" hr>
                   There are numerous hazards associated with structural icing:
-                  <DetailList type="bullet" bullet="disc">
+                  <BulletList bullet="disc">
                     <>
                       Ice affects the shape of the airfoil, which in turn reduces the coefficient of
                       lift and the critical angle of attack;{' '}
@@ -797,7 +798,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                       (see <Link href={references.tailplane_icing}>this article</Link> for a
                       detailed explanation).
                     </>
-                  </DetailList>
+                  </BulletList>
                 </Paragraph>,
                 <Paragraph heading="Pilot Response to Icing" hr>
                   Preflight briefing for an IFR flight in IMC should always include checking the
@@ -844,7 +845,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                 </>,
                 <>
                   Fog is <Link href={references.fog.types}>classified by the way it's formed</Link>:
-                  <DetailList type="bullet">
+                  <BulletList>
                     <>
                       <Bold>Radiation fog</Bold> is formed by the cooling of land after sunset by
                       infrared thermal radiation in calm conditions with a clear sky. The cooling
@@ -868,7 +869,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                       <Bold>Upslope fog</Bold> is formed when moist air is forced up hill and cools
                       due to <Link href={references.adiabatic_process}>adiabatic cooling</Link>.
                     </>
-                  </DetailList>
+                  </BulletList>
                 </>,
               ];
             case '3k': // Frost
