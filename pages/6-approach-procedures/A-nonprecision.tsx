@@ -4,6 +4,7 @@ import React from 'react';
 import {
   AIM,
   Bold,
+  BulletList,
   Danger,
   Info,
   InlineList,
@@ -11,10 +12,12 @@ import {
   Paragraph,
   Quotation,
   ReferenceList,
+  Success,
   Tab,
   Tabs,
   TaskPage,
   Term,
+  ToDo,
   Warning,
 } from '../../components';
 import { getStructure, getTaskFromSectionLetter } from '../../lib/data_loaders';
@@ -105,6 +108,69 @@ const Nonprecision: NextPage<TaskPage.TopLevelProps> = (props) => {
                   thorough discussion.
                 </Paragraph>,
 
+                <Paragraph
+                  heading="Continuous descent final approach"
+                  hr
+                  references={<Link.Reference reference="AC 120-108" />}
+                >
+                  A more stable way of flying NPAs is{' '}
+                  <Term>continuous descent final approach (CDFA)</Term>, also known as
+                  constant-angle nonprecision approach (CANPA). Instead of diving and driving,{' '}
+                  <Success>the aircraft descends at a continuous rate</Success> from some point on
+                  the final approach course (usually the FAF) down to the runway threshold. This
+                  makes for a much more <Success>stabilized approach</Success> which, all things
+                  equal, is a superior way to land.
+                </Paragraph>,
+
+                <>
+                  But, alas, all things are not equal. Calculating where to begin the descent is not
+                  complicated but way too difficulty to do while flying the approach. Some avionics
+                  systems can provide <Term>advisory glidepaths</Term> (shown as LNAV+V on approach
+                  charts), which handle the math for you but which require caution to use:
+                  <BulletList>
+                    <>
+                      The advisory glidepath{' '}
+                      <Danger>does not guarantee obstacle protection below the MDA</Danger>
+                    </>
+                    <>
+                      When flying an LNAV+V approach in the G1000 with the autopilot coupled,{' '}
+                      <Danger>
+                        the aircraft will not level off at the MDA even if the MDA is set in the
+                        altitude preselect!
+                      </Danger>{' '}
+                      Hence, it is crucial that the pilot keep in mind the nature of the approach
+                      they are flying; though it may feel like an approach with vertical guidance,
+                      it is emphatically not!
+                    </>
+                    <>
+                      <Warning>
+                        Pilots flying CDFA must be very cautious not to descend below MDA when
+                        making the land/go-missed decision.
+                      </Warning>{' '}
+                      In a precision approach, the DA is not a minimum descent altitude--it's
+                      understood that the aircraft will descend a bit further before it begins
+                      climbing. <Warning>The nonprecision approach's MDA is not like this.</Warning>{' '}
+                      Thus, some operators use SOPs that{' '}
+                      <Info>
+                        incorporate a buffer and treat MDA+50 or MDA+100 as the "decision altitude."
+                      </Info>
+                    </>
+                  </BulletList>
+                </>,
+                <>
+                  See these two articles from IFR Magazine for more:{' '}
+                  <BulletList bullet="disc">
+                    <>
+                      <Link href={references.cdfa}>Constant Angle Descent</Link> (published 29 July,
+                      2014; updated 12 November, 2019)
+                    </>
+                    <>
+                      <Link href={references.advisory_glidepath}>Advisory Glidepaths</Link>{' '}
+                      (published 31 July, 2014; updated 12 November, 2019)
+                    </>
+                  </BulletList>
+                </>,
+
                 <Paragraph heading="Approach types" hr>
                   Nuances unique to each type of NPA are discussed below.
                 </Paragraph>,
@@ -144,7 +210,12 @@ const Nonprecision: NextPage<TaskPage.TopLevelProps> = (props) => {
                       Supplemental Flight Manual declaring the receiver's fitness for flying to LP
                       minima.
                     </Tab>
-                    <Tab heading="LOC and LDA">aoeu</Tab>
+                    <Tab heading="LOC and LDA">
+                      <ToDo />
+                    </Tab>
+                    <Tab heading="VOR">
+                      <ToDo />
+                    </Tab>
                   </Tabs>
                 </>,
               ];
@@ -160,5 +231,7 @@ const Nonprecision: NextPage<TaskPage.TopLevelProps> = (props) => {
 export default Nonprecision;
 
 const references = {
+  advisory_glidepath: uri.ifr_mag('system', 'advisory-glidepaths'),
+  cdfa: uri.ifr_mag('technique', 'constant-angle-descent'),
   flight_insight_vdp: uri.youtube('vhSzPqN7r74'),
 };
