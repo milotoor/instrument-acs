@@ -236,12 +236,11 @@ function ParagraphReferences({ references }: ParagraphReferenceProps) {
         const isLast = i === referenceArray.length - 1;
         const textColor = 'text-slate-400';
         return (
-          <span className={cn('text-xs', textColor, { 'mr-2': !isLast })}>
+          <span className={cn('text-xs', textColor, { 'mr-2': !isLast })} key={i}>
             {React.cloneElement(reference, {
               ...reference.props,
               bold: false,
               className: cn('hover:text-slate-500', textColor),
-              key: i,
             })}
             {isLast ? null : ','}
           </span>
