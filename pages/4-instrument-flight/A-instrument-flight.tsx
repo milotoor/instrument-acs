@@ -38,7 +38,7 @@ const InstrumentFlight: NextPage<TaskPage.TopLevelProps> = (props) => {
 
           <Tabs>
             <Tab heading="Control and Performance Method">
-              <Paragraph>
+              <>
                 This method divides the instruments into three categories:{' '}
                 <BulletList>
                   <>
@@ -58,9 +58,9 @@ const InstrumentFlight: NextPage<TaskPage.TopLevelProps> = (props) => {
                     space-based radio signals.
                   </>
                 </BulletList>
-              </Paragraph>
+              </>
 
-              <Paragraph>
+              <>
                 This method also emphasizes a four step process for changing attitude:{' '}
                 <BulletList>
                   <>
@@ -80,7 +80,7 @@ const InstrumentFlight: NextPage<TaskPage.TopLevelProps> = (props) => {
                     cross-check, make adjustments in <Italic>small increments</Italic>
                   </>
                 </BulletList>
-              </Paragraph>
+              </>
             </Tab>
 
             <Tab heading="Primary and Supporting Method">
@@ -128,6 +128,7 @@ const InstrumentFlight: NextPage<TaskPage.TopLevelProps> = (props) => {
             pilots to individually determine which instruments give them the most pertinent
             information for each phase of a maneuver.
           </Paragraph>,
+
           <>
             With that said, the <Bold>selected radial cross-check</Bold> technique is standard for
             glass panels and is the only technique discussed in the IFH chapter 6 part 2. This scan

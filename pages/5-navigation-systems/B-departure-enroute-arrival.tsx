@@ -67,7 +67,7 @@ const DepartureEnrouteArrival: NextPage<TaskPage.TopLevelProps> = (props) => {
           </>,
           <Tabs>
             <Tab heading="ODPs">
-              <Paragraph>
+              <>
                 <Bold>Obstacle Departure Procedures (ODPs)</Bold> are DPs whose primary purpose is
                 to <Bold>provide obstacle protection.</Bold> They are always provided in textual
                 form, and{' '}
@@ -76,11 +76,11 @@ const DepartureEnrouteArrival: NextPage<TaskPage.TopLevelProps> = (props) => {
                 </Tooltip>{' '}
                 The procedures are provided alongside the takeoff minima on both the FAA charts and
                 Jeppesen 10-9 pages.
-              </Paragraph>
-              <Paragraph>
-                <Image src="departure_procedure" />
-              </Paragraph>
-              <Paragraph>
+              </>
+
+              <Image src="departure_procedure" />
+
+              <>
                 An ODP must be developed when obstructions penetrate the 40:1 departure obstacle
                 clearance surface (OCS) as described in <Link href={references.terps}>TERPS</Link>.
                 Any given runway gets at most one ODP, which is to be considered the default DP for
@@ -93,10 +93,11 @@ const DepartureEnrouteArrival: NextPage<TaskPage.TopLevelProps> = (props) => {
                     altitude)
                   </>
                 </InlineList>
-              </Paragraph>
+              </>
             </Tab>
+
             <Tab heading="SIDs">
-              <Paragraph>
+              <>
                 <Bold>Standard Instrument Departures (SIDs)</Bold> are DPs whose primary purpose is
                 to{' '}
                 <Bold>
@@ -121,10 +122,11 @@ const DepartureEnrouteArrival: NextPage<TaskPage.TopLevelProps> = (props) => {
                   <>a position and altitude where ATC radar service is provided</>
                 </InlineList>{' '}
                 (this last is not an option for ODP terminations).
-              </Paragraph>
+              </>
             </Tab>
+
             <Tab heading="DVAs & VCOA">
-              <Paragraph>
+              <>
                 Per <AIM paragraph={[5, 2, 9, 'b']} />: a{' '}
                 <Bold>
                   Diverse Vector Area (DVA) is an area in which ATC may provide random radar vectors
@@ -134,9 +136,9 @@ const DepartureEnrouteArrival: NextPage<TaskPage.TopLevelProps> = (props) => {
                 , established in accordance with the TERPS criteria for diverse departures. The DVA
                 provides obstacle and terrain avoidance in lieu of taking off from the runway under
                 IFR using an ODP or SID.
-              </Paragraph>
+              </>
 
-              <Paragraph>
+              <>
                 Alternatively, per <AIM paragraph={[5, 2, 9, 'e', 7]} />, a{' '}
                 <Bold>
                   Visual Climb Over Airport (VCOA) procedure enables an aircraft operating in VMC
@@ -145,38 +147,38 @@ const DepartureEnrouteArrival: NextPage<TaskPage.TopLevelProps> = (props) => {
                 </Bold>
                 . At this point, the pilot may proceed in IMC to the first en route fix using a
                 diverse departure.
-              </Paragraph>
+              </>
 
-              <Paragraph>
-                <Image src="departure_procedure">
-                  In the procedure above, the VCOA has a minimum ceiling of 4400' and visibility of
-                  3 statute miles. Pilots flying the VCOA procedure are{' '}
-                  <Bold>
-                    expected to remain within 3 statute miles of the airport until reaching the "at
-                    or above" altitude (in this case 9400')
-                  </Bold>
-                  , after which they may proceed on course according to their clearance.
-                </Image>
-              </Paragraph>
+              <Image src="departure_procedure">
+                In the procedure above, the VCOA has a minimum ceiling of 4400' and visibility of 3
+                statute miles. Pilots flying the VCOA procedure are{' '}
+                <Bold>
+                  expected to remain within 3 statute miles of the airport until reaching the "at or
+                  above" altitude (in this case 9400')
+                </Bold>
+                , after which they may proceed on course according to their clearance.
+              </Image>
 
-              <Paragraph>
+              <>
                 There is no minimum climb gradient for the circling maneuver (indeed it would not
                 make much sense to have one); however upon arriving at the VCOA's termination
                 altitude the aircraft is once again expected to climb at a minimum of 200 per
                 nautical mile.
-              </Paragraph>
+              </>
 
-              <Paragraph>
+              <>
                 Confoundingly, both Jeppesen and FAA charts are inconsistent in how they refer to
                 the VCOA minimums. Sometimes they describe the minimums as "for climb in visual
                 conditions" (as they do in the procedure above) while other times they use the more
                 explicit "for visual climb over airport".
-              </Paragraph>
+              </>
             </Tab>
           </Tabs>,
+
           <Paragraph heading="Standard Arrival Procedures">
             <ToDo />
           </Paragraph>,
+
           <Paragraph heading="Terminal Arrival Areas">
             A <Bold>TAA</Bold>, described in <AIM paragraph={[5, 4, 5, 'd']} />, provides a
             transition from the en route structure to the terminal environment with minimal

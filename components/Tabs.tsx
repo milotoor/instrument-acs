@@ -3,6 +3,7 @@ import * as React from 'react';
 
 import { useSize } from '../lib/hooks';
 import { ChildProp } from '../lib/types';
+import { WrapParagraph } from './TaskPage';
 
 type TabsProps = ChildProp<React.ReactElement<TabProps>[]>;
 type TabProps = ChildProp & { active?: boolean; heading: string };
@@ -36,9 +37,14 @@ export function Tabs({ children }: TabsProps) {
         style={{ height: size?.height ?? 0 }}
       >
         <div ref={resizeTarget}>
-          {children.map((tab, i) => (
-            <Tab {...tab.props} active={active === i} key={i} />
-          ))}
+          {children.map((tab, i) => {
+            const { children, ...rest } = tab.props;
+            return (
+              <Tab {...rest} active={active === i} key={i}>
+                <WrapParagraph content={children} />
+              </Tab>
+            );
+          })}
         </div>
       </div>
     </div>

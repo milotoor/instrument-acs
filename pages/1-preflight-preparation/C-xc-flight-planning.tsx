@@ -75,7 +75,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
           </Paragraph>,
           <Tabs>
             <Tab heading="Regulatory requirements">
-              <Paragraph>
+              <>
                 The process looks like this:
                 <BulletList>
                   <>
@@ -107,9 +107,9 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                     </Bold>
                   </>
                 </BulletList>
-              </Paragraph>
+              </>
 
-              <Paragraph>
+              <>
                 If the proposed alternate doesn't have any IAPs, it may still be filed as an
                 alternate if the ceiling and visibility at the time of arrival at the alternate
                 would allow a descent from the MEA under basic VFR. See{' '}
@@ -118,23 +118,21 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                   if you choose to deviate to the alternate, you should use the published minimums
                   for the approach you choose to fly.
                 </Bold>
-              </Paragraph>
+              </>
 
-              <Paragraph>
+              <>
                 Jeppesen charts are great for determining if an airport is suitable as an alternate,
                 because their <Link href={references.jeppesen10_9}>10-9 pages</Link> list out all
                 approaches at the airport and their associated minima. The FAA makes this
                 information available too, in the "Alternate Minimums" section of TERPS, but it's
                 not as easy to decipher and approaches with standard minima aren't included at all.
-              </Paragraph>
+              </>
 
-              <Paragraph>
-                <Image src="jeppesen-10-9" noMargin />
-              </Paragraph>
+              <Image src="jeppesen-10-9" noMargin />
             </Tab>
 
             <Tab heading="GPS and WAAS">
-              <Paragraph>
+              <>
                 This is where things get a little messy.
                 <BulletList>
                   <>
@@ -162,7 +160,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                     <AIM paragraph={[1, 1, 17, 'b', 5, 'c']} />.
                   </>
                 </BulletList>
-              </Paragraph>
+              </>
             </Tab>
           </Tabs>,
         ],

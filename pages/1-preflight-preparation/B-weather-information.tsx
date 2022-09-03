@@ -63,7 +63,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
           </>,
           <Tabs>
             <Tab heading="GFA">
-              <Paragraph>
+              <>
                 The NWS provides the{' '}
                 <Link bold href={references.gfa}>
                   Graphical Forecasts for Aviation
@@ -72,25 +72,23 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                 complete picture of the weather that may impact flight in the continental United
                 States. It's a great product for observing the general weather conditions over a
                 large area.
-              </Paragraph>
+              </>
 
-              <Paragraph>
+              <>
                 Know how to read the most common symbols on the charts; the legend is available{' '}
                 <Link href={references.gfa_symbols}>here</Link>.
-              </Paragraph>
+              </>
 
-              <Paragraph>
-                <Image src="gfa" noMargin />
-              </Paragraph>
+              <Image src="gfa" noMargin />
             </Tab>
 
             <Tab heading="METARs & TAFs">
-              <Paragraph>
+              <>
                 <Bold>Aviation Routine Weather Report (METARs)</Bold> and{' '}
                 <Bold>Terminal Aerodrome Forecasts (TAFs)</Bold> are perhaps the most commonly
                 encountered source of weather information. <AIM paragraph={[7, 1, 28]} /> provides a
                 key for the products' coded language.
-              </Paragraph>
+              </>
 
               <Paragraph heading="TAFs">
                 METARs are most thoroughly defined by <Link.Reference reference="AC 00-45" />{' '}
@@ -127,7 +125,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
             </Tab>
 
             <Tab heading="AIRMETs & SIGMETs">
-              <Paragraph>
+              <>
                 <Link bold href={references.awc.graphical_airmet}>
                   Graphical AIRMET
                 </Link>{' '}
@@ -139,7 +137,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                 AIRMETs and SIGMETs are issued by the AWC, and both are considered “widespread”
                 because they must be either affecting or be forecasted to affect an area of{' '}
                 <Bold>at least 3,000 square miles at any one time.</Bold>
-              </Paragraph>
+              </>
 
               <Paragraph heading="AIRMETs">
                 AIRMETs are primarily of concern to lighter aircraft. They come in three flavors:{' '}
@@ -161,13 +159,11 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                 </BulletList>
               </Paragraph>
 
-              <Paragraph>
-                <Image src="graphical_airmets" noMargin />
-              </Paragraph>
+              <Image src="graphical_airmets" noMargin />
             </Tab>
 
             <Tab heading="SIGWX">
-              <Paragraph>
+              <>
                 <Bold>Significant Weather charts</Bold> come in{' '}
                 <Link bold href={references.awc.sigwx.low}>
                   low (below FL240)
@@ -178,53 +174,48 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                 </Link>{' '}
                 varieties. The low SIGWX chart shows freezing levels, turbulence, and low cloud
                 ceilings:
-              </Paragraph>
+              </>
 
-              <Paragraph>
-                <Image src="sigwx_low" />
-              </Paragraph>
+              <Image src="sigwx_low" />
 
-              <Paragraph>
+              <>
                 The high SIGWX chart shows thunderstorms, tropical cyclones, moderate or severe
                 turbulence, jetstreams, volcanic eruptions and more:
-              </Paragraph>
-              <Paragraph>
+              </>
+
+              <>
                 <Image src="sigwx_high" noMargin />
-              </Paragraph>
+              </>
             </Tab>
 
             <Tab heading="Miscellaneous Charts">
               <Tabs>
                 <Tab heading="Surface Analysis">
-                  <Paragraph>
+                  <>
                     The{' '}
                     <Link bold href={references.awc.surface_analysis}>
                       Surface Analysis Chart
                     </Link>{' '}
                     shows useful information regarding front positions, pressure systems, wind
                     intensities and precipitation.
-                  </Paragraph>
+                  </>
 
-                  <Paragraph>
-                    <Image src="surface_analysis_chart" noMargin />
-                  </Paragraph>
+                  <Image src="surface_analysis_chart" noMargin />
                 </Tab>
 
                 <Tab heading="Convective Outlooks">
-                  <Paragraph>
+                  <>
                     <Bold>Convective Outlook</Bold> charts describe prospects for general and severe
                     thunderstorm activity during the following 24 hours. They should be utilized
                     primarily for planning flights later in the day (other products are better
                     suited for getting current weather information)
-                  </Paragraph>
+                  </>
 
-                  <Paragraph>
-                    <Image src="convective_outlook" noMargin />
-                  </Paragraph>
+                  <Image src="convective_outlook" noMargin />
                 </Tab>
 
                 <Tab heading="Constant Pressure">
-                  <Paragraph>
+                  <>
                     See <Link.Reference reference="AC 00-45" /> paragraph 5.15.1 (page 5-103, 232
                     overall). Constant pressure forecasts depict select weather (e.g. wind) at a
                     specified pressure level (e.g. 300 MB) and the altitudes (in meters) of that
@@ -240,11 +231,9 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                     </Bold>
                     , except in winter when valley fog may occur. The location and strength of the
                     jet stream can be viewed at 300 MB, 250 MB, and 200 MB levels.
-                  </Paragraph>
+                  </>
 
-                  <Paragraph>
-                    <Image src="constant_pressure" noMargin />
-                  </Paragraph>
+                  <Image src="constant_pressure" noMargin />
                 </Tab>
               </Tabs>
             </Tab>
@@ -328,7 +317,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
           </>,
           <Tabs>
             <Tab heading="Macro-Systems">
-              <Paragraph>
+              <>
                 In the northern hemisphere:
                 <BulletList>
                   <>
@@ -349,11 +338,9 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                     winds, the greater the deflection.
                   </>
                 </BulletList>
-              </Paragraph>
+              </>
 
-              <Paragraph>
-                <Image src="cyclonic_flow" noMargin />
-              </Paragraph>
+              <Image src="cyclonic_flow" noMargin />
             </Tab>
 
             <Tab heading="Jetstream">
@@ -363,22 +350,22 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
             </Tab>
 
             <Tab heading="Hazards">
-              <Paragraph>
+              <>
                 Phenomena like <Link.Reference bold reference="AC 00-54" text="wind shear" /> or{' '}
                 <Link.Reference bold reference="AC 00-57" text="mountain wave" /> can be extremely
                 hazardous: countless GA accidents have occurred simply because pilots (especially
                 instrument pilots!) forget that downwind of a mountain range is a high-risk
                 environment.
-              </Paragraph>
+              </>
 
-              <Paragraph>
+              <>
                 <Bold>Thunderstorms</Bold> are a source of extremely hazardous windshear and
                 microbursts. Windshear can be found on all sides a thunderstorm cell and in the
                 downdrafts underneath the cell. The gust front from a thunderstorm can precede the
                 storm itself by <Bold>15 miles or more!</Bold>
-              </Paragraph>
+              </>
 
-              <Paragraph>
+              <>
                 For reasons not entirely clear to me, wind shear patterns vary between front types:
                 <BulletList bullet="alpha">
                   <>
@@ -393,12 +380,12 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                     <ColdFront plural /> do
                   </>
                 </BulletList>
-              </Paragraph>
+              </>
 
-              <Paragraph>
+              <>
                 Additionally,{' '}
                 <Bold>low-level temperature inversions are common sources of windshear.</Bold>
-              </Paragraph>
+              </>
             </Tab>
           </Tabs>,
         ],
@@ -497,7 +484,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
           <Image src="clouds" noMargin />,
           <Tabs>
             <Tab heading="Standing lenticular">
-              <Paragraph>
+              <>
                 <Bold>Altocumulus Standing Lenticular (ACSL)</Bold> clouds are an orographic type of
                 cloud, often formed in patches in the shape of almonds. They are caused by wave
                 motions in the atmosphere and are frequently seen in mountainous or hilly areas.
@@ -505,20 +492,18 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                 for more than 60 miles. The cloud elements form at the windward edge of the cloud
                 and are carried to the downwind edge where they evaporate. The cloud as a whole is
                 usually stationary or slow moving.
-              </Paragraph>
+              </>
 
-              <Paragraph>
+              <>
                 The ACSL clouds indicate the position of the wave crests, but they do not
                 necessarily give an indication on the intensity of turbulence or strength of
                 updrafts and downdrafts. This is because the clouds depend on both lifting and
                 moisture: an ACSL cloud may be visible in weak updrafts where there is an adequate
                 supply of moisture, but may not be visible when the environment is very dry, even if
                 the wave is intense.
-              </Paragraph>
+              </>
 
-              <Paragraph>
-                <Image src="lenticular_cloud" noMargin />
-              </Paragraph>
+              <Image src="lenticular_cloud" noMargin />
             </Tab>
             <Tab heading="High clouds">
               High clouds are mostly made of ice crystals; ironically these are the least likely to

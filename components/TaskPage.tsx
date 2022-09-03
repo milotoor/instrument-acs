@@ -13,6 +13,7 @@ import { Bold, Tooltip } from './Typography';
 // Component prop types
 type ParagraphProps = ChildProp & ParagraphReferenceProps & { heading?: string; hr?: boolean };
 type ParagraphReferenceProps = {
+type WrapParagraphProps = { content: React.ReactNode };
   className?: string;
   references?: OneOrMore<React.ReactElement<LinkProps>>;
 };
@@ -181,23 +182,11 @@ function NoteCard({ heading, id, notes }: NoteCardProps) {
   const notePrefix = heading[0].toLowerCase();
   const note = notes[`${notePrefix}${id}`];
   if (!note || (Array.isArray(note) && note.length === 0)) return null;
-
-  const cardContent = (() => {
-    if (!Array.isArray(note)) return note;
-    return note.map((paragraph, i) => {
-      if (React.isValidElement(paragraph)) {
-        if (paragraph.type === Paragraph) {
-          return React.cloneElement(paragraph, { key: i });
-        }
-      }
-
-      return <Paragraph key={i}>{paragraph}</Paragraph>;
-    });
-  })();
-
   return (
     <div className="w-full bg-white text-black p-2 my-5 rounded-lg shadow-[0px_5px_25px] shadow-yellow-400 text-sm">
-      <NoteContext.Provider value={{ heading, item: id }}>{cardContent}</NoteContext.Provider>
+      <NoteContext.Provider value={{ heading, item: id }}>
+        <WrapParagraph content={note} />
+      </NoteContext.Provider>
     </div>
   );
 }
@@ -250,5 +239,19 @@ export function ReferenceList({ className, references }: ParagraphReferenceProps
         );
       })}
     </div>
+  );
+}
+
+export function WrapParagraph({ content }: WrapParagraphProps) {
+  return (
+    <>
+      {React.Children.map(content, (child, i) => {
+        if (React.isValidElement(child) && child.type === Paragraph) {
+          return React.cloneElement(child, { key: i });
+        }
+
+        return <Paragraph key={i}>{child}</Paragraph>;
+      })}
+    </>
   );
 }
