@@ -10,7 +10,6 @@ import {
   Image,
   Info,
   InlineList,
-  Italic,
   Link,
   Paragraph,
   Quotation,
@@ -311,10 +310,10 @@ const Instruments: NextPage<TaskPage.TopLevelProps> = (props) => {
             I couldn't quite figure out where to place this factoid. <FAR section={[91, 21]} />{' '}
             prohibits the use of portable electronic devices (by the flight crew or passengers) on
             IFR flights unless{' '}
-            <Italic>
-              "the operator of the aircraft has determined will not cause interference with the
-              navigation or communication system of the aircraft."
-            </Italic>{' '}
+            <Quotation>
+              ...the operator of the aircraft has determined [the device] will not cause
+              interference with the navigation or communication system of the aircraft.
+            </Quotation>{' '}
             Curiously, the regulation also does not apply to{' '}
             <InlineList logic="or">
               <>portable voice recorders</>
