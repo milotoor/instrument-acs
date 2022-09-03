@@ -11,7 +11,7 @@ import { Link } from './Link';
 type License = 'CC BY-SA 4.0';
 
 type VerticalPosition = 'bottom' | 'top';
-type HorizontalPosition = 'left' | 'right';
+type HorizontalPosition = 'left' | 'right' | 'center';
 type AttributionPosition = `${VerticalPosition}-${HorizontalPosition}`;
 type AttributionProps = {
   author: string;
@@ -70,9 +70,12 @@ function Attribution({
           'left-0': hPosition === 'left',
           'top-0': vPosition === 'top',
           'right-0': hPosition === 'right',
+          'left-1/2 translate-x-[-50%]': hPosition === 'center',
           'rounded-tr-lg': position === 'bottom-left',
+          'rounded-t-lg': position === 'bottom-center',
           'rounded-tl-lg': position === 'bottom-right',
           'rounded-br-lg': position === 'top-left',
+          'rounded-b-lg': position === 'top-center',
           'rounded-bl-lg': position === 'top-right',
         }
       )}
