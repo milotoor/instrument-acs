@@ -3,10 +3,10 @@ import * as React from 'react';
 
 import { useSize } from '../lib/hooks';
 import { ChildProp } from '../lib/types';
-import { WrapParagraph } from './TaskPage';
+import { ReferenceList, ReferenceListProps, WrapParagraph } from './TaskPage';
 
 type TabsProps = ChildProp<React.ReactElement<TabProps>[]>;
-type TabProps = ChildProp & { active?: boolean; heading: string };
+type TabProps = ChildProp & ReferenceListProps & { active?: boolean; heading: string };
 
 export function Tabs({ children }: TabsProps) {
   const [active, setActive] = React.useState(0);
@@ -51,10 +51,15 @@ export function Tabs({ children }: TabsProps) {
   );
 }
 
-export const Tab = React.forwardRef<HTMLDivElement, TabProps>(({ active, children }, ref) => {
-  return (
-    <div className={cn('overflow-hidden', { 'max-h-0': !active })} ref={ref}>
-      <div className="p-4 ">{children}</div>
-    </div>
-  );
-});
+export const Tab = React.forwardRef<HTMLDivElement, TabProps>(
+  ({ active, children, references }, ref) => {
+    return (
+      <div className={cn('overflow-hidden', { 'max-h-0': !active })} ref={ref}>
+        <div className="p-4 ">
+          {references ? <ReferenceList references={references} /> : null}
+          {children}
+        </div>
+      </div>
+    );
+  }
+);

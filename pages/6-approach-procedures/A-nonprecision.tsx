@@ -87,7 +87,7 @@ const Nonprecision: NextPage<TaskPage.TopLevelProps> = (props) => {
               </Bold>{' '}
               [Emphasis added]
             </Quotation>
-            Unfortunately, not all NPAs have defined VDP's because{' '}
+            Unfortunately, not all NPAs have defined VDPs because{' '}
             <InlineList logic="or">
               <>an obstacle penetrates the visual surface between the MDA and runway threshold</>
               <>DME equipment is unavailable</>
@@ -170,11 +170,8 @@ const Nonprecision: NextPage<TaskPage.TopLevelProps> = (props) => {
 
           <>
             <Tabs>
-              <Tab heading="LNAV and LP">
-                <Paragraph>
-                  <ReferenceList references={<AIM paragraph={[5, 4, 5, 'm']} />} />
-                </Paragraph>
-                <Paragraph>
+              <Tab heading="LNAV and LP" references={<AIM paragraph={[5, 4, 5, 'm']} />}>
+                <>
                   Nonprecision RNAV approaches include <Term>LNAV (LATeral NAVigation)</Term> and{' '}
                   <Term>LP (Localizer Performance)</Term> procedures. procedures. Both types of
                   procedure utilize a <Term>global navigation satellite system (GNSS)</Term> to

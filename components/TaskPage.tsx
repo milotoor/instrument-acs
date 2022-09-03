@@ -11,9 +11,9 @@ import { Link, LinkProps } from './Link';
 import { Bold, Tooltip } from './Typography';
 
 // Component prop types
-type ParagraphProps = ChildProp & ParagraphReferenceProps & { heading?: string; hr?: boolean };
-type ParagraphReferenceProps = {
 type WrapParagraphProps = { content: React.ReactNode };
+type ParagraphProps = ChildProp & ReferenceListProps & { heading?: string; hr?: boolean };
+export type ReferenceListProps = {
   className?: string;
   references?: OneOrMore<React.ReactElement<LinkProps>>;
 };
@@ -216,7 +216,7 @@ export function Paragraph({ children, heading, hr, references }: ParagraphProps)
   );
 }
 
-export function ReferenceList({ className, references }: ParagraphReferenceProps) {
+export function ReferenceList({ className, references }: ReferenceListProps) {
   if (!references) return null;
 
   const referenceArray = Array.isArray(references) ? references : [references];
