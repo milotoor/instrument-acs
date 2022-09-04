@@ -94,7 +94,6 @@ export const Image = Object.assign(
     const { section, structure } = React.useContext(AppContext);
     const { images } = structure;
     const fullSrc = [section, src].join('/');
-    console.log(images);
     const dimensions = images && images[fullSrc];
     const hasCaption = !!caption;
 
