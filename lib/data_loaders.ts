@@ -73,7 +73,7 @@ export function getTaskFromSectionLetter(section: Section.Number, letter: Task.L
 }
 
 function getImageData(pathToRoot: string = '.'): Structure.Images {
-  const tree = dirTree(path.join(pathToRoot, 'public/img'), { extensions: /webp/ });
+  const tree = dirTree(path.join(pathToRoot, 'public/img'), { extensions: /(webp|gif)/ });
   const sections = tree?.children?.filter((child) => child.name.match(/^\d$/)) ?? [];
   return Object.fromEntries(
     sections.flatMap((section) => {

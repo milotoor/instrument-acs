@@ -9,7 +9,7 @@ if ! cd $IMAGE_DIR ; then
     exit 1
 fi
 
-find . -name "$2*" ! -name '*.webp' | while read line; do
+find . -name "$2*" ! -name '*.webp' ! -name '*.gif' | while read line; do
     filename="${line%.*}"
     cwebp $line -quiet -o $filename.webp
     echo "Converted image '$line'"

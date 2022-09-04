@@ -8,7 +8,7 @@ import { ChildProp } from '../lib/types';
 import { AppContext } from './context';
 import { Link } from './Link';
 
-type License = 'CC BY-SA 4.0';
+type License = 'CC BY-SA 4.0' | 'CC BY-SA 3.0';
 
 type VerticalPosition = 'bottom' | 'top';
 type HorizontalPosition = 'left' | 'right' | 'center';
@@ -24,10 +24,12 @@ type AttributionProps = {
   titleAuthorConnection?: string;
 };
 
+type ImageType = 'gif' | 'webp';
 type ImageProps = Partial<ChildProp> & {
   noMargin?: boolean;
   noShadow?: boolean;
   src: string;
+  type?: ImageType;
 };
 
 type ImageElement = React.ReactElement<ImageProps>;
@@ -35,6 +37,7 @@ type ImageRowProps = ChildProp<[ImageElement, ImageElement]>;
 
 const licenseHrefs = {
   'CC BY-SA 4.0': 'https://creativecommons.org/licenses/by-sa/4.0/',
+  'CC BY-SA 3.0': 'https://creativecommons.org/licenses/by-sa/3.0/',
 };
 
 function Attribution({
@@ -86,10 +89,12 @@ function Attribution({
 }
 
 export const Image = Object.assign(
-  function Image({ children: caption, src, noMargin = false, noShadow = false }: ImageProps) {
+  function Image(props: ImageProps) {
+    const { children: caption, src, noMargin = false, noShadow = false, type = 'webp' } = props;
     const { section, structure } = React.useContext(AppContext);
     const { images } = structure;
     const fullSrc = [section, src].join('/');
+    console.log(images);
     const dimensions = images && images[fullSrc];
     const hasCaption = !!caption;
 
@@ -116,7 +121,7 @@ export const Image = Object.assign(
             })}
           >
             <NextImage
-              src={`/img/${fullSrc}.webp`}
+              src={`/img/${fullSrc}.${type}`}
               layout="intrinsic"
               width={dimensions.width}
               height={dimensions.height}
@@ -136,7 +141,7 @@ export const Image = Object.assign(
 function ImageRow({ children }: ImageRowProps) {
   const { breakpoints } = useDimensions();
   return (
-    <div className="flex flex-wrap justify-center">
+    <div className="flex flex-wrap justify-center items-center">
       <div className="md:flex-half">
         {React.cloneElement(children[0], { noMargin: breakpoints.isMedium })}
       </div>
@@ -181,6 +186,49 @@ const attributions: Record<number, Record<string, AttributionProps>> = {
       linkOn: 'author',
       link: referenceURIs['FAA-H-8083-15'],
       title: 'Figure 6-21/6-22',
+      titleAuthorConnection: 'from the',
+    },
+    g1000_vor_id: {
+      author: "G1000 Pilot's Guide",
+      className: 'text-black',
+      linkOn: 'author',
+      link: referenceURIs.g1000,
+      position: 'bottom-center',
+      title: 'Figure 4-21',
+      titleAuthorConnection: 'from the',
+    },
+    vor: {
+      author: 'IFH',
+      className: 'text-slate-300',
+      linkOn: 'author',
+      link: referenceURIs['FAA-H-8083-15'],
+      position: 'bottom-right',
+      title: 'Figure 9-12',
+      titleAuthorConnection: 'from the',
+    },
+    vor_principle: {
+      author: 'Orion 8',
+      className: 'text-black',
+      license: 'CC BY-SA 3.0',
+      link: 'https://commons.wikimedia.org/wiki/File:VOR_principle.gif',
+      title: 'VOR principle',
+    },
+    vor_service_volumes_legacy: {
+      author: 'AIM',
+      className: 'text-black',
+      linkOn: 'author',
+      link: uri.aim(1, 1, 8),
+      position: 'top-left',
+      title: 'Figure 1-1-1',
+      titleAuthorConnection: 'from the',
+    },
+    vor_service_volumes_new: {
+      author: 'AIM',
+      className: 'text-black',
+      linkOn: 'author',
+      link: uri.aim(1, 1, 8),
+      position: 'top-left',
+      title: 'Figure 1-1-4',
       titleAuthorConnection: 'from the',
     },
   },

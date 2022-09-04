@@ -13,6 +13,9 @@ import {
   Link,
   Paragraph,
   Quotation,
+  Success,
+  Tab,
+  Tabs,
   TaskPage,
   Term,
   ToDo,
@@ -197,7 +200,7 @@ const Instruments: NextPage<TaskPage.TopLevelProps> = (props) => {
 
           <Paragraph
             heading="Electronic Flight Displays"
-            references={<Link href={references.g1000}>G1000 Pilot's Guide</Link>}
+            references={<Link.Reference reference="g1000" />}
           >
             EFDs such as the G1000 are tremendously powerful flight tools which integrate many
             individual instruments into a coherent presentation.
@@ -216,11 +219,7 @@ const Instruments: NextPage<TaskPage.TopLevelProps> = (props) => {
               Building familiarity and fluency with the capabilities of the EFD is a significant
               portion of IFR training in glass cockpits.
             </Warning>{' '}
-            Check out the{' '}
-            <Link bold href={references.g1000}>
-              G1000 Pilot's Guide
-            </Link>{' '}
-            for specifics.
+            Check out the <Link.Reference reference="g1000" /> for specifics.
           </>,
 
           <Paragraph
@@ -322,6 +321,207 @@ const Instruments: NextPage<TaskPage.TopLevelProps> = (props) => {
             .
           </>,
         ],
+        k2a: [
+          <Tabs>
+            <Tab heading="VOR">
+              <Tabs>
+                <Tab
+                  heading="Accuracy Checks"
+                  references={[<FAR section={[91, 171]} />, <AIM paragraph={[1, 1, 4]} />]}
+                >
+                  <>
+                    An aircraft's VOR receivers must be checked <Bold>every 30 days</Bold> for
+                    accuracy in order for them to be used during IFR flight. There are several
+                    different ways VOR receivers may be tested:
+                    <BulletList>
+                      <>
+                        <Term>VOR test facility (VOT):</Term> these are special facilities which
+                        only broadcast the 360° radial signal. No matter where you are relative to
+                        the facility, tuning in the VOT frequency and centering the needle should
+                        show <Info>0° FROM or 180° TO (±4°)</Info>
+                      </>
+                      <>
+                        <Bold>Ground or airborne checkpoint:</Bold> these are designated areas on
+                        the airport surface (or at a specified GPS coordinate/fix for airborne
+                        checks) where the bearing from a given VOR is known. When positioned over
+                        the checkpoint and with the known radial entered, the needle should be
+                        centered with a FROM indication,{' '}
+                        <Info>±4° on the ground or ±6° in the air.</Info> These checkpoints are
+                        listed in the Chart Supplement.
+                      </>
+                      <>
+                        <Bold>Airborne airway check:</Bold> this is probably the most convoluted way
+                        to check accuracy. The steps to take are:{' '}
+                        <InlineList>
+                          <>
+                            select a VOR airway to establish a known, published bearing FROM the VOR
+                          </>
+                          <>
+                            select a prominent ground point along the airway, preferably 20NM or
+                            more from the facility (this is best done at a low altitude to ensure
+                            your position over the ground)
+                          </>
+                          <>note the indicated VOR bearing</>
+                        </InlineList>
+                        . The bearing must be within{' '}
+                        <Info>±6° of the airway's published radial.</Info>
+                      </>
+                      <>
+                        <Bold>Dual VOR check:</Bold> Aircraft with two VOR receivers may verify
+                        their correctness against each other. With both both receivers tuned to the
+                        same VOR and with both needles centered,{' '}
+                        <Info>the radials should be ±4° from one another.</Info>
+                      </>
+                    </BulletList>
+                  </>
+                  <>
+                    The results of the VOR test must be entered in the aircraft logbook. The log
+                    entry must include the{' '}
+                    <InlineList>
+                      <>date</>
+                      <>place</>
+                      <>bearing error</>
+                      <>the pilot's signature</>
+                    </InlineList>
+                    .
+                  </>
+                </Tab>
+                <Tab heading="Identification" references={<Link.Reference reference="g1000" />}>
+                  <>
+                    The first step with using any VOR for navigation is to ensure that you're
+                    navigating off of what you think you're navigating off of. This is done by
+                    identifying the VOR. In a steam gauge cockpit you need to listen in to a Morse
+                    code signal which is broadcast by the VOR station around the clock.{' '}
+                    <Warning>
+                      The absence of the Morse signal indicates either you are on the wrong
+                      frequency or the VOR is down for maintenance and the navigation signals should
+                      not be trusted.
+                    </Warning>
+                  </>
+
+                  <>
+                    Glass cockpits make this easy. After tuning the frequency, the software will
+                    automatically decode the Morse signal and render the ID next to the frequency
+                    display. In the image below, the BNA and GHM VORs have been tuned in and both
+                    are identified in NAV 1 and NAV 2, respectively. The BNA VOR is being actively
+                    used for navigation, <Success>as indicated in green.</Success>
+                  </>
+
+                  <Image src="g1000_vor_id" noShadow />
+
+                  <>
+                    If for whatever reason the G1000 does not automatically identify the VOR,{' '}
+                    <Info>
+                      you can always listen in yourself by pressing the VOL/ID button on the audio
+                      panel.
+                    </Info>
+                  </>
+                </Tab>
+
+                <Tab heading="Operation">
+                  <>
+                    VOR operation can be tricky, and it has more than its fair share of quirks and
+                    pitfalls. Conceptually it's quite simple:{' '}
+                    <Bold>
+                      rotate the OBS knob until the needle is centered and your bearing TO or FROM
+                      the station can be read right off the instrument.
+                    </Bold>{' '}
+                    Five dots to either side of the centerline are spaced out at 2° each, yielding
+                    an indication of how far off course you are.
+                  </>
+
+                  <Image.Row>
+                    <Image src="vor" />
+                    <Image src="vor_principle" type="gif" />
+                  </Image.Row>
+
+                  <Paragraph heading="Quirks">
+                    <BulletList bullet="disc">
+                      <>
+                        <Term>Cone of confusion</Term>
+                      </>
+                      <>
+                        <Term>Proximal sensitivity</Term>
+                      </>
+                    </BulletList>
+                  </Paragraph>
+                </Tab>
+
+                <Tab
+                  heading="Minimum Operational Network"
+                  references={<AIM paragraph={[1, 1, 3, 'f']} />}
+                >
+                  <Quotation source={['FAA', references.vor_mon]}>
+                    The FAA is transitioning the National Airspace System (NAS) to Performance Based
+                    Navigation (PBN). As a result, the VOR infrastructure in the Contiguous United
+                    States (CONUS) is being repurposed to provide a conventional backup navigation
+                    service during potential Global Positioning System (GPS) outages. This backup
+                    infrastructure is known as the VOR MON.
+                  </Quotation>
+
+                  <>
+                    At its core, the MON is a backup system for aircraft to fall back on in case of
+                    a widespread GPS failure. It is intended to provide "
+                    <Info>nearly continuous VOR signal coverage at 5,000 feet AGL</Info> across the
+                    NAS, outside of the Western U.S. Mountains Area (WUSMA)." However,{' '}
+                    <Warning>
+                      there is no plan to change the NAVAID/route structure is the WUSMA.
+                    </Warning>{' '}
+                    Nearly all VORs inside the WUSMA will be retained. A complete list of the VORs
+                    up for discontinuance can be found in the{' '}
+                    <Link href={references.federal_register_mon}>Federal Register</Link>.
+                  </>
+
+                  <>
+                    A key objective of the MON is to ensure that{' '}
+                    <Info>
+                      any aircraft in the CONUS, regardless of its position, will be within 100NM of
+                      a MON airport (i.e. one with an ILS or VOR approach).
+                    </Info>{' '}
+                    Though aircraft may voluntarily use the MON at any time, it is primarily
+                    intended as a reversionary system.{' '}
+                    <Success>
+                      The FAA has not and will not mandate that pilots plan to divert to, and carry
+                      sufficient fuel to reach, a MON airport.
+                    </Success>{' '}
+                    However, pilots of aircraft which do not have VOR receivers (e.g. WAAS-only
+                    equipped aircraft) should think carefully about backup plans in the case of a
+                    GPS outage.
+                  </>
+
+                  <Paragraph heading="Service volumes">
+                    Making the collective VOR service volume ubiquitously available at 5,000' MSL
+                    has required some adjustments to the VOR standard service volumes. In the past,
+                    the FAA bucketed VORs into three different types: terminal, low and high. The
+                    categories were defined by the service volume they covered:{' '}
+                    <InlineList>
+                      <>
+                        terminal VORs cover a cylindrical volume with a 25NM radius, from 1,000'
+                        above terminal height (ATH) up to 12,000' ATH
+                      </>
+                      <>low VORs cover a 40NM radius from 1,000' ATH up to 18,000' ATH</>
+                      <>high VORs cover a complex volume of overlapping cylinders</>
+                    </InlineList>{' '}
+                    (see image below).
+                  </Paragraph>
+
+                  <>
+                    In December 2020, the FAA announced two new VOR service volumes in support of
+                    the MON: VOR low and VOR high. At 5,000' ATH, both types support signal
+                    reception up to 70NM away. Read more about VOR service volumes{' '}
+                    <Link href={references.vor_service_volumes}>here</Link>.
+                  </>
+
+                  <Image.Row>
+                    <Image src="vor_service_volumes_legacy">Original service volumes</Image>
+                    <Image src="vor_service_volumes_new">New service volumes</Image>
+                  </Image.Row>
+                </Tab>
+              </Tabs>
+            </Tab>
+
+          </Tabs>,
+        ],
       }}
     />
   );
@@ -331,6 +531,9 @@ export default Instruments;
 
 const references = {
   cold_temperature_airports: 'https://aeronav.faa.gov/d-tpp/Cold_Temp_Airports.pdf',
-  g1000: 'http://static.garmin.com/pumac/190-00498-08_0A_Web.pdf',
+  federal_register_mon: 'https://www.govinfo.gov/content/pkg/FR-2016-07-26/pdf/2016-17579.pdf',
   tso_c112: uri.tso('a920c2bd43aa26b786257bf0006e6acd/$FILE/TSO-C112e.pdf'),
+  vor_mon:
+    'https://www.faa.gov/about/office_org/headquarters_offices/ato/service_units/techops/navservices/gbng/vormon',
+  vor_service_volumes: uri.boldMethod('navigation', 'the-types-of-vors-and-how-to-identify-them/'),
 };

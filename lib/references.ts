@@ -60,6 +60,7 @@ export const referenceURIs = {
   'FAA-H-8083-15': `${handbooksURIBase}/FAA-H-8083-15B.pdf`,
   'FAA-H-8083-16': `${handbooksURIBase}/instrument_procedures_handbook/FAA-H-8083-16B.pdf`,
   'FAA-H-8083-25': 'https://www.faa.gov/sites/faa.gov/files/2022-03/pilot_handbook.pdf',
+  'g1000': 'https://static.garmin.com/pumac/190-00498-08_0A_Web.pdf',
   'IFP': uri.atc('flight_info/aeronav/procedures/'),
   'InFO 15012':
     'https://www.faa.gov/other_visit/aviation_industry/airline_operators/airline_safety/info/all_infos/media/2015/info15012.pdf',
@@ -82,6 +83,7 @@ export const referenceNames = {
   'FAA-H-8083-15': 'Instrument Flying Handbook',
   'FAA-H-8083-16': 'Instrument Procedures Handbook',
   'FAA-H-8083-25': 'PHAK',
+  'g1000': "G1000 Pilot's Guide",
   'IFP': 'Instrument Flight Procedures',
   'InFO 15012': 'InFO 15012: Logging Instrument Approach Procedures',
   'TSO-C145':
