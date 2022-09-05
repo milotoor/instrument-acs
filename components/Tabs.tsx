@@ -1,8 +1,8 @@
 import cn from 'classnames';
 import * as React from 'react';
 
-import { useSize } from '../lib/hooks';
 import { ChildProp } from '../lib/types';
+import { ResponsiveResize } from './Collapse';
 import { ReferenceList, ReferenceListProps, WrapParagraph } from './TaskPage';
 
 type TabsProps = ChildProp<React.ReactElement<TabProps>[]>;
@@ -10,9 +10,6 @@ type TabProps = ChildProp & ReferenceListProps & { active?: boolean; heading: st
 
 export function Tabs({ children }: TabsProps) {
   const [active, setActive] = React.useState(0);
-  const resizeTarget = React.useRef(null);
-  const size = useSize(resizeTarget);
-
   return (
     <div className="rounded-md overflow-hidden border border-slate-400">
       <div className="flex items-stretch justify-start border-b border-slate-400">
@@ -32,21 +29,16 @@ export function Tabs({ children }: TabsProps) {
           );
         })}
       </div>
-      <div
-        className="transition-height ease-in-out duration-500"
-        style={{ height: size?.height ?? 0 }}
-      >
-        <div ref={resizeTarget}>
-          {children.map((tab, i) => {
-            const { children, ...rest } = tab.props;
-            return (
-              <Tab {...rest} active={active === i} key={i}>
-                <WrapParagraph content={children} />
-              </Tab>
-            );
-          })}
-        </div>
-      </div>
+      <ResponsiveResize>
+        {children.map((tab, i) => {
+          const { children, ...rest } = tab.props;
+          return (
+            <Tab {...rest} active={active === i} key={i}>
+              <WrapParagraph content={children} />
+            </Tab>
+          );
+        })}
+      </ResponsiveResize>
     </div>
   );
 }

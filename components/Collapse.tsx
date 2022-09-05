@@ -1,7 +1,9 @@
 import cn from 'classnames';
 import * as React from 'react';
 
+import { useSize } from '../lib/hooks';
 import { ChildProp } from '../lib/types';
+import { WrapParagraph } from './TaskPage';
 
 type CollapseProps = ChildProp & {
   decoration?: React.ReactElement;
@@ -10,9 +12,7 @@ type CollapseProps = ChildProp & {
 };
 
 export function Collapse({ children, decoration, heading, startOpen = false }: CollapseProps) {
-  const [contentEl, setContentEl] = React.useState<HTMLDivElement | null>(null);
   const [open, setOpen] = React.useState(startOpen);
-  const transitionClasses = 'ease-in-out duration-500';
   return (
     <div className="shadow-md shadow-slate-500 rounded-lg overflow-hidden border border-slate-400">
       <div
@@ -23,20 +23,32 @@ export function Collapse({ children, decoration, heading, startOpen = false }: C
         <div className="text-md ml-3 grow">{heading}</div>
         {decoration ? <div className="justify-self-end mr-2">{decoration}</div> : null}
       </div>
-      <div
-        ref={(ref) => setContentEl(ref)}
-        className={cn('transition-height', transitionClasses)}
-        style={{ height: open ? contentEl?.scrollHeight : 0 }}
-      >
+      <ResponsiveResize>
         <div
-          className={cn('p-4 border-t transition-border', transitionClasses, {
+          className={cn('border-t transition-border ease-in-out duration-500', {
+            'h-0': !open,
             'border-slate-400': open,
             'border-white': !open,
           })}
         >
-          {children}
+          <div className="p-4">
+            <WrapParagraph content={children} />
+          </div>
         </div>
-      </div>
+      </ResponsiveResize>
+    </div>
+  );
+}
+
+export function ResponsiveResize({ children }: ChildProp) {
+  const resizeTarget = React.useRef(null);
+  const size = useSize(resizeTarget);
+  return (
+    <div
+      className="transition-height ease-in-out duration-500"
+      style={{ height: size?.height ?? 0 }}
+    >
+      <div ref={resizeTarget}>{children}</div>
     </div>
   );
 }
