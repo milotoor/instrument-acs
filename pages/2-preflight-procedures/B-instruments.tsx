@@ -520,6 +520,17 @@ const Instruments: NextPage<TaskPage.TopLevelProps> = (props) => {
               </Tabs>
             </Tab>
 
+            <Tab heading="DME">
+              <ToDo />
+            </Tab>
+
+            <Tab heading="ILS">
+              <ToDo />
+            </Tab>
+
+            <Tab heading="Marker Beacons">
+              <ToDo />
+            </Tab>
           </Tabs>,
         ],
       }}
