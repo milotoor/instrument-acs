@@ -79,7 +79,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                 <Link href={references.gfa_symbols}>here</Link>.
               </>
 
-              <Image src="gfa" noMargin />
+              <Image src="gfa" />
             </Tab>
 
             <Tab heading="METARs & TAFs">
@@ -159,7 +159,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                 </BulletList>
               </Paragraph>
 
-              <Image src="graphical_airmets" noMargin />
+              <Image src="graphical_airmets" />
             </Tab>
 
             <Tab heading="SIGWX">
@@ -184,7 +184,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
               </>
 
               <>
-                <Image src="sigwx_high" noMargin />
+                <Image src="sigwx_high" />
               </>
             </Tab>
 
@@ -200,7 +200,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                     intensities and precipitation.
                   </>
 
-                  <Image src="surface_analysis_chart" noMargin />
+                  <Image src="surface_analysis_chart" />
                 </Tab>
 
                 <Tab heading="Convective Outlooks">
@@ -211,7 +211,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                     suited for getting current weather information)
                   </>
 
-                  <Image src="convective_outlook" noMargin />
+                  <Image src="convective_outlook" />
                 </Tab>
 
                 <Tab heading="Constant Pressure">
@@ -233,7 +233,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                     jet stream can be viewed at 300 MB, 250 MB, and 200 MB levels.
                   </>
 
-                  <Image src="constant_pressure" noMargin />
+                  <Image src="constant_pressure" />
                 </Tab>
               </Tabs>
             </Tab>
@@ -340,7 +340,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                 </BulletList>
               </>
 
-              <Image src="cyclonic_flow" noMargin />
+              <Image src="cyclonic_flow" />
             </Tab>
 
             <Tab heading="Jetstream">
@@ -459,7 +459,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
             are large lows that generally travel from west to east along a front. They last from a
             few days to more than a week."
           </>,
-          <Image src="cyclogenesis" noMargin />,
+          <Image src="cyclogenesis" />,
         ],
 
         // Clouds
@@ -481,7 +481,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
             atmosphere, clouds will tend to grow vertically and be more cumuliform; in a stable
             atmosphere, clouds will be more stratiform.
           </>,
-          <Image src="clouds" noMargin />,
+          <Image src="clouds" />,
           <Tabs>
             <Tab heading="Standing lenticular">
               <>
@@ -503,7 +503,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
                 the wave is intense.
               </>
 
-              <Image src="lenticular_cloud" noMargin />
+              <Image src="lenticular_cloud" />
             </Tab>
             <Tab heading="High clouds">
               High clouds are mostly made of ice crystals; ironically these are the least likely to
@@ -632,7 +632,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
             horizontal winds last only a few minutes. See <AIM paragraph={[7, 1, 24]} /> for more
             information.
           </>,
-          <Image src="microburst" noMargin>
+          <Image src="microburst">
             At Point X, the aircraft enters the microburst zone where a headwind causes it to
             balloon above the normal glideslope. At the center of the microburst, point Y, there is
             a downdraft which causes the aircraft to sink. At point Z, the aircraft enters the most

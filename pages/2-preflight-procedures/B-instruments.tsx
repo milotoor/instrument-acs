@@ -300,7 +300,7 @@ const Instruments: NextPage<TaskPage.TopLevelProps> = (props) => {
             ). If installed, ADS-B Out equipment should be in transmit mode at all times.
           </>,
 
-          <Image src="ads_b" noMargin />,
+          <Image src="ads_b" />,
         ],
 
         // Operation of nav systems

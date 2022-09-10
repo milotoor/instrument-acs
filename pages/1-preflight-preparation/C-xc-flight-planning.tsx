@@ -128,7 +128,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                 not as easy to decipher and approaches with standard minima aren't included at all.
               </>
 
-              <Image src="jeppesen-10-9" noMargin />
+              <Image src="jeppesen-10-9" />
             </Tab>
 
             <Tab heading="GPS and WAAS">
@@ -241,7 +241,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
               An image helps:
             </>
 
-            <Image src="dma_chart" noMargin />
+            <Image src="dma_chart" />
           </Collapse>,
 
           <Paragraph heading="IFR Cruise Altitudes">
@@ -457,7 +457,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
           <Image src="icao_flight_plan" />,
 
           <Collapse heading="Equipment suffixes">
-            <Image src="equipment_codes" noMargin />
+            <Image src="equipment_codes" />
           </Collapse>,
         ],
 

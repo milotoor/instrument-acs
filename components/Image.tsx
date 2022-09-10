@@ -2,7 +2,6 @@ import cn from 'classnames';
 import NextImage from 'next/image';
 import * as React from 'react';
 
-import { useDimensions } from '../lib/hooks';
 import { referenceURIs, uri } from '../lib/references';
 import { ChildProp } from '../lib/types';
 import { AppContext } from './context';
@@ -26,7 +25,6 @@ type AttributionProps = {
 
 type ImageType = 'gif' | 'webp';
 type ImageProps = Partial<ChildProp> & {
-  noMargin?: boolean;
   noShadow?: boolean;
   src: string;
   type?: ImageType;
@@ -90,7 +88,7 @@ function Attribution({
 
 export const Image = Object.assign(
   function Image(props: ImageProps) {
-    const { children: caption, src, noMargin = false, noShadow = false, type = 'webp' } = props;
+    const { children: caption, src, noShadow = false, type = 'webp' } = props;
     const { section, structure } = React.useContext(AppContext);
     const { images } = structure;
     const fullSrc = [section, src].join('/');
@@ -106,29 +104,21 @@ export const Image = Object.assign(
     })();
 
     return (
-      <div
-        className={cn({
-          'mb-10': !noMargin && !hasCaption,
-          'mb-5': !noMargin && hasCaption,
-          'mb-2': noMargin,
-        })}
-      >
-        <div className="flex flex-col items-center w-full">
-          <div
-            className={cn('max-w-image leading-[0] relative overflow-hidden', {
-              'shadow-lg shadow-slate-500': !noShadow,
-            })}
-          >
-            <NextImage
-              src={`/img/${fullSrc}.${type}`}
-              layout="intrinsic"
-              width={dimensions.width}
-              height={dimensions.height}
-            />
-            {attribution}
-          </div>
-          {hasCaption && <div className="max-w-image px-3 text-xs mt-4">{caption}</div>}
+      <div className="flex flex-col items-center w-full">
+        <div
+          className={cn('max-w-image leading-[0] relative overflow-hidden', {
+            'shadow-lg shadow-slate-500': !noShadow,
+          })}
+        >
+          <NextImage
+            src={`/img/${fullSrc}.${type}`}
+            layout="intrinsic"
+            width={dimensions.width}
+            height={dimensions.height}
+          />
+          {attribution}
         </div>
+        {hasCaption && <div className="max-w-image px-3 text-xs mt-4">{caption}</div>}
       </div>
     );
   },
@@ -138,15 +128,10 @@ export const Image = Object.assign(
 );
 
 function ImageRow({ children }: ImageRowProps) {
-  const { breakpoints } = useDimensions();
   return (
     <div className="flex flex-wrap justify-center items-center">
-      <div className="md:flex-half">
-        {React.cloneElement(children[0], { noMargin: breakpoints.isMedium })}
-      </div>
-      <div className="md:flex-half">
-        {React.cloneElement(children[1], { noMargin: breakpoints.isMedium })}
-      </div>
+      <div className="md:flex-half">{children[0]}</div>
+      <div className="md:flex-half">{children[1]}</div>
     </div>
   );
 }
@@ -194,6 +179,14 @@ const attributions: Record<number, Record<string, AttributionProps>> = {
       link: referenceURIs.g1000,
       position: 'bottom-center',
       title: 'Figure 4-21',
+      titleAuthorConnection: 'from the',
+    },
+    tis_block_diagram: {
+      author: 'AIM',
+      className: 'text-black',
+      linkOn: 'author',
+      link: uri.aim(4, 5, 6),
+      title: 'Figure 4-5-6',
       titleAuthorConnection: 'from the',
     },
     vor: {
