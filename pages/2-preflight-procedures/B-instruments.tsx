@@ -273,9 +273,8 @@ const Instruments: NextPage<TaskPage.TopLevelProps> = (props) => {
           >
             <Term>Automatic Dependent Surveillance-Broadcast (ADS-B)</Term> is a relatively new
             technology, and was only recently mandated. ADS-B Out periodically broadcasts the
-            aircraft's GPS-derived position, altitude, velocity and identifier in response to
-            queries from ground-based equipment. The full set of information that must be included
-            is defined in <FAR section={[91, 227]} />.
+            aircraft's GPS-derived position, altitude, velocity and identifier. The full set of
+            information that must be included is defined in <FAR section={[91, 227]} />.
           </Paragraph>,
 
           <>
