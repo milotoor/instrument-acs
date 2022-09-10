@@ -184,7 +184,7 @@ const Nonprecision: NextPage<TaskPage.TopLevelProps> = (props) => {
                     provided due to terrain and obstacles and therefore, no LPV or LNAV/VNAV minima
                     will be published.
                   </Quotation>
-                </Paragraph>
+                </>
                 Like localizer approaches, an LP approach comes with "angular guidance":{' '}
                 <Info>lateral sensitivity incleases as the approach continues.</Info> Note that{' '}
                 <Warning>
