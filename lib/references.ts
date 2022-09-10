@@ -8,14 +8,22 @@ export const uri = {
     if (typeof chapter === 'undefined') return aimURIBase;
     if (typeof section === 'undefined') return aimURIBase + `chap_${chapter}.html`;
 
-    let sectionURI = aimURIBase + `/chap${chapter}_section_${section}.html`;
+    let sectionURI = aimURIBase + `chap${chapter}_section_${section}.html`;
     if (typeof chapter === 'undefined') return sectionURI;
 
     const paraSuffix = [chapter, section, paragraph].join('-');
-    return aimURIBase + `/chap${chapter}_section_${section}.html#$paragraph${paraSuffix}`;
+    return aimURIBase + `chap${chapter}_section_${section}.html#$paragraph${paraSuffix}`;
   },
 
   atc: (rest: string) => `https://www.faa.gov/air_traffic/${rest}`,
+
+  aviation_news_talk: (episode?: keyof typeof aviationNewsTalkEpisodes) => {
+    const baseUrl = 'https://aviationnewstalk.com';
+    if (!episode) return baseUrl;
+    const episodeId = [episode, aviationNewsTalkEpisodes[episode]].join('-');
+    return [baseUrl, 'episode', episodeId].join('/');
+  },
+
   awc: (r?: string) => `https://www.aviationweather.gov/${r ? r : ''}`,
 
   boldMethod: (section: string, article: string, blog = false) =>
@@ -41,6 +49,10 @@ export const uri = {
 
 const handbooksURIBase =
   'https://www.faa.gov/sites/faa.gov/files/regulations_policies/handbooks_manuals/aviation';
+
+const aviationNewsTalkEpisodes = {
+  245: 'what-you-need-to-know-about-tis-tas-and-ads-b-traffic-systems-ga-news',
+};
 
 export const referenceURIs = {
   '14 CFR part 61': uri.far(61),
