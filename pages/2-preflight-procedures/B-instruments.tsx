@@ -5,6 +5,7 @@ import {
   AIM,
   Bold,
   BulletList,
+  Collapse,
   Danger,
   FAR,
   Image,
@@ -300,6 +301,158 @@ const Instruments: NextPage<TaskPage.TopLevelProps> = (props) => {
           </>,
 
           <Image src="ads_b" />,
+
+          <Collapse
+            heading="ADS-B vs. TIS vs. TAS"
+            references={
+              <Link href={references.aviation_news_talk.ep245}>Aviation News Talk ep. 245</Link>
+            }
+          >
+            <>
+              Much of the information in this section is from{' '}
+              <Success>
+                Max Trescott's phenomenal podcast,{' '}
+                <Link href={references.aviation_news_talk.home}>Aviation News Talk</Link>, episode
+                245.
+              </Success>{' '}
+              Give it a listen!
+            </>
+
+            <Paragraph
+              heading="Traffic Information Service"
+              references={<AIM paragraph={[4, 5, 6]} />}
+            >
+              TIS is the least expensive option and, per Max Trescott, the one you're most likely to
+              find in a G1000-equipped 172. It is a per-client service, meaning that individual
+              aircraft received data tailored for them.{' '}
+              <Info>
+                TIS data comes from FAA radar stations and are typically more accurate than that
+                from more-expensive TAS systems.
+              </Info>{' '}
+              The flip-side is that TIS is only available within a 55NM radius of a{' '}
+              <Term>Terminal Mode S Radar Sites</Term> (there are about 100 of them in the NAS);{' '}
+              <Warning>
+                there are vast areas of the NAS with no TIS data. Furthermore, the latest generation
+                of ATC radar (ASR-11) does not support TIS. It is, in effect, slated for extinction.
+              </Warning>
+            </Paragraph>
+
+            <>
+              TIS is enabled with a Mode S transponder. It transmits data on as many as 8 aircraft
+              within a 7 mile radius, 3500' above and 3000' below. The information on these aircraft
+              includes its{' '}
+              <InlineList>
+                <>position</>
+                <>altitude</>
+                <>altitude trend</>
+                <>ground track</>
+              </InlineList>
+              . It will only show traffic which have an operating transponder and which are within
+              range and line-of-sight of a radar station.{' '}
+              <Danger>Traffic below you which are below the radar floor will not show up.</Danger>{' '}
+              There is also a "cone of silence" directly over the radar site. Furthermore, accuracy
+              decreases with distance from the radar site. When you are more than 30 miles away from
+              the TIS ground station, traffic within ⅜ of a mile laterally from your position will
+              be shown either directly in front of or behind your aircraft (to avoid right-left
+              confusion).
+            </>
+
+            <>
+              TIS does not provide recommendations to de-conflict, it only provides aural alerts.
+              When an intruder is within half a mile horizontally and 500' vertically, an alert is
+              triggered. On the G1000 traffic map, intruder aircraft are shown as a solid yellow
+              circle and their relative altitude is shown in hundred's of feet (i.e. +02 means 200
+              feet above your aircraft).
+            </>
+
+            <>
+              TIS data is collected on one radar sweep (5 seconds) and is disseminated on the next
+              sweep, so data in the cockpit is a minimum of 5 seconds old. To account for this, the
+              ground station applies a predictive algorithm to determine where each aircraft will be
+              when the data is transmitted/received. The algorithm does not account for aircraft
+              maneuvers, so it does not handle aircraft in turns elegantly.
+            </>
+
+            <Image src="tis_block_diagram" />
+
+            <Paragraph heading="Traffic Advisory System">
+              The capabilities of TAS systems vary by manufacturer and model. Rather than
+              communicate with FAA radar stations, TAS systems actively ping other aircraft in the
+              vicinity to locate them, similar to the way a{' '}
+              <Term>traffic collision avoidance system (TCAS)</Term> operates. Indeed, TAS seems to
+              be modeled after TCAS and is intended as a more affordable version of it. However,{' '}
+              <Info>
+                TAS is only meant as a visual aid for spotting aircraft, not for avoidance.
+              </Info>{' '}
+              TAS systems do not provide <Term>resolution advisories (RAs)</Term> the way TCAS
+              systems do. Like TIS, TAS will only display other Mode A, C or S-equipped aircraft
+              (altitude information will be unavailable for Mode A aircraft).
+            </Paragraph>
+
+            <>
+              Transmitter power has an important effect on TAS functionality. TIS is able to receive
+              traffic data from up to 55NM from a radar station. On the other hand, a low-power TAS
+              transceiver may only be able to detect aircraft up to 12 miles away. For many smaller
+              aircraft this isn't a big problem, but something to be aware of.
+            </>
+
+            <Paragraph
+              heading="Automatic Dependent Surveillance-Broadcast"
+              references={<AIM paragraph={[4, 5, 7]} />}
+            >
+              Unlike TIS and TAS, ADS-B is <Bold>automatic</Bold>, meaning that it is constantly
+              broadcasting its position to other aircraft and ground stations. It is{' '}
+              <Bold>dependent</Bold> because it relies on GPS information; it provides the same{' '}
+              <Bold>surveillance</Bold> function as radar, but does so by <Bold>broadcasting</Bold>{' '}
+              its position.
+            </Paragraph>
+
+            <>
+              <Term>ADS-B Out</Term> performs the broadcasting function described above and is now
+              mandated for all aircraft flying in class A airspace, within the lateral boundaries of
+              class B or C airspace, within the mode-C veil or above 10,000' MSL. Per Max Trescott,
+              owners installing only ADS-B Out equipment will shell out thousands of dollars for few
+              if any benefits.
+            </>
+
+            <>
+              By contrast, <Term>ADS-B In</Term> allows aircraft to receive traffic information from
+              other ADS-B-equipped aircraft and FAA ground stations.{' '}
+              <Warning>
+                Bizarrely, there two ADS-B standards——1090 ES and 978 UAT——which are mutually
+                incompatible and transmit on different frequencies.
+              </Warning>{' '}
+              Hence, aircraft equipped with 1090 ES will not be able to directly cooperate with 978
+              UAT-equipped aircraft! Instead these aircraft will have to rely on the{' '}
+              <Term>ADS-R</Term>
+              rebroadcasting ground stations. This works well enough, but, like TIS, aircraft which
+              are within line of sight of one another but not with an ADS-R station will not be able
+              to see one another (if they have opposite ADS-B systems). 1090 ES is required for
+              flying in class A airspace, but 978 UAT provides{' '}
+              <Term>Flight Information Service-Broadcast (FIS-B)</Term> as well as faster data
+              transmission rates.{' '}
+              <Info>
+                Airlines wanted a system compatible with other countries, and I guess 1090 ES is?
+              </Info>{' '}
+              Also, if every US aircraft adopted the 1090 ES standard, there were concerns that the
+              lower-bandwidth system might not be able to support busy metro areas. Hence, 978 UAT
+              offloads some users who would have gone to 1090 ES and provides free weather
+              information for doing so.
+            </>
+
+            <>
+              ADS-B traffic symbols differ from TIS and TAS. ADS-B traffic is depicted using cyan
+              arrowheads and vectors (showing relative motion and speed); for aircraft close by, the
+              arrowhead turns yellow and is circumscribed by a solid yellow circle.
+            </>
+
+            <Image.Row>
+              <Image src="tas_tis_symbols">
+                TIS and TIS display traffic using colored circles and diamonds
+              </Image>
+              <Image src="ads_b_display">ADS-B displays show traffic as cyan arrowheads</Image>
+            </Image.Row>
+          </Collapse>,
         ],
 
         // Operation of nav systems
@@ -540,6 +693,10 @@ const Instruments: NextPage<TaskPage.TopLevelProps> = (props) => {
 export default Instruments;
 
 const references = {
+  aviation_news_talk: {
+    home: uri.aviation_news_talk(),
+    ep245: uri.aviation_news_talk(245),
+  },
   cold_temperature_airports: 'https://aeronav.faa.gov/d-tpp/Cold_Temp_Airports.pdf',
   federal_register_mon: 'https://www.govinfo.gov/content/pkg/FR-2016-07-26/pdf/2016-17579.pdf',
   tso_c112: uri.tso('a920c2bd43aa26b786257bf0006e6acd/$FILE/TSO-C112e.pdf'),
