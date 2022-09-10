@@ -218,22 +218,20 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
           </>,
 
           <Collapse heading="Designated Mountainous Areas">
-            <Paragraph>
+            <>
               The FFA, in conjunction with NATCA, is planning to reassess what areas of the country
               are considered mountainous. At the 2020 Aeronautical Chart Meeting, there was a{' '}
               <Link href={references.dma.presentation}>presentation</Link> on the topic which
               outlines the new data-driven approach. See{' '}
               <Link href={references.dma.explainer}>this article</Link> for a helpful summary.
-            </Paragraph>
+            </>
 
-            <Paragraph>
-              <Image.Row>
-                <Image src="dma_current">The old designation</Image>
-                <Image src="dma_future">The new designation</Image>
-              </Image.Row>
-            </Paragraph>
+            <Image.Row>
+              <Image src="dma_current">The old designation</Image>
+              <Image src="dma_future">The new designation</Image>
+            </Image.Row>
 
-            <Paragraph>
+            <>
               The new definition is this:{' '}
               <Gray italic>
                 Designated mountainous areas include those areas having a terrain elevation
@@ -241,11 +239,9 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                 arc-second quadrangles overlying terrain or U.S. territorial waters.
               </Gray>{' '}
               An image helps:
-            </Paragraph>
+            </>
 
-            <Paragraph>
-              <Image src="dma_chart" />
-            </Paragraph>
+            <Image src="dma_chart" noMargin />
           </Collapse>,
 
           <Paragraph heading="IFR Cruise Altitudes">
@@ -325,16 +321,16 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
             <Bold>Be able to justify the ForeFlight performance profile for your aircraft.</Bold>
           </>,
           <Collapse heading="Calculating true airspeed">
-            <Paragraph>
+            <>
               To calculate true airspeed (TAS), you first need to know the pressure at altitude,{' '}
               <Katex>\rho</Katex>. To calculate <Katex>\rho</Katex>, use the following equation:
-            </Paragraph>
-            <Paragraph>
-              <Katex block className="text-xl text-center">
-                \rho = \rho_0 \times e^[\frac[-gMh][RT]]
-              </Katex>
-            </Paragraph>
-            <Paragraph>
+            </>
+
+            <Katex block className="text-xl text-center">
+              \rho = \rho_0 \times e^[\frac[-gMh][RT]]
+            </Katex>
+
+            <>
               where:
               <BulletList bullet="disc">
                 <>
@@ -364,21 +360,22 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
                   Kelvins
                 </>
               </BulletList>
-            </Paragraph>
-            <Paragraph>Given that, we can calculate TAS like so:</Paragraph>
-            <Paragraph>
-              <Katex block className="text-xl text-center">
-                TAS = CAS \times \sqrt[\frac[\rho_0][\rho]]
-              </Katex>
-            </Paragraph>
-            <Paragraph>
+            </>
+
+            <>Given that, we can calculate TAS like so:</>
+
+            <Katex block className="text-xl text-center">
+              TAS = CAS \times \sqrt[\frac[\rho_0][\rho]]
+            </Katex>
+
+            <>
               Hence, the only inputs required are the height, OAT, sea level pressure and calibrated
               airspeed.{' '}
               <Bold gray>
                 A decent rule of thumb is that TAS is 2% greater than CAS for every thousand feet of
                 altitude.
               </Bold>
-            </Paragraph>
+            </>
           </Collapse>,
         ],
 

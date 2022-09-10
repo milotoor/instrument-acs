@@ -3,15 +3,17 @@ import * as React from 'react';
 
 import { useSize } from '../lib/hooks';
 import { ChildProp } from '../lib/types';
-import { WrapParagraph } from './TaskPage';
+import { ReferenceList, ReferenceListProps, WrapParagraph } from './TaskPage';
 
-type CollapseProps = ChildProp & {
-  decoration?: React.ReactElement;
-  heading: string;
-  startOpen?: boolean;
-};
+type CollapseProps = ChildProp &
+  ReferenceListProps & {
+    decoration?: React.ReactElement;
+    heading: string;
+    startOpen?: boolean;
+  };
 
-export function Collapse({ children, decoration, heading, startOpen = false }: CollapseProps) {
+export function Collapse(props: CollapseProps) {
+  const { children, decoration, heading, references, startOpen = false } = props;
   const [open, setOpen] = React.useState(startOpen);
   return (
     <div className="shadow-md shadow-slate-500 rounded-lg overflow-hidden border border-slate-400">
@@ -32,6 +34,7 @@ export function Collapse({ children, decoration, heading, startOpen = false }: C
           })}
         >
           <div className="p-4">
+            <ReferenceList references={references} />
             <WrapParagraph content={children} />
           </div>
         </div>
