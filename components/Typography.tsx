@@ -19,7 +19,7 @@ type InlineListProps = ChildProp<React.ReactNode[]> & {
 };
 
 type KatexProps = ChildProp<string> & { block?: boolean } & React.HTMLAttributes<HTMLDivElement>;
-type QuotationProps = ChildProp;
+type QuotationProps = ChildProp & { source?: [string, string] };
 type TooltipProps = ChildProp & { message?: string; noUnderline?: boolean };
 
 export function Bold(props: Omit<EmphasizeProps, 'bold'>) {
