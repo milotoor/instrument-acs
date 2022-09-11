@@ -700,7 +700,6 @@ const references = {
   cold_temperature_airports: 'https://aeronav.faa.gov/d-tpp/Cold_Temp_Airports.pdf',
   federal_register_mon: 'https://www.govinfo.gov/content/pkg/FR-2016-07-26/pdf/2016-17579.pdf',
   tso_c112: uri.tso('a920c2bd43aa26b786257bf0006e6acd/$FILE/TSO-C112e.pdf'),
-  vor_mon:
-    'https://www.faa.gov/about/office_org/headquarters_offices/ato/service_units/techops/navservices/gbng/vormon',
+  vor_mon: uri.faa.nav_services('gbng/vormon'),
   vor_service_volumes: uri.boldMethod('navigation', 'the-types-of-vors-and-how-to-identify-them/'),
 };

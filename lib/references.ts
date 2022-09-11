@@ -9,7 +9,7 @@ export const uri = {
     if (typeof section === 'undefined') return aimURIBase + `chap_${chapter}.html`;
 
     let sectionURI = aimURIBase + `chap${chapter}_section_${section}.html`;
-    if (typeof chapter === 'undefined') return sectionURI;
+    if (typeof paragraph === 'undefined') return sectionURI;
 
     const paraSuffix = [chapter, section, paragraph].join('-');
     return aimURIBase + `chap${chapter}_section_${section}.html#$paragraph${paraSuffix}`;
@@ -28,6 +28,11 @@ export const uri = {
 
   boldMethod: (section: string, article: string, blog = false) =>
     `https://www.boldmethod.com/${blog ? 'blog/' : ''}learn-to-fly/${section}/${article}/`,
+
+  faa: {
+    nav_services: (rest?: string) =>
+      `https://www.faa.gov/about/office_org/headquarters_offices/ato/service_units/techops/navservices/${rest}`,
+  },
 
   faa_docs: (...components: string[]) =>
     `https://www.faa.gov/documentLibrary/media/${components.join('/')}`,
