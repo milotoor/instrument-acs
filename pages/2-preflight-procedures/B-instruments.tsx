@@ -85,7 +85,7 @@ const Instruments: NextPage<TaskPage.TopLevelProps> = (props) => {
             altimeters (at least in light, GA aircraft) can not be set below 28 or above 31 "Hg.
             When the barometric pressure is outside of this range, special procedures should be
             used:
-            <BulletList bullet="disc">
+            <BulletList type="disc">
               <>
                 <Info>High barometric pressure (above 31 "Hg)</Info> may be caused by{' '}
                 <Info>cold, dry air masses</Info>. When an aircraft's altimeter cannot be set above
@@ -161,7 +161,7 @@ const Instruments: NextPage<TaskPage.TopLevelProps> = (props) => {
             </Bold>{' '}
             The correction is applied like so (this is technically called the "All Segments
             Method"):
-            <BulletList bullet="decimal">
+            <BulletList type="decimal">
               <>
                 <Bold>From the IAF to the FAF:</Bold> Calculate the correction by taking the FAF
                 altitude and subtracting the airport elevation. Use this number to enter the
@@ -243,7 +243,7 @@ const Instruments: NextPage<TaskPage.TopLevelProps> = (props) => {
           <>
             <FAR section={[91, 215, 'b']} /> specifies what airspace is off limits for aircraft
             without a functioning transponder:
-            <BulletList bullet="disc">
+            <BulletList type="disc">
               <>
                 <Bold>Class A, B or C airspace.</Bold>{' '}
                 <Warning>
@@ -588,7 +588,7 @@ const Instruments: NextPage<TaskPage.TopLevelProps> = (props) => {
                   </Image.Row>
 
                   <Paragraph heading="Quirks">
-                    <BulletList bullet="disc">
+                    <BulletList type="disc">
                       <>
                         <Term>Cone of confusion</Term>
                       </>

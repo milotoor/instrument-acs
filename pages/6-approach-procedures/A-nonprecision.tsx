@@ -152,7 +152,7 @@ const Nonprecision: NextPage<TaskPage.TopLevelProps> = (props) => {
           </>,
           <>
             See these two articles from IFR Magazine for more:{' '}
-            <BulletList bullet="disc">
+            <BulletList type="disc">
               <>
                 <Link href={references.cdfa}>Constant Angle Descent</Link> (published 29 July, 2014;
                 updated 12 November, 2019)

@@ -98,7 +98,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
               <Paragraph heading="TAFs" hr>
                 TAFs are most thoroughly defined by <Link.Reference reference="AC 00-45" />{' '}
                 paragraph 5.11 (page 5-75, 204 overall). Miscellaneous facts:
-                <BulletList bullet="disc">
+                <BulletList type="disc">
                   <>
                     They describe aviation weather expected to occur during a specific period,{' '}
                     <Bold>within 5 statute miles</Bold> of the center of the airport's runway
@@ -153,7 +153,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
               <Paragraph heading="SIGMETs">
                 SIGMETs are issued for significant weather hazards that are of concern to all
                 aircraft. Examples include:
-                <BulletList bullet="disc">
+                <BulletList type="disc">
                   <>Widespread sand or dust storms</>
                   <>Thunderstorms</>
                 </BulletList>
@@ -367,7 +367,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
 
               <>
                 For reasons not entirely clear to me, wind shear patterns vary between front types:
-                <BulletList bullet="alpha">
+                <BulletList type="alpha">
                   <>
                     with a <ColdFront />, it occurs just after the front passes and for a short
                     period thereafter
@@ -731,7 +731,7 @@ const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
           </>,
           <Paragraph heading="Hazards of Structural Icing" hr>
             There are numerous hazards associated with structural icing:
-            <BulletList bullet="disc">
+            <BulletList type="disc">
               <>
                 Ice affects the shape of the airfoil, which in turn reduces the coefficient of lift
                 and the critical angle of attack;{' '}

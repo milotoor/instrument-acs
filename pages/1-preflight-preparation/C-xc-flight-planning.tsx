@@ -261,7 +261,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
 
           <Paragraph>
             Flying VFR-on-top subjects the pilot to regulations for both IFR and VFR flight:
-            <BulletList bullet="disc">
+            <BulletList type="disc">
               <>
                 You must fly at the appropriate VFR altitude as prescribed in{' '}
                 <FAR section={[91, 159]} />
@@ -290,7 +290,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
             <FAR section={[91, 211]} /> specifies the requirements. Note that these values refer to{' '}
             <Italic>cabin pressure altitudes</Italic>. If the airplane is pressurized the rules are
             different.{' '}
-            <BulletList bullet="disc">
+            <BulletList type="disc">
               <>
                 <Bold>Between 12,000 and 14,500 feet:</Bold> required flight crew members must have
                 supplemental oxygen if the flight is longer than 30 minutes at those altitudes
@@ -332,7 +332,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
 
             <>
               where:
-              <BulletList bullet="disc">
+              <BulletList type="disc">
                 <>
                   <Katex>h</Katex> is the altitude at which we want to calculate the pressure,
                   expressed in meters.
@@ -384,7 +384,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
           <>
             The ETA is simply the ETD plus the estimated time enroute (ETE). Calculating the ETE is
             not complicated, it's just math:
-            <BulletList bullet="decimal">
+            <BulletList type="decimal">
               <>calculate the time and distance it will take to climb to cruise altitude</>
               <>calculate how long the descent will take, and where it should begin</>
               <>
@@ -407,7 +407,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
           <>
             <FAR section={[91, 167]} /> is the relevant regulation. It specifies that "no person may
             operate a civil aircraft in IFR conditions unless it carries enough fuel to:"
-            <BulletList bullet="decimal">
+            <BulletList type="decimal">
               <>Complete the flight to the first airport of intended landing</>
               <>
                 Fly from that airport to the alternate airport{' '}
@@ -465,7 +465,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
         k5: [
           <>
             An IFR flight plan may be activated in a number of different ways:{' '}
-            <BulletList bullet="disc">
+            <BulletList type="disc">
               <>
                 When departing an airport with a control tower, you can usually get the clearance
                 directly from ground control.

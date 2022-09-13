@@ -93,7 +93,7 @@ const InstrumentFlight: NextPage<TaskPage.TopLevelProps> = (props) => {
                   Frequently, the primary instrument is meant to be held constant for the duration
                   of a maneuver; the supporting instruments indicate a flight parameter's trend.
                 </Bold>
-                <BulletList bullet="disc">
+                <BulletList type="disc">
                   <>
                     <Bold>Pitch:</Bold> during straight and level flight, the primary instrument is
                     the <Info>altimeter</Info>. Supporting instruments include the{' '}

@@ -44,7 +44,7 @@ const DepartureEnrouteArrival: NextPage<TaskPage.TopLevelProps> = (props) => {
           <>
             Both ODPs and SIDS have associated minimum visibility and climb gradients, and may have
             minimum ceilings as well.{' '}
-            <BulletList bullet="disc">
+            <BulletList type="disc">
               <>
                 <Bold>The standard takeoff weather minimum is 1 mile visibility</Bold> (for 1 & 2
                 engine aircraft; 3 & 4 engine aircraft use half a mile). Notably, this does not

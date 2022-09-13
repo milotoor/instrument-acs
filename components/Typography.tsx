@@ -4,7 +4,7 @@ import React from 'react';
 
 import { ChildProp, Colors } from '../lib/types';
 
-type BulletListProps = ChildProp<React.ReactNode[]> & { bullet?: 'alpha' | 'decimal' | 'disc' };
+type BulletListProps = ChildProp<React.ReactNode[]> & { type?: 'alpha' | 'decimal' | 'disc' };
 type EmphasizeProps = ChildProp & {
   bold?: boolean;
   className?: string;
@@ -26,13 +26,13 @@ export function Bold(props: Omit<EmphasizeProps, 'bold'>) {
   return <Emphasize bold {...props} />;
 }
 
-export function BulletList({ bullet = 'decimal', children }: BulletListProps) {
+export function BulletList({ type = 'decimal', children }: BulletListProps) {
   return (
     <ol
       className={cn('ml-12 mt-2', {
-        'list-decimal': bullet === 'decimal',
-        'list-alpha': bullet === 'alpha',
-        'list-disc': bullet === 'disc',
+        'list-decimal': type === 'decimal',
+        'list-alpha': type === 'alpha',
+        'list-disc': type === 'disc',
       })}
     >
       {children.map((child, i) => (
