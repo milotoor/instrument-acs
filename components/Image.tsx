@@ -17,7 +17,6 @@ type AttributionProps = {
   className?: string;
   license?: License;
   link: string;
-  linkOn?: 'title' | 'author';
   position?: AttributionPosition;
   title?: string;
   titleAuthorConnection?: string;
@@ -38,16 +37,23 @@ const licenseHrefs = {
   'CC BY-SA 3.0': 'https://creativecommons.org/licenses/by-sa/3.0/',
 };
 
-function Attribution({
-  author,
-  className,
-  license,
-  link,
-  linkOn = 'title',
-  position = 'bottom-left',
-  title,
-  titleAuthorConnection = 'by',
-}: AttributionProps) {
+const worksWithoutAuthors = [
+  'Instrument Flying Handbook',
+  'IFH',
+  'Aeronautical Information Manual',
+  'AIM',
+  "G1000 Pilot's Guide",
+];
+
+function Attribution(props: AttributionProps) {
+  const { author, className, license, link, position = 'bottom-left', title } = props;
+
+  const authorlessWork = worksWithoutAuthors.includes(author);
+  let { titleAuthorConnection } = props;
+  if (!titleAuthorConnection) {
+    titleAuthorConnection = authorlessWork ? 'from the' : 'by';
+  }
+
   const titleText = title ? `"${title}"` : 'Image';
   const licenseElement = license ? (
     <span>
@@ -56,8 +62,8 @@ function Attribution({
   ) : null;
 
   const [titleNode, authorNode] = (() => {
-    if (linkOn === 'title') return [<Link href={link}>{titleText}</Link>, author];
-    return [titleText, <Link href={link}>{author}</Link>];
+    if (authorlessWork) return [titleText, <Link href={link}>{author}</Link>];
+    return [<Link href={link}>{titleText}</Link>, author];
   })();
 
   const [vPosition, hPosition] = position.split('-') as [VerticalPosition, HorizontalPosition];
@@ -160,43 +166,33 @@ const attributions: Record<number, Record<string, AttributionProps>> = {
     ads_b: {
       author: 'Aeronautical Information Manual',
       className: 'text-black',
-      linkOn: 'author',
       link: uri.aim(4, 5, 7),
       title: 'Figure 4-5-7',
-      titleAuthorConnection: 'from the',
     },
     efd: {
       author: 'Instrument Flying Handbook',
-      linkOn: 'author',
       link: referenceURIs['FAA-H-8083-15'],
       title: 'Figure 6-21/6-22',
-      titleAuthorConnection: 'from the',
     },
     g1000_vor_id: {
       author: "G1000 Pilot's Guide",
       className: 'text-black',
-      linkOn: 'author',
       link: referenceURIs.g1000,
       position: 'bottom-center',
       title: 'Figure 4-21',
-      titleAuthorConnection: 'from the',
     },
     tis_block_diagram: {
       author: 'AIM',
       className: 'text-black',
-      linkOn: 'author',
       link: uri.aim(4, 5, 6),
       title: 'Figure 4-5-6',
-      titleAuthorConnection: 'from the',
     },
     vor: {
       author: 'IFH',
       className: 'text-slate-300',
-      linkOn: 'author',
       link: referenceURIs['FAA-H-8083-15'],
       position: 'bottom-right',
       title: 'Figure 9-12',
-      titleAuthorConnection: 'from the',
     },
     vor_principle: {
       author: 'Orion 8',
@@ -208,30 +204,24 @@ const attributions: Record<number, Record<string, AttributionProps>> = {
     vor_service_volumes_legacy: {
       author: 'AIM',
       className: 'text-black',
-      linkOn: 'author',
       link: uri.aim(1, 1, 8),
       position: 'top-left',
       title: 'Figure 1-1-1',
-      titleAuthorConnection: 'from the',
     },
     vor_service_volumes_new: {
       author: 'AIM',
       className: 'text-black',
-      linkOn: 'author',
       link: uri.aim(1, 1, 8),
       position: 'top-left',
       title: 'Figure 1-1-4',
-      titleAuthorConnection: 'from the',
     },
   },
   4: {
     pfd_scan: {
       author: 'Instrument Flying Handbook',
-      linkOn: 'author',
       position: 'bottom-right',
       link: referenceURIs['FAA-H-8083-15'],
       title: 'Figure 6-33',
-      titleAuthorConnection: 'from the',
     },
   },
 };
