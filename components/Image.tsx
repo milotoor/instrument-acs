@@ -216,6 +216,21 @@ const attributions: Record<number, Record<string, AttributionProps>> = {
       title: 'Figure 1-1-4',
     },
   },
+  3: {
+    hold_components: {
+      author: 'AIM',
+      className: 'text-black',
+      link: uri.aim(5, 3, 8),
+      title: 'Figure 5-3-3',
+    },
+    hold_entries: {
+      author: 'AIM',
+      className: 'text-black',
+      link: uri.aim(5, 3, 8),
+      position: 'bottom-right',
+      title: 'Figure 5-3-4',
+    },
+  },
   4: {
     pfd_scan: {
       author: 'Instrument Flying Handbook',
