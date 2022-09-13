@@ -183,7 +183,7 @@ function NoteCard({ heading, id, notes }: NoteCardProps) {
   const note = notes[`${notePrefix}${id}`];
   if (!note || (Array.isArray(note) && note.length === 0)) return null;
   return (
-    <div className="w-full bg-white text-black p-2 my-5 rounded-lg shadow-[0px_5px_25px] shadow-yellow-400 text-sm">
+    <div className="w-full bg-white text-black my-5 rounded-lg shadow-[0px_5px_25px] shadow-yellow-400 text-sm">
       <NoteContext.Provider value={{ heading, item: id }}>
         <WrapParagraph content={note} />
       </NoteContext.Provider>
@@ -201,7 +201,7 @@ export function Paragraph({ children, heading, hr, references }: ParagraphProps)
   }
 
   return (
-    <div className="mt-5 first:mt-0" id={id}>
+    <div className="p-3 first:mt-0" id={id}>
       {hr ? <hr className="w-4/5 m-auto mb-5" /> : null}
       <div className={cn('flex flex-row items-center mb-1', { hidden: !heading })}>
         <a href={`#${id}`}>

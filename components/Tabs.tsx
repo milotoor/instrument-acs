@@ -47,7 +47,7 @@ export const Tab = React.forwardRef<HTMLDivElement, TabProps>(
   ({ active, children, references }, ref) => {
     return (
       <div className={cn('overflow-hidden', { 'max-h-0': !active })} ref={ref}>
-        <div className="p-4 ">
+        <div>
           {references ? <ReferenceList references={references} /> : null}
           {children}
         </div>
