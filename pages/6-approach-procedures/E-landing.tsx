@@ -5,8 +5,8 @@ import {
   AIM,
   Bold,
   Danger,
+  FAR,
   Info,
-  Italic,
   Link,
   Paragraph,
   Quotation,
@@ -14,7 +14,7 @@ import {
   Term,
 } from '../../components';
 import { getStructure, getTaskFromSectionLetter } from '../../lib/data_loaders';
-import { uri } from '../../lib/references';
+import { referenceURIs, uri } from '../../lib/references';
 
 export const getStaticProps = () => ({
   props: { structure: getStructure(), task: getTaskFromSectionLetter(6, 'E') },
@@ -27,7 +27,10 @@ const Landing: NextPage<TaskPage.TopLevelProps> = (props) => {
       notes={{
         // Pilot responsibilities and landing factors
         k1: [
-          <Paragraph heading="Meteorological factors" references={<AIM paragraph={[7, 1, 13]} />}>
+          <Paragraph
+            heading="Meteorological factors"
+            references={[<AIM paragraph={[7, 1, 13]} />, <FAR section={[91, 175, 'h']} />]}
+          >
             A crucial consideration on every IAP so <Term>flight visibility</Term> and{' '}
             <Term>runway visual range (RVR)</Term>.{' '}
             <Info>
@@ -52,24 +55,30 @@ const Landing: NextPage<TaskPage.TopLevelProps> = (props) => {
               </Bold>
             </Quotation>
             RVR values are computed by sensors mounted on poles near the runway which transmit light
-            at a known intensity and measure the extent of dissipation.
+            at a known intensity and measure the extent of dissipation. Per{' '}
+            <FAR section={[91, 175, 'h']} />{' '}
+            <Info>
+              If RVR equipment is inoperative, an approach's minimum RVR requirement may be met by
+              converting to ground visibility.
+            </Info>{' '}
+            2,400 RVR should be converted to ½SM.
           </Paragraph>,
 
           <Paragraph heading="Straight-In Approaches">
             A word of caution about the straight-in approach at non-towered airports:{' '}
             <Danger>be very careful to communicate clearly with VFR traffic in the pattern!</Danger>{' '}
-            Per <Link.Reference reference="AC 90-66B" /> §9.5:{' '}
-            <Italic>
-              "The FAA encourages pilots to use the standard traffic pattern when arriving or
+            <Quotation source={['AC 90-66B §9.5', referenceURIs['AC 90-66B']]}>
+              The FAA encourages pilots to use the standard traffic pattern when arriving or
               departing a non-towered airport or a part-time-towered airport when the control tower
               is not operating,{' '}
               <Bold>
                 particularly when other traffic is observed or when operating from an unfamiliar
-                airport."
+                airport.
               </Bold>
-            </Italic>{' '}
-            (However, immediately following this excerpt they acknowledge that a visual approach at
-            the end of an instrument approach is one such time when a straight-in may be desirable.)
+            </Quotation>
+            Immediately following this excerpt, however, it is acknowledged that a visual approach
+            at the end of an instrument approach is one such time when a straight-in may be
+            desirable.
           </Paragraph>,
 
           <>
