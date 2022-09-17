@@ -5,8 +5,6 @@ export default function Document() {
   return (
     <Html>
       <Head>
-        <title>The Instrument ACS</title>
-
         {/* These control how the app renders on the iOS home screen/in Safari mobile */}
         <link rel="apple-touch-icon" href="/img/logo/apple-touch-icon.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
