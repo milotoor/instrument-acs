@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import Head from 'next/head';
+import * as React from 'react';
 
 import { Layout, Link } from '../components';
 import { getStructure } from '../lib/data_loaders';
@@ -14,11 +14,6 @@ export const getStaticProps = () => ({
 const Home: NextPage<ACSProp> = ({ structure }) => {
   return (
     <Layout home structure={structure}>
-      <Head>
-        <title>The Instrument ACS</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <main className="flex flex-1 flex-col justify-center md:w-medium px-4">
         <h1 className="text-4xl sm:text-7xl font-bold font-fancy pt-5">
           The{' '}
