@@ -11,7 +11,6 @@ import {
   Link,
   Paragraph,
   Quotation,
-  ReferenceList,
   Success,
   Tab,
   Tabs,
@@ -174,30 +173,79 @@ const Nonprecision: NextPage<TaskPage.TopLevelProps> = (props) => {
               <Tab heading="LNAV and LP" references={<AIM paragraph={[5, 4, 5, 'm']} />}>
                 <>
                   Nonprecision RNAV approaches include <Term>LNAV (LATeral NAVigation)</Term> and{' '}
-                  <Term>LP (Localizer Performance)</Term> procedures. procedures. Both types of
-                  procedure utilize a <Term>global navigation satellite system (GNSS)</Term> to
-                  provide lateral guidance. The primary difference is the degree of precision:{' '}
+                  <Term>LP (Localizer Performance)</Term> procedures. Both types of procedure
+                  utilize a <Term>global navigation satellite system (GNSS)</Term> to provide
+                  lateral guidance. The primary difference is the degree of precision:{' '}
                   <Info>LP approaches utilize the Wide Area Augmentation System (WAAS)</Info> while{' '}
                   <Info>LNAV approaches only utilize GPS</Info>. Per{' '}
                   <AIM paragraph={[5, 4, 5, 'm']} />:
                 </>
-                Like localizer approaches, an LP approach comes with "angular guidance":{' '}
-                <Info>lateral sensitivity incleases as the approach continues.</Info> Note that{' '}
-                <Warning>
-                  a receiver which supports LPV approaches does not necessarily support LP
-                  approaches
-                </Warning>
-                . If the receiver was approved prior to{' '}
-                <Link.Reference reference="TSO-C145" text="TSO-C145b" /> and{' '}
-                <Link.Reference reference="TSO-C146" text="TSO-C146b" /> it may require an upgrade
-                to fly to LP minima. There must be a statement in the POH or Supplemental Flight
-                Manual declaring the receiver's fitness for flying to LP minima.
 
                 <Quotation>
                   LP will be published in locations where vertically guided minima cannot be
                   provided due to terrain and obstacles and therefore, no LPV or LNAV/VNAV minima
                   will be published.
                 </Quotation>
+
+                <>
+                  Note that{' '}
+                  <Warning>
+                    a receiver which supports LPV approaches does not necessarily support LP
+                    approaches
+                  </Warning>
+                  . If the receiver was approved prior to{' '}
+                  <Link.Reference reference="TSO-C145" text="TSO-C145b" /> and{' '}
+                  <Link.Reference reference="TSO-C146" text="TSO-C146b" /> it may require an upgrade
+                  to fly to LP minima. There must be a statement in the POH or Supplemental Flight
+                  Manual declaring the receiver's fitness for flying to LP minima.
+                </>
+
+                <Paragraph
+                  heading="Lateral sensitivity"
+                  references={<AIM paragraph={[1, 1, 17, 'b', 5]} />}
+                >
+                  Lateral sensitivity (i.e. the distance represented by full-scale deflection on the
+                  CDI) on an RNAV approach depends on the underlying technology. For GPS approaches,
+                  the CDI sensitivity begins at <Warning>±5NM while en route.</Warning> Once within{' '}
+                  <Info>30NM of the airport</Info> the GPS transitions to terminal mode, which has a{' '}
+                  <Info>sensitivity of ±1NM</Info>. Within <Success>2NM of the FAWP</Success> the
+                  sensitivity changes gradually to <Success>0.3NM at the FAWP</Success> when the GPS
+                  transitions to approach mode. This gradual change in sensitivity can be confusing
+                  if the aircraft's... <ToDo />
+                </Paragraph>
+
+                <>
+                  For LP approaches (and LPV approaches), the lateral sensitivity scales
+                  differently. Initially, the sensitivity is ±1NM. 2NM prior to the FAF,{' '}
+                  <Info>
+                    the sensitivity increases to be similar to the angular scaling of an ILS
+                  </Info>
+                  . However, the sensitivity differs from that of a localizer in two ways:{' '}
+                  <InlineList>
+                    <>
+                      the initial scaling on final approach will be ±0.3NM (same as GPS and better
+                      than ILS, which is less sensitive far from the runway)
+                    </>
+                    <>
+                      the scaling changes to linear near the runway threshold instead of continuing
+                      to become more sensitive
+                    </>
+                  </InlineList>
+                  .
+                </>
+
+                <Paragraph
+                  heading="Requirements"
+                  references={[<AIM paragraph={[1, 1, 17, 'b', 5]} />]}
+                >
+                  There are performance requirements that must be met in order to complete either an
+                  LNAV or LP approach.{' '}
+                  <Warning>For LNAV approaches, RAIM must be operational.</Warning> If there is a
+                  RAIM failure annunciation the approach <Danger>must not be completed!</Danger> If
+                  the approach has already begun, the pilot must immediately execute the missed
+                  approach (see <AIM paragraph={[1, 1, 17, 'b', 5, 'g']} />
+                  ).
+                </Paragraph>
               </Tab>
               <Tab heading="LOC and LDA">
                 <ToDo />
