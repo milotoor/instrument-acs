@@ -30,14 +30,9 @@ export function Tabs({ children }: TabsProps) {
         })}
       </div>
       <ResponsiveResize>
-        {children.map((tab, i) => {
-          const { children, ...rest } = tab.props;
-          return (
-            <Tab {...rest} active={active === i} key={i}>
-              <WrapParagraph content={children} />
-            </Tab>
-          );
-        })}
+        {children.map((tab, i) => (
+          <Tab {...tab.props} active={active === i} key={i} />
+        ))}
       </ResponsiveResize>
     </div>
   );
@@ -45,12 +40,11 @@ export function Tabs({ children }: TabsProps) {
 
 export const Tab = React.forwardRef<HTMLDivElement, TabProps>(
   ({ active, children, references }, ref) => {
+    let elements = [children];
+    if (references) elements.unshift(<ReferenceList references={references} />);
     return (
       <div className={cn('overflow-hidden', { 'max-h-0': !active })} ref={ref}>
-        <div>
-          {references ? <ReferenceList references={references} /> : null}
-          {children}
-        </div>
+        <WrapParagraph content={elements} />
       </div>
     );
   }

@@ -15,6 +15,7 @@ type CollapseProps = ChildProp &
 export function Collapse(props: CollapseProps) {
   const { children, decoration, heading, references, startOpen = false } = props;
   const [open, setOpen] = React.useState(startOpen);
+  const elements = references ? [<ReferenceList references={references} />, children] : children;
   return (
     <div className="shadow-md shadow-slate-500 rounded-lg overflow-hidden border border-slate-400">
       <div
@@ -33,10 +34,7 @@ export function Collapse(props: CollapseProps) {
             'border-white': !open,
           })}
         >
-          <div className="p-4">
-            <ReferenceList references={references} />
-            <WrapParagraph content={children} />
-          </div>
+          <WrapParagraph content={elements} />
         </div>
       </ResponsiveResize>
     </div>

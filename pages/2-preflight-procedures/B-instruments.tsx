@@ -59,18 +59,19 @@ const Instruments: NextPage<TaskPage.TopLevelProps> = (props) => {
             <Danger>
               especially when transitioning from a high pressure region to a low pressure region.
             </Danger>
-            <Quotation>
-              If the altimeter is not set to the current altimeter setting when flying from an area
-              of high pressure into an area of low pressure, the aircraft will be closer to the
-              surface than the altimeter indicates. An inch Hg. error in the altimeter setting
-              equals 1,000 feet of altitude...To quote an old saying: “GOING FROM A HIGH TO A LOW,
-              LOOK OUT BELOW.”
-            </Quotation>
-            <Info>
-              In other words, if the altimeter setting is 1" too high, your indicated altitude will
-              be 1,000' too high.
-            </Info>
           </>,
+
+          <Quotation>
+            If the altimeter is not set to the current altimeter setting when flying from an area of
+            high pressure into an area of low pressure, the aircraft will be closer to the surface
+            than the altimeter indicates. An inch Hg. error in the altimeter setting equals 1,000
+            feet of altitude...To quote an old saying: “GOING FROM A HIGH TO A LOW, LOOK OUT BELOW.”
+          </Quotation>,
+
+          <Info>
+            In other words, if the altimeter setting is 1" too high, your indicated altitude will be
+            1,000' too high.
+          </Info>,
 
           <>
             In the Cessna 172 it's not aerodynamically feasible to reach the flight levels, but{' '}
@@ -126,17 +127,17 @@ const Instruments: NextPage<TaskPage.TopLevelProps> = (props) => {
           </Paragraph>,
 
           <Paragraph heading="Cold Temperature Corrections" hr>
-            Quoth <AIM paragraph={[7, 3, 1]} />:{' '}
-            <Quotation>
-              Temperature has an effect on the accuracy of barometric altimeters, indicated
-              altitude, and true altitude. The standard temperature at sea level is 15°C. The
-              temperature gradient from sea level is -2°C per 1,000 feet...When the ambient (at
-              altitude) temperature is colder than standard, the aircraft's true altitude is lower
-              than the indicated barometric altitude. When the ambient temperature is warmer than
-              the standard day, the aircraft's true altitude is higher than the indicated barometric
-              altitude.
-            </Quotation>
+            Quoth <AIM paragraph={[7, 3, 1]} />:
           </Paragraph>,
+
+          <Quotation>
+            Temperature has an effect on the accuracy of barometric altimeters, indicated altitude,
+            and true altitude. The standard temperature at sea level is 15°C. The temperature
+            gradient from sea level is -2°C per 1,000 feet...When the ambient (at altitude)
+            temperature is colder than standard, the aircraft's true altitude is lower than the
+            indicated barometric altitude. When the ambient temperature is warmer than the standard
+            day, the aircraft's true altitude is higher than the indicated barometric altitude.
+          </Quotation>,
 
           <>
             This is important to be mindful of in general, and for IFR flight in particular it is
@@ -466,10 +467,14 @@ const Instruments: NextPage<TaskPage.TopLevelProps> = (props) => {
             I couldn't quite figure out where to place this factoid. <FAR section={[91, 21]} />{' '}
             prohibits the use of portable electronic devices (by the flight crew or passengers) on
             IFR flights unless{' '}
-            <Quotation>
-              ...the operator of the aircraft has determined [the device] will not cause
-              interference with the navigation or communication system of the aircraft.
-            </Quotation>{' '}
+          </>,
+
+          <Quotation>
+            ...the operator of the aircraft has determined [the device] will not cause interference
+            with the navigation or communication system of the aircraft.
+          </Quotation>,
+
+          <>
             Curiously, the regulation also does not apply to{' '}
             <InlineList logic="or">
               <>portable voice recorders</>

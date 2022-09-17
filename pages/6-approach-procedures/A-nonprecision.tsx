@@ -76,17 +76,18 @@ const Nonprecision: NextPage<TaskPage.TopLevelProps> = (props) => {
             The decision of when to descend from the MDA is made simpler by the presence of a{' '}
             <Term>visual descent point (VDP)</Term>. <AIM paragraph={[5, 4, 5, 'h']} /> defines the
             VDP like so:
-            <Quotation>
-              The visual descent point (VDP), identified by the symbol (V), is a defined point on
-              the final approach course of a nonprecision{' '}
-              <Bold>straight-in approach procedure</Bold>
-              from which a stabilized visual descent from the MDA to the runway touchdown point may
-              be commenced.{' '}
-              <Bold>
-                The pilot should not descend below the MDA prior to reaching the VDP.
-              </Bold>{' '}
-              [Emphasis added]
-            </Quotation>
+          </Paragraph>,
+
+          <Quotation>
+            The visual descent point (VDP), identified by the symbol (V), is a defined point on the
+            final approach course of a nonprecision <Bold>straight-in approach procedure</Bold> from
+            which a stabilized visual descent from the MDA to the runway touchdown point may be
+            commenced.{' '}
+            <Bold>The pilot should not descend below the MDA prior to reaching the VDP.</Bold>{' '}
+            [Emphasis added]
+          </Quotation>,
+
+          <>
             Unfortunately, not all NPAs have defined VDPs because{' '}
             <InlineList logic="or">
               <>an obstacle penetrates the visual surface between the MDA and runway threshold</>
@@ -99,7 +100,7 @@ const Nonprecision: NextPage<TaskPage.TopLevelProps> = (props) => {
             descent. Check out this{' '}
             <Link href={references.flight_insight_vdp}>FlightInsight video</Link> for a thorough
             discussion.
-          </Paragraph>,
+          </>,
 
           <Paragraph
             heading="Continuous descent final approach"
@@ -179,11 +180,6 @@ const Nonprecision: NextPage<TaskPage.TopLevelProps> = (props) => {
                   <Info>LP approaches utilize the Wide Area Augmentation System (WAAS)</Info> while{' '}
                   <Info>LNAV approaches only utilize GPS</Info>. Per{' '}
                   <AIM paragraph={[5, 4, 5, 'm']} />:
-                  <Quotation>
-                    LP will be published in locations where vertically guided minima cannot be
-                    provided due to terrain and obstacles and therefore, no LPV or LNAV/VNAV minima
-                    will be published.
-                  </Quotation>
                 </>
                 Like localizer approaches, an LP approach comes with "angular guidance":{' '}
                 <Info>lateral sensitivity incleases as the approach continues.</Info> Note that{' '}
@@ -196,6 +192,12 @@ const Nonprecision: NextPage<TaskPage.TopLevelProps> = (props) => {
                 <Link.Reference reference="TSO-C146" text="TSO-C146b" /> it may require an upgrade
                 to fly to LP minima. There must be a statement in the POH or Supplemental Flight
                 Manual declaring the receiver's fitness for flying to LP minima.
+
+                <Quotation>
+                  LP will be published in locations where vertically guided minima cannot be
+                  provided due to terrain and obstacles and therefore, no LPV or LNAV/VNAV minima
+                  will be published.
+                </Quotation>
               </Tab>
               <Tab heading="LOC and LDA">
                 <ToDo />

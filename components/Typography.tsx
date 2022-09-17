@@ -109,7 +109,7 @@ export function Katex({ block = false, children, ...rest }: KatexProps) {
 
 export function Quotation({ children }: QuotationProps) {
   return (
-    <div className="border-l-gray-300 border-l-[6px] my-2 py-1 pl-3 ml-3 bg-gray-50">
+    <div className="border-l-gray-300 border-l-[6px] py-1 pl-3 ml-3 bg-gray-50">
       <Italic>{children}</Italic>
     </div>
   );
