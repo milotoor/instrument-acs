@@ -1,4 +1,6 @@
 const cornell14CFR = 'https://www.law.cornell.edu/cfr/text/14';
+const faaHq = 'https://www.faa.gov/about/office_org/headquarters_offices';
+
 export const uri = {
   ac: (acNum: string, prefix: string = 'AC_') =>
     uri.faa_docs('Advisory_Circular', `${prefix}${acNum}.pdf`),
@@ -30,8 +32,9 @@ export const uri = {
     `https://www.boldmethod.com/${blog ? 'blog/' : ''}learn-to-fly/${section}/${article}/`,
 
   faa: {
-    nav_services: (rest?: string) =>
-      `https://www.faa.gov/about/office_org/headquarters_offices/ato/service_units/techops/navservices/${rest}`,
+    legal_interpretations: (rest: string) =>
+      `${faaHq}/agc/practice_areas/regulations/interpretations/Data/interps/${rest}`,
+    nav_services: (rest: string) => `${faaHq}/ato/service_units/techops/navservices/${rest}`,
   },
 
   faa_docs: (...components: string[]) =>
