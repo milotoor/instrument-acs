@@ -4,7 +4,7 @@ import React from 'react';
 
 import { referenceURIs } from '../lib/references';
 import { ChildProp, Item, OneOrMore, Section, Structure, Task } from '../lib/types';
-import { makeAnchorId, objectHasProperty } from '../lib/util';
+import { logWarning, makeAnchorId, objectHasProperty } from '../lib/util';
 import { NoteContext } from './context';
 import { Layout } from './Layout';
 import { Link, LinkProps } from './Link';
@@ -194,6 +194,10 @@ function NoteCard({ heading, id, notes }: NoteCardProps) {
 export function Paragraph({ children, heading, hr, references }: ParagraphProps) {
   const { heading: sectionHeading, item } = React.useContext(NoteContext);
 
+  if (references && !heading) {
+    logWarning('References will not be rendered for a Paragraph with no heading');
+  }
+
   let id;
   if (heading) {
     const sanitizedHeading = heading.toLowerCase().split(' ').join('_');
@@ -203,14 +207,16 @@ export function Paragraph({ children, heading, hr, references }: ParagraphProps)
   return (
     <div className="p-3 first:mt-0" id={id}>
       {hr ? <hr className="w-4/5 m-auto mb-5" /> : null}
-      <div className={cn('flex flex-row items-center mb-1', { hidden: !heading })}>
-        <a href={`#${id}`}>
-          <span className="bg-indigo-500 px-2 py-1 inline-block rounded-xl text-white text-xs">
-            <Bold>{heading}</Bold>
-          </span>
-        </a>
-        <ReferenceList className="ml-4" references={references} />
-      </div>
+      {heading ? (
+        <div className="flex flex-row items-center mb-1">
+          <a href={`#${id}`}>
+            <span className="bg-indigo-500 px-2 py-1 inline-block rounded-xl text-white text-xs">
+              <Bold>{heading}</Bold>
+            </span>
+          </a>
+          <ReferenceList className="ml-4" references={references} />
+        </div>
+      ) : null}
       {children}
     </div>
   );
