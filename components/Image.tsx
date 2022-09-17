@@ -169,6 +169,11 @@ const attributions: Record<number, Record<string, AttributionProps>> = {
       link: uri.aim(4, 5, 7),
       title: 'Figure 4-5-7',
     },
+    ads_b_display: {
+      author: 'ForeFlight',
+      link: 'https://support.foreflight.com/hc/en-us/articles/4406036663063-What-traffic-features-does-ForeFlight-Mobile-offer-',
+      title: 'ADS-B Traffic Targets',
+    },
     efd: {
       author: 'Instrument Flying Handbook',
       link: referenceURIs['FAA-H-8083-15'],

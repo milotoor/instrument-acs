@@ -424,11 +424,10 @@ const Instruments: NextPage<TaskPage.TopLevelProps> = (props) => {
               </Warning>{' '}
               Hence, aircraft equipped with 1090 ES will not be able to directly cooperate with 978
               UAT-equipped aircraft! Instead these aircraft will have to rely on the{' '}
-              <Term>ADS-R</Term>
-              rebroadcasting ground stations. This works well enough, but, like TIS, aircraft which
-              are within line of sight of one another but not with an ADS-R station will not be able
-              to see one another (if they have opposite ADS-B systems). 1090 ES is required for
-              flying in class A airspace, but 978 UAT provides{' '}
+              <Term>ADS-R</Term> rebroadcasting ground stations. This works well enough, but, like
+              TIS, aircraft which are within line of sight of one another but not with an ADS-R
+              station will not be able to see one another (if they have opposite ADS-B systems).
+              1090 ES is required for flying in class A airspace, but 978 UAT provides{' '}
               <Term>Flight Information Service-Broadcast (FIS-B)</Term> as well as faster data
               transmission rates.{' '}
               <Info>
@@ -441,16 +440,22 @@ const Instruments: NextPage<TaskPage.TopLevelProps> = (props) => {
             </>
 
             <>
-              ADS-B traffic symbols differ from TIS and TAS. ADS-B traffic is depicted using cyan
-              arrowheads and vectors (showing relative motion and speed); for aircraft close by, the
-              arrowhead turns yellow and is circumscribed by a solid yellow circle.
+              ADS-B traffic symbols differ from TIS and TAS. ADS-B traffic is depicted using
+              cyan/white arrowheads and vectors (showing relative motion and speed); for aircraft
+              close by, the arrowhead turns yellow (for caution alerts) and may be replaced with a
+              circle, or red (for warning alerts) and may be replaced with a square.{' '}
+              <Link.Reference reference="AC 20-172" /> appendix B describes the standard for these
+              symbols.
             </>
 
             <Image.Row>
               <Image src="tas_tis_symbols">
-                TIS and TIS display traffic using colored circles and diamonds
+                TIS and TAS display traffic using colored circles and diamonds. TCAS systems also
+                show red squares for RAs.
               </Image>
-              <Image src="ads_b_display">ADS-B displays show traffic as cyan arrowheads</Image>
+              <Image src="ads_b_display">
+                ADS-B displays show traffic as cyan/white arrowheads.
+              </Image>
             </Image.Row>
           </Collapse>,
         ],
