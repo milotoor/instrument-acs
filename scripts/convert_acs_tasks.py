@@ -4,7 +4,6 @@ into our custom TOML format
 """
 
 import attr
-import click
 from functools import cached_property
 import os
 from pathlib import Path
