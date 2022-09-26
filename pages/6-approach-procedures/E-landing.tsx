@@ -105,7 +105,10 @@ const Landing: NextPage<TaskPage.TopLevelProps> = (props) => {
                     Threshold lights (the <Success>green row of lights</Success> at the runway
                     threshold)
                   </>
-                  <>Runway end identifier lights</>
+                  <>
+                    Runway end identifier lights (REILs; the two blinking white lights on either
+                    side of the threshold)
+                  </>
                   <>Visual glideslope indicator (i.e. VASI or PAPI)</>
                   <>Touchdown zone or touchdown zone markings</>
                   <>Touchdown zone lights</>
