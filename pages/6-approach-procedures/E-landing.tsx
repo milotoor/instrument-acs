@@ -4,14 +4,17 @@ import React from 'react';
 import {
   AIM,
   Bold,
+  BulletList,
   Danger,
   FAR,
   Info,
   Link,
   Paragraph,
   Quotation,
+  Success,
   TaskPage,
   Term,
+  Warning,
 } from '../../components';
 import { getStructure, getTaskFromSectionLetter } from '../../lib/data_loaders';
 import { referenceURIs, uri } from '../../lib/references';
@@ -67,7 +70,82 @@ const Landing: NextPage<TaskPage.TopLevelProps> = (props) => {
             2,400 RVR should be converted to ½SM.
           </>,
 
-          <Paragraph heading="Straight-In Approaches">
+          <Paragraph heading="Landing requirements" references={<FAR section={[91, 175]} />}>
+            There are three requirements that must be met prior to descending below MDA or DA:
+            <BulletList>
+              <>
+                The aircraft must be{' '}
+                <Info>
+                  continuously in a position to land (on the intended runway) using a normal rate of
+                  descent and normal maneuvers.
+                </Info>{' '}
+                Part 121 and 135 operators must additionally land in the touchdown zone.
+              </>
+              <>
+                The <Info>required flight visibility is present</Info>
+              </>
+              <>
+                One or more of the following 10 references is <Info>visible and identifiable</Info>{' '}
+                to the pilot:
+                <BulletList type="square">
+                  <>
+                    Approach light system. This one is special:{' '}
+                    <Warning>
+                      with only the approach lights in view, you may only descend to 100 feet above{' '}
+                      <Term>touchdown zone elevation (TDZE)</Term>
+                    </Warning>{' '}
+                    <Bold italic>UNLESS</Bold> the <Danger>red terminating bars</Danger> or the{' '}
+                    <Danger>red side row bars</Danger> (only present for ALSF-1 and ALSF-2 systems)
+                    are also distinctly visible and identifiable (in which case you may descend to
+                    land)
+                  </>
+                  <>Runway threshold</>
+                  <>Threshold markings</>
+                  <>
+                    Threshold lights (the <Success>green row of lights</Success> at the runway
+                    threshold)
+                  </>
+                  <>Runway end identifier lights</>
+                  <>Visual glideslope indicator (i.e. VASI or PAPI)</>
+                  <>Touchdown zone or touchdown zone markings</>
+                  <>Touchdown zone lights</>
+                  <>Runway or runway markings</>
+                  <>Runway lights</>
+                </BulletList>
+                <div className="pt-3">
+                  See this <Link href={references.landing_references}>Boldmethod article</Link> for
+                  illustrations of each item
+                </div>
+              </>
+            </BulletList>
+          </Paragraph>,
+
+          <Paragraph heading="Landing hazards">
+            There are a whole host of hazards particular to the approach and landing phase of
+            flight. These include:
+            <BulletList>
+              <>
+                <Bold>Wake turbulence</Bold>: this is a significant concern whenever landing behind
+                (or taking off after) a larger aircraft. When an aircraft is{' '}
+                <Warning>heavy, clean and slow</Warning> it generates significant wing tip vortices.
+                Flying into these vortices at low altitude can cause dramatic and unrecoverable
+                upsets. To avoid this, light aircraft should{' '}
+                <Success>land beyond the touchdown point</Success> and{' '}
+                <Success>rotate/lift off prior to the rotation point</Success> of larger aircraft in
+                front. <Warning>Light, quartering tailwinds</Warning> tend to keep the upwind vortex
+                over the runway and in the landing zone.
+              </>
+              <>
+                <Bold>Hydroplaning</Bold>: this is caused by{' '}
+                <Info>standing water on the runway</Info> and is exacerbated by excessive speed.
+                Smooth runways are more vulnerable than grooved ones. When hydroplaning, the wheels
+                are not in touch with the ground even though the aircraft is not flying; hence,{' '}
+                <Danger>braking and directional control are virtually nonexistent</Danger>.
+              </>
+            </BulletList>
+          </Paragraph>,
+
+          <Paragraph heading="Straight-in approaches">
             A word of caution about the straight-in approach at non-towered airports:{' '}
             <Danger>be very careful to communicate clearly with VFR traffic in the pattern!</Danger>
           </Paragraph>,
@@ -108,6 +186,12 @@ const Landing: NextPage<TaskPage.TopLevelProps> = (props) => {
 export default Landing;
 
 const references = {
+  landing_references: uri.boldMethod.blog(
+    'lists',
+    '2022',
+    '03',
+    'approved-visual-references-instrument-approach-landing-fars-10-items'
+  ),
   rvr_explainer: uri.faa.nav_services('lsg/rvr'),
   wvi_accident: 'http://www.kathrynsreport.com/2022/08/cessna-340a-n740wj-fatal-accident.html',
 };
