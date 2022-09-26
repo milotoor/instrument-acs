@@ -671,7 +671,7 @@ const Instruments: NextPage<TaskPage.TopLevelProps> = (props) => {
                     In December 2020, the FAA announced two new VOR service volumes in support of
                     the MON: VOR low and VOR high. At 5,000' ATH, both types support signal
                     reception up to 70NM away. Read more about VOR service volumes{' '}
-                    <Link href={references.vor_service_volumes}>here</Link>.
+                    <Link href={references.vor_volumes}>here</Link>.
                   </>
 
                   <Image.Row>
@@ -711,5 +711,5 @@ const references = {
   federal_register_mon: 'https://www.govinfo.gov/content/pkg/FR-2016-07-26/pdf/2016-17579.pdf',
   tso_c112: uri.tso('a920c2bd43aa26b786257bf0006e6acd/$FILE/TSO-C112e.pdf'),
   vor_mon: uri.faa.nav_services('gbng/vormon'),
-  vor_service_volumes: uri.boldMethod('navigation', 'the-types-of-vors-and-how-to-identify-them/'),
+  vor_volumes: uri.boldMethod.l2f('navigation', 'the-types-of-vors-and-how-to-identify-them/'),
 };

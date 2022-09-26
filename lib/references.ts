@@ -3,7 +3,7 @@ const faaHq = 'https://www.faa.gov/about/office_org/headquarters_offices';
 
 export const uri = {
   ac: (acNum: string, prefix: string = 'AC_') =>
-    uri.faa_docs('Advisory_Circular', `${prefix}${acNum}.pdf`),
+    uri.faa.docs('Advisory_Circular', `${prefix}${acNum}.pdf`),
 
   aim: (chapter?: number, section?: number, paragraph?: number) => {
     const aimURIBase = uri.atc('publications/atpubs/aim_html/');
@@ -28,17 +28,21 @@ export const uri = {
 
   awc: (r?: string) => `https://www.aviationweather.gov/${r ? r : ''}`,
 
-  boldMethod: (section: string, article: string, blog = false) =>
-    `https://www.boldmethod.com/${blog ? 'blog/' : ''}learn-to-fly/${section}/${article}/`,
+  boldMethod: Object.assign(
+    (...parts: string[]) => `https://www.boldmethod.com/${parts.join('/')}`,
+    {
+      l2f: (...parts: string[]) => uri.boldMethod('learn-to-fly', ...parts),
+      blog: (...components: string[]) => uri.boldMethod('blog', ...components),
+    }
+  ),
 
   faa: {
+    docs: (...components: string[]) =>
+      `https://www.faa.gov/documentLibrary/media/${components.join('/')}`,
     legal_interpretations: (rest: string) =>
       `${faaHq}/agc/practice_areas/regulations/interpretations/Data/interps/${rest}`,
     nav_services: (rest: string) => `${faaHq}/ato/service_units/techops/navservices/${rest}`,
   },
-
-  faa_docs: (...components: string[]) =>
-    `https://www.faa.gov/documentLibrary/media/${components.join('/')}`,
 
   far: (part: number, section?: number) => {
     if (typeof section === 'undefined') return cornell14CFR + `/part-${part}`;

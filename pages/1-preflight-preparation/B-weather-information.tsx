@@ -920,6 +920,10 @@ const references = {
   icing_intensities:
     'https://www.aopa.org/news-and-media/all-news/2009/december/01/wx-watch-icing-intensities',
   isa: uri.wikipedia('International_Standard_Atmosphere'),
-  tailplane_icing: uri.boldMethod('maneuvers', 'recovering-from-a-tailplane-stall', true),
+  tailplane_icing: uri.boldMethod.blog(
+    'learn-to-fly',
+    'maneuvers',
+    'recovering-from-a-tailplane-stall'
+  ),
   wx_brief: 'https://www.1800wxbrief.com/',
 };

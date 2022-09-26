@@ -253,7 +253,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
             While operating on an IFR flight plan in VMC, a pilot may request a{' '}
             <Bold>VFR-on-top clearance</Bold> in lieu of an assigned altitude, permitting them to
             select an altitude or flight level of their choice (subject to ATC constraints). Per a{' '}
-            <Link href={references.vfrOnTop}>boldmethod article</Link>, "this can be helpful if
+            <Link href={references.vfrOnTop}>Boldmethod article</Link>, "this can be helpful if
             you're slightly above, or in between layers, and you want to stay out of the clouds"
             (because extended IMC flying can be fatiguing, the view is better and there's generally
             less turbulence). A VFR-on-top clearance permits operations above, below and between
@@ -531,12 +531,12 @@ const references = {
   },
   icao_codes:
     'https://www.faa.gov/about/office_org/headquarters_offices/ato/service_units/systemops/fs/wd/media/ICAO_Equip_Code_Definitions.pdf',
-  jeppesen10_9: uri.boldMethod('navigation', 'how-to-use-the-jeppesen-airport-10-9-page'),
+  jeppesen10_9: uri.boldMethod.l2f('navigation', 'how-to-use-the-jeppesen-airport-10-9-page'),
   tso: {
     c129: uri.tso('e560cd9c6acf8ba186256dc700717e0f/$FILE/C129a.pdf'),
     c145: uri.tso('efe54f1e6272a7068625811d0064b679/$FILE/TSO-C145e.pdf'),
     c146: uri.tso('76fa4ba66612622a86257282006d332a/$FILE/TSO-C146b%20(3-2-07%20Revised).pdf'),
     c196: uri.tso('43dd92d6f1b61f4686257c4d006b94b8/$FILE/TSO-C196b.pdf'),
   },
-  vfrOnTop: uri.boldMethod('regulations', 'understanding-vfr-on-top-clearance-requirements'),
+  vfrOnTop: uri.boldMethod.l2f('regulations', 'understanding-vfr-on-top-clearance-requirements'),
 };

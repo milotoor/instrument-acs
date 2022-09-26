@@ -225,6 +225,6 @@ const DepartureEnrouteArrival: NextPage<TaskPage.TopLevelProps> = (props) => {
 export default DepartureEnrouteArrival;
 
 const references = {
-  order_8260_46c: uri.faa_docs('Order/ND/8260.46C.pdf'),
-  terps: uri.faa_docs('Order/FAA_Order_8260.3D1.pdf'),
+  order_8260_46c: uri.faa.docs('Order/ND/8260.46C.pdf'),
+  terps: uri.faa.docs('Order/FAA_Order_8260.3D1.pdf'),
 };
