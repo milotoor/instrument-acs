@@ -16,6 +16,8 @@ module.exports = {
       },
       listStyleType: {
         alpha: 'lower-alpha',
+        square: 'square',
+        roman: 'lower-roman',
       },
       maxWidth: {
         image: '90%',
