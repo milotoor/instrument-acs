@@ -190,7 +190,7 @@ function NoteCard({ heading, id, notes }: NoteCardProps) {
   const note = notes[`${notePrefix}${id}`];
   if (!note || (Array.isArray(note) && note.length === 0)) return null;
   return (
-    <div className="w-full bg-white text-black my-5 rounded-lg shadow-[0px_5px_25px] shadow-yellow-400 text-sm">
+    <div className="note-card">
       <NoteContext.Provider value={{ heading, item: id }}>
         <WrapParagraph content={note} />
       </NoteContext.Provider>

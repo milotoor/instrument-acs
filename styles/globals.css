@@ -7,6 +7,10 @@
         @apply font-roboto-mono;
     }
 
+    .note-card {
+        @apply w-full bg-white text-black my-5 rounded-lg shadow-[0px_5px_25px] shadow-yellow-400 text-sm;
+    }
+
     .text-glow-gold {
         text-shadow: 0 0 40px rgba(255, 255, 0, 1);
         @apply text-yellow-400;

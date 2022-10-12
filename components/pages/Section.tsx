@@ -4,11 +4,15 @@ import React from 'react';
 import { Section, Structure } from '../../lib/types';
 import { numberToNumeral } from '../../lib/util';
 import { Layout } from '../Layout';
+import { WrapParagraph } from '../Typography';
 import { TaskList } from './Task';
 
-type SectionPageProps = SectionPage.TopLevelProps & { number: Section.Number };
+type SectionPageProps = SectionPage.TopLevelProps & {
+  note?: React.ReactNode;
+  number: Section.Number;
+};
 
-export const SectionPage: React.FC<SectionPageProps> = ({ number, structure }) => {
+export const SectionPage: React.FC<SectionPageProps> = ({ note, number, structure }) => {
   const section = structure.sections[number - 1];
   const { name } = section;
   const title = `Section ${numberToNumeral(number)}. ${name}`;
@@ -25,6 +29,12 @@ export const SectionPage: React.FC<SectionPageProps> = ({ number, structure }) =
           <h3 className="text-subtitle">Tasks</h3>
           <TaskList className="ml-12 mt-2 text-lg" tasks={section.tasks} />
         </div>
+
+        {note && (
+          <div className="note-card">
+            <WrapParagraph content={note} />
+          </div>
+        )}
       </main>
     </Layout>
   );
