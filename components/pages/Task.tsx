@@ -2,13 +2,13 @@ import cn from 'classnames';
 import Head from 'next/head';
 import React from 'react';
 
-import { referenceURIs } from '../lib/references';
-import { Item, Section, Structure, Task } from '../lib/types';
-import { makeAnchorId, objectHasProperty } from '../lib/util';
-import { NoteContext } from './context';
-import { Layout } from './Layout';
-import { Link } from './Link';
-import { Tooltip, WrapParagraph } from './Typography';
+import { referenceURIs } from '../../lib/references';
+import { Item, Section, Structure, Task } from '../../lib/types';
+import { makeAnchorId, objectHasProperty } from '../../lib/util';
+import { NoteContext } from '../context';
+import { Layout } from '../Layout';
+import { Link } from '../Link';
+import { Tooltip, WrapParagraph } from '../Typography';
 
 // Component prop types
 type ReferencesSectionProps = { references: string[] };
