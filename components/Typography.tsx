@@ -2,7 +2,10 @@ import cn from 'classnames';
 import katex from 'katex';
 import React from 'react';
 
-import { ChildProp, Colors } from '../lib/types';
+import { ChildProp, Colors, OneOrMore } from '../lib/types';
+import { LinkProps } from './Link';
+import { NoteContext } from './context';
+import { logWarning, makeAnchorId } from '../lib/util';
 
 type BulletListProps = ChildProp<React.ReactNode[]> & {
   type?: 'alpha' | 'decimal' | 'disc' | 'roman' | 'square';
@@ -23,7 +26,15 @@ type InlineListProps = ChildProp<React.ReactNode[]> & {
 
 type KatexProps = ChildProp<string> & { block?: boolean } & React.HTMLAttributes<HTMLDivElement>;
 type QuotationProps = ChildProp & { source?: [string, string] };
+
+export type ReferenceListProps = {
+  className?: string;
+  references?: OneOrMore<React.ReactElement<LinkProps>>;
+};
+
 type TooltipProps = ChildProp & { message?: string; noUnderline?: boolean };
+type ParagraphProps = ChildProp & ReferenceListProps & { heading?: string; hr?: boolean };
+type WrapParagraphProps = { content: React.ReactNode };
 
 export function Bold(props: Omit<EmphasizeProps, 'bold'>) {
   return <Emphasize bold {...props} />;
@@ -112,10 +123,67 @@ export function Katex({ block = false, children, ...rest }: KatexProps) {
   });
 }
 
+export function Paragraph({ children, heading, hr, references }: ParagraphProps) {
+  const { heading: sectionHeading, item } = React.useContext(NoteContext);
+
+  if (references && !heading) {
+    logWarning('References will not be rendered for a Paragraph with no heading');
+  }
+
+  let id;
+  if (heading) {
+    const sanitizedHeading = heading.toLowerCase().split(' ').join('_');
+    id = makeAnchorId(sectionHeading, item, sanitizedHeading);
+  }
+
+  return (
+    <div className="p-3 first:mt-0" id={id}>
+      {hr ? <hr className="w-4/5 m-auto mb-5" /> : null}
+      {heading ? (
+        <div className="flex flex-row items-center mb-1">
+          <a href={`#${id}`}>
+            <span className="bg-indigo-500 px-2 py-1 inline-block rounded-xl text-white text-xs">
+              <Bold>{heading}</Bold>
+            </span>
+          </a>
+          <ReferenceList className="ml-4" references={references} />
+        </div>
+      ) : null}
+      {children}
+    </div>
+  );
+}
+
 export function Quotation({ children }: QuotationProps) {
   return (
     <div className="border-l-gray-300 border-l-[6px] py-1 pl-3 ml-3 bg-gray-50">
       <Italic>{children}</Italic>
+    </div>
+  );
+}
+
+export function ReferenceList({ className, references }: ReferenceListProps) {
+  if (!references) return null;
+
+  const referenceArray = Array.isArray(references) ? references : [references];
+  if (referenceArray.length === 0) return null;
+
+  return (
+    <div className={cn('inline', className)}>
+      {referenceArray.map((reference, i) => {
+        const isLast = i === referenceArray.length - 1;
+        const textColor = 'text-slate-400';
+        return (
+          <span className={cn('text-xs', textColor, { 'mr-2': !isLast })} key={i}>
+            {React.cloneElement(reference, {
+              ...reference.props,
+              bold: false,
+              className: cn('hover:text-slate-500', textColor),
+            })}
+            {isLast ? null : ','}
+          </span>
+        );
+      })}
     </div>
   );
 }
@@ -158,4 +226,18 @@ export function Tooltip({ message, children, noUnderline = false }: TooltipProps
 
 export function Warning(props: Omit<EmphasizeProps, 'bold' | 'color'>) {
   return <Emphasize bold color="warning" {...props} />;
+}
+
+export function WrapParagraph({ content }: WrapParagraphProps) {
+  return (
+    <>
+      {React.Children.map(content, (child, i) => {
+        if (React.isValidElement(child) && child.type === Paragraph) {
+          return React.cloneElement(child, { key: i });
+        }
+
+        return <Paragraph key={i}>{child}</Paragraph>;
+      })}
+    </>
+  );
 }

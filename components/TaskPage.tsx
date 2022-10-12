@@ -3,21 +3,14 @@ import Head from 'next/head';
 import React from 'react';
 
 import { referenceURIs } from '../lib/references';
-import { ChildProp, Item, OneOrMore, Section, Structure, Task } from '../lib/types';
-import { logWarning, makeAnchorId, objectHasProperty } from '../lib/util';
+import { Item, Section, Structure, Task } from '../lib/types';
+import { makeAnchorId, objectHasProperty } from '../lib/util';
 import { NoteContext } from './context';
 import { Layout } from './Layout';
-import { Link, LinkProps } from './Link';
-import { Bold, Tooltip } from './Typography';
+import { Link } from './Link';
+import { Tooltip, WrapParagraph } from './Typography';
 
 // Component prop types
-type WrapParagraphProps = { content: React.ReactNode };
-type ParagraphProps = ChildProp & ReferenceListProps & { heading?: string; hr?: boolean };
-export type ReferenceListProps = {
-  className?: string;
-  references?: OneOrMore<React.ReactElement<LinkProps>>;
-};
-
 type ReferencesSectionProps = { references: string[] };
 type SectionContainerProps = { children: React.ReactNode; heading: string };
 type TaskPageProps = TaskPage.TopLevelProps & FlagsProp & { notes?: NotesObject };
@@ -188,76 +181,5 @@ function NoteCard({ heading, id, notes }: NoteCardProps) {
         <WrapParagraph content={note} />
       </NoteContext.Provider>
     </div>
-  );
-}
-
-export function Paragraph({ children, heading, hr, references }: ParagraphProps) {
-  const { heading: sectionHeading, item } = React.useContext(NoteContext);
-
-  if (references && !heading) {
-    logWarning('References will not be rendered for a Paragraph with no heading');
-  }
-
-  let id;
-  if (heading) {
-    const sanitizedHeading = heading.toLowerCase().split(' ').join('_');
-    id = makeAnchorId(sectionHeading, item, sanitizedHeading);
-  }
-
-  return (
-    <div className="p-3 first:mt-0" id={id}>
-      {hr ? <hr className="w-4/5 m-auto mb-5" /> : null}
-      {heading ? (
-        <div className="flex flex-row items-center mb-1">
-          <a href={`#${id}`}>
-            <span className="bg-indigo-500 px-2 py-1 inline-block rounded-xl text-white text-xs">
-              <Bold>{heading}</Bold>
-            </span>
-          </a>
-          <ReferenceList className="ml-4" references={references} />
-        </div>
-      ) : null}
-      {children}
-    </div>
-  );
-}
-
-export function ReferenceList({ className, references }: ReferenceListProps) {
-  if (!references) return null;
-
-  const referenceArray = Array.isArray(references) ? references : [references];
-  if (referenceArray.length === 0) return null;
-
-  return (
-    <div className={cn('inline', className)}>
-      {referenceArray.map((reference, i) => {
-        const isLast = i === referenceArray.length - 1;
-        const textColor = 'text-slate-400';
-        return (
-          <span className={cn('text-xs', textColor, { 'mr-2': !isLast })} key={i}>
-            {React.cloneElement(reference, {
-              ...reference.props,
-              bold: false,
-              className: cn('hover:text-slate-500', textColor),
-            })}
-            {isLast ? null : ','}
-          </span>
-        );
-      })}
-    </div>
-  );
-}
-
-export function WrapParagraph({ content }: WrapParagraphProps) {
-  return (
-    <>
-      {React.Children.map(content, (child, i) => {
-        if (React.isValidElement(child) && child.type === Paragraph) {
-          return React.cloneElement(child, { key: i });
-        }
-
-        return <Paragraph key={i}>{child}</Paragraph>;
-      })}
-    </>
   );
 }

@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import { ChildProp } from '../lib/types';
 import { ResponsiveResize } from './Collapse';
-import { ReferenceList, ReferenceListProps, WrapParagraph } from './TaskPage';
+import { ReferenceList, ReferenceListProps, WrapParagraph } from './Typography';
 
 type TabsProps = ChildProp<React.ReactElement<TabProps>[]>;
 type TabProps = ChildProp & ReferenceListProps & { active?: boolean; heading: string };

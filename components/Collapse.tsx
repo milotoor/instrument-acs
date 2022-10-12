@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import { useSize } from '../lib/hooks';
 import { ChildProp } from '../lib/types';
-import { ReferenceList, ReferenceListProps, WrapParagraph } from './TaskPage';
+import { ReferenceList, ReferenceListProps, WrapParagraph } from './Typography';
 
 type CollapseProps = ChildProp &
   ReferenceListProps & {
