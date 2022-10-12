@@ -169,7 +169,7 @@ function SectionContainer({ children, heading }: SectionContainerProps) {
   return (
     <div className="pt-6">
       <div className="text-3xl font-fancy mb-2 text-fuchsia-500">{heading}</div>
-      <div className="font-roboto-mono">{children}</div>
+      <div>{children}</div>
     </div>
   );
 }

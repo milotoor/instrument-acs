@@ -41,7 +41,7 @@ export default Home;
 const TableOfContents: React.FC<ACSProp> = ({ structure }) => {
   return (
     <div className="my-10 w-full">
-      <ol className="list-decimal leading-7 ml-8 mt-4 text-lg font-roboto-mono">
+      <ol className="list-decimal leading-7 ml-8 mt-4 text-lg">
         {structure.sections.map(({ name, tasks }) => (
           <li key={name}>
             {name}

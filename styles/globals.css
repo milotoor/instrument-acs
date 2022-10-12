@@ -3,22 +3,20 @@
 @tailwind utilities;
 
 @layer utilities {
+    body {
+        @apply font-roboto-mono;
+    }
+
     .text-glow-gold {
         text-shadow: 0 0 40px rgba(255, 255, 0, 1);
         @apply text-yellow-400;
     }
 
-    .__bold_roboto_mono {
-        @apply font-bold font-roboto-mono;
-    }
-
     .text-subtitle {
-        @apply text-xl md:text-2xl;
-        @apply __bold_roboto_mono;
+        @apply text-xl md:text-2xl font-bold;
     }
 
     .text-title {
-        @apply text-2xl md:text-4xl;
-        @apply __bold_roboto_mono;
+        @apply text-2xl md:text-4xl font-bold;
     }
 }
