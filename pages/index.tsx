@@ -2,7 +2,7 @@ import { NextPage } from 'next';
 import Head from 'next/head';
 import * as React from 'react';
 
-import { Layout, Link } from '../components';
+import { Layout, Link, TaskList } from '../components';
 import { getStaticPropFns } from '../lib/data_loaders';
 import { Structure } from '../lib/types';
 
@@ -42,13 +42,7 @@ const TableOfContents: React.FC<ACSProp> = ({ structure }) => {
         {structure.sections.map(({ name, tasks }) => (
           <li key={name}>
             {name}
-            <ol className="list-alpha ml-8">
-              {tasks.map((task) => (
-                <Link href={task.uri} key={task.name}>
-                  <li>{task.name}</li>
-                </Link>
-              ))}
-            </ol>
+            <TaskList tasks={tasks} className="ml-8" />
           </li>
         ))}
       </ol>
