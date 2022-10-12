@@ -46,7 +46,7 @@ export function Layout({ children, home = false, structure, task }: LayoutProps)
                 </Link>
               )}
             </span>
-            <div className="font-fancy text-2xl hover:text-title">
+            <div className="font-fancy text-2xl hover:text-glow-gold">
               <Link className={null} href="/">
                 The Instrument ACS
               </Link>

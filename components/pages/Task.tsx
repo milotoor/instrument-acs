@@ -38,10 +38,10 @@ export const TaskPage: React.FC<TaskPageProps> = ({ task, structure, flags = {},
       </Head>
 
       <main className="flex flex-1 flex-col w-full lg:w-large px-4 mb-8">
-        <h3 className="text-xl md:text-2xl font-bold font-roboto-mono">
+        <h3 className="text-subtitle text-white">
           Section {meta.section.numeral}. {meta.section.name}
         </h3>
-        <h1 className="text-2xl md:text-4xl font-bold font-roboto-mono text-title -indent-12 pl-12 mt-2">
+        <h1 className="text-title text-glow-gold mt-2">
           Task {meta.letter}. {meta.name}
         </h1>
 
