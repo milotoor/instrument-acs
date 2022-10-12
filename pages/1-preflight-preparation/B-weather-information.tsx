@@ -19,15 +19,12 @@ import {
   TaskPage,
   Warning,
 } from '../../components';
-import { getStructure, getTaskFromSectionLetter } from '../../lib/data_loaders';
+import { getStaticPropFns } from '../../lib/data_loaders';
 import { uri } from '../../lib/references';
 
 type FrontProps = { plural?: boolean };
 
-export const getStaticProps = () => ({
-  props: { structure: getStructure(), task: getTaskFromSectionLetter(1, 'B') },
-});
-
+export const getStaticProps = getStaticPropFns.task(1, 'B');
 const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
   return (
     <TaskPage

@@ -16,13 +16,10 @@ import {
   Term,
   Warning,
 } from '../../components';
-import { getStructure, getTaskFromSectionLetter } from '../../lib/data_loaders';
+import { getStaticPropFns } from '../../lib/data_loaders';
 import { referenceURIs, uri } from '../../lib/references';
 
-export const getStaticProps = () => ({
-  props: { structure: getStructure(), task: getTaskFromSectionLetter(6, 'E') },
-});
-
+export const getStaticProps = getStaticPropFns.task(6, 'E');
 const Landing: NextPage<TaskPage.TopLevelProps> = (props) => {
   return (
     <TaskPage

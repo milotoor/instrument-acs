@@ -19,13 +19,10 @@ import {
   ToDo,
   Warning,
 } from '../../components';
-import { getStructure, getTaskFromSectionLetter } from '../../lib/data_loaders';
+import { getStaticPropFns } from '../../lib/data_loaders';
 import { uri } from '../../lib/references';
 
-export const getStaticProps = () => ({
-  props: { structure: getStructure(), task: getTaskFromSectionLetter(6, 'A') },
-});
-
+export const getStaticProps = getStaticPropFns.task(6, 'A');
 const Nonprecision: NextPage<TaskPage.TopLevelProps> = (props) => {
   return (
     <TaskPage

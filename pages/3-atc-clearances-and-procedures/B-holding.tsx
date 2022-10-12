@@ -15,12 +15,9 @@ import {
   Term,
   Warning,
 } from '../../components';
-import { getStructure, getTaskFromSectionLetter } from '../../lib/data_loaders';
+import { getStaticPropFns } from '../../lib/data_loaders';
 
-export const getStaticProps = () => ({
-  props: { structure: getStructure(), task: getTaskFromSectionLetter(3, 'B') },
-});
-
+export const getStaticProps = getStaticPropFns.task(3, 'B');
 const Holding: NextPage<TaskPage.TopLevelProps> = (props) => {
   return (
     <TaskPage

@@ -61,7 +61,7 @@ function getSectionStructure(pathToRoot: string = '.'): Structure.Section[] {
   });
 }
 
-export function getTaskFromSectionLetter(section: Section.Number, letter: Task.Letter): Task {
+function getTaskFromSectionLetter(section: Section.Number, letter: Task.Letter): Task {
   const fs = require('fs');
 
   // Load the .toml file
@@ -85,3 +85,10 @@ function getImageData(pathToRoot: string = '.'): Structure.Images {
     })
   );
 }
+
+export const getStaticPropFns = {
+  structure: () => ({ props: { structure: getStructure() } }),
+  task: (section: Section.Number, letter: Task.Letter) => () => ({
+    props: { structure: getStructure(), task: getTaskFromSectionLetter(section, letter) },
+  }),
+};

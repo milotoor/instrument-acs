@@ -18,13 +18,10 @@ import {
   ToDo,
   Tooltip,
 } from '../../components';
-import { getStructure, getTaskFromSectionLetter } from '../../lib/data_loaders';
+import { getStaticPropFns } from '../../lib/data_loaders';
 import { uri } from '../../lib/references';
 
-export const getStaticProps = () => ({
-  props: { structure: getStructure(), task: getTaskFromSectionLetter(5, 'B') },
-});
-
+export const getStaticProps = getStaticPropFns.task(5, 'B');
 const DepartureEnrouteArrival: NextPage<TaskPage.TopLevelProps> = (props) => {
   return (
     <TaskPage

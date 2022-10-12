@@ -3,15 +3,12 @@ import Head from 'next/head';
 import * as React from 'react';
 
 import { Layout, Link } from '../components';
-import { getStructure } from '../lib/data_loaders';
+import { getStaticPropFns } from '../lib/data_loaders';
 import { Structure } from '../lib/types';
 
 type ACSProp = { structure: Structure.AppData };
 
-export const getStaticProps = () => ({
-  props: { structure: getStructure() },
-});
-
+export const getStaticProps = getStaticPropFns.structure;
 const Home: NextPage<ACSProp> = ({ structure }) => {
   return (
     <Layout home structure={structure}>

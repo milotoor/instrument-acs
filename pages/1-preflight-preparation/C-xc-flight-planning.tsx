@@ -21,13 +21,10 @@ import {
   ToDo,
   Warning,
 } from '../../components';
-import { getStructure, getTaskFromSectionLetter } from '../../lib/data_loaders';
+import { getStaticPropFns } from '../../lib/data_loaders';
 import { uri } from '../../lib/references';
 
-export const getStaticProps = () => ({
-  props: { structure: getStructure(), task: getTaskFromSectionLetter(1, 'C') },
-});
-
+export const getStaticProps = getStaticPropFns.task(1, 'C');
 const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
   return (
     <TaskPage
