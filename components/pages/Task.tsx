@@ -40,10 +40,8 @@ export const TaskPage: React.FC<TaskPageProps> = ({ task, structure, flags = {},
       </Head>
 
       <main className="flex flex-1 flex-col w-full lg:w-large px-4 mb-8">
-        <Link className={null} href={section.uri}>
-          <h3 className="text-subtitle">
-            Section {meta.section.numeral}. {meta.section.name}
-          </h3>
+        <Link className="text-subtitle" color={null} href={section.uri}>
+          Section {meta.section.numeral}. {meta.section.name}
         </Link>
         <h1 className="text-title text-glow-gold mt-2">
           Task {meta.letter}. {meta.name}

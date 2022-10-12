@@ -42,8 +42,8 @@ const TableOfContents: React.FC<ACSProp> = ({ structure }) => {
       <ol className="list-decimal leading-7 ml-8 mt-4 text-lg">
         {structure.sections.map(({ name, tasks, uri }) => (
           <li key={name} className="my-4">
-            <Link className={null} href={uri}>
-              <span className="text-subtitle">{name}</span>
+            <Link className="text-subtitle" color={null} href={uri}>
+              {name}
             </Link>
             <TaskList tasks={tasks} className="ml-8" />
           </li>

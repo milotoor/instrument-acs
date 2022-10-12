@@ -9,7 +9,7 @@ import { makeAnchorId, objectHasProperty } from '../lib/util';
 import { AppContext } from './context';
 import { Emphasize, Tooltip } from './Typography';
 
-type CommonLinkProps = { bold?: boolean; className?: string | null };
+type CommonLinkProps = { bold?: boolean; className?: string; color?: string | null };
 type ReferenceLinkProps = CommonLinkProps & {
   reference: LinkableReference;
   text?: React.ReactNode;
@@ -31,11 +31,12 @@ export type LinkProps = NextLinkProps & ChildProp & CommonLinkProps;
 type LinkableReference = keyof typeof referenceURIs;
 
 export const Link = Object.assign(
-  function Link({ bold, children, className, href, ...rest }: LinkProps) {
+  function Link({ bold, children, className, color, href, ...rest }: LinkProps) {
     return (
       <span
-        className={cn('hover:underline text-fuchsia-500', className, {
-          'text-inherit': className === null,
+        className={cn('hover:underline', className, color, {
+          'text-inherit': color === null,
+          'text-fuchsia-500': color === undefined,
         })}
       >
         <Emphasize bold={bold}>
