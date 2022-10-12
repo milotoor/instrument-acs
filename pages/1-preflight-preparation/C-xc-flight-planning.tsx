@@ -246,7 +246,7 @@ const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
           </Collapse>,
 
           <Paragraph heading="IFR Cruise Altitudes">
-            <ToDo />
+            This is a test
           </Paragraph>,
 
           <Paragraph heading="VFR-On-Top">
