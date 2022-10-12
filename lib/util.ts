@@ -21,6 +21,18 @@ export function makeAnchorId(
   return id;
 }
 
+const numerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'] as const;
+
+/** Converts a section Roman numeral to its Arabic equivalent */
+export function numeralToNumber(numeral: Section.Numeral) {
+  return (numerals.indexOf(numeral) + 1) as Section.Number;
+}
+
+/** Converts a section Roman numeral to its Arabic equivalent */
+export function numberToNumeral(number: Section.Number): Section.Numeral {
+  return numerals[number - 1];
+}
+
 /** Basic typeguard for the `in` operator, not sure why this isn't in the TypeScript core lib */
 export function objectHasProperty<T>(obj: T, prop: any): prop is keyof T {
   return prop in obj;

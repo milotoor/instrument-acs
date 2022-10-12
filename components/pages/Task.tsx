@@ -4,7 +4,7 @@ import React from 'react';
 
 import { referenceURIs } from '../../lib/references';
 import { Item, Section, Structure, Task } from '../../lib/types';
-import { makeAnchorId, objectHasProperty } from '../../lib/util';
+import { makeAnchorId, numeralToNumber, objectHasProperty } from '../../lib/util';
 import { NoteContext } from '../context';
 import { Layout } from '../Layout';
 import { Link } from '../Link';
@@ -31,6 +31,7 @@ type NotesObject = Record<Item.ID, React.ReactNode>;
 export const TaskPage: React.FC<TaskPageProps> = ({ task, structure, flags = {}, notes }) => {
   const { meta } = task;
   const dataSectionProps = { task, notes };
+  const section = structure.sections[numeralToNumber(meta.section.numeral) - 1];
   return (
     <Layout structure={structure} task={task}>
       <Head>
@@ -38,9 +39,11 @@ export const TaskPage: React.FC<TaskPageProps> = ({ task, structure, flags = {},
       </Head>
 
       <main className="flex flex-1 flex-col w-full lg:w-large px-4 mb-8">
-        <h3 className="text-subtitle text-white">
-          Section {meta.section.numeral}. {meta.section.name}
-        </h3>
+        <Link className={null} href={section.uri}>
+          <h3 className="text-subtitle text-white">
+            Section {meta.section.numeral}. {meta.section.name}
+          </h3>
+        </Link>
         <h1 className="text-title text-glow-gold mt-2">
           Task {meta.letter}. {meta.name}
         </h1>

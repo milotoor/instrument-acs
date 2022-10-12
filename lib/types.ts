@@ -16,6 +16,7 @@ export namespace Item {
 
 export namespace Section {
   export type Number = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+  export type Numeral = 'I' | 'II' | 'III' | 'IV' | 'V' | 'VI' | 'VII' | 'VIII';
 
   export namespace Headings {
     export type NonList = 'Objective' | 'References';
@@ -31,7 +32,7 @@ export namespace Task {
     name: string;
     objective: string;
     references: string[];
-    section: { numeral: string; name: string };
+    section: { numeral: Section.Numeral; name: string };
   };
 }
 
