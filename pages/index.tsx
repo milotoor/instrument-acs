@@ -5,6 +5,7 @@ import * as React from 'react';
 import { Layout, Link, TaskList } from '../components';
 import { getStaticPropFns } from '../lib/data_loaders';
 import { Structure } from '../lib/types';
+import { uri } from '../lib/references';
 
 type ACSProp = { structure: Structure.AppData };
 
@@ -39,9 +40,11 @@ const TableOfContents: React.FC<ACSProp> = ({ structure }) => {
   return (
     <div className="my-10 w-full">
       <ol className="list-decimal leading-7 ml-8 mt-4 text-lg">
-        {structure.sections.map(({ name, tasks }) => (
-          <li key={name}>
-            {name}
+        {structure.sections.map(({ name, tasks, uri }) => (
+          <li key={name} className="my-4">
+            <Link className={null} href={uri}>
+              <span className="text-subtitle">{name}</span>
+            </Link>
             <TaskList tasks={tasks} className="ml-8" />
           </li>
         ))}

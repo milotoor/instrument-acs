@@ -22,7 +22,7 @@ export const SectionPage: React.FC<SectionPageProps> = ({ number, structure }) =
         <h1 className="text-title text-glow-gold">{title}</h1>
 
         <div className="my-10">
-          <h3 className="text-subtitle text-white">Tasks</h3>
+          <h3 className="text-subtitle">Tasks</h3>
           <TaskList className="ml-12 mt-2 text-lg" tasks={section.tasks} />
         </div>
       </main>
