@@ -1,7 +1,8 @@
 import cn from 'classnames';
 import React from 'react';
 
-import { Section, Structure, Task } from '../lib/types';
+import { Structure, Task } from '../lib/types';
+import { numeralToNumber } from '../lib/util';
 import { AppContext } from './context';
 import { Link } from './Link';
 
@@ -9,21 +10,22 @@ type MaybeTask = Structure.Task | undefined;
 type LayoutProps = {
   children: React.ReactNode;
   home?: boolean;
+  section?: Structure.Section;
   structure: Structure.AppData;
   task?: Task;
 };
 
-const sectionNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];
-
-export function Layout({ children, home = false, structure, task }: LayoutProps) {
+export function Layout({ children, home = false, section, structure, task }: LayoutProps) {
   const tasks = React.useMemo(() => structure?.sections?.flatMap((s) => s.tasks), [structure]);
   const meta = task?.meta;
-  const [section, letter] = meta
-    ? [(sectionNumerals.indexOf(meta.section.numeral) + 1) as Section.Number, meta.letter]
+  const [sectionNumber, letter] = meta
+    ? [numeralToNumber(meta.section.numeral), meta.letter]
+    : section
+    ? [section.number, undefined]
     : [undefined, undefined];
 
   const taskIndex = React.useMemo(
-    () => tasks?.findIndex((t) => t.section === section && t.letter === letter),
+    () => tasks?.findIndex((t) => t.section === sectionNumber && t.letter === letter),
     [tasks, task]
   );
 
@@ -35,7 +37,7 @@ export function Layout({ children, home = false, structure, task }: LayoutProps)
 
   const navLinkClasses = 'absolute h-top-bar flex flex-col justify-center font-roboto';
   return (
-    <AppContext.Provider value={{ section, structure, task: letter }}>
+    <AppContext.Provider value={{ section: sectionNumber, structure, task: letter }}>
       <div className="flex h-screen flex-col items-center justify-start">
         {!home && (
           <div className="w-full h-top-bar z-10 flex-shrink-0 shadow-xl shadow-slate-800 flex flex-row justify-center items-center relative bg-gradient-to-r from-cyan-500 to-blue-500">

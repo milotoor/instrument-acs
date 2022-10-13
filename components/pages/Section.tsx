@@ -17,7 +17,7 @@ export const SectionPage: React.FC<SectionPageProps> = ({ note, number, structur
   const { name } = section;
   const title = `Section ${numberToNumeral(number)}. ${name}`;
   return (
-    <Layout structure={structure}>
+    <Layout section={section} structure={structure}>
       <Head>
         <title>{title}</title>
       </Head>
