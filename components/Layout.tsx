@@ -4,6 +4,7 @@ import { Structure, Task } from '../lib/types';
 import { numeralToNumber } from '../lib/util';
 import { AppContext } from './context';
 import { Link } from './Link';
+import { TableOfContents } from './Tasks';
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -23,7 +24,7 @@ export function Layout({ children, home = false, section, structure, task }: Lay
 
   return (
     <AppContext.Provider value={{ section: sectionNumber, structure, task: letter }}>
-      <div className="flex h-screen flex-col items-center justify-start">
+      <div className="h-screen flex flex-col items-center justify-start">
         {!home && (
           <div className="w-full h-top-bar z-10 flex-shrink-0 shadow-xl shadow-slate-800 flex flex-row justify-center items-center relative bg-gradient-to-r from-cyan-500 to-blue-500">
             <div className="font-fancy text-2xl hover:text-glow-gold">
@@ -33,8 +34,11 @@ export function Layout({ children, home = false, section, structure, task }: Lay
             </div>
           </div>
         )}
-        <div className="w-full pt-4 pb-2 flex-grow overflow-auto  flex flex-col items-center">
-          {children}
+        <div className="w-full flex overflow-hidden">
+          <div className="w-96 py-4 pl-2 overflow-auto">
+            {!home && <TableOfContents structure={structure} small />}
+          </div>
+          <div className="pt-4 pb-2 pl-4 flex flex-col flex-grow overflow-auto">{children}</div>
         </div>
       </div>
     </AppContext.Provider>

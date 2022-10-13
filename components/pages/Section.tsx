@@ -4,8 +4,8 @@ import React from 'react';
 import { Section, Structure } from '../../lib/types';
 import { numberToNumeral } from '../../lib/util';
 import { Layout } from '../Layout';
+import { TaskList } from '../Tasks';
 import { WrapParagraph } from '../Typography';
-import { TaskList } from './Task';
 
 type SectionPageProps = SectionPage.TopLevelProps & {
   note?: React.ReactNode;

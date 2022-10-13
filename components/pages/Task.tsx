@@ -14,7 +14,6 @@ import { Tooltip, WrapParagraph } from '../Typography';
 type ReferencesSectionProps = { references: string[] };
 type SectionContainerProps = { children: React.ReactNode; heading: string };
 type TaskPageProps = TaskPage.TopLevelProps & FlagsProp & { notes?: NotesObject };
-type TaskListProps = { className?: string; tasks: Structure.Task[] };
 type DataSectionProps = FlagsProp & {
   heading: Section.Headings.List;
   notes?: NotesObject;
@@ -65,18 +64,6 @@ export namespace TaskPage {
     task: Task;
     structure: Structure.AppData;
   };
-}
-
-export function TaskList({ className, tasks }: TaskListProps) {
-  return (
-    <ol className={cn('list-alpha', className)}>
-      {tasks.map((task) => (
-        <Link href={task.uri} key={task.name}>
-          <li>{task.name}</li>
-        </Link>
-      ))}
-    </ol>
-  );
 }
 
 function ReferencesSection({ references }: ReferencesSectionProps) {

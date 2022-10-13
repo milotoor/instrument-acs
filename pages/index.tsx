@@ -2,15 +2,14 @@ import { NextPage } from 'next';
 import Head from 'next/head';
 import * as React from 'react';
 
-import { Layout, Link, TaskList } from '../components';
+import { Layout, Link, TableOfContents } from '../components';
 import { getStaticPropFns } from '../lib/data_loaders';
 import { Structure } from '../lib/types';
-import { uri } from '../lib/references';
 
-type ACSProp = { structure: Structure.AppData };
+type HomeProps = { structure: Structure.AppData };
 
 export const getStaticProps = getStaticPropFns.structure;
-const Home: NextPage<ACSProp> = ({ structure }) => {
+const Home: NextPage<HomeProps> = ({ structure }) => {
   return (
     <Layout home structure={structure}>
       <Head>
@@ -28,27 +27,12 @@ const Home: NextPage<ACSProp> = ({ structure }) => {
           </Link>
         </h1>
 
-        <TableOfContents structure={structure} />
+        <div className="my-10 w-full">
+          <TableOfContents structure={structure} />
+        </div>
       </main>
     </Layout>
   );
 };
 
 export default Home;
-
-const TableOfContents: React.FC<ACSProp> = ({ structure }) => {
-  return (
-    <div className="my-10 w-full">
-      <ol className="list-decimal leading-7 ml-8 mt-4 text-lg">
-        {structure.sections.map(({ name, tasks, uri }) => (
-          <li key={name} className="my-4">
-            <Link className="text-subtitle" color={null} href={uri}>
-              {name}
-            </Link>
-            <TaskList tasks={tasks} className="ml-8" />
-          </li>
-        ))}
-      </ol>
-    </div>
-  );
-};
