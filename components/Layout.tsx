@@ -5,12 +5,13 @@ import { numeralToNumber } from '../lib/util';
 import { AppContext } from './context';
 import { Link } from './Link';
 import { TableOfContents } from './Tasks';
+import { Bold } from './Typography';
 
-type LayoutProps = {
+type StructureProp = { structure: Structure.AppData };
+type LayoutProps = StructureProp & {
   children: React.ReactNode;
   home?: boolean;
   section?: Structure.Section;
-  structure: Structure.AppData;
   task?: Task;
 };
 
@@ -32,6 +33,7 @@ export function Layout({ children, home = false, section, structure, task }: Lay
                 The Instrument ACS
               </Link>
             </div>
+            <LastUpdatedWidget structure={structure} />
           </div>
         )}
         <div className="w-full flex overflow-hidden">
@@ -42,5 +44,14 @@ export function Layout({ children, home = false, section, structure, task }: Lay
         </div>
       </div>
     </AppContext.Provider>
+  );
+}
+
+function LastUpdatedWidget({ structure }: StructureProp) {
+  return (
+    <div className="absolute right-5 h-top-bar flex flex-col justify-center items-end text-xs">
+      <span>Last updated:</span>
+      <Bold>{structure.lastUpdated}</Bold>
+    </div>
   );
 }

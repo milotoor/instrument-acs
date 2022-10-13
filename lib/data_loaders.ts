@@ -1,5 +1,7 @@
+import { execSync } from 'child_process';
 import dirTree from 'directory-tree';
 import imageSize from 'image-size';
+import { DateTime } from 'luxon';
 import path from 'path';
 import toml from 'toml';
 
@@ -27,11 +29,18 @@ const taskURIs = {
   8: { A: 'checking-equipment' },
 } as Record<Section.Number, Record<Task.Letter, string>>;
 
-export function getStructure(pathToRoot: string = '.') {
+export function getStructure(pathToRoot: string = '.'): Structure.AppData {
   return {
     images: getImageData(pathToRoot),
     sections: getSectionStructure(pathToRoot),
+    lastUpdated: getLastUpdated(),
   };
+}
+
+function getLastUpdated() {
+  const dateStr = String(execSync('git log -1 --format=%cD'));
+  const date = DateTime.fromRFC2822(dateStr);
+  return date.toLocaleString(DateTime.DATETIME_FULL);
 }
 
 function getSectionStructure(pathToRoot: string = '.'): Structure.Section[] {

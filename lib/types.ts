@@ -61,5 +61,5 @@ export namespace Structure {
 
   export type Image = { width: number; height: number; type?: string };
   export type Images = Record<string, Image>;
-  export type AppData = { images: Images; sections: Section[] };
+  export type AppData = { images: Images; sections: Section[]; lastUpdated: string };
 }
