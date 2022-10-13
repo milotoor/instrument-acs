@@ -244,4 +244,26 @@ const attributions: Record<number, Record<string, AttributionProps>> = {
       title: 'Figure 6-33',
     },
   },
+  6: {
+    gps_cdi_scaling_phases: {
+      author: "G1000 Pilot's Guide",
+      className: 'text-black',
+      link: referenceURIs.g1000,
+      position: 'bottom-right',
+      title: 'Figure 2-23 Automatic CDI Scaling',
+    },
+    lnav_cdi_scaling: {
+      author: "G1000 Pilot's Guide",
+      className: 'text-black',
+      link: referenceURIs.g1000,
+      title: 'Figure 2-24',
+    },
+    lpv_cdi_scaling: {
+      author: "G1000 Pilot's Guide",
+      className: 'text-black',
+      link: referenceURIs.g1000,
+      position: 'bottom-right',
+      title: 'Figure 2-25',
+    },
+  },
 };
