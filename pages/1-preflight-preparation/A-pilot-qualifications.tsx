@@ -2,7 +2,7 @@ import { NextPage } from 'next';
 import React from 'react';
 
 import { Bold, BulletList, FAR, InlineList, Link, TaskPage } from '../../components';
-import { getStaticPropFns } from '../../lib/data_loaders';
+import { getStaticPropFns } from '../../server';
 
 export const getStaticProps = getStaticPropFns.task(1, 'A');
 const PilotQualifications: NextPage<TaskPage.TopLevelProps> = (props) => {

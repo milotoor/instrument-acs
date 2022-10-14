@@ -15,7 +15,7 @@ import {
   Term,
   Warning,
 } from '../../components';
-import { getStaticPropFns } from '../../lib/data_loaders';
+import { getStaticPropFns } from '../../server';
 
 export const getStaticProps = getStaticPropFns.structure;
 const ApproachProcedures: NextPage<SectionPage.TopLevelProps> = (props) => {

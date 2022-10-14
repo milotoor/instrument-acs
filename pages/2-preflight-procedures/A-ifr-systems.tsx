@@ -2,8 +2,8 @@ import { NextPage } from 'next';
 import React from 'react';
 
 import { AIM, Bold, Collapse, Info, Link, Quotation, TaskPage, Warning } from '../../components';
-import { getStaticPropFns } from '../../lib/data_loaders';
 import { uri } from '../../lib/references';
+import { getStaticPropFns } from '../../server';
 
 export const getStaticProps = getStaticPropFns.task(2, 'A');
 const IfrSystems: NextPage<TaskPage.TopLevelProps> = (props) => {

@@ -19,8 +19,8 @@ import {
   ToDo,
   Warning,
 } from '../../components';
-import { getStaticPropFns } from '../../lib/data_loaders';
 import { uri } from '../../lib/references';
+import { getStaticPropFns } from '../../server';
 
 export const getStaticProps = getStaticPropFns.task(6, 'A');
 const Nonprecision: NextPage<TaskPage.TopLevelProps> = (props) => {

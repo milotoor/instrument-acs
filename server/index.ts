@@ -5,7 +5,7 @@ import { DateTime } from 'luxon';
 import path from 'path';
 import toml from 'toml';
 
-import { Section, Structure, Task } from './types';
+import { Section, Structure, Task } from '../lib/types';
 
 const sectionURIs = {
   1: 'preflight-preparation',
@@ -52,6 +52,7 @@ function getSectionStructure(pathToRoot: string = '.'): Structure.Section[] {
     const sectionName = name.replace(/\d\. /, '');
     const number = parseInt(name.match(/([1-8])/)![1]) as Section.Number;
     const sectionURIComponent = `${number}-${sectionURIs[number]}`;
+
     return {
       name: sectionName,
       number,

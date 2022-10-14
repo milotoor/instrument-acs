@@ -19,8 +19,8 @@ import {
   TaskPage,
   Warning,
 } from '../../components';
-import { getStaticPropFns } from '../../lib/data_loaders';
 import { uri } from '../../lib/references';
+import { getStaticPropFns } from '../../server';
 
 type FrontProps = { plural?: boolean };
 

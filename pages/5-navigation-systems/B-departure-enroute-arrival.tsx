@@ -18,8 +18,8 @@ import {
   ToDo,
   Tooltip,
 } from '../../components';
-import { getStaticPropFns } from '../../lib/data_loaders';
 import { uri } from '../../lib/references';
+import { getStaticPropFns } from '../../server';
 
 export const getStaticProps = getStaticPropFns.task(5, 'B');
 const DepartureEnrouteArrival: NextPage<TaskPage.TopLevelProps> = (props) => {
