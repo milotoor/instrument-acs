@@ -2,9 +2,16 @@ import cn from 'classnames';
 import Head from 'next/head';
 import React from 'react';
 
-import { referenceURIs } from '../../lib/references';
-import { Item, Section, Structure, Task } from '../../lib/types';
-import { makeAnchorId, numeralToNumber, objectHasProperty } from '../../lib/util';
+import {
+  Item,
+  makeAnchorId,
+  numeralToNumber,
+  objectHasProperty,
+  referenceURIs,
+  Section,
+  Structure,
+  Task,
+} from '../../lib';
 import { NoteContext } from '../context';
 import { Layout } from '../Layout';
 import { Link } from '../Link';

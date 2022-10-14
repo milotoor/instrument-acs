@@ -3,8 +3,8 @@ import Head from 'next/head';
 import * as React from 'react';
 
 import { Layout, Link, TableOfContents } from '../components';
+import { Structure } from '../lib';
 import { getStaticPropFns } from '../server';
-import { Structure } from '../lib/types';
 
 type HomeProps = { structure: Structure.AppData };
 

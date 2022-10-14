@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { Structure, Task } from '../lib/types';
-import { numeralToNumber } from '../lib/util';
+import { numeralToNumber, Structure, Task } from '../lib';
 import { AppContext } from './context';
 import { Link } from './Link';
 import { TableOfContents } from './Tasks';

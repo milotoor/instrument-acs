@@ -1,8 +1,7 @@
 import Head from 'next/head';
 import React from 'react';
 
-import { Section, Structure } from '../../lib/types';
-import { numberToNumeral } from '../../lib/util';
+import { numberToNumeral, Section, Structure } from '../../lib';
 import { Layout } from '../Layout';
 import { TaskList } from '../Tasks';
 import { WrapParagraph } from '../Typography';

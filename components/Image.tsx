@@ -2,8 +2,7 @@ import cn from 'classnames';
 import NextImage from 'next/image';
 import * as React from 'react';
 
-import { referenceURIs, uri } from '../lib/references';
-import { ChildProp } from '../lib/types';
+import { ChildProp, referenceURIs, uri } from '../lib';
 import { AppContext } from './context';
 import { Link } from './Link';
 

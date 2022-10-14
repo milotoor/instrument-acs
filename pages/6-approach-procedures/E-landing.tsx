@@ -16,7 +16,7 @@ import {
   Term,
   Warning,
 } from '../../components';
-import { referenceURIs, uri } from '../../lib/references';
+import { referenceURIs, uri } from '../../lib';
 import { getStaticPropFns } from '../../server';
 
 export const getStaticProps = getStaticPropFns.task(6, 'E');

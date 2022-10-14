@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Item, Section, Structure, Task } from '../lib/types';
+import { Item, Section, Structure, Task } from '../lib';
 
 type AppContext = {
   section?: Section.Number;

@@ -21,7 +21,7 @@ import {
   ToDo,
   Warning,
 } from '../../components';
-import { uri } from '../../lib/references';
+import { uri } from '../../lib';
 import { getStaticPropFns } from '../../server';
 
 export const getStaticProps = getStaticPropFns.task(1, 'C');

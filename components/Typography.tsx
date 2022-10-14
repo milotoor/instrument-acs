@@ -2,10 +2,9 @@ import cn from 'classnames';
 import katex from 'katex';
 import React from 'react';
 
-import { ChildProp, Colors, OneOrMore } from '../lib/types';
+import { ChildProp, Colors, logWarning, makeAnchorId, OneOrMore } from '../lib';
 import { LinkProps } from './Link';
 import { NoteContext } from './context';
-import { logWarning, makeAnchorId } from '../lib/util';
 
 type BulletListProps = ChildProp<React.ReactNode[]> & {
   type?: 'alpha' | 'decimal' | 'disc' | 'roman' | 'square';

@@ -1,8 +1,7 @@
 import cn from 'classnames';
 import * as React from 'react';
 
-import { useSize } from '../lib/hooks';
-import { ChildProp } from '../lib/types';
+import { ChildProp, useSize } from '../lib';
 import { ReferenceList, ReferenceListProps, WrapParagraph } from './Typography';
 
 type CollapseProps = ChildProp &

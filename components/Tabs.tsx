@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import * as React from 'react';
 
-import { ChildProp } from '../lib/types';
+import { ChildProp } from '../lib';
 import { ResponsiveResize } from './Collapse';
 import { ReferenceList, ReferenceListProps, WrapParagraph } from './Typography';
 

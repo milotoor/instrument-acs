@@ -5,7 +5,7 @@ import { DateTime } from 'luxon';
 import path from 'path';
 import toml from 'toml';
 
-import { Section, Structure, Task } from '../lib/types';
+import { Section, Structure, Task } from '../lib';
 
 const sectionURIs = {
   1: 'preflight-preparation',

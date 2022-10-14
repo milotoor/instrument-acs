@@ -2,10 +2,17 @@ import cn from 'classnames';
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import React from 'react';
 
-import { referenceNames, referenceURIs, uri } from '../lib/references';
-import { ChildProp, Item, Section, Task } from '../lib/types';
-import { makeAnchorId, objectHasProperty } from '../lib/util';
-
+import {
+  ChildProp,
+  Item,
+  makeAnchorId,
+  objectHasProperty,
+  referenceNames,
+  referenceURIs,
+  Section,
+  Task,
+  uri,
+} from '../lib';
 import { AppContext } from './context';
 import { Emphasize, Tooltip } from './Typography';
 

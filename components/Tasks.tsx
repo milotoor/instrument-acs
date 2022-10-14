@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import * as React from 'react';
 
-import { Structure } from '../lib/types';
+import { Structure } from '../lib';
 import { Link } from './Link';
 
 type TableOfContentsProps = { small?: boolean; structure: Structure.AppData };
