@@ -8,7 +8,7 @@ type AppContext = {
 };
 
 export const AppContext = React.createContext<AppContext>({
-  structure: { images: {}, sections: [] },
+  structure: { images: {}, sections: [], lastUpdated: '' },
 });
 
 type NoteContext = {

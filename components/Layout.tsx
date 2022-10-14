@@ -48,10 +48,12 @@ export function Layout({ children, home = false, section, structure, task }: Lay
 }
 
 function LastUpdatedWidget({ structure }: StructureProp) {
+  const { lastUpdated } = structure;
+  if (!lastUpdated) return null;
   return (
     <div className="absolute right-5 h-top-bar flex flex-col justify-center items-end text-xs">
       <span>Last updated:</span>
-      <Bold>{structure.lastUpdated}</Bold>
+      <Bold>{lastUpdated}</Bold>
     </div>
   );
 }
