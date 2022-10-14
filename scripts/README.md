@@ -17,13 +17,3 @@ For example:
 > ./convert_image 1 cloud
 Converted image './clouds.jpeg'
 ```
-
-## `make_tsx_files`
-
-This script generates the ACS files and directories within the `pages` directory, using the `data/acs` directory's `.toml` files as a basis for doing so. Requires `ts-node` and project dependencies to be installed. This script was useful during the early phase of the `instrument_acs` project to bootstrap the TypeScript files for each of the ACS tasks, but it doesn't have much value anymore.
-
-Usage:
-
-```sh
-./make_tsx_files.ts
-```
