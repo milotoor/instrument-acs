@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import { Layout, Link, TableOfContents } from '../components';
 import { Structure } from '../lib';
-import { getStaticPropFns } from '../server';
+import { getStaticPropFns } from '../ssr';
 
 type HomeProps = { structure: Structure.AppData };
 

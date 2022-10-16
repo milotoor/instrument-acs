@@ -14,7 +14,7 @@ import {
   TaskPage,
   Warning,
 } from '../../components';
-import { getStaticPropFns } from '../../server';
+import { getStaticPropFns } from '../../ssr';
 
 export const getStaticProps = getStaticPropFns.task(4, 'A');
 const InstrumentFlight: NextPage<TaskPage.TopLevelProps> = (props) => {

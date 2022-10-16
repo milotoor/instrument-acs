@@ -2,7 +2,7 @@ import { NextPage } from 'next';
 import React from 'react';
 
 import { TaskPage } from '../../components';
-import { getStaticPropFns } from '../../server';
+import { getStaticPropFns } from '../../ssr';
 
 export const getStaticProps = getStaticPropFns.task(2, 'C');
 const FlightDeckCheck: NextPage<TaskPage.TopLevelProps> = (props) => {

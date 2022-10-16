@@ -15,7 +15,7 @@ import {
   Term,
   Warning,
 } from '../../components';
-import { getStaticPropFns } from '../../server';
+import { getStaticPropFns } from '../../ssr';
 
 export const getStaticProps = getStaticPropFns.task(3, 'B');
 const Holding: NextPage<TaskPage.TopLevelProps> = (props) => {

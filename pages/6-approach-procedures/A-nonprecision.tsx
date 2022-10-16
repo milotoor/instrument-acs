@@ -20,7 +20,7 @@ import {
   Warning,
 } from '../../components';
 import { uri } from '../../lib';
-import { getStaticPropFns } from '../../server';
+import { getStaticPropFns } from '../../ssr';
 
 export const getStaticProps = getStaticPropFns.task(6, 'A');
 const Nonprecision: NextPage<TaskPage.TopLevelProps> = (props) => {

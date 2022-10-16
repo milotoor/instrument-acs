@@ -22,7 +22,7 @@ import {
   Warning,
 } from '../../components';
 import { uri } from '../../lib';
-import { getStaticPropFns } from '../../server';
+import { getStaticPropFns } from '../../ssr';
 
 export const getStaticProps = getStaticPropFns.task(1, 'C');
 const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {

@@ -19,7 +19,7 @@ import {
   Tooltip,
 } from '../../components';
 import { uri } from '../../lib';
-import { getStaticPropFns } from '../../server';
+import { getStaticPropFns } from '../../ssr';
 
 export const getStaticProps = getStaticPropFns.task(5, 'B');
 const DepartureEnrouteArrival: NextPage<TaskPage.TopLevelProps> = (props) => {

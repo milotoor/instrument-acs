@@ -17,7 +17,7 @@ import {
   Warning,
 } from '../../components';
 import { referenceURIs, uri } from '../../lib';
-import { getStaticPropFns } from '../../server';
+import { getStaticPropFns } from '../../ssr';
 
 export const getStaticProps = getStaticPropFns.task(6, 'E');
 const Landing: NextPage<TaskPage.TopLevelProps> = (props) => {

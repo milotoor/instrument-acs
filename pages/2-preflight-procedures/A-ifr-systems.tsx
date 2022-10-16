@@ -3,7 +3,7 @@ import React from 'react';
 
 import { AIM, Bold, Collapse, Info, Link, Quotation, TaskPage, Warning } from '../../components';
 import { uri } from '../../lib';
-import { getStaticPropFns } from '../../server';
+import { getStaticPropFns } from '../../ssr';
 
 export const getStaticProps = getStaticPropFns.task(2, 'A');
 const IfrSystems: NextPage<TaskPage.TopLevelProps> = (props) => {
