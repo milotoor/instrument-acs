@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import React from 'react';
 
 import { numberToNumeral, Section, Structure } from '../../lib';
@@ -16,25 +15,19 @@ export const SectionPage: React.FC<SectionPageProps> = ({ note, number, structur
   const { name } = section;
   const title = `Section ${numberToNumeral(number)}. ${name}`;
   return (
-    <Layout section={section} structure={structure}>
-      <Head>
-        <title>{title}</title>
-      </Head>
+    <Layout section={section} structure={structure} title={title}>
+      <h1 className="text-title text-glow-gold">{title}</h1>
 
-      <main className="flex flex-1 flex-col w-full lg:w-large px-4 mb-8">
-        <h1 className="text-title text-glow-gold">{title}</h1>
+      <div className="my-10">
+        <h3 className="text-subtitle">Tasks</h3>
+        <TaskList className="ml-12 mt-2 text-lg" tasks={section.tasks} />
+      </div>
 
-        <div className="my-10">
-          <h3 className="text-subtitle">Tasks</h3>
-          <TaskList className="ml-12 mt-2 text-lg" tasks={section.tasks} />
+      {note && (
+        <div className="note-card">
+          <WrapParagraph content={note} />
         </div>
-
-        {note && (
-          <div className="note-card">
-            <WrapParagraph content={note} />
-          </div>
-        )}
-      </main>
+      )}
     </Layout>
   );
 };

@@ -1,5 +1,4 @@
 import cn from 'classnames';
-import Head from 'next/head';
 import React from 'react';
 
 import {
@@ -40,27 +39,21 @@ export const TaskPage: React.FC<TaskPageProps> = ({ task, structure, flags = {},
   const dataSectionProps = { task, notes };
   const section = structure.sections[numeralToNumber(meta.section.numeral) - 1];
   return (
-    <Layout structure={structure} task={task}>
-      <Head>
-        <title>{meta.name}</title>
-      </Head>
+    <Layout structure={structure} task={task} title={meta.name}>
+      <Link className="text-subtitle" color={null} href={section.uri}>
+        Section {meta.section.numeral}. {meta.section.name}
+      </Link>
+      <h1 className="text-title text-glow-gold mt-2">
+        Task {meta.letter}. {meta.name}
+      </h1>
 
-      <main className="flex flex-1 flex-col w-full lg:w-large px-4 mb-8">
-        <Link className="text-subtitle" color={null} href={section.uri}>
-          Section {meta.section.numeral}. {meta.section.name}
-        </Link>
-        <h1 className="text-title text-glow-gold mt-2">
-          Task {meta.letter}. {meta.name}
-        </h1>
-
-        <div>
-          <ReferencesSection references={meta.references} />
-          <SectionContainer heading="Objective">{meta.objective}</SectionContainer>
-          <DataSection heading="Knowledge" flags={flags} {...dataSectionProps} />
-          <DataSection heading="Risk Management" {...dataSectionProps} />
-          <DataSection heading="Skills" {...dataSectionProps} />
-        </div>
-      </main>
+      <div>
+        <ReferencesSection references={meta.references} />
+        <SectionContainer heading="Objective">{meta.objective}</SectionContainer>
+        <DataSection heading="Knowledge" flags={flags} {...dataSectionProps} />
+        <DataSection heading="Risk Management" {...dataSectionProps} />
+        <DataSection heading="Skills" {...dataSectionProps} />
+      </div>
     </Layout>
   );
 };
