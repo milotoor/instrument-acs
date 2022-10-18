@@ -1,12 +1,11 @@
-import { execSync } from 'child_process';
 import dirTree from 'directory-tree';
 import fs from 'fs';
 import imageSize from 'image-size';
-import { DateTime } from 'luxon';
 import path from 'path';
 import toml from 'toml';
 
 import { ACS } from '../lib';
+import { getLastUpdates } from './last_updates';
 
 export function getStructure(pathToRoot: string = '.') {
   return {
@@ -15,28 +14,25 @@ export function getStructure(pathToRoot: string = '.') {
   };
 }
 
-function getLastUpdated(path: string) {
-  const dateStr = String(execSync(`git log -1 --format=%cD "${path}"`));
-  const date = DateTime.fromRFC2822(dateStr);
-  return date.toLocaleString(DateTime.DATETIME_FULL);
-}
-
 /** Loads the ACS .toml files, returning an array of "section" data */
 function getSectionStructure(pathToRoot: string = '.'): ACS.Raw.Section[] {
   const tree = dirTree(path.join(pathToRoot, 'data/acs'));
   const areas = tree!.children!.filter((child) => child.name.match(/\d\./));
+  const updates = getLastUpdates(pathToRoot);
 
-  return areas.map(({ name, children, path }) => {
+  return areas.map(({ children, name }) => {
     const sectionName = name.replace(/\d\. /, '');
     const number = parseInt(name.match(/([1-8])/)![1]) as ACS.Section.Number;
+    const { updated, tasks } = updates[number];
 
     return {
-      lastUpdated: '',
+      updated,
       name: sectionName,
       number,
       tasks: children!.map(({ path }) => {
         const fileContent = fs.readFileSync(path).toString();
-        return { ...toml.parse(fileContent), lastUpdated: '' };
+        const taskData = toml.parse(fileContent) as Omit<ACS.Raw.Task, 'updated'>;
+        return { ...taskData, updated: tasks[taskData.meta.letter] };
       }),
     };
   });

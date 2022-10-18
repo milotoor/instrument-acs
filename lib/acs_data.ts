@@ -45,14 +45,14 @@ export namespace ACS {
   // Wrapper around the image data and raw ACS data
   export namespace Raw {
     export type Section = {
-      lastUpdated: string;
+      updated: string;
       name: string;
       number: Section.Number;
       tasks: Task[];
     };
 
     export type Task = {
-      lastUpdated: string;
+      updated: string;
       meta: Task.Meta;
       knowledge: Item.List;
       risk_management: Item.List;
@@ -90,7 +90,7 @@ class Section {
   tasks: Task[];
 
   constructor(raw: Raw.Section) {
-    this.lastUpdated = raw.lastUpdated;
+    this.updated = raw.updated;
     this.name = raw.name;
     this.number = raw.number;
     this.tasks = raw.tasks.map((t) => new Task(t, this));
@@ -118,7 +118,7 @@ class Task {
   section: Section;
 
   constructor(raw: Raw.Task, section: Section) {
-    this.lastUpdated = raw.lastUpdated;
+    this.updated = raw.updated;
     this.meta = raw.meta;
     this.knowledge = raw.knowledge;
     this.risk_management = raw.risk_management;

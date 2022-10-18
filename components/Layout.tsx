@@ -8,7 +8,7 @@ import { Link } from './Link';
 import { TableOfContents } from './Tasks';
 import { Bold } from './Typography';
 
-type LastUpdatedWidgetProp = { lastUpdated: string | null };
+type LastUpdatedWidgetProp = { updated: string | null };
 type LayoutProps = {
   acs: ACS;
   centered?: boolean;
@@ -28,10 +28,10 @@ export function Layout({
   task,
   title,
 }: LayoutProps) {
-  const lastUpdated = section
+  const updated = section
     ? task
-      ? acs.getTask(section, task).lastUpdated
-      : acs.getSection(section).lastUpdated
+      ? acs.getTask(section, task).updated
+      : acs.getSection(section).updated
     : null;
 
   return (
@@ -53,7 +53,7 @@ export function Layout({
                 The Instrument ACS
               </Link>
             </div>
-            <LastUpdatedWidget lastUpdated={lastUpdated} />
+            <LastUpdatedWidget updated={updated} />
           </div>
         )}
         <div className="w-full flex overflow-hidden">
@@ -75,12 +75,12 @@ export function Layout({
   );
 }
 
-function LastUpdatedWidget({ lastUpdated }: LastUpdatedWidgetProp) {
-  if (!lastUpdated) return null;
+function LastUpdatedWidget({ updated }: LastUpdatedWidgetProp) {
+  if (!updated) return null;
   return (
     <div className="absolute right-5 h-top-bar flex flex-col justify-center items-end text-xs">
       <span>Last updated:</span>
-      <Bold>{lastUpdated}</Bold>
+      <Bold>{updated}</Bold>
     </div>
   );
 }
