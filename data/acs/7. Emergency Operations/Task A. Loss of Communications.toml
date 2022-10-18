@@ -7,10 +7,6 @@ references = [
     "AIM",
 ]
 
-[meta.section]
-name = "Emergency Operations"
-numeral = "VII"
-
 [knowledge]
 1 = "Procedures to follow in the event of lost communication during various phases of flight, including techniques for reestablishing communications, when it is acceptable to deviate from an IFR clearance, and when to begin an approach at the destination."
 

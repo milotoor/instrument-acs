@@ -1,4 +1,3 @@
-import { NextPage } from 'next';
 import React from 'react';
 
 import {
@@ -18,14 +17,16 @@ import {
   ToDo,
   Tooltip,
 } from '../../components';
-import { uri } from '../../lib';
-import { getStaticPropFns } from '../../ssr';
+import { ACS, uri } from '../../lib';
+import { getStaticPropsFn } from '../../ssr';
 
-export const getStaticProps = getStaticPropFns.task(5, 'B');
-const DepartureEnrouteArrival: NextPage<TaskPage.TopLevelProps> = (props) => {
+export const getStaticProps = getStaticPropsFn;
+const DepartureEnrouteArrival: ACS.Page = (props) => {
   return (
     <TaskPage
       {...props}
+      section={5}
+      task="B"
       notes={{
         // DPs and STARs
         k1: [

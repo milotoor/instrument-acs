@@ -8,10 +8,6 @@ references = [
     "IFP",
 ]
 
-[meta.section]
-name = "Emergency Operations"
-numeral = "VII"
-
 [knowledge]
 1 = "Recognizing if primary flight instruments are inaccurate or inoperative, and advising ATC or the evaluator."
 2 = "Common failure modes of vacuum and electric attitude instruments and how to correct or minimize the effect of their loss."

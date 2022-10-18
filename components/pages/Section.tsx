@@ -1,21 +1,22 @@
 import React from 'react';
 
-import { numberToNumeral, Section, Structure } from '../../lib';
+import { ACS } from '../../lib';
 import { Layout } from '../Layout';
 import { TaskList } from '../Tasks';
 import { WrapParagraph } from '../Typography';
 
-type SectionPageProps = SectionPage.TopLevelProps & {
+type SectionPageProps = ACS.TopLevelProps & {
   note?: React.ReactNode;
-  number: Section.Number;
+  number: ACS.Section.Number;
 };
 
-export const SectionPage: React.FC<SectionPageProps> = ({ note, number, structure }) => {
-  const section = structure.sections[number - 1];
-  const { name } = section;
-  const title = `Section ${numberToNumeral(number)}. ${name}`;
+export function SectionPage({ note, number, rawData }: SectionPageProps) {
+  const acsData = new ACS(rawData);
+  const section = acsData.getSection(number);
+  const { name, numeral } = section;
+  const title = `Section ${numeral}. ${name}`;
   return (
-    <Layout section={section} structure={structure} title={title}>
+    <Layout acs={acsData} section={number} title={title}>
       <h1 className="text-title text-glow-gold">{title}</h1>
 
       <div className="my-10">
@@ -30,9 +31,4 @@ export const SectionPage: React.FC<SectionPageProps> = ({ note, number, structur
       )}
     </Layout>
   );
-};
-
-// Exported under the same name as the component so only one import is required
-export namespace SectionPage {
-  export type TopLevelProps = { structure: Structure.AppData };
 }

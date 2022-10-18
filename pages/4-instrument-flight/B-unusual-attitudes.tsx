@@ -1,12 +1,12 @@
-import { NextPage } from 'next';
 import React from 'react';
 
 import { TaskPage } from '../../components';
-import { getStaticPropFns } from '../../ssr';
+import { ACS } from '../../lib';
+import { getStaticPropsFn } from '../../ssr';
 
-export const getStaticProps = getStaticPropFns.task(4, 'B');
-const UnusualAttitudes: NextPage<TaskPage.TopLevelProps> = (props) => {
-  return <TaskPage {...props} notes={{}} />;
+export const getStaticProps = getStaticPropsFn;
+const UnusualAttitudes: ACS.Page = (props) => {
+  return <TaskPage {...props} section={4} task="B" notes={{}} />;
 };
 
 export default UnusualAttitudes;

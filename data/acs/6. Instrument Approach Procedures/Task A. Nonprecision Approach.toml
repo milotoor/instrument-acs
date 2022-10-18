@@ -11,10 +11,6 @@ references = [
     "AC 120-108",
 ]
 
-[meta.section]
-name = "Instrument Approach Procedures"
-numeral = "VI"
-
 [knowledge]
 1 = "Procedures and limitations associated with a nonprecision approach, including the differences between Localizer Performance (LP) and Lateral Navigation (LNAV) approach guidance."
 2 = "Navigation system annunciations expected during an RNAV approach."

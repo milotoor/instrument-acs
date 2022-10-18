@@ -1,4 +1,3 @@
-import { NextPage } from 'next';
 import React from 'react';
 
 import {
@@ -22,14 +21,16 @@ import {
   ToDo,
   Warning,
 } from '../../components';
-import { uri } from '../../lib';
-import { getStaticPropFns } from '../../ssr';
+import { ACS, uri } from '../../lib';
+import { getStaticPropsFn } from '../../ssr';
 
-export const getStaticProps = getStaticPropFns.task(2, 'B');
-const Instruments: NextPage<TaskPage.TopLevelProps> = (props) => {
+export const getStaticProps = getStaticPropsFn;
+const Instruments: ACS.Page = (props) => {
   return (
     <TaskPage
       {...props}
+      section={2}
+      task="B"
       notes={{
         // Pitot-static instrument operation
         k1a: [

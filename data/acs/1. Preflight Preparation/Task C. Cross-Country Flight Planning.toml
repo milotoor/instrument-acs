@@ -14,10 +14,6 @@ references = [
     "NOTAMs",
 ]
 
-[meta.section]
-name = "Preflight Preparation"
-numeral = "I"
-
 [knowledge]
 1 = "Route planning, including consideration of the available navigational facilities, special use airspace, preferred routes, and alternate airports."
 2 = "Altitude selection accounting for terrain and obstacles, glide distance of airplane, IFR cruising altitudes, effect of wind, and oxygen requirements."

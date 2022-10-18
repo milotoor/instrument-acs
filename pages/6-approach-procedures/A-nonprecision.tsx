@@ -1,4 +1,3 @@
-import { NextPage } from 'next';
 import React from 'react';
 
 import {
@@ -19,14 +18,16 @@ import {
   ToDo,
   Warning,
 } from '../../components';
-import { uri } from '../../lib';
-import { getStaticPropFns } from '../../ssr';
+import { ACS, uri } from '../../lib';
+import { getStaticPropsFn } from '../../ssr';
 
-export const getStaticProps = getStaticPropFns.task(6, 'A');
-const Nonprecision: NextPage<TaskPage.TopLevelProps> = (props) => {
+export const getStaticProps = getStaticPropsFn;
+const Nonprecision: ACS.Page = (props) => {
   return (
     <TaskPage
       {...props}
+      section={6}
+      task="A"
       notes={{
         k1: [
           <>

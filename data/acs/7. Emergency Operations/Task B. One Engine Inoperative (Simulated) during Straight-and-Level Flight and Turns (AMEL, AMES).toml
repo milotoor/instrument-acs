@@ -8,10 +8,6 @@ references = [
     "FAA-H-8083-15",
 ]
 
-[meta.section]
-name = "Emergency Operations"
-numeral = "VII"
-
 [knowledge]
 1 = "Procedures used if engine failure occurs during straight-and-level flight and turns while on instruments."
 

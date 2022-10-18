@@ -1,4 +1,3 @@
-import { NextPage } from 'next';
 import React from 'react';
 
 import {
@@ -15,13 +14,16 @@ import {
   Term,
   Warning,
 } from '../../components';
-import { getStaticPropFns } from '../../ssr';
+import { ACS } from '../../lib';
+import { getStaticPropsFn } from '../../ssr';
 
-export const getStaticProps = getStaticPropFns.task(3, 'B');
-const Holding: NextPage<TaskPage.TopLevelProps> = (props) => {
+export const getStaticProps = getStaticPropsFn;
+const Holding: ACS.Page = (props) => {
   return (
     <TaskPage
       {...props}
+      section={3}
+      task="B"
       notes={{
         k1: [
           <>When ATC is unable to clear a flight to its destination, it may be required to hold.</>,

@@ -1,19 +1,19 @@
 import * as React from 'react';
-import { Item, Section, Structure, Task } from '../lib';
+import { ACS } from '../lib';
 
 type AppContext = {
-  section?: Section.Number;
-  structure: Structure.AppData;
-  task?: Task.Letter;
+  acs: ACS;
+  section?: ACS.Section.Number;
+  task?: ACS.Task.Letter;
 };
 
 export const AppContext = React.createContext<AppContext>({
-  structure: { images: {}, sections: [], lastUpdated: '' },
+  acs: new ACS({ images: {}, sections: [] }),
 });
 
 type NoteContext = {
-  heading: Section.Headings.List;
-  item: Item.ID;
+  heading: ACS.Section.Heading;
+  item: ACS.Item.ID;
 };
 
 // Default values are completely arbitrary-- really annoying that React requires this

@@ -1,4 +1,3 @@
-import { NextPage } from 'next';
 import React from 'react';
 
 import {
@@ -19,16 +18,18 @@ import {
   TaskPage,
   Warning,
 } from '../../components';
-import { uri } from '../../lib';
-import { getStaticPropFns } from '../../ssr';
+import { ACS, uri } from '../../lib';
+import { getStaticPropsFn } from '../../ssr';
 
 type FrontProps = { plural?: boolean };
 
-export const getStaticProps = getStaticPropFns.task(1, 'B');
-const WeatherInformation: NextPage<TaskPage.TopLevelProps> = (props) => {
+export const getStaticProps = getStaticPropsFn;
+const WeatherInformation: ACS.Page = (props) => {
   return (
     <TaskPage
       {...props}
+      section={1}
+      task="B"
       flags={{ missed: ['3i'] }}
       notes={{
         // Sources of weather data

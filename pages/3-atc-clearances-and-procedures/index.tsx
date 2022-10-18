@@ -1,11 +1,11 @@
-import { NextPage } from 'next';
 import React from 'react';
 
 import { SectionPage } from '../../components';
-import { getStaticPropFns } from '../../ssr';
+import { ACS } from '../../lib';
+import { getStaticPropsFn } from '../../ssr';
 
-export const getStaticProps = getStaticPropFns.structure;
-const ATCClearancesAndProcedures: NextPage<SectionPage.TopLevelProps> = (props) => {
+export const getStaticProps = getStaticPropsFn;
+const ATCClearancesAndProcedures: ACS.Page = (props) => {
   return <SectionPage {...props} number={3} />;
 };
 

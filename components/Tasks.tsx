@@ -1,16 +1,16 @@
 import cn from 'classnames';
 import * as React from 'react';
 
-import { Structure } from '../lib';
+import { ACS } from '../lib';
 import { Link } from './Link';
 
-type TableOfContentsProps = { small?: boolean; structure: Structure.AppData };
-type TaskListProps = { className?: string; tasks: Structure.Task[] };
+type TableOfContentsProps = { small?: boolean; acs: ACS };
+type TaskListProps = { className?: string; tasks: ACS.Task[] };
 
-export function TableOfContents({ small = false, structure }: TableOfContentsProps) {
+export function TableOfContents({ small = false, acs }: TableOfContentsProps) {
   return (
     <ol className="list-decimal leading-7 ml-8 mt-4 text-lg">
-      {structure.sections.map(({ name, tasks, uri }) => (
+      {acs.sections.map(({ name, tasks, uri }) => (
         <li key={name} className="my-4">
           <Link
             className={cn({ 'text-subtitle': !small, 'text-subtitle-sm': small })}

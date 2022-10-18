@@ -8,10 +8,6 @@ references = [
     "AIM",
 ]
 
-[meta.section]
-name = "Preflight Procedures"
-numeral = "II"
-
 [knowledge.1]
 general = "Operation of their airplane’s applicable flight instrument system(s) including:"
 specific = [

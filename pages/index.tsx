@@ -1,16 +1,14 @@
-import { NextPage } from 'next';
 import * as React from 'react';
 
 import { Layout, Link, TableOfContents } from '../components';
-import { Structure } from '../lib';
-import { getStaticPropFns } from '../ssr';
+import { ACS } from '../lib';
+import { getStaticPropsFn } from '../ssr';
 
-type HomeProps = { structure: Structure.AppData };
-
-export const getStaticProps = getStaticPropFns.structure;
-const Home: NextPage<HomeProps> = ({ structure }) => {
+export const getStaticProps = getStaticPropsFn;
+const Home: ACS.Page = ({ rawData }) => {
+  const acsData = new ACS(rawData);
   return (
-    <Layout centered home structure={structure} title="The Instrument ACS">
+    <Layout acs={acsData} centered home title="The Instrument ACS">
       <div className="max-w-[800px]">
         <h1 className="text-7xl font-bold font-fancy pt-5 pb-10">
           The{' '}
@@ -19,7 +17,7 @@ const Home: NextPage<HomeProps> = ({ structure }) => {
           </Link>
         </h1>
 
-        <TableOfContents structure={structure} />
+        <TableOfContents acs={acsData} />
       </div>
     </Layout>
   );

@@ -1,4 +1,3 @@
-import { NextPage } from 'next';
 import React from 'react';
 
 import {
@@ -21,14 +20,16 @@ import {
   ToDo,
   Warning,
 } from '../../components';
-import { uri } from '../../lib';
-import { getStaticPropFns } from '../../ssr';
+import { ACS, uri } from '../../lib';
+import { getStaticPropsFn } from '../../ssr';
 
-export const getStaticProps = getStaticPropFns.task(1, 'C');
-const XcFlightPlanning: NextPage<TaskPage.TopLevelProps> = (props) => {
+export const getStaticProps = getStaticPropsFn;
+const XcFlightPlanning: ACS.Page = (props) => {
   return (
     <TaskPage
       {...props}
+      section={1}
+      task="C"
       notes={{
         // Route planning
         k1: [

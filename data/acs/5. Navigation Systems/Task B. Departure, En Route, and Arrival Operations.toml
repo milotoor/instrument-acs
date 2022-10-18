@@ -11,10 +11,6 @@ references = [
     "AIM",
 ]
 
-[meta.section]
-name = "Navigation Systems"
-numeral = "V"
-
 [knowledge]
 1 = "Elements related to ATC routes, including departure procedures (DPs) and associated climb gradients; arrival procedures (STARs) and associated constraints."
 2 = "Pilot/controller responsibilities, communication procedures, and ATC services available to pilots."

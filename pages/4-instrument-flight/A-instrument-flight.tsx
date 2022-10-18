@@ -1,4 +1,3 @@
-import { NextPage } from 'next';
 import React from 'react';
 
 import {
@@ -14,13 +13,16 @@ import {
   TaskPage,
   Warning,
 } from '../../components';
-import { getStaticPropFns } from '../../ssr';
+import { ACS } from '../../lib';
+import { getStaticPropsFn } from '../../ssr';
 
-export const getStaticProps = getStaticPropFns.task(4, 'A');
-const InstrumentFlight: NextPage<TaskPage.TopLevelProps> = (props) => {
+export const getStaticProps = getStaticPropsFn;
+const InstrumentFlight: ACS.Page = (props) => {
   return (
     <TaskPage
       {...props}
+      section={4}
+      task="A"
       flags={{ missed: ['1'] }}
       notes={{
         // Attitude instrument flying

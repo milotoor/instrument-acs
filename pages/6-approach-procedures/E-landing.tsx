@@ -1,4 +1,3 @@
-import { NextPage } from 'next';
 import React from 'react';
 
 import {
@@ -16,14 +15,16 @@ import {
   Term,
   Warning,
 } from '../../components';
-import { referenceURIs, uri } from '../../lib';
-import { getStaticPropFns } from '../../ssr';
+import { ACS, referenceURIs, uri } from '../../lib';
+import { getStaticPropsFn } from '../../ssr';
 
-export const getStaticProps = getStaticPropFns.task(6, 'E');
-const Landing: NextPage<TaskPage.TopLevelProps> = (props) => {
+export const getStaticProps = getStaticPropsFn;
+const Landing: ACS.Page = (props) => {
   return (
     <TaskPage
       {...props}
+      section={6}
+      task="E"
       notes={{
         // Pilot responsibilities and landing factors
         k1: [

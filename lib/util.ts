@@ -1,4 +1,4 @@
-import { Item, Section } from './types';
+import { ACS } from './acs_data';
 
 /** Logs a warning message to the console in dev mode */
 export function logWarning(warning: string) {
@@ -12,25 +12,13 @@ export function logWarning(warning: string) {
  * but will be unique within the context of a given task.
  */
 export function makeAnchorId(
-  heading: Section.Headings.List,
-  itemId: Item.ID,
+  heading: ACS.Section.Heading,
+  itemId: ACS.Item.ID,
   paragraphId?: string
 ) {
   let id = heading[0].toLowerCase() + itemId;
   if (paragraphId) id += '-' + paragraphId;
   return id;
-}
-
-const numerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'] as const;
-
-/** Converts a section Roman numeral to its Arabic equivalent */
-export function numeralToNumber(numeral: Section.Numeral) {
-  return (numerals.indexOf(numeral) + 1) as Section.Number;
-}
-
-/** Converts a section Roman numeral to its Arabic equivalent */
-export function numberToNumeral(number: Section.Number): Section.Numeral {
-  return numerals[number - 1];
 }
 
 /** Basic typeguard for the `in` operator, not sure why this isn't in the TypeScript core lib */

@@ -9,10 +9,6 @@ references = [
     "AC 68-1",
 ]
 
-[meta.section]
-name = "Preflight Preparation"
-numeral = "I"
-
 [knowledge]
 1 = "Certification requirements, recency of experience, and recordkeeping."
 2 = "Privileges and limitations."

@@ -1,15 +1,16 @@
-import { NextPage } from 'next';
 import React from 'react';
 
 import { AIM, Bold, Collapse, Info, Link, Quotation, TaskPage, Warning } from '../../components';
-import { uri } from '../../lib';
-import { getStaticPropFns } from '../../ssr';
+import { ACS, uri } from '../../lib';
+import { getStaticPropsFn } from '../../ssr';
 
-export const getStaticProps = getStaticPropFns.task(2, 'A');
-const IfrSystems: NextPage<TaskPage.TopLevelProps> = (props) => {
+export const getStaticProps = getStaticPropsFn;
+const IfrSystems: ACS.Page = (props) => {
   return (
     <TaskPage
       {...props}
+      section={2}
+      task="A"
       notes={{
         // Anti-icing/deicing systems
         k1: [

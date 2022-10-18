@@ -1,16 +1,7 @@
 import cn from 'classnames';
 import React from 'react';
 
-import {
-  Item,
-  makeAnchorId,
-  numeralToNumber,
-  objectHasProperty,
-  referenceURIs,
-  Section,
-  Structure,
-  Task,
-} from '../../lib';
+import { ACS, makeAnchorId, objectHasProperty, referenceURIs } from '../../lib';
 import { NoteContext } from '../context';
 import { Layout } from '../Layout';
 import { Link } from '../Link';
@@ -19,51 +10,46 @@ import { Tooltip, WrapParagraph } from '../Typography';
 // Component prop types
 type ReferencesSectionProps = { references: string[] };
 type SectionContainerProps = { children: React.ReactNode; heading: string };
-type TaskPageProps = TaskPage.TopLevelProps & FlagsProp & { notes?: NotesObject };
+type TaskPageProps = ACS.TopLevelProps &
+  FlagsProp & { notes?: NotesObject; section: ACS.Section.Number; task: ACS.Task.Letter };
 type DataSectionProps = FlagsProp & {
-  heading: Section.Headings.List;
+  heading: ACS.Section.Heading;
   notes?: NotesObject;
-  task: Task;
+  task: ACS.Task;
 };
 
 // Flag types
 type FlagType = 'missed';
-type FlagsProp = { flags?: Partial<Record<FlagType, Item.ID[]>> };
+type FlagsProp = { flags?: Partial<Record<FlagType, ACS.Item.ID[]>> };
 
 // Note types
-type NoteCardProps = { heading: Section.Headings.List; id: Item.ID; notes: NotesObject };
-type NotesObject = Record<Item.ID, React.ReactNode>;
+type NoteCardProps = { heading: ACS.Section.Heading; id: ACS.Item.ID; notes: NotesObject };
+type NotesObject = Record<ACS.Item.ID, React.ReactNode>;
 
-export const TaskPage: React.FC<TaskPageProps> = ({ task, structure, flags = {}, notes }) => {
-  const { meta } = task;
+export function TaskPage(props: TaskPageProps) {
+  const { flags = {}, notes, rawData, section: sectionNumber, task: taskLetter } = props;
+  const acsData = new ACS(rawData);
+  const section = acsData.getSection(sectionNumber);
+  const task = acsData.getTask(sectionNumber, taskLetter);
   const dataSectionProps = { task, notes };
-  const section = structure.sections[numeralToNumber(meta.section.numeral) - 1];
   return (
-    <Layout structure={structure} task={task} title={meta.name}>
+    <Layout acs={acsData} section={sectionNumber} task={taskLetter} title={task.name}>
       <Link className="text-subtitle" color={null} href={section.uri}>
-        Section {meta.section.numeral}. {meta.section.name}
+        Section {section.numeral}. {section.name}
       </Link>
       <h1 className="text-title text-glow-gold mt-2">
-        Task {meta.letter}. {meta.name}
+        Task {task.letter}. {task.name}
       </h1>
 
       <div>
-        <ReferencesSection references={meta.references} />
-        <SectionContainer heading="Objective">{meta.objective}</SectionContainer>
+        <ReferencesSection references={task.meta.references} />
+        <SectionContainer heading="Objective">{task.meta.objective}</SectionContainer>
         <DataSection heading="Knowledge" flags={flags} {...dataSectionProps} />
         <DataSection heading="Risk Management" {...dataSectionProps} />
         <DataSection heading="Skills" {...dataSectionProps} />
       </div>
     </Layout>
   );
-};
-
-// Exported under the same name as the component so only one import is required
-export namespace TaskPage {
-  export type TopLevelProps = {
-    task: Task;
-    structure: Structure.AppData;
-  };
 }
 
 function ReferencesSection({ references }: ReferencesSectionProps) {
@@ -152,7 +138,7 @@ function DataSection({ flags, heading, notes = {}, task }: DataSectionProps) {
     </SectionContainer>
   );
 
-  function applyFlags(id: Item.ID, text: string) {
+  function applyFlags(id: ACS.Item.ID, text: string) {
     const wasMissed = flags?.missed?.includes(id);
     const hoverText = wasMissed ? 'Missed on knowledge test!' : undefined;
     return (

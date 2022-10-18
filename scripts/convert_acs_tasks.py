@@ -61,10 +61,6 @@ class TaskFile:
                 "objective": objective,
                 "name": self.raw_path.name[len("Task A. ") : -len(".txt")],
                 "references": parsed_references,
-                "section": {
-                    "name": self.parsed_path.parts[-2][3:],
-                    "numeral": self.roman_numeral,
-                },
             }
         }
 

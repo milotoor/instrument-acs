@@ -1,12 +1,12 @@
-import { NextPage } from 'next';
 import React from 'react';
 
 import { TaskPage } from '../../components';
-import { getStaticPropFns } from '../../ssr';
+import { ACS } from '../../lib';
+import { getStaticPropsFn } from '../../ssr';
 
-export const getStaticProps = getStaticPropFns.task(8, 'A');
-const CheckingEquipment: NextPage<TaskPage.TopLevelProps> = (props) => {
-  return <TaskPage {...props} notes={{}} />;
+export const getStaticProps = getStaticPropsFn;
+const CheckingEquipment: ACS.Page = (props) => {
+  return <TaskPage {...props} section={8} task="A" notes={{}} />;
 };
 
 export default CheckingEquipment;

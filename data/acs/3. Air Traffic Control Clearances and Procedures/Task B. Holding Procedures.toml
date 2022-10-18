@@ -9,10 +9,6 @@ references = [
     "AIM",
 ]
 
-[meta.section]
-name = "Air Traffic Control Clearances and Procedures"
-numeral = "III"
-
 [knowledge]
 1 = "Elements related to holding procedures, including reporting criteria, appropriate speeds, and recommended entry procedures for standard, nonstandard, published, and nonpublished holding patterns."
 

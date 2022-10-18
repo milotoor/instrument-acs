@@ -1,9 +1,7 @@
-import { NextPage } from 'next';
 import React from 'react';
 
 import {
   AIM,
-  Bold,
   BulletList,
   Gray,
   Image,
@@ -15,10 +13,11 @@ import {
   Term,
   Warning,
 } from '../../components';
-import { getStaticPropFns } from '../../ssr';
+import { ACS } from '../../lib';
+import { getStaticPropsFn } from '../../ssr';
 
-export const getStaticProps = getStaticPropFns.structure;
-const ApproachProcedures: NextPage<SectionPage.TopLevelProps> = (props) => {
+export const getStaticProps = getStaticPropsFn;
+const ApproachProcedures: ACS.Page = (props) => {
   return (
     <SectionPage
       {...props}
