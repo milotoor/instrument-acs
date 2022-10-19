@@ -30,7 +30,7 @@ type FARProps = CommonLinkProps & {
   section?: FARReference;
 };
 
-type TaskLinkProps = { section: ACS.Section.Number; task: ACS.Task.Letter; id: ACS.Item.ID };
+type TaskLinkProps = { section?: ACS.Section.Number; task?: ACS.Task.Letter; id: ACS.Item.ID };
 export type LinkProps = NextLinkProps & ChildProp & CommonLinkProps;
 type LinkableReference = keyof typeof referenceURIs;
 
@@ -81,10 +81,14 @@ export const Link = Object.assign(
       return title ? <Tooltip message={title}>{link}</Tooltip> : link;
     },
 
-    Task({ section, task: taskLetter, id }: TaskLinkProps) {
-      const { acs } = React.useContext(AppContext);
-      const task = acs.getTask(section, taskLetter);
+    Task({ id, ...props }: TaskLinkProps) {
+      const context = React.useContext(AppContext);
+      const { acs } = context;
+      const taskLetter = props.task || context.task;
+      const section = props.section || context.section;
+      if (!section || !taskLetter) throw Error('Unable to identify task for link');
 
+      const task = acs.getTask(section, taskLetter);
       const dataSection = id[0].toLowerCase();
       const itemId = id.slice(1);
       const heading =
