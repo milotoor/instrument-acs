@@ -5,14 +5,15 @@ import {
   Bold,
   BulletList,
   Danger,
+  Gray,
+  Image,
   Info,
   InlineList,
+  Italic,
   Link,
   Paragraph,
   Quotation,
   Success,
-  Tab,
-  Tabs,
   TaskPage,
   Term,
   ToDo,
@@ -162,97 +163,162 @@ const Nonprecision: ACS.Page = (props) => {
             </BulletList>
           </>,
 
-          <Paragraph heading="Approach types" hr>
-            Nuances unique to each type of NPA are discussed below.
+          <Paragraph heading="LP vs. LNAV" references={<AIM paragraph={[1, 1, 17, 'b', 5]} />}>
+            LP and LNAV approaches differ in a few ways. LP approaches require WAAS while LNAV only
+            requires GPS (see <Link.Task id="k3" />
+            ). Most importantly, they differ in their lateral sensitivity (i.e. the distance
+            represented by full-scale deflection on the CDI).
           </Paragraph>,
 
           <>
-            <Tabs>
-              <Tab heading="LNAV and LP" references={<AIM paragraph={[5, 4, 5, 'm']} />}>
-                <>
-                  Nonprecision RNAV approaches include <Term>LNAV (LATeral NAVigation)</Term> and{' '}
-                  <Term>LP (Localizer Performance)</Term> procedures. Both types of procedure
-                  utilize a <Term>global navigation satellite system (GNSS)</Term> to provide
-                  lateral guidance. The primary difference is the degree of precision:{' '}
-                  <Info>LP approaches utilize the Wide Area Augmentation System (WAAS)</Info> while{' '}
-                  <Info>LNAV approaches only utilize GPS</Info>. Per{' '}
-                  <AIM paragraph={[5, 4, 5, 'm']} />:
-                </>
-
-                <Quotation>
-                  LP will be published in locations where vertically guided minima cannot be
-                  provided due to terrain and obstacles and therefore, no LPV or LNAV/VNAV minima
-                  will be published.
-                </Quotation>
-
-                <>
-                  Note that{' '}
-                  <Warning>
-                    a receiver which supports LPV approaches does not necessarily support LP
-                    approaches
-                  </Warning>
-                  . If the receiver was approved prior to{' '}
-                  <Link.Reference reference="TSO-C145" text="TSO-C145b" /> and{' '}
-                  <Link.Reference reference="TSO-C146" text="TSO-C146b" /> it may require an upgrade
-                  to fly to LP minima. There must be a statement in the POH or Supplemental Flight
-                  Manual declaring the receiver's fitness for flying to LP minima.
-                </>
-
-                <Paragraph
-                  heading="Lateral sensitivity"
-                  references={<AIM paragraph={[1, 1, 17, 'b', 5]} />}
-                >
-                  Lateral sensitivity (i.e. the distance represented by full-scale deflection on the
-                  CDI) on an RNAV approach depends on the underlying technology. For GPS approaches,
-                  the CDI sensitivity begins at <Warning>±5NM while en route.</Warning> Once within{' '}
-                  <Info>30NM of the airport</Info> the GPS transitions to terminal mode, which has a{' '}
-                  <Info>sensitivity of ±1NM</Info>. Within <Success>2NM of the FAWP</Success> the
-                  sensitivity changes gradually to <Success>0.3NM at the FAWP</Success> when the GPS
-                  transitions to approach mode. This gradual change in sensitivity can be confusing
-                  if the aircraft's... <ToDo />
-                </Paragraph>
-
-                <>
-                  For LP approaches (and LPV approaches), the lateral sensitivity scales
-                  differently. Initially, the sensitivity is ±1NM. 2NM prior to the FAF,{' '}
-                  <Info>
-                    the sensitivity increases to be similar to the angular scaling of an ILS
-                  </Info>
-                  . However, the sensitivity differs from that of a localizer in two ways:{' '}
-                  <InlineList>
-                    <>
-                      the initial scaling on final approach will be ±0.3NM (same as GPS and better
-                      than ILS, which is less sensitive far from the runway)
-                    </>
-                    <>
-                      the scaling changes to linear near the runway threshold instead of continuing
-                      to become more sensitive
-                    </>
-                  </InlineList>
-                  .
-                </>
-
-                <Paragraph
-                  heading="Requirements"
-                  references={[<AIM paragraph={[1, 1, 17, 'b', 5]} />]}
-                >
-                  There are performance requirements that must be met in order to complete either an
-                  LNAV or LP approach.{' '}
-                  <Warning>For LNAV approaches, RAIM must be operational.</Warning> If there is a
-                  RAIM failure annunciation the approach <Danger>must not be completed!</Danger> If
-                  the approach has already begun, the pilot must immediately execute the missed
-                  approach (see <AIM paragraph={[1, 1, 17, 'b', 5, 'g']} />
-                  ).
-                </Paragraph>
-              </Tab>
-              <Tab heading="LOC and LDA">
-                <ToDo />
-              </Tab>
-              <Tab heading="VOR">
-                <ToDo />
-              </Tab>
-            </Tabs>
+            To begin with, understand that the CDI scale varies depending on the phase of flight
+            (when using GPS/WAAS as the navigation source):
           </>,
+
+          <Image src="gps_cdi_scaling_phases" />,
+
+          <>
+            As seen above, the CDI changes scale several times during flight. What's most important
+            here is how the scaling——and, thus, the meaning of full-scale deflection——changes during
+            an approach. In particular:
+            <BulletList type="disc">
+              <>
+                When 30nm from the departure airport, the scaling shifts from{' '}
+                <Info>enroute mode (which has 2nm sensitivity)</Info> to{' '}
+                <Info>terminal mode (1nm)</Info>. This scale ramp-down occurs over a distance of
+                1nm.
+              </>
+              <>
+                When 2nm from the <Term>final approach fix (FAF)</Term>, the CDI scale changes
+                gradually again to <Info>approach mode (1nm sensitivity)</Info>. This can sometimes
+                be confusing:{' '}
+                <Warning>
+                  if you are on a heading to intercept final approach at an angle which is shallower
+                  than the CDI scaling's taper, the CDI may indicate that you are drifting further
+                  from final approach when in fact you are getting closer!
+                </Warning>{' '}
+                For this reason, <AIM paragraph={[1, 1, 17, 'b', 5, 'e', '5']} /> says:{' '}
+                <Gray italic>
+                  "requesting or accepting vectors which will cause the aircraft to intercept the
+                  final approach course within 2 NM of the FAWP is not recommended."
+                </Gray>{' '}
+                <div className="pt-3">
+                  In the G1000, this scaling should occur automatically once the approach procedure
+                  is activated or if vectors to final are selected.{' '}
+                  <Info>
+                    The way in which the CDI scales in approach mode varies by the approach type:
+                  </Info>
+                </div>
+              </>
+            </BulletList>
+          </>,
+
+          <Image.Row>
+            <Image src="lnav_cdi_scaling">Typical LNAV and LNAV+V Approach CDI Scaling</Image>
+            <Image src="lpv_cdi_scaling">Typical LNAV/VNAV, LPV, and LP Approach CDI Scaling</Image>
+          </Image.Row>,
+
+          <>
+            Per <AIM paragraph={[1, 1, 17, 'b', 5, 'e', 5]} />, IFR-certified GPS receivers are only
+            required to transition from ±1NM 2NM prior to the FAWP to ±0.3 NM at the FAWP. However
+            as seen above, the G1000 does more than this, continuing to narrow at a constant angle
+            near the runway threshold.{' '}
+            <Warning>
+              It's not clear to me if this is true for all G1000's, or only those equipped with
+              SBAS-capable GPS receivers.
+            </Warning>
+          </>,
+
+          <>
+            For LP approaches (and LPV approaches), the lateral sensitivity scales differently.
+            Initially, the sensitivity is ±1NM. 2NM prior to the FAF,{' '}
+            <Info>the sensitivity increases to be similar to the angular scaling of an ILS</Info>.
+            However, the sensitivity differs from that of a localizer in two ways:{' '}
+            <InlineList>
+              <>
+                the initial scaling on final approach will be ±0.3NM (same as GPS and better than
+                ILS, which is less sensitive far from the runway)
+              </>
+              <>
+                the scaling changes to linear near the runway threshold instead of continuing to
+                become more sensitive
+              </>
+            </InlineList>
+            . Additionally, per <AIM paragraph={[1, 1, 18, 'd', 5]} />:
+          </>,
+
+          <Quotation>
+            Since the origin point of the lateral splay for the angular portion of the final is not
+            fixed due to antenna placement like localizer, the splay angle can remain fixed, making
+            a consistent width of final for aircraft being vectored onto the final approach course
+            on different length runways
+          </Quotation>,
+
+          <>
+            Finally, the CDI scale shifts back to{' '}
+            <Info>0.3nm when the missed approach is activated.</Info> This happens immediately for
+            LP and LPV approaches, and more gradually for basic LNAV approaches.
+          </>,
+        ],
+        k2: (
+          <>
+            There are performance requirements that must be met in order to complete either an LNAV
+            or LP approach. <Warning>For LNAV approaches, RAIM must be operational.</Warning> If
+            there is a RAIM failure annunciation the approach{' '}
+            <Danger>must not be completed!</Danger> If the approach has already begun, the pilot
+            must immediately execute the missed approach (see{' '}
+            <AIM paragraph={[1, 1, 17, 'b', 5, 'g']} />
+            ).
+          </>
+        ),
+        k3: [
+          <Paragraph heading="LNAV and LP" references={<AIM paragraph={[5, 4, 5, 'm']} />}>
+            Nonprecision RNAV approaches include <Term>LNAV (LATeral NAVigation)</Term> and{' '}
+            <Term>LP (Localizer Performance)</Term> procedures. Both types of procedure utilize a{' '}
+            <Term>global navigation satellite system (GNSS)</Term> to provide lateral guidance. The
+            primary difference is the degree of precision:{' '}
+            <Info>LP approaches utilize the Wide Area Augmentation System (WAAS)</Info> while{' '}
+            <Info>LNAV approaches only utilize GPS</Info>. Per <AIM paragraph={[5, 4, 5, 'm']} />:
+          </Paragraph>,
+
+          <Quotation>
+            LP will be published in locations where vertically guided minima cannot be provided due
+            to terrain and obstacles and therefore, no LPV or LNAV/VNAV minima will be published.
+          </Quotation>,
+
+          <>
+            Note that{' '}
+            <Warning>
+              a receiver which supports LPV approaches does not necessarily support LP approaches
+            </Warning>
+            . If the receiver was approved prior to{' '}
+            <Link.Reference reference="TSO-C145" text="TSO-C145b" /> and{' '}
+            <Link.Reference reference="TSO-C146" text="TSO-C146b" /> it may require an upgrade to
+            fly to LP minima. There must be a statement in the POH or Supplemental Flight Manual
+            declaring the receiver's fitness for flying to LP minima.
+          </>,
+
+          <Paragraph heading="LOC and LDA">
+            Localizer approaches provide the lateral navigation of an ILS but not the vertical
+            glideslope. A <Term>localizer-type directional aid (LDA)</Term>
+          </Paragraph>,
+
+          <>
+            Normal-sensing and reverse-sensing can be confusing. On the chart, one side of the arrow
+            will be shaded.{' '}
+            <Info>
+              If she shaded side of the arrow is on your <Italic>right</Italic>, then you will have
+              normal-sensing; if it's on your left, you'll have reverse-sensing.
+            </Info>{' '}
+            This applies to back-course localizers too: if you are flying away from a back-course
+            localizer (see the{' '}
+            <Link href={references.aspen_loc_iap}>wacky LOC/DME-E approach into Aspen</Link>) you'll
+            have normal-sensing (as the IAP chart helpfully says).
+          </>,
+
+          <Paragraph heading="VOR">
+            <ToDo />
+          </Paragraph>,
         ],
       }}
     />
@@ -263,6 +329,7 @@ export default Nonprecision;
 
 const references = {
   advisory_glidepath: uri.ifr_mag('system', 'advisory-glidepaths'),
+  aspen_loc_iap: 'https://aeronav.faa.gov/d-tpp/2210/05889LDE.PDF',
   cdfa: uri.ifr_mag('technique', 'constant-angle-descent'),
   flight_insight_vdp: uri.youtube('vhSzPqN7r74'),
 };
