@@ -6,7 +6,7 @@ import { getStaticPropsFn } from '../../ssr';
 
 export const getStaticProps = getStaticPropsFn;
 const LossOfComm: ACS.Page = (props) => {
-  return <TaskPage {...props} section={7} task="A" flags={{ missed: ['1'] }} notes={{}} />;
+  return <TaskPage {...props} section={7} task="A" notes={{}} />;
 };
 
 export default LossOfComm;

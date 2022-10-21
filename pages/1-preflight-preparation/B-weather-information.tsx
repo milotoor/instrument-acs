@@ -30,7 +30,6 @@ const WeatherInformation: ACS.Page = (props) => {
       {...props}
       section={1}
       task="B"
-      flags={{ missed: ['3i'] }}
       notes={{
         // Sources of weather data
         k1: [

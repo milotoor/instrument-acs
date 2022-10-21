@@ -23,7 +23,6 @@ const InstrumentFlight: ACS.Page = (props) => {
       {...props}
       section={4}
       task="A"
-      flags={{ missed: ['1'] }}
       notes={{
         // Attitude instrument flying
         k1: [

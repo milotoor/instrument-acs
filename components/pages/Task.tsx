@@ -1,34 +1,28 @@
-import cn from 'classnames';
 import React from 'react';
 
 import { ACS, makeAnchorId, objectHasProperty, referenceURIs } from '../../lib';
 import { NoteContext } from '../context';
 import { Layout } from '../Layout';
 import { Link } from '../Link';
-import { Tooltip, WrapParagraph } from '../Typography';
+import { WrapParagraph } from '../Typography';
 
 // Component prop types
+type DataSectionProps = { heading: ACS.Section.Heading; notes?: NotesObject; task: ACS.Task };
 type ItemHeadingProps = { marker: string; id: string; text: string };
 type ReferencesSectionProps = { references: string[] };
 type SectionContainerProps = { children: React.ReactNode; heading: string };
-type TaskPageProps = ACS.TopLevelProps &
-  FlagsProp & { notes?: NotesObject; section: ACS.Section.Number; task: ACS.Task.Letter };
-type DataSectionProps = FlagsProp & {
-  heading: ACS.Section.Heading;
+type TaskPageProps = ACS.TopLevelProps & {
   notes?: NotesObject;
-  task: ACS.Task;
+  section: ACS.Section.Number;
+  task: ACS.Task.Letter;
 };
-
-// Flag types
-type FlagType = 'missed';
-type FlagsProp = { flags?: Partial<Record<FlagType, ACS.Item.ID[]>> };
 
 // Note types
 type NoteCardProps = { heading: ACS.Section.Heading; id: ACS.Item.ID; notes: NotesObject };
 type NotesObject = Record<ACS.Item.ID, React.ReactNode>;
 
 export function TaskPage(props: TaskPageProps) {
-  const { flags = {}, notes, rawData, section: sectionNumber, task: taskLetter } = props;
+  const { notes, rawData, section: sectionNumber, task: taskLetter } = props;
   const acsData = new ACS(rawData);
   const section = acsData.getSection(sectionNumber);
   const task = acsData.getTask(sectionNumber, taskLetter);
@@ -45,7 +39,7 @@ export function TaskPage(props: TaskPageProps) {
       <div>
         <ReferencesSection references={task.meta.references} />
         <SectionContainer heading="Objective">{task.meta.objective}</SectionContainer>
-        <DataSection heading="Knowledge" flags={flags} {...dataSectionProps} />
+        <DataSection heading="Knowledge" {...dataSectionProps} />
         <DataSection heading="Risk Management" {...dataSectionProps} />
         <DataSection heading="Skills" {...dataSectionProps} />
       </div>
@@ -85,7 +79,7 @@ function ReferencesSection({ references }: ReferencesSectionProps) {
   );
 }
 
-function DataSection({ flags, heading, notes = {}, task }: DataSectionProps) {
+function DataSection({ heading, notes = {}, task }: DataSectionProps) {
   const data = (() => {
     switch (heading) {
       case 'Knowledge':
@@ -135,16 +129,6 @@ function DataSection({ flags, heading, notes = {}, task }: DataSectionProps) {
       })}
     </SectionContainer>
   );
-
-  function applyFlags(id: ACS.Item.ID, text: string) {
-    const wasMissed = flags?.missed?.includes(id);
-    const hoverText = wasMissed ? 'Missed on knowledge test!' : undefined;
-    return (
-      <Tooltip noUnderline message={hoverText}>
-        <span className={cn('text-lg', { 'bg-red-500/50': wasMissed })}>{text}</span>
-      </Tooltip>
-    );
-  }
 }
 
 function ItemHeading({ id, marker, text }: ItemHeadingProps) {
