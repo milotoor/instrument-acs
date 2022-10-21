@@ -11,7 +11,7 @@
 
 @layer components {
     .note-card {
-        @apply w-full bg-white text-black my-5 rounded-lg shadow-[0px_5px_25px] shadow-yellow-400 text-sm;
+        @apply w-full bg-white text-black my-5 rounded-lg shadow-[0px_0px_15px] shadow-yellow-400 text-sm;
     }
 }
 
