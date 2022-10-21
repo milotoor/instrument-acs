@@ -1,9 +1,20 @@
 const cornell14CFR = 'https://www.law.cornell.edu/cfr/text/14';
 const faaHq = 'https://www.faa.gov/about/office_org/headquarters_offices';
 
+// AeroNav organizes its IAP charts into folders of the form YYMM, where YY is the last two digits
+// of the current year, and MM is the 2-digit representation of the current month
+const AERONAV_FOLDER = (() => {
+  const d = new Date();
+  const year = d.getFullYear().toString();
+  const month = (d.getMonth() + 1).toString(); // Add 1 because JavaScript 0-indexes the months
+  return year.toString().slice(-2) + (month.length == 2 ? month : `0${month}`);
+})();
+
 export const uri = {
   ac: (acNum: string, prefix: string = 'AC_') =>
     uri.faa.docs('Advisory_Circular', `${prefix}${acNum}.pdf`),
+
+  aeronav_iap: (id: string) => `https://aeronav.faa.gov/d-tpp/${AERONAV_FOLDER}/${id}.PDF`,
 
   aim: (chapter?: number, section?: number, paragraph?: number) => {
     const aimURIBase = uri.atc('publications/atpubs/aim_html/');

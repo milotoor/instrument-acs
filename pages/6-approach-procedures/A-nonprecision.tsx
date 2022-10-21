@@ -340,7 +340,7 @@ const Nonprecision: ACS.Page = (props) => {
             </Info>{' '}
             This applies to back-course localizers too: if you are flying away from a back-course
             localizer (see the{' '}
-            <Link href={references.aspen_loc_iap}>infamous LOC/DME-E approach into Aspen</Link>)
+            <Link href={references.iap.ase_loc}>infamous LOC/DME-E approach into Aspen</Link>)
             you'll have normal-sensing (as the IAP chart helpfully says).
           </>,
 
@@ -368,8 +368,29 @@ const Nonprecision: ACS.Page = (props) => {
             If it aligns within 30° of a runway, straight-in minimums may still be published.
           </>,
 
-          <Paragraph heading="VOR">
-            <ToDo />
+          <Paragraph heading="VOR & DME">
+            As we all know from private training, a <Term>VHF omnidirectional range (VOR)</Term> is
+            a ground-based navaid which can be used to determine one's relative bearing, to track
+            courses inbound to or outbound from the navaid, or to intercept fixes on defined
+            radials. VOR approaches define the course to follow using radials from the VOR,
+            sometimes including <Term>distance measuring equipment (DME)</Term> arcs. They are
+            commonly found at airports with VORs on site; these are (typically) the most
+            straightforward VOR approaches, as they simply involve tracking a radial inbound to the
+            airport. Other, more complicated arrangements may exist:
+            <BulletList type="disc">
+              <>
+                The VOR may be at a different location, requiring you to track outbound{' '}
+                <Italic>from</Italic> the VOR. This will frequently involve a circling approach at
+                the destination airport, unless the VOR just happens to be closely aligned with
+                runway heading (and even then, I'm not sure what TERPS has to say...). See, e.g.,
+                the <Link href={references.iap.wvi_vor}>KWVI VOR-A approach</Link>
+              </>
+              <>
+                The VOR may be along the final approach course but before the airport, requiring you
+                to overfly it. Sometimes you will also need to switch radials as you overfly (see
+                the <Link href={references.iap.ccr_vor}>CCR VOR 19R approach</Link>)
+              </>
+            </BulletList>
           </Paragraph>,
         ],
       }}
@@ -381,7 +402,11 @@ export default Nonprecision;
 
 const references = {
   advisory_glidepath: uri.ifr_mag('system', 'advisory-glidepaths'),
-  aspen_loc_iap: 'https://aeronav.faa.gov/d-tpp/2210/05889LDE.PDF',
   cdfa: uri.ifr_mag('technique', 'constant-angle-descent'),
   flight_insight_vdp: uri.youtube('vhSzPqN7r74'),
+  iap: {
+    ase_loc: uri.aeronav_iap('05889LDE'),
+    ccr_vor: uri.aeronav_iap('05320V19R'),
+    wvi_vor: uri.aeronav_iap('00805VA'),
+  },
 };
