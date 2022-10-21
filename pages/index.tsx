@@ -6,7 +6,7 @@ import { getStaticPropsFn } from '../ssr';
 
 export const getStaticProps = getStaticPropsFn;
 const Home: ACS.Page = ({ rawData }) => {
-  const acsData = new ACS(rawData);
+  const acsData = React.useMemo(() => new ACS(rawData), []);
   return (
     <Layout acs={acsData} centered home title="The Instrument ACS">
       <div className="max-w-[800px]">

@@ -11,7 +11,7 @@ type SectionPageProps = ACS.TopLevelProps & {
 };
 
 export function SectionPage({ note, number, rawData }: SectionPageProps) {
-  const acsData = new ACS(rawData);
+  const acsData = React.useMemo(() => new ACS(rawData), []);
   const section = acsData.getSection(number);
   const { name, numeral } = section;
   const title = `Section ${numeral}. ${name}`;

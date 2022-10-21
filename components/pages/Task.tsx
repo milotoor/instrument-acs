@@ -23,7 +23,7 @@ type NotesObject = Record<ACS.Item.ID, React.ReactNode>;
 
 export function TaskPage(props: TaskPageProps) {
   const { notes, rawData, section: sectionNumber, task: taskLetter } = props;
-  const acsData = new ACS(rawData);
+  const acsData = React.useMemo(() => new ACS(rawData), []);
   const section = acsData.getSection(sectionNumber);
   const task = acsData.getTask(sectionNumber, taskLetter);
   const dataSectionProps = { task, notes };
