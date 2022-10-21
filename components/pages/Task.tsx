@@ -101,40 +101,38 @@ function DataSection({ flags, heading, notes = {}, task }: DataSectionProps) {
   const noteCardProps = { heading, notes };
   return (
     <SectionContainer heading={heading}>
-      <div>
-        {sorted.map(([num, datum]) => {
-          // If the datum is not the beginning of a sub-list, render it
-          const id = makeAnchorId(heading, num);
-          if (typeof datum === 'string')
-            return (
-              <div key={num}>
-                <ItemHeading id={id} marker={num} text={datum} />
-                <NoteCard {...noteCardProps} id={num} />
-              </div>
-            );
-
-          // Otherwise we need to render the sublist
-          const { general, specific } = datum;
+      {sorted.map(([num, datum]) => {
+        // If the datum is not the beginning of a sub-list, render it
+        const id = makeAnchorId(heading, num);
+        if (typeof datum === 'string')
           return (
             <div key={num}>
-              <ItemHeading marker={num} id={id} text={general} />
+              <ItemHeading id={id} marker={num} text={datum} />
               <NoteCard {...noteCardProps} id={num} />
-              {specific.map((text, i) => {
-                // Char code 97 is "a", 98 is "b", etc.
-                const letter = String.fromCharCode(97 + i);
-                const itemId = num + letter;
-                const id = makeAnchorId(heading, itemId);
-                return (
-                  <div key={i}>
-                    <ItemHeading marker={letter} id={id} text={text} />
-                    <NoteCard {...noteCardProps} id={itemId} />
-                  </div>
-                );
-              })}
             </div>
           );
-        })}
-      </div>
+
+        // Otherwise we need to render the sublist
+        const { general, specific } = datum;
+        return (
+          <div key={num}>
+            <ItemHeading marker={num} id={id} text={general} />
+            <NoteCard {...noteCardProps} id={num} />
+            {specific.map((text, i) => {
+              // Char code 97 is "a", 98 is "b", etc.
+              const letter = String.fromCharCode(97 + i);
+              const itemId = num + letter;
+              const id = makeAnchorId(heading, itemId);
+              return (
+                <div key={i}>
+                  <ItemHeading marker={letter} id={id} text={text} />
+                  <NoteCard {...noteCardProps} id={itemId} />
+                </div>
+              );
+            })}
+          </div>
+        );
+      })}
     </SectionContainer>
   );
 
