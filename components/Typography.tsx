@@ -42,7 +42,7 @@ export function Bold(props: Omit<EmphasizeProps, 'bold'>) {
 export function BulletList({ type = 'decimal', children }: BulletListProps) {
   return (
     <ol
-      className={cn('ml-12 mt-2', {
+      className={cn('ml-8 mt-2', {
         'list-decimal': type === 'decimal',
         'list-alpha': type === 'alpha',
         'list-disc': type === 'disc',
