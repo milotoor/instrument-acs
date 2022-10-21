@@ -93,7 +93,7 @@ function Attribution(props: AttributionProps) {
 
 export const Image = Object.assign(
   function Image(props: ImageProps) {
-    const { children: caption, src, noShadow = false, type = 'webp' } = props;
+    const { children: caption, noShadow = false, src, type = 'webp' } = props;
     const { section, acs } = React.useContext(AppContext);
     const { images } = acs;
     const fullSrc = [section, src].join('/');
@@ -251,11 +251,23 @@ const attributions: Record<number, Record<string, AttributionProps>> = {
       position: 'bottom-right',
       title: 'Figure 2-23 Automatic CDI Scaling',
     },
+    ils_diagram: {
+      author: 'AIM',
+      className: 'text-black',
+      link: uri.aim(1, 1, 9),
+      title: 'FAA Instrument Landing Systems',
+    },
     lnav_cdi_scaling: {
       author: "G1000 Pilot's Guide",
       className: 'text-black',
       link: referenceURIs.g1000,
       title: 'Figure 2-24',
+    },
+    localizer_limitations: {
+      author: 'AIM',
+      className: 'text-black',
+      link: uri.aim(1, 1, 9),
+      title: 'Limits of Localizer Coverage',
     },
     lpv_cdi_scaling: {
       author: "G1000 Pilot's Guide",

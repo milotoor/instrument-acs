@@ -298,22 +298,74 @@ const Nonprecision: ACS.Page = (props) => {
             declaring the receiver's fitness for flying to LP minima.
           </>,
 
-          <Paragraph heading="LOC and LDA">
-            Localizer approaches provide the lateral navigation of an ILS but not the vertical
-            glideslope. A <Term>localizer-type directional aid (LDA)</Term>
+          <Paragraph heading="LOC and LDA" references={[<AIM paragraph={[1, 1, 9, 'b-c']} />]}>
+            Localizer approaches provide the lateral navigation of an ILS, and may be used
+            independently of an ILS glideslope in non-precision approaches. The localizer equipment
+            is installed at the departure end of the runway and emits directional radio signals
+            towards the approach end. Two amplitude-modulated signals are sent (one at 150 Hz, the
+            other 90 Hz); the cockpit receiver compares the relative modulation between the two
+            signals to interpret the aircraft's lateral position relative to runway centerline:
           </Paragraph>,
+
+          <Image src="ils_diagram" />,
+
+          <>
+            <Info>
+              The localizer signal is emitted such that width of the course is 700 feet at the
+              runway threshold
+            </Info>{' '}
+            (i.e., a full-scale CDI deflection means the aircraft is 350' off runway centerline).
+            Therefore, the splay angle of this signal will vary across runways of differing
+            lengths--this is one of the ways localizers differ from GPS/WAAS approaches. Some
+            localizers also emit a "back courses", which is parallel to the front course but in the
+            opposite direction. When flying a localizer back course, the CDI sensing will be
+            reversed.{' '}
+            <Success>
+              On the front course, a CDI deflection to the left means you are right of centerline
+              and should correct to the left ("chase the needle")
+            </Success>
+            ; however,{' '}
+            <Warning>
+              on the back course a left deflection means you should "push the needle" and correct to
+              the right!
+            </Warning>
+          </>,
 
           <>
             Normal-sensing and reverse-sensing can be confusing. On the chart, one side of the arrow
             will be shaded.{' '}
             <Info>
-              If she shaded side of the arrow is on your <Italic>right</Italic>, then you will have
+              If the shaded side of the arrow is on your <Italic>right</Italic>, then you will have
               normal-sensing; if it's on your left, you'll have reverse-sensing.
             </Info>{' '}
             This applies to back-course localizers too: if you are flying away from a back-course
             localizer (see the{' '}
-            <Link href={references.aspen_loc_iap}>wacky LOC/DME-E approach into Aspen</Link>) you'll
-            have normal-sensing (as the IAP chart helpfully says).
+            <Link href={references.aspen_loc_iap}>infamous LOC/DME-E approach into Aspen</Link>)
+            you'll have normal-sensing (as the IAP chart helpfully says).
+          </>,
+
+          <>
+            Additionally, localizers have a specified service volume outside of which the signal
+            should not be trusted. However,{' '}
+            <Info>
+              ATC may clear aircraft on procedures beyond the service volume when radar monitoring
+              is provided.
+            </Info>{' '}
+            The service volume is:
+            <BulletList type="disc">
+              <>To 10 degrees either side of the course along a radius of 18 NM from the antenna</>
+              <>From 10 to 35 degrees either side of the course along a radius of 10 NM</>
+            </BulletList>
+          </>,
+
+          <Image src="localizer_limitations" />,
+
+          <>
+            A <Term>localizer-type directional aid (LDA)</Term> is very similar to a localizer,{' '}
+            <Info>
+              but it is not aligned with any runway and is very rarely paired with a glideslope.
+            </Info>{' '}
+            If it aligns within 30° of a runway, straight-in minimums may still be published.
           </>,
 
           <Paragraph heading="VOR">
