@@ -47,8 +47,8 @@ export function Layout({
       }
       <div className="h-screen max-h-screen h-[-webkit-fill-available] flex flex-col items-center justify-start">
         {!home && (
-          <div className="w-full h-top-bar z-10 flex-shrink-0 shadow-xl shadow-slate-800 flex flex-row justify-center items-center relative bg-gradient-to-r from-cyan-500 to-blue-500">
-            <div className="font-fancy text-2xl hover:text-glow-gold">
+          <div className="w-full h-top-bar z-10 flex-shrink-0 shadow-xl shadow-slate-800 flex flex-row md:justify-center items-center relative bg-gradient-to-r from-cyan-500 to-blue-500">
+            <div className="font-fancy text-2xl hover:text-glow-gold pl-4 md:pl-0">
               <Link color={null} href="/">
                 The Instrument ACS
               </Link>
