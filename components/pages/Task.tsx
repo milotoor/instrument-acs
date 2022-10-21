@@ -8,6 +8,7 @@ import { Link } from '../Link';
 import { Tooltip, WrapParagraph } from '../Typography';
 
 // Component prop types
+type ItemHeadingProps = { marker: string; id: string; text: string };
 type ReferencesSectionProps = { references: string[] };
 type SectionContainerProps = { children: React.ReactNode; heading: string };
 type TaskPageProps = ACS.TopLevelProps &
@@ -100,41 +101,40 @@ function DataSection({ flags, heading, notes = {}, task }: DataSectionProps) {
   const noteCardProps = { heading, notes };
   return (
     <SectionContainer heading={heading}>
-      <ol className="list-decimal ml-8">
+      <div>
         {sorted.map(([num, datum]) => {
           // If the datum is not the beginning of a sub-list, render it
           const id = makeAnchorId(heading, num);
           if (typeof datum === 'string')
             return (
-              <li key={num} id={id}>
-                <a href={`#${id}`}>{applyFlags(num, datum)}</a>
+              <div key={num}>
+                <ItemHeading id={id} marker={num} text={datum} />
                 <NoteCard {...noteCardProps} id={num} />
-              </li>
+              </div>
             );
 
           // Otherwise we need to render the sublist
           const { general, specific } = datum;
           return (
-            <li key={num} id={id}>
-              <a href={`#${id}`}>{general}</a>
+            <div key={num}>
+              <ItemHeading marker={num} id={id} text={general} />
               <NoteCard {...noteCardProps} id={num} />
-              <ol className="list-alpha ml-8">
-                {specific.map((text, i) => {
-                  // Char code 97 is "a", 98 is "b", etc.
-                  const itemId = num + String.fromCharCode(97 + i);
-                  const id = makeAnchorId(heading, itemId);
-                  return (
-                    <li key={i} id={id}>
-                      <a href={`#${id}`}>{applyFlags(itemId, text)}</a>
-                      <NoteCard {...noteCardProps} id={itemId} />
-                    </li>
-                  );
-                })}
-              </ol>
-            </li>
+              {specific.map((text, i) => {
+                // Char code 97 is "a", 98 is "b", etc.
+                const letter = String.fromCharCode(97 + i);
+                const itemId = num + letter;
+                const id = makeAnchorId(heading, itemId);
+                return (
+                  <div key={i}>
+                    <ItemHeading marker={letter} id={id} text={text} />
+                    <NoteCard {...noteCardProps} id={itemId} />
+                  </div>
+                );
+              })}
+            </div>
           );
         })}
-      </ol>
+      </div>
     </SectionContainer>
   );
 
@@ -147,6 +147,19 @@ function DataSection({ flags, heading, notes = {}, task }: DataSectionProps) {
       </Tooltip>
     );
   }
+}
+
+function ItemHeading({ id, marker, text }: ItemHeadingProps) {
+  return (
+    <div id={id} className="flex items-baseline">
+      <div>{marker}.</div>
+      <div className="flex-grow pl-2">
+        <a href={`#${id}`}>
+          <span className="text-lg">{text}</span>
+        </a>
+      </div>
+    </div>
+  );
 }
 
 function SectionContainer({ children, heading }: SectionContainerProps) {
