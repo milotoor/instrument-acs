@@ -16,7 +16,6 @@ import {
   Success,
   TaskPage,
   Term,
-  ToDo,
   Warning,
 } from '../../components';
 import { ACS, uri } from '../../lib';
@@ -393,6 +392,79 @@ const Nonprecision: ACS.Page = (props) => {
             </BulletList>
           </Paragraph>,
         ],
+        k4: [
+          <>
+            Stabilized approaches are key to safe IFR flight. They are characterized by{' '}
+            <InlineList>
+              <>steady flight paths</>
+              <>constant airspeeds</>
+              <>constant descent rates</>
+              <Bold>constant angle glidepaths</Bold>
+              <>no late configuration changes</>
+            </InlineList>
+            . Quoting from the{' '}
+            <Link href={references.stabilized_approach}>
+              FAASTeam's <Italic>Stabilized Approach and Landing</Italic>
+            </Link>
+            :
+          </>,
+
+          <Quotation
+            source={["FAASTeam's Stabilized Approach and Landing", references.stabilized_approach]}
+          >
+            Every runway is unique, but a commonly referenced optimum glidepath follows the “3:1”
+            principle. The principle, also seen as a descent ratio, means that for every 3 nautical
+            miles (nm) flown over the ground, the aircraft should descend 1,000 feet. This
+            flightpath profile simulates a 3° glideslope.
+          </Quotation>,
+
+          <>
+            It goes on to say{' '}
+            <Success>
+              "The further from the runway that you establish a “3:1” flight path profile, the
+              greater your probability of successfully flying a stable approach."
+            </Success>
+          </>,
+
+          <>
+            Fundamentally, stabilized approaches are about diminishing the aircraft's energy in a
+            gradual manner as you approach to land. In cruise flight you have high kinetic energy
+            and potential energy; arriving in the terminal area you begin to lose some of both, but
+            it's not until the approach that you must remove all excess energy from the aircraft.
+            It's difficult if not impossible to safely lose both kinetic energy (i.e. airspeed) and
+            potential energy (altitude) at the same time. To make the problem simpler, the pilot
+            should{' '}
+            <Success>
+              settle into a reference airspeed to maintain during the descent{' '}
+              <Info>(90 knots in the Skyhawk)</Info>, then concentrate on losing altitude slowly but
+              surely.
+            </Success>{' '}
+            <Danger>An inability to do so should become a go-around!</Danger>
+          </>,
+
+          <>
+            <Link href={references.code_7700_stabilized_approach}>Code 7700</Link> provides the
+            following criteria for a stabilized approach, distilled from material created by the
+            Flight Safety Foundation more than 20 years ago:
+            <BulletList>
+              <>The aircraft is fully configured, and all checklists are completed.</>
+              <>
+                The aircraft is on extended centerline and on the correct glide path, with only
+                small changes in heading and pitch needed to maintain the correct flight path.
+              </>
+              <>The aircraft is on speed, no slower than VREF or faster than VREF+20.</>
+              <>
+                The aircraft sink rate is no greater than 1,000 feet per minute and the power
+                setting is appropriate for the configuration.
+              </>
+            </BulletList>
+          </>,
+
+          <Warning>
+            If any of these criteria are not met by 500' AGL (1000' AGL in IMC), the approach is
+            unstable and should be aborted.
+          </Warning>,
+        ],
       }}
     />
   );
@@ -403,10 +475,12 @@ export default Nonprecision;
 const references = {
   advisory_glidepath: uri.ifr_mag('system', 'advisory-glidepaths'),
   cdfa: uri.ifr_mag('technique', 'constant-angle-descent'),
+  code_7700_stabilized_approach: 'https://code7700.com/stabilized_approach.htm',
   flight_insight_vdp: uri.youtube('vhSzPqN7r74'),
   iap: {
     ase_loc: uri.aeronav_iap('05889LDE'),
     ccr_vor: uri.aeronav_iap('05320V19R'),
     wvi_vor: uri.aeronav_iap('00805VA'),
   },
+  stabilized_approach: 'https://www.faa.gov/news/safety_briefing/2018/media/se_topic_18-09.pdf',
 };

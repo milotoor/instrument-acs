@@ -218,7 +218,7 @@ const XcFlightPlanning: ACS.Page = (props) => {
 
           <Collapse heading="Designated Mountainous Areas">
             <>
-              The FFA, in conjunction with NATCA, is planning to reassess what areas of the country
+              The FAA, in conjunction with NATCA, is planning to reassess what areas of the country
               are considered mountainous. At the 2020 Aeronautical Chart Meeting, there was a{' '}
               <Link href={references.dma.presentation}>presentation</Link> on the topic which
               outlines the new data-driven approach. See{' '}
