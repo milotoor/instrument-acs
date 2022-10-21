@@ -58,7 +58,7 @@ export function Layout({
         )}
         <div className="w-full flex overflow-hidden">
           {!home && (
-            <div className="w-96 flex-shrink-0 py-4 pl-2 overflow-auto">
+            <div className="w-96 flex-shrink-0 py-4 pl-2 overflow-auto hidden md:block max-w-[33%]">
               <TableOfContents acs={acs} small />
             </div>
           )}
