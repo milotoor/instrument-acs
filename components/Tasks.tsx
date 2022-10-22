@@ -2,25 +2,36 @@ import cn from 'classnames';
 import * as React from 'react';
 
 import { ACS } from '../lib';
+import { AppContext } from './context';
 import { Link } from './Link';
 
 type TableOfContentsProps = { small?: boolean; acs: ACS };
-type TaskListProps = { className?: string; tasks: ACS.Task[] };
+type TaskListProps = { activeTask?: ACS.Task.Letter; className?: string; tasks: ACS.Task[] };
+const activeLinkColor = 'text-glow-gold';
 
 export function TableOfContents({ small = false, acs }: TableOfContentsProps) {
+  const { section, task } = React.useContext(AppContext);
   return (
     <ol className="list-decimal leading-7 ml-8 mt-4 text-lg">
-      {acs.sections.map(({ name, tasks, uri }) => (
+      {acs.sections.map(({ name, number, tasks, uri }) => (
         <li key={name} className="my-4">
           <Link
-            className={cn({ 'text-subtitle': !small, 'text-subtitle-sm': small })}
+            className={cn({
+              'text-subtitle': !small,
+              'text-subtitle-sm': small,
+              [activeLinkColor]: section === number && !task,
+            })}
             color={null}
             href={uri}
           >
             {name}
           </Link>
           <div className={cn({ 'text-sm': small })}>
-            <TaskList tasks={tasks} className="ml-8" />
+            <TaskList
+              activeTask={section === number ? task : undefined}
+              tasks={tasks}
+              className="ml-8"
+            />
           </div>
         </li>
       ))}
@@ -28,11 +39,15 @@ export function TableOfContents({ small = false, acs }: TableOfContentsProps) {
   );
 }
 
-export function TaskList({ className, tasks }: TaskListProps) {
+export function TaskList({ activeTask, className, tasks }: TaskListProps) {
   return (
     <ol className={cn('list-alpha', className)}>
       {tasks.map((task) => (
-        <Link href={task.uri} key={task.name}>
+        <Link
+          color={activeTask === task.meta.letter ? activeLinkColor : undefined}
+          href={task.uri}
+          key={task.name}
+        >
           <li>{task.name}</li>
         </Link>
       ))}
