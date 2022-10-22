@@ -259,17 +259,32 @@ const Nonprecision: ACS.Page = (props) => {
             LP and LPV approaches, and more gradually for basic LNAV approaches.
           </>,
         ],
-        k2: (
+        k2: [
+          <>
+            In the G1000, the CDI enunciates its mode based upon the current phase of flight.
+            Confirming the expected mode is active is an important part of flying the approach,
+            because{' '}
+            <Warning>
+              if the CDI is still in terminal mode you will not have the precision required for
+              lateral guidance!
+            </Warning>
+          </>,
+
+          <Image.Row>
+            <Image src="cdi_diagram" />
+            <Image src="cdi_enunciations" />
+          </Image.Row>,
+
           <>
             There are performance requirements that must be met in order to complete either an LNAV
             or LP approach. <Warning>For LNAV approaches, RAIM must be operational.</Warning> If
-            there is a RAIM failure annunciation the approach{' '}
-            <Danger>must not be completed!</Danger> If the approach has already begun, the pilot
-            must immediately execute the missed approach (see{' '}
-            <AIM paragraph={[1, 1, 17, 'b', 5, 'g']} />
-            ).
-          </>
-        ),
+            there is a RAIM failure annunciation the approach <Danger>must be abandoned!</Danger> If
+            the approach has already begun, the pilot must immediately execute the missed approach
+            (see <AIM paragraph={[1, 1, 17, 'b', 5, 'g']} />
+            ). The G1000 automatically monitors RAIM and warns with an alert message when it is not
+            available (e.g. "Approach is not active" or "RAIM not available from FAF to MAP."
+          </>,
+        ],
         k3: [
           <Paragraph heading="LNAV and LP" references={<AIM paragraph={[5, 4, 5, 'm']} />}>
             Nonprecision RNAV approaches include <Term>LNAV (LATeral NAVigation)</Term> and{' '}
