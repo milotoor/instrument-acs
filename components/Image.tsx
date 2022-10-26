@@ -96,8 +96,8 @@ export const Image = Object.assign(
     const { children: caption, noShadow = false, src, type = 'webp' } = props;
     const { section, acs } = React.useContext(AppContext);
     const { images } = acs;
-    const fullSrc = [section, src].join('/');
-    const dimensions = images && images[fullSrc];
+    const srcWithSection = [section, src].join('/');
+    const dimensions = images && images[srcWithSection];
     const hasCaption = !!caption;
 
     const attribution = (() => {
@@ -108,6 +108,7 @@ export const Image = Object.assign(
       }
     })();
 
+    const fullSrc = `/img/${srcWithSection}.${type}`;
     return (
       <div className="flex flex-col items-center w-full">
         <div
@@ -115,12 +116,14 @@ export const Image = Object.assign(
             'shadow-lg shadow-slate-500': !noShadow,
           })}
         >
-          <NextImage
-            src={`/img/${fullSrc}.${type}`}
-            layout="intrinsic"
-            width={dimensions.width}
-            height={dimensions.height}
-          />
+          <a href={fullSrc}>
+            <NextImage
+              src={fullSrc}
+              layout="intrinsic"
+              width={dimensions.width}
+              height={dimensions.height}
+            />
+          </a>
           {attribution}
         </div>
         {hasCaption && <div className="max-w-image px-3 text-xs mt-4">{caption}</div>}
