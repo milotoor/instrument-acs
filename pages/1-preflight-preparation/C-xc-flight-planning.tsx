@@ -455,7 +455,13 @@ const XcFlightPlanning: ACS.Page = (props) => {
                 </Success>{' '}
                 (to avoid clearance delays)
               </>
-              <>You can request to not receive any SIDs or STARs in the flight plan remarks</>
+              <>
+                There's an old notion, still taught today, that you can request to not receive any
+                SIDs or STARs in the flight plan remarks. <Warning>Don't do this.</Warning> It's an
+                impractical request, and at the end of the day the controller is just going to give
+                it to you anyway one step at a time. This is a huge of waste of their time and
+                defeats the purpose SIDs and STARs were invented to serve.
+              </>
             </BulletList>
           </>,
 
