@@ -370,11 +370,36 @@ const Nonprecision: ACS.Page = (props) => {
           <>
             There are performance requirements that must be met in order to complete either an LNAV
             or LP approach. <Warning>For LNAV approaches, RAIM must be operational.</Warning> If
-            there is a RAIM failure annunciation the approach <Danger>must be abandoned!</Danger> If
+            there is a RAIM failure enunciation the approach <Danger>must be abandoned!</Danger> If
             the approach has already begun, the pilot must immediately execute the missed approach
             (see <AIM paragraph={[1, 1, 17, 'b', 5, 'g']} />
             ). The G1000 automatically monitors RAIM and warns with an alert message when it is not
             available (e.g. "Approach is not active" or "RAIM not available from FAF to MAP."
+          </>,
+
+          <Paragraph heading="VDA and LNAV+V" references={<AIM paragraph={[5, 4, 5, 'k']} />}>
+            Some NPAs include a <Term>vertical descend angle (VDA)</Term> which is intended as an
+            aid in flying stabilized approaches.{' '}
+            <Bold>This does not make the approach a precision approach</Bold>.{' '}
+            <Info>
+              When flying such an approach, you may see LNAV+V enunciated on the HSI as well as an
+              advisory glideslope.
+            </Info>
+          </Paragraph>,
+
+          <>
+            Having this advisory guidance can be very helpful, but there are some gotchas to be
+            aware of. For one thing,{' '}
+            <Danger>
+              advisory vertical guidance does not guarantee obstacle clearance below MDA!
+            </Danger>{' '}
+            It is up to the pilot to visually avoid said obstacles. Furthermore, flying an NPA with
+            advisory vertical guidance using the autopilot requires very close scrutiny to ensure
+            the aircraft does not descend below minimums.{' '}
+            <Danger>
+              The GFC700 will not level the aircraft off at MDA when flying an LNAV approach with a
+              VDA.
+            </Danger>
           </>,
         ],
         k3: [
