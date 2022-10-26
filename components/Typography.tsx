@@ -24,12 +24,9 @@ type InlineListProps = ChildProp<React.ReactNode[]> & {
 };
 
 type KatexProps = ChildProp<string> & { block?: boolean } & React.HTMLAttributes<HTMLDivElement>;
-type QuotationProps = ChildProp & { source?: [string, string] };
-
-export type ReferenceListProps = {
-  className?: string;
-  references?: OneOrMore<React.ReactElement<LinkProps>>;
-};
+type QuotationProps = ChildProp & { source?: [string, string] | Reference };
+type Reference = React.ReactElement<LinkProps>;
+export type ReferenceListProps = { className?: string; references?: OneOrMore<Reference> };
 
 type TooltipProps = ChildProp & { message?: string; noUnderline?: boolean };
 type ParagraphProps = ChildProp & ReferenceListProps & { heading?: string; hr?: boolean };
