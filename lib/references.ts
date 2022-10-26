@@ -88,6 +88,7 @@ export const referenceURIs = {
   'AC 20-172': uri.ac('20-172B'),
   'AC 68-1': uri.ac('68-1'),
   'AC 90-66B': uri.ac('90-66b'),
+  'AC 90-100A': uri.ac('90-100A_CHG_2'),
   'AC 91-74': uri.ac('91-74B'),
   'AC 91.21-1': uri.ac('91.21-1D'),
   'AIM': uri.aim(),

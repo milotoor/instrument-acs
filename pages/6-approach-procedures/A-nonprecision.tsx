@@ -164,9 +164,10 @@ const Nonprecision: ACS.Page = (props) => {
 
           <Paragraph heading="LP vs. LNAV" references={<AIM paragraph={[1, 1, 17, 'b', 5]} />}>
             LP and LNAV approaches differ in a few ways. LP approaches require WAAS while LNAV only
-            requires GPS (see <Link.Task id="k3" />
-            ). Most importantly, they differ in their lateral sensitivity (i.e. the distance
-            represented by full-scale deflection on the CDI).
+            requires GPS; see <Link.Task id="k3" />. A RAIM check is not required if WAAS coverage
+            is assured, and hence this step does not need to be performed for LP approaches. Most
+            importantly, they differ in their lateral sensitivity (i.e. the distance represented by
+            full-scale deflection on the CDI).
           </Paragraph>,
 
           <>
@@ -257,6 +258,97 @@ const Nonprecision: ACS.Page = (props) => {
             Finally, the CDI scale shifts back to{' '}
             <Info>0.3nm when the missed approach is activated.</Info> This happens immediately for
             LP and LPV approaches, and more gradually for basic LNAV approaches.
+          </>,
+
+          <Paragraph
+            heading="RAIM"
+            references={[
+              <AIM paragraph={[1, 1, 17, 'a', 3]} />,
+              <AIM paragraph={[1, 1, 17, 'b', 5, 'g']} />,
+            ]}
+          >
+            <Link href={references.raim}>
+              <Term>Receiver autonomous integrity monitoring (RAIM)</Term>
+            </Link>{' '}
+            is a critical part of GPS approaches. RAIM is used to assess the reliability of GPS
+            signals received during flight. For a variety of reasons (e.g. ionospheric
+            interference), GPS signals may be inaccurate; it's a complex system, things can
+            sometimes go wrong, right? In order for safety-critical applications (like aviation) to
+            make use of GPS, there must be a mechanism for detecting when signals are inaccurate and
+            plans must change. RAIM is that mechanism.
+          </Paragraph>,
+
+          <>
+            To understand RAIM it's helpful to first understand GPS. Plenty of resources out there
+            can explain it better than I, but suffice it to say: 24 satellites orbit the Earth and
+            broadcast their position and the current time when the signal was sent. Using these
+            signals, receivers can compute their own position and the time.{' '}
+            <Info>
+              Four satellites are required to compute latitude, longitude, altitude and time.
+            </Info>{' '}
+            For a detailed, accessible and interactive explanation of the GPS system I highly
+            recommend{' '}
+            <Link href={references.bartosz_ciechanowski}>Bartosz Ciechanowski's blog</Link>.
+          </>,
+
+          <>
+            With five satellites, the receiver is able to compare the position/time solutions
+            derived from each group of 4 satellites (there are 5 such groups);{' '}
+            <Success>if they all agree on the solution, then there is no fault.</Success> Hurray!
+            Alternatively, GPS receivers can use barometric altimeter input as a substitute for one
+            of the satellites (this is known as "baro-aiding").
+          </>,
+
+          <>
+            <Warning>What happens if they don't agree, though?</Warning> The receiver has detected a
+            fault. This is already good, as it informs us that something is wrong. If this is all we
+            know, we won't be able to fly a GPS approach, but that's much better than thinking we
+            can when we can't. Sadly, with only five satellites in view we won't be able to detect
+            which satellite is the problem and will have to navigate by some other means. However,
+            with <Italic>six</Italic> satellites in view (or five + baro-aiding), the receiver is
+            able to determine which satellite is problematic! It can thus exclude that satellite
+            from its computations and continue functioning. This is known as{' '}
+            <Term>fault detection and exclusion (FDE)</Term>.
+          </>,
+
+          <>
+            RAIM refers to this real-time monitoring, fault detecting and excluding. It thus
+            requires a minimum of five satellites to be in view, and functions even better with six
+            or more. While it's great to have that monitoring in the air, you'd still rather know
+            ahead of time if there might be a signal reliability issue. Thankfully, GPS satellite
+            positions are extremely predictable! Software is available online to perform "RAIM
+            prediction" (the FAA recommends their{' '}
+            <Link href={references.sapt}>Service Availability Prediction Tool</Link>), and
+            sophisticated avionics like the G1000 can also perform predictions.
+          </>,
+
+          <Image src="raim_prediction" />,
+
+          <>
+            Per <Link.Reference reference="AC 90-100A" />, TSO-C129/196-equipped users (i.e. pilots
+            of aircraft equipped with non-WAAS GPS) must confirm RAIM availability for the intended
+            route (and time of travel) during preflight, if they are to use RNAV procedures during
+            the flight. However, users of TSO-C145/146 equipment need not do so provided that WAAS
+            coverage is confirmed to be available along the route of flight (this can be confirmed
+            through NOTAMs or predictive tools).
+          </>,
+
+          <Quotation source={<AIM paragraph={[1, 1, 17]} />}>
+            In situations where RAIM is predicted to be unavailable, the flight must rely on other
+            approved navigation equipment, re-route to where RAIM is available, delay departure, or
+            cancel the flight.
+          </Quotation>,
+
+          <>
+            Finally,{' '}
+            <Warning>
+              when the receiver indicates that RAIM capability has been lost, the pilot{' '}
+              <Italic>must</Italic> monitor an alternative means of navigation.
+            </Warning>{' '}
+            <Danger>
+              Without RAIM capability, the pilot has no assurance of the accuracy of the GPS
+              position!
+            </Danger>
           </>,
         ],
         k2: [
@@ -489,6 +581,7 @@ export default Nonprecision;
 
 const references = {
   advisory_glidepath: uri.ifr_mag('system', 'advisory-glidepaths'),
+  bartosz_ciechanowski: 'https://ciechanow.ski/gps/',
   cdfa: uri.ifr_mag('technique', 'constant-angle-descent'),
   code_7700_stabilized_approach: 'https://code7700.com/stabilized_approach.htm',
   flight_insight_vdp: uri.youtube('vhSzPqN7r74'),
@@ -497,5 +590,7 @@ const references = {
     ccr_vor: uri.aeronav_iap('05320V19R'),
     wvi_vor: uri.aeronav_iap('00805VA'),
   },
+  raim: uri.wikipedia('Receiver_autonomous_integrity_monitoring'),
+  sapt: 'https://sapt.faa.gov/default.php',
   stabilized_approach: 'https://www.faa.gov/news/safety_briefing/2018/media/se_topic_18-09.pdf',
 };

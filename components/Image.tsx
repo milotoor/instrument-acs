@@ -289,5 +289,12 @@ const attributions: Record<number, Record<string, AttributionProps>> = {
       position: 'bottom-right',
       title: 'Figure 2-25',
     },
+    raim_prediction: {
+      author: "G1000 Pilot's Guide",
+      className: 'text-black',
+      link: referenceURIs.g1000,
+      position: 'top-right',
+      title: 'Figure 5-107 RAIM Prediction',
+    },
   },
 };
