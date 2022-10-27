@@ -8,7 +8,7 @@ import { Link } from './Link';
 import { TableOfContents } from './Tasks';
 import { Bold } from './Typography';
 
-type LastUpdatedWidgetProp = { updated: string | null };
+type LastUpdatedWidgetProp = { sha?: string; updated?: string };
 type LayoutProps = {
   acs: ACS;
   centered?: boolean;
@@ -28,11 +28,11 @@ export function Layout({
   task,
   title,
 }: LayoutProps) {
-  const updated = section
+  const [updateDate, sha] = section
     ? task
       ? acs.getTask(section, task).updated
       : acs.getSection(section).updated
-    : null;
+    : [];
 
   return (
     <AppContext.Provider value={{ acs, section, task }}>
@@ -53,7 +53,7 @@ export function Layout({
                 The Instrument ACS
               </Link>
             </div>
-            <LastUpdatedWidget updated={updated} />
+            <LastUpdatedWidget sha={sha} updated={updateDate} />
           </div>
         )}
         <div className="w-full flex overflow-hidden">
@@ -75,12 +75,18 @@ export function Layout({
   );
 }
 
-function LastUpdatedWidget({ updated }: LastUpdatedWidgetProp) {
+function LastUpdatedWidget({ sha, updated }: LastUpdatedWidgetProp) {
   if (!updated) return null;
   return (
-    <div className="absolute right-5 h-top-bar flex flex-col justify-center items-end text-xs">
-      <span>Last updated:</span>
-      <Bold>{updated}</Bold>
-    </div>
+    <Link
+      className="absolute right-5 h-top-bar"
+      color={null}
+      href={`https://github.com/milotoor/instrument-acs/commit/${sha}`}
+    >
+      <div className="h-full flex flex-col justify-center items-end text-xs">
+        <span>Last updated:</span>
+        <Bold>{updated}</Bold>
+      </div>
+    </Link>
   );
 }

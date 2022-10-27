@@ -7,7 +7,7 @@ import { ACS } from '../lib';
 
 type Letter = ACS.Task.Letter;
 type Number = ACS.Section.Number;
-type UpdateType = string;
+type UpdateType = ACS.LastUpdate;
 type TaskUpdates = Record<Letter, UpdateType>;
 type SectionUpdates = Record<Number, { updated: UpdateType; tasks: TaskUpdates }>;
 
@@ -18,9 +18,9 @@ type SectionUpdates = Record<Number, { updated: UpdateType; tasks: TaskUpdates }
  * penalty incurred (as a result of larger bundle size) because this is only executed at build time.
  */
 function getLastUpdateForPath(path: string): UpdateType {
-  const dateStr = String(execSync(`git log -1 --format=%cD "${path}"`));
-  const date = DateTime.fromRFC2822(dateStr);
-  return date.toLocaleString(DateTime.DATE_FULL);
+  const gitLog = (format: string) => String(execSync(`git log -1 --format=%${format} "${path}"`));
+  const date = DateTime.fromRFC2822(gitLog('cD'));
+  return [date.toLocaleString(DateTime.DATE_FULL), gitLog('h')];
 }
 
 function getLastUpdateForTask({ name, path }: DirectoryTree) {
@@ -45,7 +45,7 @@ function getLastUpdatesForSection({ children, name, path }: DirectoryTree) {
  * in the app's top bar.
  */
 export function getLastUpdates(pathToRoot: string = '.') {
-  const tree = dirTree('pages');
+  const tree = dirTree(path.join(pathToRoot, 'pages'));
   const sections = tree!.children!.filter((child) => child.name.match(/\d-/));
   return Object.fromEntries(sections.map(getLastUpdatesForSection)) as SectionUpdates;
 }

@@ -13,6 +13,7 @@ export namespace ACS {
 
   export type Image = { width: number; height: number; type?: string };
   export type Images = Record<string, Image>;
+  export type LastUpdate = [string, string];
   export type Page = NextPage<TopLevelProps>;
   export type TopLevelProps = { rawData: ACS.Raw };
 
@@ -45,14 +46,14 @@ export namespace ACS {
   // Wrapper around the image data and raw ACS data
   export namespace Raw {
     export type Section = {
-      updated: string;
+      updated: LastUpdate;
       name: string;
       number: Section.Number;
       tasks: Task[];
     };
 
     export type Task = {
-      updated: string;
+      updated: LastUpdate;
       meta: Task.Meta;
       knowledge: Item.List;
       risk_management: Item.List;
