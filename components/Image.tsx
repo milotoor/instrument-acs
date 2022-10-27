@@ -119,14 +119,14 @@ export const Image = Object.assign(
             'shadow-lg shadow-slate-500': !noShadow,
           })}
         >
-          <a href={fullSrc}>
+          <Link href={fullSrc}>
             <NextImage
               src={fullSrc}
               layout="intrinsic"
               width={dimensions.width}
               height={dimensions.height}
             />
-          </a>
+          </Link>
           {attribution}
         </div>
         {hasCaption && <div className="max-w-image px-3 text-xs mt-4">{caption}</div>}
