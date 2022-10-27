@@ -45,6 +45,7 @@ type LinkableReference = keyof typeof referenceURIs;
 
 export const Link = Object.assign(
   function Link({ bold, children, className, color, href, ...rest }: LinkProps) {
+    const isLocalLink = '/#'.includes(href.toString()[0]);
     return (
       <span
         className={cn('hover:underline', className, color, {
@@ -53,7 +54,7 @@ export const Link = Object.assign(
         })}
       >
         <Emphasize bold={bold}>
-          {href.toString().startsWith('/') ? (
+          {isLocalLink ? (
             <NextLink href={href} {...rest}>
               <span className="cursor-pointer">{children}</span>
             </NextLink>

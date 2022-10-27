@@ -136,9 +136,9 @@ function ItemHeading({ id, marker, text }: ItemHeadingProps) {
     <div id={id} className="flex items-baseline">
       <div>{marker}.</div>
       <div className="flex-grow pl-2">
-        <a href={`#${id}`}>
+        <Link color={null} href={`#${id}`}>
           <span className="text-lg">{text}</span>
-        </a>
+        </Link>
       </div>
     </div>
   );

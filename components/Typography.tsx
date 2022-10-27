@@ -3,8 +3,8 @@ import katex from 'katex';
 import React from 'react';
 
 import { ChildProp, Colors, logWarning, makeAnchorId, OneOrMore } from '../lib';
-import { LinkProps } from './Link';
 import { NoteContext } from './context';
+import { Link, LinkProps } from './Link';
 
 type BulletListProps = ChildProp<React.ReactNode[]> & {
   type?: 'alpha' | 'decimal' | 'disc' | 'roman' | 'square';
@@ -137,11 +137,11 @@ export function Paragraph({ children, heading, hr, references }: ParagraphProps)
       {hr ? <hr className="w-4/5 m-auto mb-5" /> : null}
       {heading ? (
         <div className="flex flex-row items-center mb-1">
-          <a href={`#${id}`}>
+          <Link color={null} href={`#${id}`}>
             <span className="bg-indigo-500 px-2 py-1 inline-block rounded-xl text-white text-xs">
               <Bold>{heading}</Bold>
             </span>
-          </a>
+          </Link>
           <ReferenceList className="ml-4" references={references} />
         </div>
       ) : null}
