@@ -470,8 +470,8 @@ const Nonprecision: ACS.Page = (props) => {
               normal-sensing; if it's on your left, you'll have reverse-sensing.
             </Info>{' '}
             This applies to back-course localizers too: if you are flying away from a back-course
-            localizer (see the{' '}
-            <Link href={references.iap.ase_loc}>infamous LOC/DME-E approach into Aspen</Link>)
+            localizer (see the infamous{' '}
+            <Link.Approach type="LOC/DME" circling="E" name="Aspen" icao="KASE" id="05889LDE" />)
             you'll have normal-sensing (as the IAP chart helpfully says).
           </>,
 
@@ -514,12 +514,20 @@ const Nonprecision: ACS.Page = (props) => {
                 <Italic>from</Italic> the VOR. This will frequently involve a circling approach at
                 the destination airport, unless the VOR just happens to be closely aligned with
                 runway heading (and even then, I'm not sure what TERPS has to say...). See, e.g.,
-                the <Link href={references.iap.wvi_vor}>KWVI VOR-A approach</Link>
+                the{' '}
+                <Link.Approach
+                  type="VOR"
+                  circling="A"
+                  name="Watsonville"
+                  icao="KWVI"
+                  id="00805VA"
+                />
               </>
               <>
                 The VOR may be along the final approach course but before the airport, requiring you
                 to overfly it. Sometimes you will also need to switch radials as you overfly (see
-                the <Link href={references.iap.ccr_vor}>CCR VOR 19R approach</Link>)
+                the <Link.Approach type="VOR" rwy="19R" name="Concord" icao="KCCR" id="05320V19R" />
+                )
               </>
             </BulletList>
           </Paragraph>,
@@ -610,11 +618,6 @@ const references = {
   cdfa: uri.ifr_mag('technique', 'constant-angle-descent'),
   code_7700_stabilized_approach: 'https://code7700.com/stabilized_approach.htm',
   flight_insight_vdp: uri.youtube('vhSzPqN7r74'),
-  iap: {
-    ase_loc: uri.aeronav_iap('05889LDE'),
-    ccr_vor: uri.aeronav_iap('05320V19R'),
-    wvi_vor: uri.aeronav_iap('00805VA'),
-  },
   raim: uri.wikipedia('Receiver_autonomous_integrity_monitoring'),
   sapt: 'https://sapt.faa.gov/default.php',
   stabilized_approach: 'https://www.faa.gov/news/safety_briefing/2018/media/se_topic_18-09.pdf',

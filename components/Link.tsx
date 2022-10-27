@@ -15,6 +15,15 @@ import { AppContext } from './context';
 import { Emphasize, Tooltip } from './Typography';
 
 type CommonLinkProps = { bold?: boolean; className?: string; color?: string | null };
+type ApproachLinkProps = {
+  type: string;
+  rwy?: number | string;
+  circling?: string;
+  name: string;
+  icao?: string;
+  id: string;
+};
+
 type ReferenceLinkProps = CommonLinkProps & {
   reference: LinkableReference;
   text?: React.ReactNode;
@@ -58,6 +67,19 @@ export const Link = Object.assign(
     );
   },
   {
+    Approach({ circling, icao, id, name, rwy, type }: ApproachLinkProps) {
+      const approachName = (() => {
+        if (rwy) return `${type} RWY-${rwy}`;
+        if (circling) return `${type}-${circling}`;
+      })();
+
+      return (
+        <Link href={uri.aeronav_iap(id)}>
+          {approachName} approach into {name}
+          {icao && ` (${icao})`}
+        </Link>
+      );
+    },
     Reference({ reference, text, ...rest }: ReferenceLinkProps) {
       let linkContent: React.ReactNode = reference;
       let title;
