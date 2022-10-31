@@ -10,7 +10,7 @@ const Home: ACS.Page = ({ rawData }) => {
   return (
     <Layout acs={acsData} centered home title="The Instrument ACS">
       <div className="max-w-[800px]">
-        <h1 className="text-7xl font-bold font-fancy pt-5 pb-10">
+        <h1 className="text-center sm:text-left text-7xl font-bold font-fancy pt-5 pb-10">
           The{' '}
           <Link className="text-glow-gold" href={references.acs}>
             Instrument ACS
