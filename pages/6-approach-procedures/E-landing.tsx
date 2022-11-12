@@ -169,7 +169,7 @@ const Landing: ACS.Page = (props) => {
 
           <>
             At none other than Watsonville airport (where I will meet my DPE for the instrument
-            checkride) there was a{' '}
+            check ride) there was a{' '}
             <Link href={references.wvi_accident}>midair collision on 18 August, 2022</Link>,
             involving a very fast twin Cessna performing a straight-in approach and a 152 in the
             pattern. The 152 may have made an error in judgment by turning base in front of the

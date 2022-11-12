@@ -55,7 +55,7 @@ const PilotQualifications: ACS.Page = (props) => {
             operate as PIC under IFR. If <span className="italic">those</span> six months lapse,
             your only option is an <Bold>instrument proficiency check</Bold> (see{' '}
             <FAR section={[61, 57, 'd']} />
-            ). This basically means taking your checkride again, so don't let that happen.
+            ). This basically means taking your check ride again, so don't let that happen.
           </>,
         ],
 

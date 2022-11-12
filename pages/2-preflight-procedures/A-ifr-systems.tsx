@@ -15,7 +15,7 @@ const IfrSystems: ACS.Page = (props) => {
         // Anti-icing/deicing systems
         k1: [
           <>
-            The Cessna 172S, my aircraft of choice for the checkride, is not equipped for{' '}
+            The Cessna 172S, my aircraft of choice for the check ride, is not equipped for{' '}
             <Bold>flight into known icing (FIKI)</Bold> and is not equipped with any anti-icing or
             deicing systems for the airframe, propeller, air intake or fuel system. Given that its
             engine is fuel-injected, induction icing is not typically a concern; however, the POH

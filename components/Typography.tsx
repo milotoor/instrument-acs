@@ -24,7 +24,11 @@ type InlineListProps = ChildProp<React.ReactNode[]> & {
 };
 
 type KatexProps = ChildProp<string> & { block?: boolean } & React.HTMLAttributes<HTMLDivElement>;
-type QuotationProps = ChildProp & { source?: [string, string] | Reference };
+type QuotationProps = ChildProp & {
+  inline?: boolean;
+  padded?: boolean;
+  source?: [string, string] | Reference;
+};
 type Reference = React.ReactElement<LinkProps>;
 export type ReferenceListProps = { className?: string; references?: OneOrMore<Reference> };
 
@@ -99,8 +103,13 @@ export function InlineList({ children, delimeter = ',', logic = 'and' }: InlineL
         <span key={i}>
           {i > 0 ? ' ' : ''}
           <Gray italic>{child}</Gray>
-          {i >= children.length - 2 ? '' : delimeter}
-          {logic && i === children.length - 2 ? ` ${logic}` : ''}
+          {i < children.length - 2
+            ? delimeter
+            : i === children.length - 2
+            ? logic
+              ? ` ${logic}`
+              : delimeter
+            : ''}
         </span>
       ))}
     </>
@@ -150,9 +159,14 @@ export function Paragraph({ children, heading, hr, references }: ParagraphProps)
   );
 }
 
-export function Quotation({ children }: QuotationProps) {
+export function Quotation({ children, inline = false, padded = false }: QuotationProps) {
+  if (inline) return <Gray italic>"{children}"</Gray>;
   return (
-    <div className="border-l-gray-300 border-l-[6px] py-1 pl-3 ml-3 bg-gray-50">
+    <div
+      className={cn('border-l-gray-300 border-l-[6px] py-1 pl-3 ml-3 bg-gray-50', {
+        'm-3': padded,
+      })}
+    >
       <Italic>{children}</Italic>
     </div>
   );
