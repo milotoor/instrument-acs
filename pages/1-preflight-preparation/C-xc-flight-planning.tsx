@@ -8,15 +8,18 @@ import {
   FAR,
   Gray,
   Image,
+  Info,
   InlineList,
   Italic,
   Katex,
   Link,
   Paragraph,
+  Quotation,
   Success,
   Tab,
   Tabs,
   TaskPage,
+  Term,
   ToDo,
   Warning,
 } from '../../components';
@@ -55,6 +58,11 @@ const XcFlightPlanning: ACS.Page = (props) => {
                 Check for any <Bold>Standard Instrument Departures (SIDs)</Bold> or{' '}
                 <Bold>Standard Terminal Arrivals (STARs)</Bold> that could simplify your transition
                 to/from the en route structure.
+              </>
+              <>
+                When using VORs off-airway their service volumes must overlap. This usually means
+                they need to be within 80 NM of each other. See{' '}
+                <Link.Task section={2} task="B" id="k2a" />
               </>
             </BulletList>
           </>,
@@ -98,6 +106,11 @@ const XcFlightPlanning: ACS.Page = (props) => {
                         ceiling 800 feet and visibility 2 statute miles for a nonprecision approach
                       </>
                     </InlineList>
+                    . Note that{' '}
+                    <Warning>
+                      for the purposes of alternate planning LPV approaches must still be considered
+                      non-precision.
+                    </Warning>
                   </>
                   <>
                     <Bold>
@@ -143,7 +156,15 @@ const XcFlightPlanning: ACS.Page = (props) => {
                       alternate
                     </Bold>
                     , though you must use nonprecision minima for planning purposes. See{' '}
-                    <AIM paragraph={[1, 1, 18]} />.
+                    <AIM paragraph={[1, 1, 18, 'c', 9, 'a']} />:
+                    <Quotation padded>
+                      When using WAAS at an alternate airport, flight planning must be based on
+                      flying the RNAV (GPS) LNAV or circling minima line...91 non-precision weather
+                      requirements must be used for planning. Upon arrival at an alternate, when the
+                      WAAS navigation system indicates that LNAV/VNAV or LPV service is available,
+                      then vertical guidance may be used to complete the approach using the
+                      displayed level of service
+                    </Quotation>
                   </>
                   <>
                     If your aircraft is not WAAS capable, (i.e. your aircraft is only equipped with
@@ -166,6 +187,11 @@ const XcFlightPlanning: ACS.Page = (props) => {
 
         // Altitude selection
         k2: [
+          <>
+            Your route of flight may require multiple altitudes, especially if flying over high
+            terrain for short periods.{' '}
+            <Success>File the first altitude you want to cruise at.</Success>
+          </>,
           <Paragraph heading="Altitude Types">
             There are several different types of altitude relevant to VFR and IFR flight:
             <BulletList type="decimal">
@@ -407,9 +433,9 @@ const XcFlightPlanning: ACS.Page = (props) => {
             <FAR section={[91, 167]} /> is the relevant regulation. It specifies that "no person may
             operate a civil aircraft in IFR conditions unless it carries enough fuel to:"
             <BulletList type="decimal">
-              <>Complete the flight to the first airport of intended landing</>
+              <>Complete the flight to the first airport of intended landing and fly an approach</>
               <>
-                Fly from that airport to the alternate airport{' '}
+                Fly from that airport to the alternate airport and fly an approach{' '}
                 <Bold italic>(if an alternate is required)</Bold>
               </>
               <>Fly after that for 45 minutes at normal cruising speed</>
@@ -428,7 +454,9 @@ const XcFlightPlanning: ACS.Page = (props) => {
               is what takes time, as it requires knowing your flight distance and the winds along
               each leg at the planned altitude.
             </Gray>{' '}
-            See above for details.
+            See above for details. Furthermore, the language of "no person may <Bold>operate</Bold>{' '}
+            a civil aircraft..." indicates that the IFR fuel requirement is{' '}
+            <Warning>not a legal reserve that may be dipped into.</Warning>
           </>,
         ],
 
@@ -447,7 +475,52 @@ const XcFlightPlanning: ACS.Page = (props) => {
                   it behooves the pilot to list all of the equipment suffixes applicable
                 </Success>
                 . The FAA provides a document explaining the codes{' '}
-                <Link href={references.icao_codes}>here</Link>.
+                <Link href={references.icao_codes}>here</Link>. Some common codes include:
+                <BulletList type="disc">
+                  <>
+                    <Info>S</Info> indicates that the aircraft has a VOR receiver, VHF comms system
+                    and ILS capability
+                  </>
+                  <>
+                    <Info>G</Info> indicates the aircraft has an IFR-certified GPS, and{' '}
+                    <Info>B</Info> indicates it's a WAAS GPS with LPV capability.
+                  </>
+                  <>
+                    If <Info>G</Info> applies, so does <Info>R</Info> which indicates some level of
+                    performance based navigation equipment. The specific levels of PBN are specified
+                    in the ICAO Surveillance Equipment section.
+                  </>
+                </BulletList>
+              </>
+              <>
+                For the <Term>performance based navigation (PBN)</Term>, a typical IFR GPS has the
+                codes{' '}
+                <InlineList>
+                  <>C2</>
+                  <>D2</>
+                  <>O2</>
+                  <>S1</>
+                </InlineList>
+                .
+                <BulletList type="disc">
+                  <>
+                    <Info>C2</Info>: RNAV 2 GNSS requires 2 NM accuracy 95 percent of the time. All
+                    IFR-certified GPS's meet this requirement.
+                  </>
+                  <>
+                    <Info>D2</Info>: RNAV 1 GNSS requires 1 NM accuracy. Again, all IFR-certified
+                    GPS's apply.
+                  </>
+                  <>
+                    <Info>O2</Info>: RNP 1 GNSS requires 1 NM accuracy as well as
+                    performance-monitoring equipment onboard. If your GPS enunciates when that
+                    accuracy isn't met this code applies to you.
+                  </>
+                  <>
+                    <Info>S1</Info>: RNP APCH means the GPS will scale down to 0.3 NM accuracy on
+                    final approach. This is standard for any approach-certified GPS.
+                  </>
+                </BulletList>
               </>
               <>
                 <Success>
