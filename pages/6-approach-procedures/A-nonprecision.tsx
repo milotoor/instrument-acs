@@ -118,7 +118,7 @@ const Nonprecision: ACS.Page = (props) => {
             complicated but way too difficulty to do while flying the approach. Some avionics
             systems can provide <Term>advisory glidepaths</Term> (shown as LNAV+V on approach
             charts), which handle the math for you but which require caution to use:
-            <BulletList>
+            <BulletList type="decimal">
               <>
                 The advisory glidepath{' '}
                 <Danger>does not guarantee obstacle protection below the MDA</Danger>
@@ -586,7 +586,7 @@ const Nonprecision: ACS.Page = (props) => {
             <Link href={references.code_7700_stabilized_approach}>Code 7700</Link> provides the
             following criteria for a stabilized approach, distilled from material created by the
             Flight Safety Foundation more than 20 years ago:
-            <BulletList>
+            <BulletList type="decimal">
               <>The aircraft is fully configured, and all checklists are completed.</>
               <>
                 The aircraft is on extended centerline and on the correct glide path, with only

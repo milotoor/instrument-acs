@@ -316,7 +316,7 @@ const WeatherInformation: ACS.Page = (props) => {
             <Tab heading="Macro-Systems">
               <>
                 In the northern hemisphere:
-                <BulletList>
+                <BulletList type="decimal">
                   <>
                     Air circulates clockwise around high pressure systems and counterclockwise
                     around low pressure systems
@@ -596,7 +596,7 @@ const WeatherInformation: ACS.Page = (props) => {
             because they are, by their nature, difficult to foresee and avoid. If you cannot avoid
             penetrating a thunderstorm, <AIM paragraph={[7, 1, 27, 'c']} /> provides the recommended
             recovery procedure:{' '}
-            <BulletList>
+            <BulletList type="decimal">
               <>
                 Keep your eyes inside and on the instruments; looking outside can be temporarily
                 blinding due to lightning
@@ -654,7 +654,7 @@ const WeatherInformation: ACS.Page = (props) => {
           <>
             Icing intensity should be reported using four standardized terms.{' '}
             <AIM paragraph={[7, 1, 19]} /> defines these terms like so:
-            <BulletList>
+            <BulletList type="decimal">
               <>
                 <Bold>Trace:</Bold> ice becomes noticeable and accumulates at a slow pace (less than
                 ¼ inch per hour on the outer wing)
@@ -683,7 +683,7 @@ const WeatherInformation: ACS.Page = (props) => {
 
           <Paragraph heading="Types of Icing" hr>
             There are three types of structural icing:
-            <BulletList>
+            <BulletList type="decimal">
               <>
                 Clear ice forms when{' '}
                 <Bold>
@@ -816,7 +816,7 @@ const WeatherInformation: ACS.Page = (props) => {
           </>,
           <>
             Fog is <Link href={references.fog.types}>classified by the way it's formed</Link>:
-            <BulletList>
+            <BulletList type="decimal">
               <>
                 <Bold>Radiation fog</Bold> is formed by the cooling of land after sunset by infrared
                 thermal radiation in calm conditions with a clear sky. The cooling ground then cools

@@ -97,7 +97,7 @@ const Holding: ACS.Page = (props) => {
 
           <>
             The prescribed hold entries would be:{' '}
-            <BulletList>
+            <BulletList type="decimal">
               <>
                 <Bold>20° CW to 200°</Bold> (area c in the chart): <Success>direct entry</Success>.
                 Fly directly to the fix and enter the holding pattern by turning right for the

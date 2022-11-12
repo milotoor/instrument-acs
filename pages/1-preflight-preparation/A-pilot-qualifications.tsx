@@ -35,7 +35,7 @@ const PilotQualifications: ACS.Page = (props) => {
             pilot if required. See <FAR section={[61, 51, 'g']} />. The FAA's{' '}
             <Link.Reference reference="InFO 15012" /> specifies that an approach can only be logged
             if{' '}
-            <BulletList>
+            <BulletList type="decimal">
               <>
                 the aircraft is operated solely by reference to instruments in actual or simulated
                 IMC (one or both of "Actual IMC" and "Simulated IMC" must also be logged)
@@ -63,7 +63,7 @@ const PilotQualifications: ACS.Page = (props) => {
         k2: [
           <>
             Per <FAR section={[61, 3]} />, having an instrument rating allows a pilot to operate:
-            <BulletList>
+            <BulletList type="decimal">
               <>under IFR</>
               <>in weather conditions less than the minima for VFR flight</>
               <>in Class A airspace</>

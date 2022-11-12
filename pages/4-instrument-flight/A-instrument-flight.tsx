@@ -38,7 +38,7 @@ const InstrumentFlight: ACS.Page = (props) => {
             <Tab heading="Control and Performance Method">
               <>
                 This method divides the instruments into three categories:{' '}
-                <BulletList>
+                <BulletList type="decimal">
                   <>
                     <Bold>Control instruments</Bold> depict immediate attitude and power changes;
                     these include the attitude indicator, manifold pressure gauge and the
@@ -60,7 +60,7 @@ const InstrumentFlight: ACS.Page = (props) => {
 
               <>
                 This method also emphasizes a four step process for changing attitude:{' '}
-                <BulletList>
+                <BulletList type="decimal">
                   <>
                     <Bold>Establish:</Bold> change the aircraft's pitch and/or bank in conjunction
                     with power. Reference the AI and the tach/MPG while doing so.

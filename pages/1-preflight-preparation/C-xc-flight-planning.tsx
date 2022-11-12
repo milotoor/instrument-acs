@@ -36,7 +36,7 @@ const XcFlightPlanning: ACS.Page = (props) => {
           <>
             To plan the en route portion of the flight, work backwards from an IAF to the departure
             airport. Consider the following during the planning:{' '}
-            <BulletList>
+            <BulletList type="disc">
               <>
                 The Chart Supplement publishes a list of <Bold>Preferred Routes</Bold>. These are
                 routes between large terminal areas in the country, and are mostly geared towards
@@ -76,7 +76,7 @@ const XcFlightPlanning: ACS.Page = (props) => {
             <Tab heading="Regulatory requirements">
               <>
                 The process looks like this:
-                <BulletList>
+                <BulletList type="decimal">
                   <>
                     Determine the forecast weather at the proposed alternate at the time you would
                     arrive there
@@ -133,7 +133,7 @@ const XcFlightPlanning: ACS.Page = (props) => {
             <Tab heading="GPS and WAAS">
               <>
                 This is where things get a little messy.
-                <BulletList>
+                <BulletList type="decimal">
                   <>
                     If you have a WAAS-capable aircraft, (i.e. your aircraft is equipped with a{' '}
                     <Link href={references.tso.c145}>TSO-C145</Link> or{' '}
@@ -168,7 +168,7 @@ const XcFlightPlanning: ACS.Page = (props) => {
         k2: [
           <Paragraph heading="Altitude Types">
             There are several different types of altitude relevant to VFR and IFR flight:
-            <BulletList>
+            <BulletList type="decimal">
               <>
                 <Bold>Indicated altitude</Bold> is the altitude read off the altimeter when it's set
                 to the local setting. It's important that all pilots in a shared vicinity use the
@@ -440,7 +440,7 @@ const XcFlightPlanning: ACS.Page = (props) => {
             class G airspace (but VFR rules require you to remain clear of clouds).{' '}
             <AIM paragraph={[5, 1, 6]} /> describes how to fill out a flight plan. Important items
             include:
-            <BulletList>
+            <BulletList type="decimal">
               <>
                 ATC issues clearances based on aircraft capabilities filed in Items 10 and 18, so{' '}
                 <Success>

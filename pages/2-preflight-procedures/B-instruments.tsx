@@ -493,7 +493,7 @@ const Instruments: ACS.Page = (props) => {
                     An aircraft's VOR receivers must be checked <Bold>every 30 days</Bold> for
                     accuracy in order for them to be used during IFR flight. There are several
                     different ways VOR receivers may be tested:
-                    <BulletList>
+                    <BulletList type="decimal">
                       <>
                         <Term>VOR test facility (VOT):</Term> these are special facilities which
                         only broadcast the 360° radial signal. No matter where you are relative to

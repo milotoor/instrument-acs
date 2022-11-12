@@ -70,7 +70,7 @@ const Landing: ACS.Page = (props) => {
 
           <Paragraph heading="Landing requirements" references={<FAR section={[91, 175]} />}>
             There are three requirements that must be met prior to descending below MDA or DA:
-            <BulletList>
+            <BulletList type="decimal">
               <>
                 The aircraft must be{' '}
                 <Info>
@@ -124,7 +124,7 @@ const Landing: ACS.Page = (props) => {
           <Paragraph heading="Landing hazards">
             There are a whole host of hazards particular to the approach and landing phase of
             flight. These include:
-            <BulletList>
+            <BulletList type="decimal">
               <>
                 <Bold>Wake turbulence</Bold>: this is a significant concern whenever landing behind
                 (or taking off after) a larger aircraft. When an aircraft is{' '}

@@ -25,7 +25,7 @@ const Circling: ACS.Page = (props) => {
         k1: [
           <>
             A "circling approach" is a term used to describe several different scenarios:
-            <BulletList>
+            <BulletList type="decimal">
               <>An approach aligned with a runway, but not the runway you intend to land on</>
               <>
                 An approach aligned with a runway, but which is too steep to safely perform as a

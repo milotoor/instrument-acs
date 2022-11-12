@@ -7,7 +7,7 @@ import { NoteContext } from './context';
 import { Link, LinkProps } from './Link';
 
 type BulletListProps = ChildProp<React.ReactNode[]> & {
-  type?: 'alpha' | 'decimal' | 'disc' | 'roman' | 'square';
+  type: 'alpha' | 'decimal' | 'disc' | 'roman' | 'square';
 };
 
 type EmphasizeProps = ChildProp & {
@@ -36,7 +36,7 @@ export function Bold(props: Omit<EmphasizeProps, 'bold'>) {
   return <Emphasize bold {...props} />;
 }
 
-export function BulletList({ type = 'decimal', children }: BulletListProps) {
+export function BulletList({ type, children }: BulletListProps) {
   return (
     <ol
       className={cn('ml-8 mt-2', {
