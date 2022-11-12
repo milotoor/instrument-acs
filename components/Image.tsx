@@ -243,6 +243,11 @@ const attributions: Record<number, Record<string, AttributionProps>> = {
       position: 'bottom-right',
       title: 'Figure 6-33',
     },
+    unusual_attitude_chevrons: {
+      author: "G1000 Pilot's Guide",
+      link: referenceURIs.g1000,
+      title: 'Figure 2-41',
+    },
   },
   6: {
     cdi_diagram: {

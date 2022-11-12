@@ -4,10 +4,12 @@ import {
   Bold,
   BulletList,
   Danger,
+  Image,
   Info,
   InlineList,
   Link,
   TaskPage,
+  Term,
   Warning,
 } from '../../components';
 import { ACS, uri } from '../../lib';
@@ -54,6 +56,31 @@ const UnusualAttitudes: ACS.Page = (props) => {
               </>
             </BulletList>
           </>,
+
+          <>
+            The G1000 PFD adapts when the pitch and bank exceeds certain tolerances.{' '}
+            <Info>
+              When pitch exceeds 50° nose-high or 30° nose-low, red chevrons are added to the
+              attitude indicator pointing towards the horizon.
+            </Info>{' '}
+            Additionally, numerous data displayed on the PFD is removed if pitch exceeds +30˚/-20˚
+            or bank exceeds 65˚. The{' '}
+            <InlineList>
+              <>altimeter</>
+              <>ASI</>
+              <>AI</>
+              <>VSI</>
+              <>HSI</>
+            </InlineList>{' '}
+            remain; everything else is removed so as to draw your immediate attention to the
+            precarious situation. Lastly, the G1000 NXi has{' '}
+            <Term>Electronic Stability and Protection (ESP)</Term> which will engage when pitch/bank
+            angle exceeds configurable limits. This is very useful for everyday flight but can get
+            in the way of maneuver practice and demonstration on the check ride, so know how to turn
+            it off (this is typically done via the System Setup page of the MFD).
+          </>,
+
+          <Image src="unusual_attitude_chevrons" />,
         ],
 
         k2: [
