@@ -19,7 +19,7 @@ type EmphasizeProps = ChildProp & {
 };
 
 type InlineListProps = ChildProp<React.ReactNode[]> & {
-  delimeter?: string;
+  delimiter?: string;
   logic?: 'and' | 'or' | null;
 };
 
@@ -96,7 +96,7 @@ export function Info(props: Omit<EmphasizeProps, 'bold' | 'color'>) {
   return <Emphasize bold color="info" {...props} />;
 }
 
-export function InlineList({ children, delimeter = ',', logic = 'and' }: InlineListProps) {
+export function InlineList({ children, delimiter = ',', logic = 'and' }: InlineListProps) {
   return (
     <>
       {children.flatMap((child, i) => (
@@ -104,11 +104,11 @@ export function InlineList({ children, delimeter = ',', logic = 'and' }: InlineL
           {i > 0 ? ' ' : ''}
           <Gray italic>{child}</Gray>
           {i < children.length - 2
-            ? delimeter
+            ? delimiter
             : i === children.length - 2
             ? logic
               ? ` ${logic}`
-              : delimeter
+              : delimiter
             : ''}
         </span>
       ))}

@@ -290,7 +290,7 @@ const Instruments: ACS.Page = (props) => {
           <>
             As of January 1, 2020, aircraft are required to have ADS-B Out in order to fly in
             virtually any of the places that require an altitude-reporting transponder (i.e.{' '}
-            <InlineList delimeter=";">
+            <InlineList delimiter=";">
               <>class A, B, and C airspace</>
               <>within the lateral boundaries of class B and C airspace</>
               <>within the mode C veil</>
