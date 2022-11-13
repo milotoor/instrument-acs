@@ -16,7 +16,7 @@ export function getStructure(pathToRoot: string = '.') {
 
 /** Loads the ACS .toml files, returning an array of "section" data */
 function getSectionStructure(pathToRoot: string = '.'): ACS.Raw.Section[] {
-  const tree = dirTree(path.join(pathToRoot, 'data/acs'));
+  const tree = dirTree(path.join(pathToRoot, 'acs'));
   const areas = tree!.children!.filter((child) => child.name.match(/\d\./));
   const updates = getLastUpdates(pathToRoot);
 
