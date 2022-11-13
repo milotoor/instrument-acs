@@ -261,6 +261,30 @@ const attributions: Record<number, Record<string, AttributionProps>> = {
       position: 'bottom-right',
       title: 'Table 2-1',
     },
+    circling_approach_area: {
+      author: 'AIM',
+      link: uri.aim(5, 4, 20),
+      position: 'bottom-right',
+      title: 'Figure 5-4-27',
+    },
+    circling_approach_radii: {
+      author: 'AIM',
+      link: uri.aim(5, 4, 20),
+      position: 'top-right',
+      title: 'Figure 5-4-28',
+    },
+    circling_missed_approach: {
+      author: 'AIM',
+      link: uri.aim(5, 4, 21),
+      position: 'bottom-right',
+      title: 'Figure 5-4-30',
+    },
+    circling_patterns: {
+      author: 'Instrument Flying Handbook',
+      color: 'white',
+      link: referenceURIs['FAA-H-8083-15'],
+      title: 'Figure 10-13',
+    },
     gps_cdi_scaling_phases: {
       author: "G1000 Pilot's Guide",
       link: referenceURIs.g1000,
