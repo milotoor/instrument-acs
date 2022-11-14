@@ -24,11 +24,8 @@ type InlineListProps = ChildProp<React.ReactNode[]> & {
 };
 
 type KatexProps = ChildProp<string> & { block?: boolean } & React.HTMLAttributes<HTMLDivElement>;
-type QuotationProps = ChildProp & {
-  inline?: boolean;
-  padded?: boolean;
-  source?: [string, string] | Reference;
-};
+type QuotationProps = ChildProp & QuotationSourceProps & { inline?: boolean; padded?: boolean };
+type QuotationSourceProps = { source?: [string, string] | Reference };
 type Reference = React.ReactElement<LinkProps>;
 export type ReferenceListProps = { className?: string; references?: OneOrMore<Reference> };
 
@@ -159,7 +156,7 @@ export function Paragraph({ children, heading, hr, references }: ParagraphProps)
   );
 }
 
-export function Quotation({ children, inline = false, padded = false }: QuotationProps) {
+export function Quotation({ children, inline = false, padded = false, source }: QuotationProps) {
   if (inline) return <Gray italic>"{children}"</Gray>;
   return (
     <div
@@ -167,9 +164,15 @@ export function Quotation({ children, inline = false, padded = false }: Quotatio
         'm-3': padded,
       })}
     >
-      <Italic>{children}</Italic>
+      <Italic>{children}</Italic> <QuotationSource source={source} />
     </div>
   );
+}
+
+function QuotationSource({ source }: QuotationSourceProps) {
+  if (!source) return null;
+  const sourceElement = Array.isArray(source) ? <Link href={source[1]}>{source[0]}</Link> : source;
+  return <span className="pl-6 whitespace-nowrap">— {sourceElement}</span>;
 }
 
 export function ReferenceList({ className, references }: ReferenceListProps) {

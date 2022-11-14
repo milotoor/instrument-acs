@@ -59,7 +59,7 @@ const Instruments: ACS.Page = (props) => {
             </Danger>
           </>,
 
-          <Quotation>
+          <Quotation source={<AIM paragraph={[7, 2, 3, 'b']} />}>
             If the altimeter is not set to the current altimeter setting when flying from an area of
             high pressure into an area of low pressure, the aircraft will be closer to the surface
             than the altimeter indicates. An inch Hg. error in the altimeter setting equals 1,000
@@ -125,10 +125,10 @@ const Instruments: ACS.Page = (props) => {
           </Paragraph>,
 
           <Paragraph heading="Cold Temperature Corrections" hr>
-            Quoth <AIM paragraph={[7, 3, 1]} />:
+            Quoth the AIM:
           </Paragraph>,
 
-          <Quotation>
+          <Quotation source={<AIM paragraph={[7, 3, 1]} />}>
             Temperature has an effect on the accuracy of barometric altimeters, indicated altitude,
             and true altitude. The standard temperature at sea level is 15°C. The temperature
             gradient from sea level is -2°C per 1,000 feet...When the ambient (at altitude)
@@ -465,12 +465,11 @@ const Instruments: ACS.Page = (props) => {
             I couldn't quite figure out where to place this factoid. <FAR section={[91, 21]} />{' '}
             prohibits the use of portable electronic devices (by the flight crew or passengers) on
             IFR flights unless{' '}
+            <Quotation inline>
+              the operator of the aircraft has determined [the device] will not cause interference
+              with the navigation or communication system of the aircraft.
+            </Quotation>
           </>,
-
-          <Quotation>
-            ...the operator of the aircraft has determined [the device] will not cause interference
-            with the navigation or communication system of the aircraft.
-          </Quotation>,
 
           <>
             Curiously, the regulation also does not apply to{' '}
@@ -611,7 +610,7 @@ const Instruments: ACS.Page = (props) => {
                   heading="Minimum Operational Network"
                   references={<AIM paragraph={[1, 1, 3, 'f']} />}
                 >
-                  <Quotation source={['FAA', references.vor_mon]}>
+                  <Quotation source={['FAA Air Traffic Organization', references.vor_mon]}>
                     The FAA is transitioning the National Airspace System (NAS) to Performance Based
                     Navigation (PBN). As a result, the VOR infrastructure in the Contiguous United
                     States (CONUS) is being repurposed to provide a conventional backup navigation

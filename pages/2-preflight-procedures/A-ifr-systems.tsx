@@ -33,11 +33,10 @@ const IfrSystems: ACS.Page = (props) => {
             <>
               Many GA aircraft are forbidden to fly into such conditions by their AFM/POH. The
               Cessna 172 is one such aircraft (see the POH, section 2, "Kinds of Operations
-              Limits"). While the FARs do not explicitly define the term,{' '}
-              <AIM paragraph={[7, 1, 20]} /> puts it like so:{' '}
+              Limits"). While the FARs do not explicitly define the term, the AIM puts it like so:
             </>
 
-            <Quotation>
+            <Quotation source={<AIM paragraph={[7, 1, 20]} />}>
               Atmospheric conditions in which the formation of ice is observed or detected in
               flight.
             </Quotation>
@@ -51,7 +50,7 @@ const IfrSystems: ACS.Page = (props) => {
               guidance:
             </>
 
-            <Quotation>
+            <Quotation source={['2009 Bell interpretation', references.bell_interpretation]}>
               "Known icing conditions" involve...circumstances where a reasonable pilot would expect
               a substantial likelihood of ice formation on the aircraft based upon all information
               available to that pilot...The NTSB has held on a number of occasions that known icing
@@ -80,11 +79,10 @@ const IfrSystems: ACS.Page = (props) => {
 
           <>
             When flying in IMC, it is generally good practice to{' '}
-            <Warning>periodically disconnect the autopilot and fly by hand.</Warning> Per{' '}
-            <Link.Reference reference="AC 91-74" />:{' '}
+            <Warning>periodically disconnect the autopilot and fly by hand:</Warning>
           </>,
 
-          <Quotation>
+          <Quotation source={<Link.Reference reference="AC 91-74" />}>
             When the autopilot is engaged, it can mask changes in handling characteristics due to
             aerodynamic effects of icing that would be detected by the pilot if the airplane were
             being hand flown.

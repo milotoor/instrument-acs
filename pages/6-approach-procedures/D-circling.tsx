@@ -168,8 +168,8 @@ const Circling: ACS.Page = (props) => {
               <AIM paragraph={[5, 4, 21, 'c & h']} />,
             ]}
           >
-            <AIM paragraph={[5, 4, 20, 'b', 1]} /> puts the risks involved in plain English:
-            <Quotation>
+            The AIM puts the risks involved in plain English:
+            <Quotation source={<AIM paragraph={[5, 4, 20, 'b', 1]} />}>
               Executing the missed approach after starting to maneuver usually places the aircraft
               beyond the MAP. The aircraft is clear of obstacles when at or above the MDA while
               inside the circling area, but simply joining the missed approach ground track from the

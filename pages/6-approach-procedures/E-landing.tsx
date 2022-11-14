@@ -40,7 +40,12 @@ const Landing: ACS.Page = (props) => {
             </Info>
           </Paragraph>,
 
-          <Quotation source={['FAA', references.rvr_explainer]}>
+          <Quotation
+            source={[
+              'FAA, "Lighting Systems — Runway Visual Range (RVR)"',
+              references.rvr_explainer,
+            ]}
+          >
             [RVR] is required to support precision landing and takeoff operations in the NAS. The
             system measures visibility, background luminance, and runway light intensity{' '}
             <Bold>

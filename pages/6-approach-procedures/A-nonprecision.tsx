@@ -71,11 +71,10 @@ const Nonprecision: ACS.Page = (props) => {
             references={<AIM paragraph={[5, 4, 5, 'h']} />}
           >
             The decision of when to descend from the MDA is made simpler by the presence of a{' '}
-            <Term>visual descent point (VDP)</Term>. <AIM paragraph={[5, 4, 5, 'h']} /> defines the
-            VDP like so:
+            <Term>visual descent point (VDP)</Term>. The AIM defines the VDP like so:
           </Paragraph>,
 
-          <Quotation>
+          <Quotation source={<AIM paragraph={[5, 4, 5, 'h']} />}>
             The visual descent point (VDP), identified by the symbol (V), is a defined point on the
             final approach course of a nonprecision <Bold>straight-in approach procedure</Bold> from
             which a stabilized visual descent from the MDA to the runway touchdown point may be
@@ -244,10 +243,10 @@ const Nonprecision: ACS.Page = (props) => {
                 become more sensitive
               </>
             </InlineList>
-            . Additionally, per <AIM paragraph={[1, 1, 18, 'd', 5]} />:
+            . Additionally:
           </>,
 
-          <Quotation>
+          <Quotation source={<AIM paragraph={[1, 1, 18, 'd', 5]} />}>
             Since the origin point of the lateral splay for the angular portion of the final is not
             fixed due to antenna placement like localizer, the splay angle can remain fixed, making
             a consistent width of final for aircraft being vectored onto the final approach course
@@ -409,10 +408,10 @@ const Nonprecision: ACS.Page = (props) => {
             <Term>global navigation satellite system (GNSS)</Term> to provide lateral guidance. The
             primary difference is the degree of precision:{' '}
             <Info>LP approaches utilize the Wide Area Augmentation System (WAAS)</Info> while{' '}
-            <Info>LNAV approaches only utilize GPS</Info>. Per <AIM paragraph={[5, 4, 5, 'm']} />:
+            <Info>LNAV approaches only utilize GPS</Info>.
           </Paragraph>,
 
-          <Quotation>
+          <Quotation source={<AIM paragraph={[5, 4, 5, 'm']} />}>
             LP will be published in locations where vertically guided minima cannot be provided due
             to terrain and obstacles and therefore, no LPV or LNAV/VNAV minima will be published.
           </Quotation>,
@@ -542,10 +541,6 @@ const Nonprecision: ACS.Page = (props) => {
               <Bold>constant angle glidepaths</Bold>
               <>no late configuration changes</>
             </InlineList>
-            . Quoting from the{' '}
-            <Link href={references.stabilized_approach}>
-              FAASTeam's <Italic>Stabilized Approach and Landing</Italic>
-            </Link>
             :
           </>,
 

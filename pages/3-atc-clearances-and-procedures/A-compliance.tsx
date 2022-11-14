@@ -130,8 +130,8 @@ const Compliance: ACS.Page = (props) => {
             In an emergency, the PIC is given authority to deviate from the rules set forth in the
             FARs, as well as instructions provided by ATC in clearances, to the extent required by
             the emergency. <FAR section={[91, 3]} /> provides the regulatory basis for this
-            authority. The same regulation indicates that:
-            <Quotation padded>
+            authority:{' '}
+            <Quotation inline>
               The pilot in command of an aircraft is directly responsible for, and is the final
               authority as to, the operation of that aircraft.
             </Quotation>
@@ -145,11 +145,10 @@ const Compliance: ACS.Page = (props) => {
           <>
             It's worth having <FAR section={[91, 185]} /> bookmarked for the check ride, as you are{' '}
             <Bold>100% guaranteed</Bold> to get asked about lost communications procedures. For
-            starters, the FAA acknowledges (in <AIM paragraph={[6, 4, 1, 'a']} />) that this is a
-            tricky situation:{' '}
+            starters, the FAA acknowledges that this is a tricky situation:{' '}
           </>,
 
-          <Quotation>
+          <Quotation source={<AIM paragraph={[6, 4, 1, 'a']} />}>
             It is <Bold>virtually impossible</Bold> to provide regulations and procedures applicable
             to all possible situations associated with two‐way radio communications failure. During
             two‐way radio communications failure, when confronted by a situation not covered in the
