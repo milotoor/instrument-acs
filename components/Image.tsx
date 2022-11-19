@@ -22,7 +22,7 @@ type AttributionProps = {
   titleAuthorConnection?: string;
 };
 
-type ImageType = 'gif' | 'webp';
+type ImageType = 'gif' | 'webp' | 'svg';
 type ImageProps = Partial<ChildProp> & {
   noShadow?: boolean;
   src: string;
@@ -317,6 +317,14 @@ const attributions: Record<number, Record<string, AttributionProps>> = {
       link: referenceURIs.g1000,
       position: 'top-right',
       title: 'Figure 5-107 RAIM Prediction',
+    },
+    vgsi: {
+      author: 'Cmglee',
+      color: 'white',
+      license: 'CC BY-SA 4.0',
+      link: 'https://commons.wikimedia.org/wiki/File:Comparison_visual_landing_systems.svg',
+      position: 'bottom-right',
+      title: 'Comparison visual landing systems',
     },
   },
 };

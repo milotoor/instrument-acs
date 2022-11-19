@@ -6,6 +6,7 @@ import {
   BulletList,
   Danger,
   FAR,
+  Image,
   Info,
   Link,
   Paragraph,
@@ -184,12 +185,78 @@ const Landing: ACS.Page = (props) => {
             three people and a dog were lost...
           </>,
         ],
+        k2: [
+          <Paragraph
+            heading="Visual glideslope indicators"
+            references={<AIM paragraph={[2, 1, 2]} />}
+          >
+            When transitioning to the visual segment of the approach (below MDA/DA) be on the
+            lookout for a <Term>visual glideslope indicator (VGSI)</Term>. The two canonical VGSI
+            systems are the <Term>precision approach path indicator (PAPI)</Term> and the{' '}
+            <Term>visual approach slope indicator (VASI)</Term> (though there are others as well,
+            such as the{' '}
+            <Bold>
+              <span className="text-amber-700">tri</span>
+              <span className="text-green-600">-co</span>
+              <span className="text-red-600">lor</span>
+            </Bold>
+            , <PVASI /> and{' '}
+            <Bold>
+              el<sub>em</sub>ent-ali<sup>gnm</sup>ent
+            </Bold>{' '}
+            systems). These lighting systems are located on one side of the runway, usually the left
+            (though large, 12- or 16-bar VASI systems may occupy both sides).{' '}
+            <Info>These systems usually indicate a 3° glideslope.</Info>
+          </Paragraph>,
+
+          <Image src="vgsi" type="svg">
+            OLS refers to the <Link href={references.ols}>optical landing system</Link> which is
+            used aboard aircraft carriers
+          </Image>,
+
+          <Quotation source={<AIM paragraph={[2, 1, 2, 'a/b']} />}>
+            The visual glide path of the VASI provides safe obstruction clearance within plus or
+            minus 10 degrees of the extended runway centerline and to 4 NM from the runway
+            threshold.... The visual glide path of the PAPI typically provides safe obstruction
+            clearance within plus or minus 10 degrees of the extended runway centerline and to 3.4
+            NM from the runway threshold.
+          </Quotation>,
+
+          <>
+            If the PAPI lights are flashing <Danger>do not land!</Danger> This is an element of the{' '}
+            <Term>runway status light (RWSL) system</Term> (formerly called the{' '}
+            <Term>final approach runway occupancy signal (FAROS)</Term>).{' '}
+            <Warning>
+              The flashing PAPI indicates that the runway is occupied by another aircraft or ground
+              vehicle and it is unsafe to land.
+            </Warning>{' '}
+            See <AIM paragraph={[2, 1, 6]} />.
+          </>,
+        ],
       }}
     />
   );
 };
 
 export default Landing;
+
+function PVASI() {
+  const textRed = 'text-red-600 bg-white';
+  const textWhite = 'text-white bg-red-600';
+  return (
+    <Bold>
+      <span className={textRed}>p</span>
+      <span className={textWhite}>u</span>
+      <span className={textRed}>l</span>
+      <span className={textWhite}>s</span>
+      <span className={textRed}>a</span>
+      <span className={textWhite}>t</span>
+      <span className={textRed}>i</span>
+      <span className={textWhite}>n</span>
+      <span className={textRed}>g</span>
+    </Bold>
+  );
+}
 
 const references = {
   landing_references: uri.boldMethod.blog(
@@ -198,6 +265,7 @@ const references = {
     '03',
     'approved-visual-references-instrument-approach-landing-fars-10-items'
   ),
+  ols: uri.wikipedia('Optical_landing_system'),
   rvr_explainer: uri.faa.nav_services('lsg/rvr'),
   wvi_accident: 'http://www.kathrynsreport.com/2022/08/cessna-340a-n740wj-fatal-accident.html',
 };
