@@ -79,8 +79,7 @@ const Nonprecision: ACS.Page = (props) => {
             final approach course of a nonprecision <Bold>straight-in approach procedure</Bold> from
             which a stabilized visual descent from the MDA to the runway touchdown point may be
             commenced.{' '}
-            <Bold>The pilot should not descend below the MDA prior to reaching the VDP.</Bold>{' '}
-            [Emphasis added]
+            <Bold>The pilot should not descend below the MDA prior to reaching the VDP.</Bold>
           </Quotation>,
 
           <>
