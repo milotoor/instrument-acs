@@ -67,7 +67,7 @@ export const uri = {
   ifr_mag: (section: string, id: string) => `https://www.ifr-magazine.com/${section}/${id}/`,
   tso: (rest: string) => `https://rgl.faa.gov/Regulatory_and_Guidance_Library/rgTSO.nsf/0/${rest}`,
   wikipedia: (article: string) => `https://en.wikipedia.org/wiki/${article}`,
-  youtube: (id: string) => `https://www.youtube.com/watch?v=${id}`,
+  youtube: (id: string) => `https://youtu.be/${id}`,
 };
 
 const handbooksURIBase =
