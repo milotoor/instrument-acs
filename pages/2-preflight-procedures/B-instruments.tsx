@@ -484,67 +484,6 @@ const Instruments: ACS.Page = (props) => {
           <Tabs>
             <Tab heading="VOR">
               <Tabs>
-                <Tab
-                  heading="Accuracy Checks"
-                  references={[<FAR section={[91, 171]} />, <AIM paragraph={[1, 1, 4]} />]}
-                >
-                  <>
-                    An aircraft's VOR receivers must be checked <Bold>every 30 days</Bold> for
-                    accuracy in order for them to be used during IFR flight. There are several
-                    different ways VOR receivers may be tested:
-                    <BulletList type="decimal">
-                      <>
-                        <Term>VOR test facility (VOT):</Term> these are special facilities which
-                        only broadcast the 360° radial signal. No matter where you are relative to
-                        the facility, tuning in the VOT frequency and centering the needle should
-                        show <Info>0° FROM or 180° TO (±4°)</Info>
-                      </>
-                      <>
-                        <Bold>Ground or airborne checkpoint:</Bold> these are designated areas on
-                        the airport surface (or at a specified GPS coordinate/fix for airborne
-                        checks) where the bearing from a given VOR is known. When positioned over
-                        the checkpoint and with the known radial entered, the needle should be
-                        centered with a FROM indication,{' '}
-                        <Info>±4° on the ground or ±6° in the air.</Info> These checkpoints are
-                        listed in the Chart Supplement.
-                      </>
-                      <>
-                        <Bold>Airborne airway check:</Bold> this is probably the most convoluted way
-                        to check accuracy. The steps to take are:{' '}
-                        <InlineList>
-                          <>
-                            select a VOR airway to establish a known, published bearing FROM the VOR
-                          </>
-                          <>
-                            select a prominent ground point along the airway, preferably 20NM or
-                            more from the facility (this is best done at a low altitude to ensure
-                            your position over the ground)
-                          </>
-                          <>note the indicated VOR bearing</>
-                        </InlineList>
-                        . The bearing must be within{' '}
-                        <Info>±6° of the airway's published radial.</Info>
-                      </>
-                      <>
-                        <Bold>Dual VOR check:</Bold> Aircraft with two VOR receivers may verify
-                        their correctness against each other. With both both receivers tuned to the
-                        same VOR and with both needles centered,{' '}
-                        <Info>the radials should be ±4° from one another.</Info>
-                      </>
-                    </BulletList>
-                  </>
-                  <>
-                    The results of the VOR test must be entered in the aircraft logbook. The log
-                    entry must include the{' '}
-                    <InlineList>
-                      <>date</>
-                      <>place</>
-                      <>bearing error</>
-                      <>the pilot's signature</>
-                    </InlineList>
-                    .
-                  </>
-                </Tab>
                 <Tab heading="Identification" references={<Link.Reference reference="g1000" />}>
                   <>
                     The first step with using any VOR for navigation is to ensure that you're
