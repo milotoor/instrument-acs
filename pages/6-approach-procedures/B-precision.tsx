@@ -94,6 +94,24 @@ const Precision: ACS.Page = (props) => {
             <Link href={references.terps_supplement}>TERPS supplement</Link> (an ILS with minimum
             RVR other than 1800, 2000 or 2200 should increase its required visibility by ¼ SM).
           </>,
+
+          <>
+            An additional benefit of Jeppesen charts is their inclusion of approach-specific descent
+            rates:
+          </>,
+
+          <Image src="sns_ils_31_descent_rates" />,
+
+          <>
+            For a standard 3° glideslope these values may be very familiar already, but{' '}
+            <Success>for approaches with steeper gradients they can be very helpful.</Success>{' '}
+            <Warning>
+              Remember that these values are ground speeds! You must take wind and density altitude
+              into account.
+            </Warning>{' '}
+            Nevertheless, they provide a quick and valuable reference for establishing a stabilized
+            descent, which you may tweak as needed to maintain the glideslope.
+          </>,
         ],
         k3: [
           <Paragraph heading="Ground-based navigation">
