@@ -101,6 +101,7 @@ export const referenceURIs = {
   'IFP': uri.atc('flight_info/aeronav/procedures/'),
   'InFO 15012':
     'https://www.faa.gov/other_visit/aviation_industry/airline_operators/airline_safety/info/all_infos/media/2015/info15012.pdf',
+  'TERPS supplement': 'https://www.1800wxbrief.com/Website/aip/tpp/FRNTMATTER.pdf',
   'TSO-C145': uri.tso('efe54f1e6272a7068625811d0064b679/$FILE/TSO-C145e.pdf'),
   'TSO-C146': uri.tso('76fa4ba66612622a86257282006d332a/$FILE/TSO-C146b%20(3-2-07%20Revised).pdf'),
 };

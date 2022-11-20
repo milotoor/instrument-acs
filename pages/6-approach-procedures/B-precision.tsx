@@ -3,6 +3,7 @@ import React from 'react';
 import {
   AIM,
   Bold,
+  BulletList,
   Collapse,
   Image,
   Info,
@@ -91,8 +92,8 @@ const Precision: ACS.Page = (props) => {
             the inoperative equipment visibility requirements. The "RVR 40 or ¾" visibility
             requirement (when using the local altimeter setting while the RAIL/ALS is out) is
             derived from the Inop Components table from the{' '}
-            <Link href={references.terps_supplement}>TERPS supplement</Link> (an ILS with minimum
-            RVR other than 1800, 2000 or 2200 should increase its required visibility by ¼ SM).
+            <Link.Reference reference="TERPS supplement" /> (an ILS with minimum RVR other than
+            1800, 2000 or 2200 should increase its required visibility by ¼ SM).
           </>,
 
           <>
@@ -112,6 +113,46 @@ const Precision: ACS.Page = (props) => {
             Nevertheless, they provide a quick and valuable reference for establishing a stabilized
             descent, which you may tweak as needed to maintain the glideslope.
           </>,
+
+          <Collapse heading="Inoperative Components">
+            <>
+              The "Inoperative Components or Visual Aids Table" from the{' '}
+              <Link.Reference reference="TERPS supplement" /> describes how visibility minimums
+              should be adjusted when approach equipment is out of service or otherwise inoperative.
+              The chart groups approaches into several buckets and describes how the minimum
+              visibility should be adjusted depending on which piece of equipment is down. Numerous
+              acronyms are used:
+            </>
+
+            <>
+              Numerous acronyms are used:
+              <BulletList type="disc">
+                <>
+                  <Bold>PAR</Bold>:{' '}
+                  <Link href={references.par_approach.skybrary}>precision approach radar</Link> (see
+                  also <Link href={references.par_approach.boldMethod}>BoldMethod</Link>)
+                </>
+                <>
+                  <Bold>GLS</Bold>:{' '}
+                  <Link href={references.gbas}>
+                    GBAS (ground-based augmentation system) landing system
+                  </Link>
+                </>
+                <>
+                  <Bold>ALSF 1 & 2</Bold>, <Bold>MALS</Bold>, <Bold>MALSF</Bold>, <Bold>MALSR</Bold>
+                  , <Bold>ODALS</Bold>, <Bold>SALS</Bold>, <Bold>SALSF</Bold>, <Bold>SSALF</Bold>,{' '}
+                  <Bold>SSALR</Bold>, <Bold>SSALS</Bold>: a real alphabet soup of airport lighting
+                  systems. See <Link.Task section={6} task="E" id="k2" />.
+                </>
+                <>
+                  <Bold>TDZL</Bold> / <Bold>RCLS</Bold>: touchdown zone lighting and runway
+                  centerline lighting system
+                </>
+              </BulletList>
+            </>
+
+            <Image src="inop_components_table" />
+          </Collapse>,
         ],
         k3: [
           <Paragraph heading="Ground-based navigation">
@@ -177,6 +218,10 @@ const Precision: ACS.Page = (props) => {
 export default Precision;
 
 const references = {
+  gbas: uri.skybrary('gbas-landing-system-gls'),
   lpv_precision_or_npa: uri.youtube('YAfkYZx03Ew'),
-  terps_supplement: 'https://www.1800wxbrief.com/Website/aip/tpp/FRNTMATTER.pdf',
+  par_approach: {
+    boldMethod: uri.boldMethod.l2f('navigation', 'how-to-fly-par-instrument-approaches'),
+    skybrary: uri.skybrary('precision-approach-radar-par'),
+  },
 };

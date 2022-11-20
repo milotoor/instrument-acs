@@ -38,11 +38,12 @@ const licenseHrefs = {
 };
 
 const worksWithoutAuthors = [
-  'Instrument Flying Handbook',
-  'IFH',
   'Aeronautical Information Manual',
   'AIM',
   "G1000 Pilot's Guide",
+  'IFH',
+  'Instrument Flying Handbook',
+  'TERPS supplement',
 ];
 
 function Attribution(props: AttributionProps) {
@@ -295,6 +296,12 @@ const attributions: Record<number, Record<string, AttributionProps>> = {
       author: 'AIM',
       link: uri.aim(1, 1, 9),
       title: 'FAA Instrument Landing Systems',
+    },
+    inop_components_table: {
+      author: 'TERPS supplement',
+      link: referenceURIs['TERPS supplement'],
+      position: 'bottom-right',
+      title: 'Inoperative Components or Visual Aids Table',
     },
     lnav_cdi_scaling: {
       author: "G1000 Pilot's Guide",
