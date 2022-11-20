@@ -10,9 +10,11 @@ import {
   Link,
   Paragraph,
   Quotation,
+  Success,
   TaskPage,
   Term,
   ToDo,
+  Warning,
 } from '../../components';
 import { ACS, uri } from '../../lib';
 import { getStaticPropsFn } from '../../ssr';
@@ -25,6 +27,74 @@ const Precision: ACS.Page = (props) => {
       section={6}
       task="B"
       notes={{
+        k1: [
+          <>
+            The crucial difference between a non-precision approach and a precision approach is the{' '}
+            <Info>presence of official vertical guidance after the FAF.</Info> A precision approach
+            provides you with a glideslope to follow at a stable descent rate; no dive and drive
+            here. As a consequence of this design, pilots are expected to make the land/go-missed
+            decision while still in a descent. For this reason, precision approaches have a{' '}
+            <Term>decision altitude/height (DA/DH)</Term>, not a{' '}
+            <Term>minimum descent altitude (MDA)</Term>.
+          </>,
+
+          <>
+            As the name implies,{' '}
+            <Info>
+              the DA is the altitude at which the pilot must <Italic>decide</Italic> if they are
+              going to continue the approach to a landing or abort.
+            </Info>{' '}
+            Unlike an MDA, a DA is <Italic>not</Italic> the lowest altitude that your aircraft will
+            descend to prior to going missed;{' '}
+            <Success>
+              it is understood that the aircraft will continue to descend momentarily after making
+              the decision to abort.
+            </Success>
+          </>,
+
+          <>
+            Determining the DA is typically straightforward. It is listed on FAA and Jeppesen charts
+            by aircraft category. However,{' '}
+            <Warning>
+              there may be notes which adjust the DA based upon the availability of a local
+              altimeter setting and/or inoperative airport equipment.
+            </Warning>{' '}
+            Jeppesen charts always present the DA in a consistent manner; the FAA charts may require
+            a bit of interpretation. For instance, consider the{' '}
+            <Link.Approach type="ILS" name="Salinas" icao="KSNS" rwy={31} id="00363I31" />:
+          </>,
+
+          <Image.Row>
+            <>
+              <Image src="sns_ils_31_faa_notes" />
+              <div className="mt-3">
+                <Image src="sns_ils_31_faa_profile">
+                  The FAA chart presents the DA beneath the profile view, and includes the modifying
+                  note(s) above the plan view.
+                </Image>
+              </div>
+            </>
+            <Image src="sns_ils_31_jep">
+              Jeppesen interprets the note for you and presents the two different DA values with
+              their proper context.
+            </Image>
+          </Image.Row>,
+
+          <>
+            <Success>
+              The relevant information is easier to find on the Jeppesen chart, thanks to their
+              smart chart design and meticulous note interpretation.
+            </Success>{' '}
+            This is one of many reasons that Jeppesen charts are preferred by many Part 121/135
+            operators. In addition to showing the two possible DAs (the standard DA and the one to
+            use in case the Monterey altimeter is required), the Jeppesen chart also helpfully lists
+            the inoperative equipment visibility requirements. The "RVR 40 or ¾" visibility
+            requirement (when using the local altimeter setting while the RAIL/ALS is out) is
+            derived from the Inop Components table from the{' '}
+            <Link href={references.terps_supplement}>TERPS supplement</Link> (an ILS with minimum
+            RVR other than 1800, 2000 or 2200 should increase its required visibility by ¼ SM).
+          </>,
+        ],
         k3: [
           <Paragraph heading="Ground-based navigation">
             <ToDo />
@@ -90,4 +160,5 @@ export default Precision;
 
 const references = {
   lpv_precision_or_npa: uri.youtube('YAfkYZx03Ew'),
+  terps_supplement: 'https://www.1800wxbrief.com/Website/aip/tpp/FRNTMATTER.pdf',
 };
