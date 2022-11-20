@@ -170,9 +170,9 @@ const UnusualAttitudes: ACS.Page = (props) => {
           </>,
 
           <>
-            <Link href={references.skybrary}>SKYbrary has a great article</Link> discussing unusual
-            attitudes, including the parameter limits beyond which an attitude is "unusual", the
-            causes, recovery and risk factors.
+            <Link href={references.unusual_attitude_recovery}>SKYbrary has a great article</Link>{' '}
+            discussing unusual attitudes, including the parameter limits beyond which an attitude is
+            "unusual", the causes, recovery and risk factors.
           </>,
         ],
       }}
@@ -184,6 +184,6 @@ export default UnusualAttitudes;
 
 const references = {
   graveyard_spiral: uri.wikipedia('graveyard_spiral'),
-  skybrary: 'https://www.skybrary.aero/articles/recovery-unusual-aircraft-attitudes',
+  unusual_attitude_recovery: uri.skybrary('recovery-unusual-aircraft-attitudes'),
   the_leans: uri.wikipedia('the_leans'),
 };
