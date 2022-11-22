@@ -319,6 +319,12 @@ const attributions: Record<number, Record<string, AttributionProps>> = {
       position: 'bottom-right',
       title: 'Figure 2-25',
     },
+    procedure_turn: {
+      author: 'AIM',
+      link: uri.aim(5, 4, 9),
+      position: 'bottom-right',
+      title: 'Figure 5-4-18',
+    },
     raim_prediction: {
       author: "G1000 Pilot's Guide",
       link: referenceURIs.g1000,
