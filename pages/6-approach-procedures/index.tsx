@@ -31,10 +31,6 @@ const ApproachProcedures: ACS.Page = (props) => {
           that are applicable across multiple phases of the approach.
         </>,
 
-        <Paragraph heading="Anatomy of an approach">
-          To include IAF, IF, FAF, feeder routes, missed approach, etc.
-        </Paragraph>,
-
         <Paragraph heading="Procedure turns" references={<AIM paragraph={[5, 4, 9]} />}>
           A <Term>procedure turn (PT)</Term> is a maneuver designed to assist an aircraft performing
           a course reversal. Many approaches, particularly VOR approaches, require aircraft to fly
