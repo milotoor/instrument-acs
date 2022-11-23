@@ -17,7 +17,7 @@ const Home: ACS.Page = ({ rawData }) => {
           </Link>
         </h1>
 
-        <TableOfContents acs={acsData} />
+        <TableOfContents />
       </div>
     </Layout>
   );

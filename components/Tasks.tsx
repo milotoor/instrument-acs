@@ -5,28 +5,23 @@ import { ACS } from '../lib';
 import { AppContext } from './context';
 import { Link } from './Link';
 
-type TableOfContentsProps = { small?: boolean; acs: ACS };
 type TaskListProps = { activeTask?: ACS.Task.Letter; className?: string; tasks: ACS.Task[] };
 const activeLinkColor = 'text-glow-gold';
 
-export function TableOfContents({ small = false, acs }: TableOfContentsProps) {
-  const { section, task } = React.useContext(AppContext);
+export function TableOfContents() {
+  const { acs, section, task } = React.useContext(AppContext);
   return (
-    <ol className="list-decimal leading-7 ml-8 mt-4 text-lg">
+    <ol className="list-decimal leading-7 ml-8 mt-4">
       {acs.sections.map(({ name, number, tasks, uri }) => (
         <li key={name} className="my-4">
           <Link
-            className={cn({
-              'text-subtitle': !small,
-              'text-subtitle-sm': small,
-              [activeLinkColor]: section === number && !task,
-            })}
+            className={cn('text-subtitle-sm', { [activeLinkColor]: section === number && !task })}
             color={null}
             href={uri}
           >
             {name}
           </Link>
-          <div className={cn({ 'text-sm': small })}>
+          <div className="text-sm">
             <TaskList
               activeTask={section === number ? task : undefined}
               tasks={tasks}

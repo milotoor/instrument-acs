@@ -3,8 +3,9 @@ import useResizeObserver from '@react-hook/resize-observer';
 
 import { tailwindBreakpoints } from './util';
 
-type Breakpoints = 'Small' | 'Medium' | 'Large' | 'XL' | 'XXL';
+type Breakpoints = 'XS' | 'Small' | 'Medium' | 'Large' | 'XL' | 'XXL';
 type BreakpointStatus = Record<`is${Breakpoints}`, boolean>;
+type BreakpointKey = keyof typeof tailwindBreakpoints;
 type Dimensions = {
   width: number | undefined;
   height: number | undefined;
@@ -52,12 +53,19 @@ export function useDimensions() {
   // Checks if the current width is greater than or equal to each tailwind breakpoint
   function getBreakpointStatuses(width?: number): BreakpointStatus {
     return {
-      isSmall: notSmallerThan(tailwindBreakpoints.sm),
-      isMedium: notSmallerThan(tailwindBreakpoints.md),
-      isLarge: notSmallerThan(tailwindBreakpoints.lg),
-      isXL: notSmallerThan(tailwindBreakpoints.xl),
-      isXXL: notSmallerThan(tailwindBreakpoints.xxl),
+      isXS: between(null, 'sm'),
+      isSmall: between('sm', 'md'),
+      isMedium: between('md', 'lg'),
+      isLarge: between('lg', 'xl'),
+      isXL: between('xl', 'xxl'),
+      isXXL: between('xxl', null),
     };
+
+    function between(key1: BreakpointKey | null, key2: BreakpointKey | null) {
+      if (typeof width !== 'number') return false;
+      if (key1 && width < tailwindBreakpoints[key1]) return false;
+      return !key2 || width < tailwindBreakpoints[key2];
+    }
 
     function notSmallerThan(size: number) {
       return typeof width === 'number' && width >= size;
