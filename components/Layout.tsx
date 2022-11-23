@@ -28,12 +28,6 @@ export function Layout({
   task,
   title,
 }: LayoutProps) {
-  const [updateDate, sha] = section
-    ? task
-      ? acs.getTask(section, task).updated
-      : acs.getSection(section).updated
-    : [];
-
   return (
     <AppContext.Provider value={{ acs, section, task }}>
       <Head>
@@ -46,16 +40,7 @@ export function Layout({
         //     https://allthingssmitty.com/2020/05/11/css-fix-for-100vh-in-mobile-webkit/
       }
       <div className="h-screen max-h-screen h-[-webkit-fill-available] flex flex-col items-center justify-start">
-        {!home && (
-          <div className="w-full h-top-bar z-10 flex-shrink-0 shadow-xl shadow-slate-800 flex flex-row md:justify-center items-center relative bg-gradient-to-r from-cyan-500 to-blue-500">
-            <div className="font-fancy text-2xl hover:text-glow-gold pl-4 md:pl-0">
-              <Link color={null} href="/">
-                The Instrument ACS
-              </Link>
-            </div>
-            <LastUpdatedWidget sha={sha} updated={updateDate} />
-          </div>
-        )}
+        {!home && <TopBar />}
         <div className="w-full flex overflow-hidden">
           {!home && (
             <div className="w-96 flex-shrink-0 py-4 pl-2 overflow-auto hidden md:block max-w-[33%]">
@@ -75,6 +60,31 @@ export function Layout({
   );
 }
 
+function TopBar() {
+  const { acs, section, task } = React.useContext(AppContext);
+  const [updateDate, sha] = section
+    ? task
+      ? acs.getTask(section, task).updated
+      : acs.getSection(section).updated
+    : [];
+
+  return (
+    <div className="w-full h-top-bar z-10 flex-shrink-0 shadow-xl shadow-slate-800 flex flex-row md:justify-center items-center relative bg-gradient-to-r from-cyan-500 to-blue-500">
+      <Link className="hidden sm:block absolute left-3" href={references.github_repo}>
+        <img alt="GitHub" src="/img/github.png" />
+      </Link>
+
+      {/* sm:pl-16 provides space for the GH logo */}
+      <div className="font-fancy text-2xl hover:text-glow-gold pl-4 sm:pl-16 md:pl-0">
+        <Link color={null} href="/">
+          The Instrument ACS
+        </Link>
+      </div>
+      <LastUpdatedWidget sha={sha} updated={updateDate} />
+    </div>
+  );
+}
+
 function LastUpdatedWidget({ sha, updated }: LastUpdatedWidgetProp) {
   if (!updated) return null;
   return (
@@ -90,3 +100,7 @@ function LastUpdatedWidget({ sha, updated }: LastUpdatedWidgetProp) {
     </Link>
   );
 }
+
+const references = {
+  github_repo: 'https://github.com/milotoor/instrument-acs',
+};
