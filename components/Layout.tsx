@@ -6,9 +6,7 @@ import { ACS } from '../lib';
 import { AppContext } from './context';
 import { Link } from './Link';
 import { TableOfContents } from './Tasks';
-import { Bold } from './Typography';
 
-type LastUpdatedWidgetProp = { sha?: string; updated?: string };
 type LayoutProps = {
   acs: ACS;
   centered?: boolean;
@@ -61,13 +59,6 @@ export function Layout({
 }
 
 function TopBar() {
-  const { acs, section, task } = React.useContext(AppContext);
-  const [updateDate, sha] = section
-    ? task
-      ? acs.getTask(section, task).updated
-      : acs.getSection(section).updated
-    : [];
-
   return (
     <div className="w-full h-top-bar z-10 flex-shrink-0 shadow-xl shadow-slate-800 flex flex-row md:justify-center items-center relative bg-gradient-to-r from-cyan-500 to-blue-500">
       <Link className="hidden sm:block absolute left-3" href={references.github_repo}>
@@ -80,24 +71,7 @@ function TopBar() {
           The Instrument ACS
         </Link>
       </div>
-      <LastUpdatedWidget sha={sha} updated={updateDate} />
     </div>
-  );
-}
-
-function LastUpdatedWidget({ sha, updated }: LastUpdatedWidgetProp) {
-  if (!updated) return null;
-  return (
-    <Link
-      className="absolute right-5 h-top-bar"
-      color={null}
-      href={`https://github.com/milotoor/instrument-acs/commit/${sha}`}
-    >
-      <div className="h-full flex flex-col justify-center items-end text-xs">
-        <span>Last updated:</span>
-        <Bold>{updated}</Bold>
-      </div>
-    </Link>
   );
 }
 

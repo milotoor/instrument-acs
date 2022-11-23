@@ -4,11 +4,12 @@ import { ACS, makeAnchorId, objectHasProperty, referenceURIs } from '../../lib';
 import { NoteContext } from '../context';
 import { Layout } from '../Layout';
 import { Link } from '../Link';
-import { WrapParagraph } from '../Typography';
+import { Bold, WrapParagraph } from '../Typography';
 
 // Component prop types
 type DataSectionProps = { heading: ACS.Section.Heading; notes?: NotesObject; task: ACS.Task };
 type ItemHeadingProps = { marker: string; id: string; text: string };
+type LastUpdatedWidgetProps = { task: ACS.Task };
 type ReferencesSectionProps = { references: string[] };
 type SectionContainerProps = { children: React.ReactNode; heading: string };
 type TaskPageProps = ACS.TopLevelProps & {
@@ -36,6 +37,8 @@ export function TaskPage(props: TaskPageProps) {
         Task {task.letter}. {task.name}
       </h1>
 
+      <LastUpdatedWidget task={task} />
+
       <div>
         <ReferencesSection references={task.meta.references} />
         <SectionContainer heading="Objective">{task.meta.objective}</SectionContainer>
@@ -44,6 +47,19 @@ export function TaskPage(props: TaskPageProps) {
         <DataSection heading="Skills" {...dataSectionProps} />
       </div>
     </Layout>
+  );
+}
+
+function LastUpdatedWidget({ task }: LastUpdatedWidgetProps) {
+  const [updated, sha] = task.updated;
+  return (
+    <Link
+      className="text-sm mt-1"
+      color="text-slate-300"
+      href={`https://github.com/milotoor/instrument-acs/commit/${sha}`}
+    >
+      <span>Last updated:</span> <Bold>{updated}</Bold>
+    </Link>
   );
 }
 
