@@ -7,10 +7,11 @@ import { AppContext } from './context';
 import { Link } from './Link';
 import { TableOfContents } from './Tasks';
 
-type SidebarProps = { isOpen: boolean; setOpen: (open: boolean) => void };
+type SidebarProps = { isCollapsible: boolean };
+type SidebarButtonProps = { isOpen: boolean; setOpen: (open: boolean) => void };
+type SidebarLinkProps = { icon?: React.ReactNode; link: string; title: string };
 type LayoutProps = {
   acs: ACS;
-  centered?: boolean;
   children: React.ReactNode;
   home?: boolean;
   section?: ACS.Section.Number;
@@ -18,16 +19,16 @@ type LayoutProps = {
   title: string;
 };
 
-export function Layout({
-  acs,
-  centered = false,
-  children,
-  home = false,
-  section,
-  task,
-  title,
-}: LayoutProps) {
-  const [sidebarOpen, setSidebarOpen] = React.useState(false);
+export function Layout({ acs, children, home = false, section, task, title }: LayoutProps) {
+  const { breakpoints, computed: widthComputed } = useDimensions();
+
+  // Skip the first render entirely, until we have determined the window size. This avoids an
+  // immediate repaint after the initial load
+  if (!widthComputed) return null;
+
+  const { isXS, isSmall } = breakpoints;
+  const sidebarCollapsible = isXS || isSmall;
+
   return (
     <AppContext.Provider value={{ acs, section, task }}>
       <Head>
@@ -40,22 +41,10 @@ export function Layout({
         //     https://allthingssmitty.com/2020/05/11/css-fix-for-100vh-in-mobile-webkit/
       }
       <div className="h-screen max-h-screen h-[-webkit-fill-available] flex flex-col items-center justify-start">
-        <Sidebar isOpen={sidebarOpen} setOpen={setSidebarOpen} />
-
-        {!home && <TopBar />}
-        <div className="w-full flex overflow-hidden">
-          {!home && (
-            <div className="w-96 flex-shrink-0 py-4 pl-2 overflow-auto hidden md:block max-w-[33%]">
-              <TableOfContents />
-            </div>
-          )}
-          <main
-            className={cn('p-4 flex flex-col flex-grow overflow-auto', {
-              'items-center': centered,
-            })}
-          >
-            {children}
-          </main>
+        <Sidebar isCollapsible={sidebarCollapsible} />
+        <div className={cn({ 'ml-96': !sidebarCollapsible })}>
+          {!home && <TopBar />}
+          <main className="p-4">{children}</main>
         </div>
       </div>
     </AppContext.Provider>
@@ -65,12 +54,7 @@ export function Layout({
 function TopBar() {
   return (
     <div className="w-full h-top-bar z-10 flex-shrink-0 shadow-xl shadow-slate-800 flex flex-row md:justify-center items-center relative bg-gradient-to-r from-cyan-500 to-blue-500">
-      {/* Show GH logo only when sidebar is fixed */}
-      <div className="absolute left-3 hidden md:block">
-        <GitHubLink />
-      </div>
-
-      {/* ml-16 provides space for the GH logo/hamburger */}
+      {/* ml-16 provides space for the hamburger menu */}
       <div className="font-fancy text-2xl hover:text-glow-gold ml-16 md:ml-0">
         <Link color={null} href="/">
           The Instrument ACS
@@ -80,28 +64,51 @@ function TopBar() {
   );
 }
 
-const sidebarTransitionClasses = 'transition-all duration-500';
+const t = 'transition-all';
+const sidebarTransitionClasses = Object.assign(`${t} duration-500`, {
+  fast: `${t} duration-300`,
+});
 
-function Sidebar(props: SidebarProps) {
-  // Do not render the sidebar at all if size is medium or greater
-  const { isXS, isSmall } = useDimensions().breakpoints;
-  if (!isXS && !isSmall) return null;
+/**
+ * Renders as a collapsible element if the screen size is small, otherwise as a fixed sidebar menu
+ */
+function Sidebar({ isCollapsible }: SidebarProps) {
+  const [isOpen, setIsOpen] = React.useState(!isCollapsible);
 
-  const { isOpen } = props;
+  // If the sidebar is closed when the viewport expands past the sidebar-always-open breakpoint, set
+  // its state back to open. Conversely, if the sidebar is open when the viewport contracts past the
+  // breakpoint, close it.
+  //
+  // This pattern is not ideal, as it means the Sidebar component will render twice following the
+  // viewport resize: once in response to the screen resizing, and again due to the state change
+  // brought on by the `useEffect` hook. I'm sure there are better ways to achieve this, but
+  // considering that this is a relatively rare event anyway, this simple inefficiency will suffice.
+  React.useEffect(() => {
+    if (isCollapsible === isOpen) setIsOpen(!isCollapsible);
+  }, [isCollapsible]);
+
   return (
     <div
       className={cn(
-        'fixed left-0 w-[500px] max-w-[100%] z-20 bg-slate-900 shadow-black',
+        'fixed left-0 w-96 max-w-[100%] z-20 bg-slate-900 shadow-black',
         sidebarTransitionClasses,
         { '-translate-x-[100%] shadow-0': !isOpen, 'translate-x-0 shadow-2xl': isOpen }
       )}
     >
-      <div className="flex flex-col pl-2 h-screen">
-        <SidebarButton {...props} />
-        <div className="h-top-bar flex items-center shrink-0">
-          <GitHubLink />
+      <div className="flex flex-col h-screen overflow-auto">
+        {isCollapsible && <SidebarButton isOpen={isOpen} setOpen={setIsOpen} />}
+
+        <div className="mb-4">
+          <SidebarLink title="Home" link="/" />
+          <SidebarLink title="FAR Quick Reference" link="/far_quick_reference" />
+          <SidebarLink
+            icon={<img alt="GitHub" src="/img/github.png" height={32} width={32} />}
+            title="Source Code"
+            link={references.github_repo}
+          />
         </div>
-        <div className="pl-2 overflow-auto flex-grow">
+
+        <div className="pl-4 border-t-2 border-t-slate-300">
           <TableOfContents />
         </div>
       </div>
@@ -114,12 +121,12 @@ function Sidebar(props: SidebarProps) {
  * to an "X" when it's opened. It renders absolutely, but relative to the (right side of the)
  * sidebar container.
  */
-function SidebarButton({ isOpen, setOpen }: SidebarProps) {
+function SidebarButton({ isOpen, setOpen }: SidebarButtonProps) {
   const barClasses = cn('h-[3px] w-[30px] bg-white', sidebarTransitionClasses);
   return (
     <div
       className={cn(
-        'absolute h-top-bar flex flex-col justify-center z-30',
+        'absolute h-top-bar flex flex-col justify-center',
         sidebarTransitionClasses,
         // 12px to the left of the sidebar's right side when open, 12px to its right when closed
         { 'right-[-42px]': !isOpen, 'right-[12px]': isOpen }
@@ -139,10 +146,18 @@ function SidebarButton({ isOpen, setOpen }: SidebarProps) {
   }
 }
 
-function GitHubLink() {
+function SidebarLink({ icon, link, title }: SidebarLinkProps) {
   return (
-    <Link href={references.github_repo}>
-      <img alt="GitHub" src="/img/github.png" />
+    <Link className="w-full" color={null} href={link} noUnderline>
+      <div
+        className={cn(
+          'flex flex-row items-center h-top-bar hover:bg-slate-600',
+          sidebarTransitionClasses.fast
+        )}
+      >
+        <div className="ml-3 w-10">{icon}</div>
+        <div className="flex-grow ml-5">{title}</div>
+      </div>
     </Link>
   );
 }

@@ -7,6 +7,7 @@ type Breakpoints = 'XS' | 'Small' | 'Medium' | 'Large' | 'XL' | 'XXL';
 type BreakpointStatus = Record<`is${Breakpoints}`, boolean>;
 type BreakpointKey = keyof typeof tailwindBreakpoints;
 type Dimensions = {
+  computed: boolean;
   width: number | undefined;
   height: number | undefined;
   breakpoints: BreakpointStatus;
@@ -28,6 +29,7 @@ export function useDimensions() {
   // Initialize state with undefined width/height so server and client renders match
   // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
   const [windowSize, setWindowSize] = React.useState<Dimensions>({
+    computed: false,
     width: undefined,
     height: undefined,
     breakpoints: getBreakpointStatuses(),
@@ -41,6 +43,7 @@ export function useDimensions() {
     // Handler to call on window resize
     function handleResize() {
       setWindowSize({
+        computed: true,
         width: window.innerWidth,
         height: window.innerHeight,
         breakpoints: getBreakpointStatuses(window.innerWidth),
@@ -65,10 +68,6 @@ export function useDimensions() {
       if (typeof width !== 'number') return false;
       if (key1 && width < tailwindBreakpoints[key1]) return false;
       return !key2 || width < tailwindBreakpoints[key2];
-    }
-
-    function notSmallerThan(size: number) {
-      return typeof width === 'number' && width >= size;
     }
   }
 }
