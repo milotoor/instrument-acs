@@ -8,7 +8,7 @@ export const getStaticProps = getStaticPropsFn;
 const Home: ACS.Page = ({ rawData }) => {
   const acsData = React.useMemo(() => new ACS(rawData), []);
   return (
-    <Layout acs={acsData} home title="The Instrument ACS">
+    <Layout acs={acsData} title="The Instrument ACS">
       <div className="max-w-[800px]">
         <h1 className="text-center sm:text-left text-7xl font-bold font-fancy pt-5 pb-10">
           The{' '}

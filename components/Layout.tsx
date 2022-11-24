@@ -13,13 +13,12 @@ type SidebarLinkProps = { icon?: React.ReactNode; link: string; title: string };
 type LayoutProps = {
   acs: ACS;
   children: React.ReactNode;
-  home?: boolean;
   section?: ACS.Section.Number;
   task?: ACS.Task.Letter;
   title: string;
 };
 
-export function Layout({ acs, children, home = false, section, task, title }: LayoutProps) {
+export function Layout({ acs, children, section, task, title }: LayoutProps) {
   const { breakpoints, computed: widthComputed } = useDimensions();
 
   // Skip the first render entirely, until we have determined the window size. This avoids an
@@ -43,7 +42,7 @@ export function Layout({ acs, children, home = false, section, task, title }: La
       <div className="h-screen max-h-screen h-[-webkit-fill-available] flex flex-col items-center justify-start">
         <Sidebar isCollapsible={sidebarCollapsible} />
         <div className={cn({ 'ml-96': !sidebarCollapsible })}>
-          {!home && <TopBar />}
+          <TopBar />
           <main className="p-4">{children}</main>
         </div>
       </div>
