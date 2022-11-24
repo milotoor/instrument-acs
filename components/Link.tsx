@@ -40,15 +40,17 @@ type FARProps = CommonLinkProps & {
 };
 
 type TaskLinkProps = { section?: ACS.Section.Number; task?: ACS.Task.Letter; id: ACS.Item.ID };
-export type LinkProps = NextLinkProps & ChildProp & CommonLinkProps;
+export type LinkProps = NextLinkProps & ChildProp & CommonLinkProps & { noUnderline?: boolean };
 type LinkableReference = keyof typeof referenceURIs;
 
 export const Link = Object.assign(
-  function Link({ bold, children, className, color, href, ...rest }: LinkProps) {
+  function Link(props: LinkProps) {
+    const { bold, children, className, color, href, noUnderline = false, ...rest } = props;
     const isLocalLink = '/#'.includes(href.toString()[0]);
     return (
       <span
-        className={cn('hover:underline', className, color, {
+        className={cn(className, color, {
+          'hover:underline': !noUnderline,
           'text-inherit': color === null,
           'text-fuchsia-500': color === undefined,
         })}
