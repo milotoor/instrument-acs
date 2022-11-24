@@ -125,6 +125,15 @@ export function Katex({ block = false, children, ...rest }: KatexProps) {
   });
 }
 
+export function NoteCard({ children }: ChildProp) {
+  if (!children) return null;
+  return (
+    <div className="w-full bg-white text-black my-5 rounded-lg shadow-[0px_0px_15px] shadow-yellow-400 text-sm">
+      <WrapParagraph content={children} />
+    </div>
+  );
+}
+
 export function Paragraph({ children, heading, hr, references }: ParagraphProps) {
   const { heading: sectionHeading, item } = React.useContext(NoteContext);
 

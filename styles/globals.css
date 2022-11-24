@@ -9,13 +9,6 @@
     }
 }
 
-@layer components {
-    .note-card {
-        @apply w-full bg-white text-black my-5 rounded-lg shadow-[0px_0px_15px] shadow-yellow-400 text-sm;
-    }
-}
-
-
 @layer utilities {
     .text-subtitle {
         @apply text-xl md:text-2xl font-bold text-slate-300;
