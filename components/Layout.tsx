@@ -39,9 +39,9 @@ export function Layout({ acs, children, section, task, title }: LayoutProps) {
         // See https://css-tricks.com/css-fix-for-100vh-in-mobile-webkit/
         //     https://allthingssmitty.com/2020/05/11/css-fix-for-100vh-in-mobile-webkit/
       }
-      <div className="h-screen max-h-screen h-[-webkit-fill-available] flex flex-col items-center justify-start">
+      <div className="h-screen max-h-screen h-[-webkit-fill-available] flex justify-start">
         <Sidebar isCollapsible={sidebarCollapsible} />
-        <div className={cn({ 'ml-96': !sidebarCollapsible })}>
+        <div className={cn({ 'ml-96 flex-grow': !sidebarCollapsible })}>
           <TopBar />
           <main className="p-4">{children}</main>
         </div>
