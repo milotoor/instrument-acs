@@ -65,9 +65,7 @@ function TopBar() {
 }
 
 const t = 'transition-all';
-const sidebarTransitionClasses = Object.assign(`${t} duration-500`, {
-  fast: `${t} duration-300`,
-});
+const sidebarTransitionClasses = Object.assign(`${t} duration-500`, { fast: `${t} duration-300` });
 
 /**
  * Renders as a collapsible element if the screen size is small, otherwise as a fixed sidebar menu
@@ -104,7 +102,7 @@ function Sidebar({ isCollapsible }: SidebarProps) {
           <SidebarLink
             icon={<img alt="GitHub" src="/img/github.png" height={32} width={32} />}
             title="Source Code"
-            link={references.github_repo}
+            link="https://github.com/milotoor/instrument-acs"
           />
         </div>
 
@@ -126,10 +124,12 @@ function SidebarButton({ isOpen, setOpen }: SidebarButtonProps) {
   return (
     <div
       className={cn(
-        'absolute h-top-bar flex flex-col justify-center',
+        'absolute h-[3rem] w-[3rem] flex flex-col justify-center items-center rounded-full scale-75',
         sidebarTransitionClasses,
-        // 12px to the left of the sidebar's right side when open, 12px to its right when closed
-        { 'right-[-42px]': !isOpen, 'right-[12px]': isOpen }
+        {
+          'right-[-3rem] bg-cyan-500/75': !isOpen,
+          'right-0 bg-cyan-700 hover:bg-cyan-500': isOpen,
+        }
       )}
     >
       {/* py-2 is not necessary for rendering, but the extra padding makes it easier to click */}
@@ -161,7 +161,3 @@ function SidebarLink({ icon, link, title }: SidebarLinkProps) {
     </Link>
   );
 }
-
-const references = {
-  github_repo: 'https://github.com/milotoor/instrument-acs',
-};
