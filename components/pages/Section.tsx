@@ -1,8 +1,7 @@
 import React from 'react';
 
 import { ACS } from '../../lib';
-import { Layout } from '../Layout';
-import { TaskList } from '../Tasks';
+import { Layout, TaskList } from '../Layout';
 import { NoteCard } from '../Typography';
 
 type SectionPageProps = ACS.TopLevelProps & {
