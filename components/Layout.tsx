@@ -2,7 +2,7 @@ import cn from 'classnames';
 import Head from 'next/head';
 import React from 'react';
 
-import { ACS, ChildProp, tailwindBreakpoints, useClientRendering } from '../lib';
+import { ACS, ChildProp, tailwindBreakpoints, uri, useClientRendering } from '../lib';
 import { AppContext, BreakpointContext } from './context';
 import { Link } from './Link';
 
@@ -164,7 +164,7 @@ function Sidebar(props: SidebarProps) {
           <SidebarLink
             icon={<img alt="GitHub" src="/img/github.png" height={32} width={32} />}
             title="Source Code"
-            link="https://github.com/milotoor/instrument-acs"
+            link={uri.github()}
           />
         </div>
 

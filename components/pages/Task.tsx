@@ -1,6 +1,14 @@
 import React from 'react';
 
-import { ACS, ChildProp, makeAnchorId, objectHasProperty, referenceURIs, useACS } from '../../lib';
+import {
+  ACS,
+  ChildProp,
+  makeAnchorId,
+  objectHasProperty,
+  referenceURIs,
+  uri,
+  useACS,
+} from '../../lib';
 import { NoteContext } from '../context';
 import { Layout } from '../Layout';
 import { Link } from '../Link';
@@ -53,11 +61,7 @@ export function TaskPage(props: TaskPageProps) {
 function LastUpdatedWidget({ task }: LastUpdatedWidgetProps) {
   const [updated, sha] = task.updated;
   return (
-    <Link
-      className="text-sm mt-1"
-      color="text-slate-300"
-      href={`https://github.com/milotoor/instrument-acs/commit/${sha}`}
-    >
+    <Link className="text-sm mt-1" color="text-slate-300" href={uri.github('commit', sha)}>
       <span>Last updated:</span> <Bold>{updated}</Bold>
     </Link>
   );
