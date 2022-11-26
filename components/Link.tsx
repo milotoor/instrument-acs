@@ -47,6 +47,7 @@ export const Link = Object.assign(
   function Link(props: LinkProps) {
     const { bold, children, className, color, href, noUnderline = false, ...rest } = props;
     const isLocalLink = '/#'.includes(href.toString()[0]);
+    const target = isLocalLink ? undefined : '_blank';
     return (
       <span
         className={cn(className, color, {
@@ -56,15 +57,9 @@ export const Link = Object.assign(
         })}
       >
         <Emphasize bold={bold}>
-          {isLocalLink ? (
-            <NextLink href={href} {...rest}>
-              <span className="cursor-pointer">{children}</span>
-            </NextLink>
-          ) : (
-            <a target="_blank" href={href.toString()} {...rest}>
-              {children}
-            </a>
-          )}
+          <NextLink href={href} {...rest}>
+            <a target={target}>{children}</a>
+          </NextLink>
         </Emphasize>
       </span>
     );
