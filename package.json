@@ -16,6 +16,7 @@
     "next": "latest",
     "react": "18.1.0",
     "react-dom": "18.1.0",
+    "react-hook-form": "^7.39.5",
     "toml": "^3.0.0"
   },
   "devDependencies": {

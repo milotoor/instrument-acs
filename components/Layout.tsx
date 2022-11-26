@@ -151,7 +151,7 @@ function Sidebar(props: SidebarProps) {
   return (
     <div
       className={cn(
-        'fixed left-0 w-96 max-w-[100%] z-20 bg-slate-900 shadow-black',
+        'fixed left-0 w-96 max-w-full z-20 bg-slate-900 shadow-black',
         sidebarTransitionClasses,
         { '-translate-x-[100%] shadow-0': !isOpen, 'translate-x-0 shadow-2xl': isOpen }
       )}
