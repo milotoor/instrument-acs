@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ACS } from '../../lib';
+import { ACS, useACS } from '../../lib';
 import { Layout, TaskList } from '../Layout';
 import { NoteCard } from '../Typography';
 
@@ -10,7 +10,7 @@ type SectionPageProps = ACS.TopLevelProps & {
 };
 
 export function SectionPage({ note, number, rawData }: SectionPageProps) {
-  const acsData = React.useMemo(() => new ACS(rawData), []);
+  const acsData = useACS(rawData);
   const section = acsData.getSection(number);
   const { name, numeral } = section;
   const title = `Section ${numeral}. ${name}`;

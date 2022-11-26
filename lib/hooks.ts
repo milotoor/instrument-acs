@@ -1,6 +1,12 @@
 import * as React from 'react';
 import useResizeObserver from '@react-hook/resize-observer';
 
+import { ACS } from './acs_data';
+
+export function useACS(rawData: ACS.Raw) {
+  return React.useMemo(() => new ACS(rawData), []);
+}
+
 /**
  * Calls a callback only after the component with the hook has been mounted, i.e. only on the client
  * side. The callback is only executed once during the component's lifecycle, and code within the

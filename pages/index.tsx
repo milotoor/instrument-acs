@@ -1,12 +1,12 @@
 import * as React from 'react';
 
 import { Layout, Link, TableOfContents } from '../components';
-import { ACS } from '../lib';
+import { ACS, useACS } from '../lib';
 import { getStaticPropsFn } from '../ssr';
 
 export const getStaticProps = getStaticPropsFn;
 const Home: ACS.Page = ({ rawData }) => {
-  const acsData = React.useMemo(() => new ACS(rawData), []);
+  const acsData = useACS(rawData);
   return (
     <Layout acs={acsData} title="The Instrument ACS">
       <div className="max-w-[800px]">

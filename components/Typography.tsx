@@ -24,13 +24,12 @@ type InlineListProps = ChildProp<React.ReactNode[]> & {
 };
 
 type KatexProps = ChildProp<string> & { block?: boolean } & React.HTMLAttributes<HTMLDivElement>;
+type ParagraphProps = ChildProp & ReferenceListProps & { heading?: string; hr?: boolean };
 type QuotationProps = ChildProp & QuotationSourceProps & { inline?: boolean; padded?: boolean };
 type QuotationSourceProps = { source?: [string, string] | Reference };
 type Reference = React.ReactElement<LinkProps>;
 export type ReferenceListProps = { className?: string; references?: OneOrMore<Reference> };
-
 type TooltipProps = ChildProp & { message?: string; noUnderline?: boolean };
-type ParagraphProps = ChildProp & ReferenceListProps & { heading?: string; hr?: boolean };
 type WrapParagraphProps = { content: React.ReactNode };
 
 export function Bold(props: Omit<EmphasizeProps, 'bold'>) {

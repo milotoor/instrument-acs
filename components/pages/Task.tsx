@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ACS, makeAnchorId, objectHasProperty, referenceURIs } from '../../lib';
+import { ACS, ChildProp, makeAnchorId, objectHasProperty, referenceURIs, useACS } from '../../lib';
 import { NoteContext } from '../context';
 import { Layout } from '../Layout';
 import { Link } from '../Link';
@@ -11,7 +11,7 @@ type DataSectionProps = { heading: ACS.Section.Heading; notes?: NotesObject; tas
 type ItemHeadingProps = { marker: string; id: string; text: string };
 type LastUpdatedWidgetProps = { task: ACS.Task };
 type ReferencesSectionProps = { references: string[] };
-type SectionContainerProps = { children: React.ReactNode; heading: string };
+type SectionContainerProps = ChildProp & { heading: string };
 type TaskPageProps = ACS.TopLevelProps & {
   notes?: NotesObject;
   section: ACS.Section.Number;
@@ -24,7 +24,7 @@ type NotesObject = Record<ACS.Item.ID, React.ReactNode>;
 
 export function TaskPage(props: TaskPageProps) {
   const { notes, rawData, section: sectionNumber, task: taskLetter } = props;
-  const acsData = React.useMemo(() => new ACS(rawData), []);
+  const acsData = useACS(rawData);
   const section = acsData.getSection(sectionNumber);
   const task = acsData.getTask(sectionNumber, taskLetter);
   const dataSectionProps = { task, notes };
