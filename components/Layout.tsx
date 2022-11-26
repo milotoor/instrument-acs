@@ -190,7 +190,7 @@ function SidebarButton({ isOpen, setOpen }: SidebarProps) {
         sidebarTransitionClasses,
         {
           'right-[-3rem] bg-cyan-500/75': !isOpen,
-          'right-0 bg-cyan-700 hover:bg-cyan-500': isOpen,
+          'right-0 bg-slate-600 hover:bg-cyan-600': isOpen,
         }
       )}
     >
