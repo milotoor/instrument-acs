@@ -2,31 +2,54 @@ import cn from 'classnames';
 import Head from 'next/head';
 import React from 'react';
 
-import { ACS, useDimensions } from '../lib';
-import { AppContext } from './context';
+import { ACS, ChildProp, tailwindBreakpoints, useClientRendering } from '../lib';
+import { AppContext, BreakpointContext } from './context';
 import { Link } from './Link';
 
-type SidebarProps = { isCollapsible: boolean };
-type SidebarButtonProps = { isOpen: boolean; setOpen: (open: boolean) => void };
+type BreakpointKey = keyof typeof tailwindBreakpoints;
+type SidebarProps = { isOpen: boolean; setOpen: (open: boolean) => void };
 type SidebarLinkProps = { icon?: React.ReactNode; link: string; title: string };
 type TaskListProps = { activeTask?: ACS.Task.Letter; className?: string; tasks: ACS.Task[] };
-type LayoutProps = {
+type LayoutProps = ChildProp & {
   acs: ACS;
-  children: React.ReactNode;
   section?: ACS.Section.Number;
   task?: ACS.Task.Letter;
   title: string;
 };
 
 export function Layout({ acs, children, section, task, title }: LayoutProps) {
-  const { breakpoints, computed: widthComputed } = useDimensions();
+  const [dimensions, setDimensions] = React.useState<BreakpointContext>();
 
-  // Skip the first render entirely, until we have determined the window size. This avoids an
-  // immediate repaint after the initial load
-  if (!widthComputed) return null;
+  // Calculates the window dimensions and recalculates them whenever the window is resized. This
+  // will cause the Layout component to set state immediately after mounting, resulting in two
+  // renders up front. This is not ideal; it would be preferable if the `dimensions` state could
+  // simply be initialized to the window dimensions on page load. However, that would interfere with
+  // SSR and re-hydration, as the server has no way of knowing the client's window size.
+  useClientRendering(() => {
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    return () => window.removeEventListener('resize', handleResize);
 
-  const { isXS, isSmall } = breakpoints;
-  const sidebarCollapsible = isXS || isSmall;
+    // Handler to call on window resize. Determines which breakpoint should apply to the client
+    // window. Exactly one of the values in the object should be `true`; the rest should be `false`
+    function handleResize() {
+      setDimensions({
+        isXS: between(null, 'sm'),
+        isSmall: between('sm', 'md'),
+        isMedium: between('md', 'lg'),
+        isLarge: between('lg', 'xl'),
+        isXL: between('xl', 'xxl'),
+        isXXL: between('xxl', null),
+      });
+    }
+
+    // Returns `true` if `window.innerWidth` is greater than or equal to the tailwind breakpoint
+    // specified by `key1` *and* less than the breakpoint specified by `key2`.
+    function between(key1: BreakpointKey | null, key2: BreakpointKey | null) {
+      if (key1 && window.innerWidth < tailwindBreakpoints[key1]) return false;
+      return !key2 || window.innerWidth < tailwindBreakpoints[key2];
+    }
+  });
 
   return (
     <AppContext.Provider value={{ acs, section, task }}>
@@ -40,13 +63,53 @@ export function Layout({ acs, children, section, task, title }: LayoutProps) {
         //     https://allthingssmitty.com/2020/05/11/css-fix-for-100vh-in-mobile-webkit/
       }
       <div className="h-screen max-h-screen h-[-webkit-fill-available] flex justify-start">
-        <Sidebar isCollapsible={sidebarCollapsible} />
-        <div className={cn({ 'ml-96 flex-grow': !sidebarCollapsible })}>
-          <TopBar />
-          <main className="p-4">{children}</main>
-        </div>
+        <BreakpointContext.Provider value={dimensions}>
+          {
+            // Skip the first render entirely, until we have determined the window dimensions. This
+            // avoids an immediate repaint of size-sensitive content after the initial load
+            dimensions && <ScreenSizeSensitiveLayout>{children}</ScreenSizeSensitiveLayout>
+          }
+        </BreakpointContext.Provider>
       </div>
     </AppContext.Provider>
+  );
+}
+
+/**
+ * Basic hook function to indicate if the sidebar should default to its open state. By default, the
+ * sidebar is open for larger screens and closed for smaller ones.
+ */
+function useDefaultOpen() {
+  const { isXS, isSmall } = React.useContext(BreakpointContext)!;
+  return !(isXS || isSmall);
+}
+
+/**
+ * Renders the Sidebar as well as the main section. It is important that this is only rendered AFTER
+ * the window dimensions/applicable tailwind breakpoint has been determined, so that the Sidebar
+ * state defaults to the correct setting
+ */
+function ScreenSizeSensitiveLayout({ children }: ChildProp) {
+  const startOpen = useDefaultOpen();
+  const [isOpen, setOpen] = React.useState(startOpen);
+
+  // The main section uses a left margin (to render adjacent to the sidebar) only when the sidebar
+  // is open on larger screens. On smaller screens `startOpen` is false, and the main section will
+  // be hidden by the sidebar when it's opened
+  const useMargin = isOpen && startOpen;
+  return (
+    <>
+      <Sidebar isOpen={isOpen} setOpen={setOpen} />
+      <div
+        className={cn('flex-grow', sidebarTransitionClasses, {
+          'ml-96': useMargin,
+          'ml-0': !useMargin,
+        })}
+      >
+        <TopBar />
+        <main className="p-4">{children}</main>
+      </div>
+    </>
   );
 }
 
@@ -69,8 +132,9 @@ const sidebarTransitionClasses = Object.assign(`${t} duration-500`, { fast: `${t
 /**
  * Renders as a collapsible element if the screen size is small, otherwise as a fixed sidebar menu
  */
-function Sidebar({ isCollapsible }: SidebarProps) {
-  const [isOpen, setIsOpen] = React.useState(!isCollapsible);
+function Sidebar(props: SidebarProps) {
+  const { isOpen, setOpen } = props;
+  const defaultOpen = useDefaultOpen();
 
   // If the sidebar is closed when the viewport expands past the sidebar-always-open breakpoint, set
   // its state back to open. Conversely, if the sidebar is open when the viewport contracts past the
@@ -81,8 +145,8 @@ function Sidebar({ isCollapsible }: SidebarProps) {
   // brought on by the `useEffect` hook. I'm sure there are better ways to achieve this, but
   // considering that this is a relatively rare event anyway, this simple inefficiency will suffice.
   React.useEffect(() => {
-    if (isCollapsible === isOpen) setIsOpen(!isCollapsible);
-  }, [isCollapsible]);
+    if (defaultOpen !== isOpen) setOpen(defaultOpen);
+  }, [defaultOpen]);
 
   return (
     <div
@@ -93,8 +157,7 @@ function Sidebar({ isCollapsible }: SidebarProps) {
       )}
     >
       <div className="flex flex-col h-screen overflow-auto">
-        {isCollapsible && <SidebarButton isOpen={isOpen} setOpen={setIsOpen} />}
-
+        <SidebarButton {...props} />
         <div className="mb-4">
           <SidebarLink title="Home" link="/" />
           <SidebarLink title="FAR Quick Reference" link="/far_quick_reference" />
@@ -118,7 +181,7 @@ function Sidebar({ isCollapsible }: SidebarProps) {
  * to an "X" when it's opened. It renders absolutely, but relative to the (right side of the)
  * sidebar container.
  */
-function SidebarButton({ isOpen, setOpen }: SidebarButtonProps) {
+function SidebarButton({ isOpen, setOpen }: SidebarProps) {
   const barClasses = cn('h-[3px] w-[30px] bg-white', sidebarTransitionClasses);
   return (
     <div
