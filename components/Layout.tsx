@@ -189,7 +189,7 @@ function Sidebar(props: SidebarProps) {
  * sidebar container.
  */
 function SidebarButton({ isOpen, setOpen }: SidebarProps) {
-  const barClasses = cn('h-[3px] w-[30px] bg-white', sidebarTransitionClasses);
+  const buttonClasses = cn('h-[3px] w-[30px] bg-white', sidebarTransitionClasses);
   return (
     <div
       className={cn(
@@ -203,9 +203,9 @@ function SidebarButton({ isOpen, setOpen }: SidebarProps) {
     >
       {/* py-2 is not necessary for rendering, but the extra padding makes it easier to click */}
       <div className="cursor-pointer py-2" onClick={toggleSidebar}>
-        <div className={cn(barClasses, { 'rotate-45 translate-y-[7px]': isOpen })} />
-        <div className={cn(barClasses, { 'scale-0': isOpen }, 'my-1')} />
-        <div className={cn(barClasses, { '-rotate-45 translate-y-[-7px]': isOpen })} />
+        <div className={cn(buttonClasses, { 'rotate-45 translate-y-[7px]': isOpen })} />
+        <div className={cn(buttonClasses, { 'scale-0': isOpen }, 'my-1')} />
+        <div className={cn(buttonClasses, { '-rotate-45 translate-y-[-7px]': isOpen })} />
       </div>
     </div>
   );
