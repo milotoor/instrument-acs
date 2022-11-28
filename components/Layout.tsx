@@ -107,21 +107,29 @@ function ScreenSizeSensitiveLayout({ children }: ChildProp) {
         })}
       >
         <TopBar />
-        <main className="p-4">{children}</main>
+        <main className="p-4 pl-8">{children}</main>
       </div>
     </>
   );
 }
 
+const barClasses = 'h-top-bar flex flex-row items-center w-full';
 function TopBar() {
   return (
-    <div className="w-full h-top-bar z-10 flex-shrink-0 shadow-xl shadow-slate-800 flex flex-row md:justify-center items-center relative bg-gradient-to-r from-cyan-500 to-blue-500">
+    <div
+      className={cn(
+        barClasses,
+        'z-10 flex-shrink-0 shadow-xl shadow-slate-800 md:justify-center bg-gradient-to-r from-cyan-500 to-blue-500'
+      )}
+    >
       {/* ml-16 provides space for the hamburger menu */}
-      <div className="font-fancy text-2xl hover:text-glow-gold ml-16 md:ml-0">
-        <Link color={null} href="/">
-          The Instrument ACS
-        </Link>
-      </div>
+      <Link
+        className="font-fancy text-2xl hover:text-glow-gold ml-16 md:ml-0"
+        color={null}
+        href="/"
+      >
+        The Instrument ACS
+      </Link>
     </div>
   );
 }
@@ -150,11 +158,10 @@ function Sidebar(props: SidebarProps) {
 
   return (
     <div
-      className={cn(
-        'fixed left-0 w-96 max-w-full z-20 bg-slate-900 shadow-black',
-        sidebarTransitionClasses,
-        { '-translate-x-[100%] shadow-0': !isOpen, 'translate-x-0 shadow-2xl': isOpen }
-      )}
+      className={cn('fixed left-0 w-96 max-w-full z-20 bg-slate-900', sidebarTransitionClasses, {
+        '-translate-x-[100%] shadow-0': !isOpen,
+        'translate-x-0 shadow-[5px_0_20px_0_rgba(30,41,59,1)]': isOpen,
+      })}
     >
       <div className="flex flex-col h-screen overflow-auto">
         <SidebarButton {...props} />
@@ -211,12 +218,7 @@ function SidebarButton({ isOpen, setOpen }: SidebarProps) {
 function SidebarLink({ icon, link, title }: SidebarLinkProps) {
   return (
     <Link className="w-full" color={null} href={link} noUnderline>
-      <div
-        className={cn(
-          'flex flex-row items-center h-top-bar hover:bg-slate-600',
-          sidebarTransitionClasses.fast
-        )}
-      >
+      <div className={cn(barClasses, 'hover:bg-slate-600', sidebarTransitionClasses.fast)}>
         <div className="ml-3 w-10">{icon}</div>
         <div className="flex-grow ml-5">{title}</div>
       </div>
