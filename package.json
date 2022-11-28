@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@react-hook/resize-observer": "^1.2.6",
+    "aws-sdk": "^2.1261.0",
     "classnames": "^2.3.1",
     "core-js": "^3.24.1",
     "directory-tree": "^3.3.0",
