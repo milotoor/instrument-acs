@@ -160,7 +160,7 @@ function Sidebar(props: SidebarProps) {
         <SidebarButton {...props} />
         <div className="mb-4">
           <SidebarLink title="Home" link="/" />
-          <SidebarLink title="FAR Quick Reference" link="/far_quick_reference" />
+          {/*<SidebarLink title="FAR Quick Reference" link="/far_quick_reference" />*/}
           <SidebarLink
             icon={<img alt="GitHub" src="/img/github.png" height={32} width={32} />}
             title="Source Code"
