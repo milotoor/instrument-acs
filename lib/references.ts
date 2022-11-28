@@ -10,10 +10,10 @@ const AERONAV_FOLDER = (() => {
   return year.toString().slice(-2) + (month.length == 2 ? month : `0${month}`);
 })();
 
-const uriExtender =
-  (root: string) =>
-  (...components: string[]) =>
-    `${root}/${components.join('/')}`;
+function uriExtender(root: string) {
+  return (...components: string[]) => `${root}/${components.join('/')}`;
+}
+
 export const uri = {
   ac: (acNum: string, prefix: string = 'AC_') =>
     uri.faa.docs('Advisory_Circular', `${prefix}${acNum}.pdf`),
