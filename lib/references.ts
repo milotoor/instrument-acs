@@ -10,6 +10,10 @@ const AERONAV_FOLDER = (() => {
   return year.toString().slice(-2) + (month.length == 2 ? month : `0${month}`);
 })();
 
+function uriExtender(root: string) {
+  return (...components: string[]) => `${root}/${components.join('/')}`;
+}
+
 export const uri = {
   ac: (acNum: string, prefix: string = 'AC_') =>
     uri.faa.docs('Advisory_Circular', `${prefix}${acNum}.pdf`),
@@ -39,17 +43,13 @@ export const uri = {
 
   awc: (r?: string) => `https://www.aviationweather.gov/${r ? r : ''}`,
 
-  boldMethod: Object.assign(
-    (...parts: string[]) => `https://www.boldmethod.com/${parts.join('/')}`,
-    {
-      l2f: (...parts: string[]) => uri.boldMethod('learn-to-fly', ...parts),
-      blog: (...components: string[]) => uri.boldMethod('blog', ...components),
-    }
-  ),
+  boldMethod: Object.assign(uriExtender('https://www.boldmethod.com'), {
+    l2f: (...parts: string[]) => uri.boldMethod('learn-to-fly', ...parts),
+    blog: (...components: string[]) => uri.boldMethod('blog', ...components),
+  }),
 
   faa: {
-    docs: (...components: string[]) =>
-      `https://www.faa.gov/documentLibrary/media/${components.join('/')}`,
+    docs: uriExtender('https://www.faa.gov/documentLibrary/media'),
     legal_interpretations: (rest: string) =>
       `${faaHq}/agc/practice_areas/regulations/interpretations/Data/interps/${rest}`,
     nav_services: (rest: string) => `${faaHq}/ato/service_units/techops/navservices/${rest}`,
@@ -64,6 +64,7 @@ export const uri = {
     return cornell14CFR + `/appendix-${letter}_to_part_${part}`;
   },
 
+  github: uriExtender('https://github.com/milotoor/instrument-acs'),
   ifr_mag: (section: string, id: string) => `https://www.ifr-magazine.com/${section}/${id}/`,
   skybrary: (article: string) => `https://www.skybrary.aero/articles/${article}`,
   tso: (rest: string) => `https://rgl.faa.gov/Regulatory_and_Guidance_Library/rgTSO.nsf/0/${rest}`,

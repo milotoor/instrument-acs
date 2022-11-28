@@ -1,15 +1,11 @@
 import * as React from 'react';
 import useResizeObserver from '@react-hook/resize-observer';
 
-import { tailwindBreakpoints } from './util';
+import { ACS } from './acs_data';
 
-type Breakpoints = 'Small' | 'Medium' | 'Large' | 'XL' | 'XXL';
-type BreakpointStatus = Record<`is${Breakpoints}`, boolean>;
-type Dimensions = {
-  width: number | undefined;
-  height: number | undefined;
-  breakpoints: BreakpointStatus;
-};
+export function useACS(rawData: ACS.Raw) {
+  return React.useMemo(() => new ACS(rawData), []);
+}
 
 /**
  * Calls a callback only after the component with the hook has been mounted, i.e. only on the client
@@ -18,51 +14,6 @@ type Dimensions = {
  */
 export function useClientRendering(callback: () => void) {
   React.useEffect(callback, []);
-}
-
-/**
- * Returns the client's current dimensions, and recalculates them whenever the window is resized.
- */
-export function useDimensions() {
-  // Initialize state with undefined width/height so server and client renders match
-  // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
-  const [windowSize, setWindowSize] = React.useState<Dimensions>({
-    width: undefined,
-    height: undefined,
-    breakpoints: getBreakpointStatuses(),
-  });
-
-  useClientRendering(() => {
-    window.addEventListener('resize', handleResize);
-    handleResize();
-    return () => window.removeEventListener('resize', handleResize);
-
-    // Handler to call on window resize
-    function handleResize() {
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-        breakpoints: getBreakpointStatuses(window.innerWidth),
-      });
-    }
-  });
-
-  return windowSize;
-
-  // Checks if the current width is greater than or equal to each tailwind breakpoint
-  function getBreakpointStatuses(width?: number): BreakpointStatus {
-    return {
-      isSmall: notSmallerThan(tailwindBreakpoints.sm),
-      isMedium: notSmallerThan(tailwindBreakpoints.md),
-      isLarge: notSmallerThan(tailwindBreakpoints.lg),
-      isXL: notSmallerThan(tailwindBreakpoints.xl),
-      isXXL: notSmallerThan(tailwindBreakpoints.xxl),
-    };
-
-    function notSmallerThan(size: number) {
-      return typeof width === 'number' && width >= size;
-    }
-  }
 }
 
 /** Returns the DOMRect of a targeted HTMLElement, observing resize */

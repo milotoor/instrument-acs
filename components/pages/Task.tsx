@@ -1,16 +1,25 @@
 import React from 'react';
 
-import { ACS, makeAnchorId, objectHasProperty, referenceURIs } from '../../lib';
+import {
+  ACS,
+  ChildProp,
+  makeAnchorId,
+  objectHasProperty,
+  referenceURIs,
+  uri,
+  useACS,
+} from '../../lib';
 import { NoteContext } from '../context';
 import { Layout } from '../Layout';
 import { Link } from '../Link';
-import { WrapParagraph } from '../Typography';
+import { Bold, NoteCard } from '../Typography';
 
 // Component prop types
 type DataSectionProps = { heading: ACS.Section.Heading; notes?: NotesObject; task: ACS.Task };
 type ItemHeadingProps = { marker: string; id: string; text: string };
+type LastUpdatedWidgetProps = { task: ACS.Task };
 type ReferencesSectionProps = { references: string[] };
-type SectionContainerProps = { children: React.ReactNode; heading: string };
+type SectionContainerProps = ChildProp & { heading: string };
 type TaskPageProps = ACS.TopLevelProps & {
   notes?: NotesObject;
   section: ACS.Section.Number;
@@ -23,7 +32,7 @@ type NotesObject = Record<ACS.Item.ID, React.ReactNode>;
 
 export function TaskPage(props: TaskPageProps) {
   const { notes, rawData, section: sectionNumber, task: taskLetter } = props;
-  const acsData = React.useMemo(() => new ACS(rawData), []);
+  const acsData = useACS(rawData);
   const section = acsData.getSection(sectionNumber);
   const task = acsData.getTask(sectionNumber, taskLetter);
   const dataSectionProps = { task, notes };
@@ -36,6 +45,8 @@ export function TaskPage(props: TaskPageProps) {
         Task {task.letter}. {task.name}
       </h1>
 
+      <LastUpdatedWidget task={task} />
+
       <div>
         <ReferencesSection references={task.meta.references} />
         <SectionContainer heading="Objective">{task.meta.objective}</SectionContainer>
@@ -44,6 +55,15 @@ export function TaskPage(props: TaskPageProps) {
         <DataSection heading="Skills" {...dataSectionProps} />
       </div>
     </Layout>
+  );
+}
+
+function LastUpdatedWidget({ task }: LastUpdatedWidgetProps) {
+  const [updated, sha] = task.updated;
+  return (
+    <Link className="text-sm mt-1" color="text-slate-300" href={uri.github('commit', sha)}>
+      <span>Last updated:</span> <Bold>{updated}</Bold>
+    </Link>
   );
 }
 
@@ -102,7 +122,7 @@ function DataSection({ heading, notes = {}, task }: DataSectionProps) {
           return (
             <div key={num}>
               <ItemHeading id={id} marker={num} text={datum} />
-              <NoteCard {...noteCardProps} id={num} />
+              <ItemCard {...noteCardProps} id={num} />
             </div>
           );
 
@@ -111,7 +131,7 @@ function DataSection({ heading, notes = {}, task }: DataSectionProps) {
         return (
           <div key={num}>
             <ItemHeading marker={num} id={id} text={general} />
-            <NoteCard {...noteCardProps} id={num} />
+            <ItemCard {...noteCardProps} id={num} />
             {specific.map((text, i) => {
               // Char code 97 is "a", 98 is "b", etc.
               const letter = String.fromCharCode(97 + i);
@@ -120,7 +140,7 @@ function DataSection({ heading, notes = {}, task }: DataSectionProps) {
               return (
                 <div key={i}>
                   <ItemHeading marker={letter} id={id} text={text} />
-                  <NoteCard {...noteCardProps} id={itemId} />
+                  <ItemCard {...noteCardProps} id={itemId} />
                 </div>
               );
             })}
@@ -153,15 +173,12 @@ function SectionContainer({ children, heading }: SectionContainerProps) {
   );
 }
 
-function NoteCard({ heading, id, notes }: NoteCardProps) {
+function ItemCard({ heading, id, notes }: NoteCardProps) {
   const notePrefix = heading[0].toLowerCase();
   const note = notes[`${notePrefix}${id}`];
-  if (!note || (Array.isArray(note) && note.length === 0)) return null;
   return (
-    <div className="note-card">
-      <NoteContext.Provider value={{ heading, item: id }}>
-        <WrapParagraph content={note} />
-      </NoteContext.Provider>
-    </div>
+    <NoteContext.Provider value={{ heading, item: id }}>
+      <NoteCard>{note}</NoteCard>
+    </NoteContext.Provider>
   );
 }

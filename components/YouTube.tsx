@@ -7,7 +7,7 @@ export function YouTube({ id, title }: YouTubeLinkProps) {
   return (
     <Collapse heading={title} decoration={<Logo />}>
       <iframe
-        className="max-w-[100%] w-[275px] h-[155px]"
+        className="max-w-full w-[275px] h-[155px]"
         width="560"
         height="304"
         src={`https://www.youtube.com/embed/${id}`}
