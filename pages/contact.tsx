@@ -59,7 +59,7 @@ const Contact: ACS.Page = ({ rawData }) => {
             'bg-cyan-500/50': disabled,
           })}
           type="submit"
-          disabled={false}
+          disabled={disabled}
         />
       </form>
     </Layout>
