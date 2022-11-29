@@ -19,7 +19,7 @@ import {
   Warning,
 } from '../../components';
 import { ACS, uri } from '../../lib';
-import { getStaticPropsFn } from '../../ssr';
+import { getStaticPropsFn } from '../../server/ssr';
 
 type FrontProps = { plural?: boolean };
 

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { AIM, Bold, Collapse, Info, Link, Quotation, TaskPage, Warning } from '../../components';
 import { ACS, uri } from '../../lib';
-import { getStaticPropsFn } from '../../ssr';
+import { getStaticPropsFn } from '../../server/ssr';
 
 export const getStaticProps = getStaticPropsFn;
 const IfrSystems: ACS.Page = (props) => {

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { SectionPage } from '../../components';
 import { ACS } from '../../lib';
-import { getStaticPropsFn } from '../../ssr';
+import { getStaticPropsFn } from '../../server/ssr';
 
 export const getStaticProps = getStaticPropsFn;
 const PreflightProcedures: ACS.Page = (props) => {

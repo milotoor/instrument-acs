@@ -17,7 +17,7 @@ import {
   Warning,
 } from '../../components';
 import { ACS, referenceURIs, uri } from '../../lib';
-import { getStaticPropsFn } from '../../ssr';
+import { getStaticPropsFn } from '../../server/ssr';
 
 export const getStaticProps = getStaticPropsFn;
 const Landing: ACS.Page = (props) => {

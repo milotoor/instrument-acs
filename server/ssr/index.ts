@@ -4,7 +4,7 @@ import imageSize from 'image-size';
 import path from 'path';
 import toml from 'toml';
 
-import { ACS } from '../lib';
+import { ACS } from '../../lib';
 import { getLastUpdates } from './last_updates';
 
 export function getStructure(pathToRoot: string = '.') {

@@ -14,7 +14,7 @@ import {
   Warning,
 } from '../../components';
 import { ACS } from '../../lib';
-import { getStaticPropsFn } from '../../ssr';
+import { getStaticPropsFn } from '../../server/ssr';
 
 export const getStaticProps = getStaticPropsFn;
 const ApproachProcedures: ACS.Page = (props) => {

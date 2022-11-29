@@ -4,7 +4,7 @@ import { FieldError, FieldValues, RegisterOptions, useForm, UseFormReturn } from
 
 import { Bold, Layout } from '../components';
 import { ACS, ContactFormValues, useACS } from '../lib';
-import { getStaticPropsFn } from '../ssr';
+import { getStaticPropsFn } from '../server/ssr';
 
 type ErrorTextProps = { error: FieldError | undefined };
 type RequestStatus = 'active' | 'error' | 'success' | 'waiting';

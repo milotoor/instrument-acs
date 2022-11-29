@@ -18,7 +18,7 @@ import {
   Tooltip,
 } from '../../components';
 import { ACS, uri } from '../../lib';
-import { getStaticPropsFn } from '../../ssr';
+import { getStaticPropsFn } from '../../server/ssr';
 
 export const getStaticProps = getStaticPropsFn;
 const DepartureEnrouteArrival: ACS.Page = (props) => {
