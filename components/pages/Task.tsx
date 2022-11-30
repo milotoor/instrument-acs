@@ -70,7 +70,7 @@ function LastUpdatedWidget({ task }: LastUpdatedWidgetProps) {
 function ReferencesSection({ references }: ReferencesSectionProps) {
   const linkProps = {
     bold: true,
-    color: 'text-cyan-500',
+    color: 'text-cyan-400',
   };
 
   return (
