@@ -1,14 +1,17 @@
+import GraphQLAPI, { GraphQLResult } from '@aws-amplify/api-graphql';
 import cn from 'classnames';
 import React from 'react';
 import { FieldError, FieldValues, RegisterOptions, useForm, UseFormReturn } from 'react-hook-form';
 
 import { Bold, Layout } from '../components';
 import { ACS, ContactFormValues, useACS } from '../lib';
+import { createContactMessage } from '../server/graphql/mutations';
 import { getStaticPropsFn } from '../server/ssr';
 
 type ErrorTextProps = { error: FieldError | undefined };
 type RequestStatus = 'active' | 'error' | 'success' | 'waiting';
 type ResponseMessageProps = { status: RequestStatus };
+type GraphQLResponse = GraphQLResult<{ createContactMessage: ContactFormValues }>;
 
 type FormInputProps = {
   field: keyof ContactFormValues;
@@ -51,7 +54,13 @@ const Contact: ACS.Page = ({ rawData }) => {
         />
 
         <FormInput field="subject" form={form} placeholder="Subject" />
-        <FormInput field="body" form={form} fullWidth inputType="textarea" placeholder="Message" />
+        <FormInput
+          field="message"
+          form={form}
+          fullWidth
+          inputType="textarea"
+          placeholder="Message"
+        />
         <input
           className={cn('p-2 rounded-md transition-all duration-300', {
             'cursor-pointer hover:translate-y-1 hover:scale-110 bg-cyan-500 hover:bg-cyan-400':
@@ -71,13 +80,12 @@ const Contact: ACS.Page = ({ rawData }) => {
 
     // Send the request
     try {
-      const response = await fetch('/api/contact', {
-        body: JSON.stringify(data),
-        headers: { 'content-type': 'application/json' },
-        method: 'POST',
-      });
+      const response = (await GraphQLAPI.graphql({
+        query: createContactMessage,
+        variables: { input: data },
+      })) as GraphQLResponse;
 
-      if (response.ok) {
+      if (response.data) {
         setReqStatus('success');
       } else {
         setReqStatus('error');

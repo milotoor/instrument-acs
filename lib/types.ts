@@ -7,4 +7,4 @@ export namespace Colors {
   export type TextColor = FrontColors | AlertColors;
 }
 
-export type ContactFormValues = Record<'email' | 'subject' | 'body', string>;
+export type ContactFormValues = Record<'email' | 'subject' | 'message', string>;
