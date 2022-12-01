@@ -9,7 +9,7 @@ import { createContactMessage } from '../server/graphql/mutations';
 import { getStaticPropsFn } from '../server/ssr';
 
 type ErrorTextProps = { error: FieldError | undefined };
-type RequestStatus = 'active' | 'error' | 'success' | 'waiting';
+type RequestStatus = 'error' | 'submitted' | 'success' | 'unsubmitted';
 type ResponseMessageProps = { status: RequestStatus };
 type GraphQLResponse = GraphQLResult<{ createContactMessage: ContactFormValues }>;
 
@@ -25,8 +25,8 @@ type FormInputProps = {
 export const getStaticProps = getStaticPropsFn;
 const Contact: ACS.Page = ({ rawData }) => {
   const acsData = useACS(rawData);
-  const [reqStatus, setReqStatus] = React.useState<RequestStatus>('waiting');
-  const disabled = ['active', 'success'].includes(reqStatus);
+  const [reqStatus, setReqStatus] = React.useState<RequestStatus>('unsubmitted');
+  const disabled = ['submitted', 'success'].includes(reqStatus);
   const form = useForm<ContactFormValues>({ reValidateMode: 'onSubmit' });
 
   return (
@@ -35,10 +35,12 @@ const Contact: ACS.Page = ({ rawData }) => {
 
       <div className="py-4">
         Found something wrong? Have a question or suggestion? Please get in touch! I'll do my best
-        to respond soon.
+        to respond soon.{' '}
+        <Bold>
+          If applicable, please include a reference to the FARs, AIM or other authoritative
+          publication.
+        </Bold>
       </div>
-
-      <ResponseMessage status={reqStatus} />
 
       <form onSubmit={form.handleSubmit(submitForm)}>
         <FormInput
@@ -61,22 +63,25 @@ const Contact: ACS.Page = ({ rawData }) => {
           inputType="textarea"
           placeholder="Message"
         />
-        <input
-          className={cn('p-2 rounded-md transition-all duration-300', {
-            'cursor-pointer hover:translate-y-1 hover:scale-110 bg-cyan-500 hover:bg-cyan-400':
-              !disabled,
-            'bg-cyan-500/50': disabled,
-          })}
-          type="submit"
-          disabled={disabled}
-        />
+        <div className="flex flex-wrap gap-2">
+          <input
+            className={cn('p-2 rounded-md transition-all duration-300', {
+              'cursor-pointer hover:translate-y-1 hover:scale-110 bg-cyan-500 hover:bg-cyan-400':
+                !disabled,
+              'bg-cyan-500/50': disabled,
+            })}
+            type="submit"
+            disabled={disabled}
+          />
+          <ResponseMessage status={reqStatus} />
+        </div>
       </form>
     </Layout>
   );
 
   async function submitForm(data: FieldValues) {
-    // First update the status to indicate a request is active. This will disable the submit button
-    setReqStatus('active');
+    // First update the status to indicate a request is submitted. This will disable the submit button
+    setReqStatus('submitted');
 
     // Send the request
     try {
@@ -99,9 +104,9 @@ const Contact: ACS.Page = ({ rawData }) => {
 export default Contact;
 
 function ResponseMessage({ status }: ResponseMessageProps) {
-  if (['active', 'waiting'].includes(status)) return null;
+  if (['submitted', 'unsubmitted'].includes(status)) return null;
 
-  const responseClasses = 'p-3 w-fit rounded-md bg-gradient-to-br';
+  const responseClasses = 'p-2 w-fit rounded-md bg-gradient-to-br';
   if (status === 'success') {
     return (
       <div className={cn(responseClasses, 'from-green-500 to-lime-900')}>
