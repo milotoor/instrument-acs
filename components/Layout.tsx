@@ -80,8 +80,8 @@ export function Layout({ acs, children, section, task, title }: LayoutProps) {
  * sidebar is open for larger screens and closed for smaller ones.
  */
 function useDefaultOpen() {
-  const { isXS, isSmall } = React.useContext(BreakpointContext)!;
-  return !(isXS || isSmall);
+  const { isXS, isSmall, isMedium } = React.useContext(BreakpointContext)!;
+  return !(isXS || isSmall || isMedium);
 }
 
 /**
@@ -119,12 +119,12 @@ function TopBar() {
     <div
       className={cn(
         barClasses,
-        'z-10 flex-shrink-0 shadow-xl shadow-slate-800 md:justify-center bg-gradient-to-r from-cyan-500 to-blue-500'
+        'z-10 flex-shrink-0 shadow-xl shadow-slate-800 lg:justify-center bg-gradient-to-r from-cyan-500 to-blue-500'
       )}
     >
       {/* ml-16 provides space for the hamburger menu */}
       <Link
-        className="font-fancy text-2xl hover:text-glow-gold ml-16 md:ml-0"
+        className="font-fancy text-2xl hover:text-glow-gold ml-16 lg:ml-0"
         color={null}
         href="/"
       >
