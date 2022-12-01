@@ -178,7 +178,7 @@ function ItemCard({ heading, id, notes }: NoteCardProps) {
   const note = notes[`${notePrefix}${id}`];
   return (
     <NoteContext.Provider value={{ heading, item: id }}>
-      <NoteCard>{note}</NoteCard>
+      <NoteCard note={note} />
     </NoteContext.Provider>
   );
 }

@@ -23,7 +23,7 @@ export function SectionPage({ note, number, rawData }: SectionPageProps) {
         <TaskList className="ml-12 mt-2 text-lg" tasks={section.tasks} />
       </div>
 
-      <NoteCard>{note}</NoteCard>
+      <NoteCard note={note} />
     </Layout>
   );
 }
