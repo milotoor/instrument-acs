@@ -2,7 +2,7 @@ import React from 'react';
 
 import { ACS, useACS } from '../../lib';
 import { Layout, TaskList } from '../Layout';
-import { NoteCard } from '../Typography';
+import { Bold, NoteCard } from '../Typography';
 
 type SectionPageProps = ACS.TopLevelProps & {
   note?: React.ReactNode;
@@ -20,7 +20,9 @@ export function SectionPage({ note, number, rawData }: SectionPageProps) {
 
       <div className="my-10">
         <h3 className="text-subtitle">Tasks</h3>
-        <TaskList className="ml-12 mt-2 text-lg" tasks={section.tasks} />
+        <Bold>
+          <TaskList className="ml-12 mt-2 text-lg" tasks={section.tasks} />
+        </Bold>
       </div>
 
       <NoteCard note={note} />
