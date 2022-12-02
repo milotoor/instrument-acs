@@ -3,7 +3,7 @@ import dirTree, { DirectoryTree } from 'directory-tree';
 import { DateTime } from 'luxon';
 import path from 'path';
 
-import { ACS } from '../../lib';
+import { ACS } from '../lib';
 
 type Letter = ACS.Task.Letter;
 type Number = ACS.Section.Number;
