@@ -1,0 +1,12 @@
+projects:
+  instrumentacs:
+    schemaPath: lib/graphql/schema.json
+    includes:
+      - lib/graphql/**/*.ts
+    excludes:
+      - ./amplify/**
+    extensions:
+      amplify:
+        codeGenTarget: typescript
+        generatedFileName: lib/api.ts
+        docsFilePath: lib/graphql

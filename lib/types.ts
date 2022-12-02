@@ -6,3 +6,5 @@ export namespace Colors {
   type AlertColors = 'danger' | 'info' | 'success' | 'warning';
   export type TextColor = FrontColors | AlertColors;
 }
+
+export type ContactMessage = Record<'email' | 'subject' | 'message', string>;

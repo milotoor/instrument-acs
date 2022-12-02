@@ -24,13 +24,13 @@ type InlineListProps = ChildProp<React.ReactNode[]> & {
 };
 
 type KatexProps = ChildProp<string> & { block?: boolean } & React.HTMLAttributes<HTMLDivElement>;
+type NoteCardProps = { note: WrapParagraphProps['content'] };
+type ParagraphProps = ChildProp & ReferenceListProps & { heading?: string; hr?: boolean };
 type QuotationProps = ChildProp & QuotationSourceProps & { inline?: boolean; padded?: boolean };
 type QuotationSourceProps = { source?: [string, string] | Reference };
 type Reference = React.ReactElement<LinkProps>;
 export type ReferenceListProps = { className?: string; references?: OneOrMore<Reference> };
-
 type TooltipProps = ChildProp & { message?: string; noUnderline?: boolean };
-type ParagraphProps = ChildProp & ReferenceListProps & { heading?: string; hr?: boolean };
 type WrapParagraphProps = { content: React.ReactNode };
 
 export function Bold(props: Omit<EmphasizeProps, 'bold'>) {
@@ -123,6 +123,15 @@ export function Katex({ block = false, children, ...rest }: KatexProps) {
     ...rest,
     dangerouslySetInnerHTML: { __html: katex.renderToString(tex, { output: 'html' }) },
   });
+}
+
+export function NoteCard({ note }: NoteCardProps) {
+  if (!note) return null;
+  return (
+    <div className="w-full bg-white text-black my-5 rounded-lg shadow-[0px_0px_15px] shadow-yellow-400 text-sm">
+      <WrapParagraph content={note} />
+    </div>
+  );
 }
 
 export function Paragraph({ children, heading, hr, references }: ParagraphProps) {

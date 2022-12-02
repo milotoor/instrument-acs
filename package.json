@@ -8,6 +8,8 @@
   },
   "dependencies": {
     "@react-hook/resize-observer": "^1.2.6",
+    "aws-amplify": "^5.0.4",
+    "aws-sdk": "^2.1261.0",
     "classnames": "^2.3.1",
     "core-js": "^3.24.1",
     "directory-tree": "^3.3.0",
@@ -16,6 +18,7 @@
     "next": "latest",
     "react": "18.1.0",
     "react-dom": "18.1.0",
+    "react-hook-form": "^7.39.5",
     "toml": "^3.0.0"
   },
   "devDependencies": {

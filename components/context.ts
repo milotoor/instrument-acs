@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { ACS } from '../lib';
 
+/*************************** AppContext ***************************************/
 type AppContext = {
   acs: ACS;
   section?: ACS.Section.Number;
@@ -11,6 +12,7 @@ export const AppContext = React.createContext<AppContext>({
   acs: new ACS({ images: {}, sections: [] }),
 });
 
+/*************************** NoteContext **************************************/
 type NoteContext = {
   heading: ACS.Section.Heading;
   item: ACS.Item.ID;
@@ -21,3 +23,8 @@ export const NoteContext = React.createContext<NoteContext>({
   heading: 'Knowledge',
   item: '1',
 });
+
+/*************************** DimensionContext *********************************/
+type Breakpoints = 'XS' | 'Small' | 'Medium' | 'Large' | 'XL' | 'XXL';
+export type BreakpointContext = Record<`is${Breakpoints}`, boolean>;
+export const BreakpointContext = React.createContext<BreakpointContext | undefined>(undefined);
