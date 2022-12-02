@@ -1,5 +1,6 @@
 import * as aws from 'aws-sdk';
 import { ContactMessage } from './types';
+
 const ses = new aws.SES();
 
 // I tried very, very hard to keep this as an environment variable, but Amplify just doesn't seem to
