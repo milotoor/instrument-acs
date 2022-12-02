@@ -18,7 +18,7 @@
     }
   },
   "function": {
-    "instrumentacsd0795340": {
+    "instrumentacsacfb3328": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",
@@ -32,13 +32,6 @@
           ]
         }
       ]
-    }
-  },
-  "hosting": {
-    "amplifyhosting": {
-      "service": "amplifyhosting",
-      "type": "cicd",
-      "lastPushTimeStamp": "2022-12-01T05:33:25.880Z"
     }
   }
 }
