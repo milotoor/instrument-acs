@@ -9,10 +9,14 @@ exports.handler = async (event) => {
   for (const record of event.Records) {
     if (record.eventName === 'INSERT') {
       const { email, message, subject } = record.dynamodb.NewImage;
+      const source = 'contact@milo.aero';
+      const toAddress = 'milo.toor@gmail.com';
+      console.log(`Sending email from ${source} to ${toAddress} on behalf of ${email.S}`);
+
       await ses
         .sendEmail({
-          Destination: { ToAddresses: ['milo.toor@gmail.com'] },
-          Source: 'contact@milo.aero',
+          Destination: { ToAddresses: [toAddress] },
+          Source: source,
           ReplyToAddresses: [email.S],
           Message: {
             Subject: { Data: `Instrument ACS contact: ${subject.S}` },
