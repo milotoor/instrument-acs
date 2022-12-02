@@ -170,11 +170,12 @@
               }
             },
             {
-              "Action": [
-                "ses:SendEmail"
-              ],
+              "Action": "ses:SendEmail",
               "Effect": "Allow",
-              "Resource": "arn:aws:ses:us-west-1:164895447730:identity/milo.aero"
+              "Resource": [
+                "arn:aws:ses:us-west-1:164895447730:identity/milo.aero",
+                "arn:aws:ses:us-west-1:164895447730:identity/milo.toor@gmail.com"
+              ]
             }
           ]
         }
