@@ -55,12 +55,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "instrumentacsd0795340",
+            "instrumentacsacfb3328",
             {
               "Fn::Join": [
                 "",
                 [
-                  "instrumentacsd0795340",
+                  "instrumentacsacfb3328",
                   "-",
                   {
                     "Ref": "env"
@@ -97,12 +97,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "instrumentacsLambdaRole13f90934",
+            "instrumentacsLambdaRole3ce9a51c",
             {
               "Fn::Join": [
                 "",
                 [
-                  "instrumentacsLambdaRole13f90934",
+                  "instrumentacsLambdaRole3ce9a51c",
                   "-",
                   {
                     "Ref": "env"

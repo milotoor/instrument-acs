@@ -7,7 +7,7 @@ export type AmplifyDependentResourcesAttributes = {
         }
     },
     "function": {
-        "instrumentacsd0795340": {
+        "instrumentacsacfb3328": {
             "Name": "string",
             "Arn": "string",
             "Region": "string",
