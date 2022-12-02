@@ -2,7 +2,7 @@ import React from 'react';
 
 import { TaskPage } from '../../components';
 import { ACS } from '../../lib';
-import { getStaticPropsFn } from '../../server/ssr';
+import { getStaticPropsFn } from '../../ssr';
 
 export const getStaticProps = getStaticPropsFn;
 const CheckingEquipment: ACS.Page = (props) => {

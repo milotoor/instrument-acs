@@ -12,7 +12,7 @@ import {
   Warning,
 } from '../components';
 import { ACS, ChildProp, uri, useACS } from '../lib';
-import { getStaticPropsFn } from '../server/ssr';
+import { getStaticPropsFn } from '../ssr';
 
 type FAQCardProps = ChildProp & { question: string };
 

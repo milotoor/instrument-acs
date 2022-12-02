@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Bold, BulletList, FAR, InlineList, Link, TaskPage } from '../../components';
 import { ACS } from '../../lib';
-import { getStaticPropsFn } from '../../server/ssr';
+import { getStaticPropsFn } from '../../ssr';
 
 export const getStaticProps = getStaticPropsFn;
 const PilotQualifications: ACS.Page = (props) => {
