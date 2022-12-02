@@ -5,8 +5,8 @@ import { FieldError, FieldValues, RegisterOptions, useForm, UseFormReturn } from
 
 import { Bold, Layout } from '../components';
 import { ACS, ContactFormValues, useACS } from '../lib';
-import { createContactMessage } from '../server/graphql/mutations';
-import { getStaticPropsFn } from '../server/ssr';
+import { createContactMessage } from '../lib/graphql/mutations';
+import { getStaticPropsFn } from '../ssr';
 
 type ErrorTextProps = { error: FieldError | undefined };
 type RequestStatus = 'error' | 'submitted' | 'success' | 'unsubmitted';
