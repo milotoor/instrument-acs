@@ -4,21 +4,21 @@ import React from 'react';
 import { FieldError, FieldValues, RegisterOptions, useForm, UseFormReturn } from 'react-hook-form';
 
 import { Bold, Layout } from '../components';
-import { ACS, ContactFormValues, useACS } from '../lib';
+import { ACS, ContactMessage, useACS } from '../lib';
 import { createContactMessage } from '../lib/graphql/mutations';
 import { getStaticPropsFn } from '../ssr';
 
 type ErrorTextProps = { error: FieldError | undefined };
 type RequestStatus = 'error' | 'submitted' | 'success' | 'unsubmitted';
 type ResponseMessageProps = { status: RequestStatus };
-type GraphQLResponse = GraphQLResult<{ createContactMessage: ContactFormValues }>;
+type GraphQLResponse = GraphQLResult<{ createContactMessage: ContactMessage }>;
 
 type FormInputProps = {
-  field: keyof ContactFormValues;
-  form: UseFormReturn<ContactFormValues>;
+  field: keyof ContactMessage;
+  form: UseFormReturn<ContactMessage>;
   fullWidth?: boolean;
   inputType?: 'input' | 'textarea';
-  options?: RegisterOptions<ContactFormValues>;
+  options?: RegisterOptions<ContactMessage>;
   placeholder: string;
 };
 
@@ -27,7 +27,7 @@ const Contact: ACS.Page = ({ rawData }) => {
   const acsData = useACS(rawData);
   const [reqStatus, setReqStatus] = React.useState<RequestStatus>('unsubmitted');
   const disabled = ['submitted', 'success'].includes(reqStatus);
-  const form = useForm<ContactFormValues>({ reValidateMode: 'onSubmit' });
+  const form = useForm<ContactMessage>({ reValidateMode: 'onSubmit' });
 
   return (
     <Layout acs={acsData} title="Contact">
