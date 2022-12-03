@@ -76,12 +76,11 @@ export function Layout({ acs, children, section, task, title }: LayoutProps) {
 }
 
 /**
- * Basic hook function to indicate if the sidebar should default to its open state. By default, the
- * sidebar is open for larger screens and closed for smaller ones.
+ * Basic hook function to indicate if the screen size is on the smaller end-- i.e. medium or smaller
  */
-function useDefaultOpen() {
+function useSmallScreen() {
   const { isXS, isSmall, isMedium } = React.useContext(BreakpointContext)!;
-  return !(isXS || isSmall || isMedium);
+  return isXS || isSmall || isMedium;
 }
 
 /**
@@ -90,13 +89,13 @@ function useDefaultOpen() {
  * state defaults to the correct setting
  */
 function ScreenSizeSensitiveLayout({ children }: ChildProp) {
-  const startOpen = useDefaultOpen();
-  const [isOpen, setOpen] = React.useState(startOpen);
+  const largeScreen = !useSmallScreen();
+  const [isOpen, setOpen] = React.useState(largeScreen);
 
   // The main section uses a left margin (to render adjacent to the sidebar) only when the sidebar
-  // is open on larger screens. On smaller screens `startOpen` is false, and the main section will
-  // be hidden by the sidebar when it's opened
-  const useMargin = isOpen && startOpen;
+  // is open on larger screens. On smaller screens `largeScreen` is false, the main section will be
+  // hidden by the sidebar when it's opened and a backdrop is rendered to catch/stop scroll events
+  const useMargin = isOpen && largeScreen;
   return (
     <>
       <Sidebar isOpen={isOpen} setOpen={setOpen} />
@@ -142,7 +141,7 @@ const sidebarTransitionClasses = Object.assign(`${t} duration-500`, { fast: `${t
  */
 function Sidebar(props: SidebarProps) {
   const { isOpen, setOpen } = props;
-  const defaultOpen = useDefaultOpen();
+  const defaultOpen = !useSmallScreen();
 
   // If the sidebar is closed when the viewport expands past the sidebar-always-open breakpoint, set
   // its state back to open. Conversely, if the sidebar is open when the viewport contracts past the
