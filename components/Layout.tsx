@@ -176,7 +176,7 @@ function Sidebar(props: SidebarProps) {
           <SidebarLink title="Contact" link="/contact" />
         </div>
 
-        <div className="pl-4 border-t-2 border-t-slate-300">
+        <div className="pl-4 pr-2 mb-[100px] border-y-2 border-y-slate-300">
           <TableOfContents />
         </div>
       </div>
