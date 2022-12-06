@@ -40,6 +40,7 @@ const WeatherInformation: ACS.Page = (props) => {
             go-to), the <Link href={references.awc.home}>Aviation Weather Center</Link> and{' '}
             <Link href={references.wx_brief}>1800wxbrief.com</Link> (run by Leidos).
           </>,
+
           <>
             There are also resources available inflight, including ADS-B In (
             <Link href={references.ads_b_fis_b}>which leverages FIS-B</Link>
@@ -47,6 +48,11 @@ const WeatherInformation: ACS.Page = (props) => {
             services. Pilots can also subscribe to SiriusXM for weather broadcasts from satellites,
             which can provide coverage at lower altitudes where ground-based transmitters can't
             reach.
+          </>,
+
+          <>
+            Pilots who opt to self-brief (i.e. not use FSS for their preflight weather briefings)
+            are encouraged to read the relatively new <Link.Reference reference="AC 91-92" />.
           </>,
         ],
 
@@ -87,7 +93,7 @@ const WeatherInformation: ACS.Page = (props) => {
                 key for the products' coded language.
               </>
 
-              <Paragraph heading="TAFs">
+              <Paragraph heading="METARs">
                 METARs are most thoroughly defined by <Link.Reference reference="AC 00-45" />{' '}
                 paragraph 3.1.1 (page 3-1, 29 overall).
               </Paragraph>

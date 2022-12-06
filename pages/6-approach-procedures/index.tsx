@@ -2,6 +2,7 @@ import React from 'react';
 
 import {
   AIM,
+  Bold,
   BulletList,
   Image,
   Info,
@@ -29,6 +30,64 @@ const ApproachProcedures: ACS.Page = (props) => {
           deal of precision during one of the most critical phases of flight. The tasks in this
           section cover various aspects of IAPs; this page will discuss information and procedures
           that are applicable across multiple phases of the approach.
+        </>,
+
+        <Paragraph heading="Approach categories">
+          For the purposes of instrument approaches, aircraft are bucketed into{' '}
+          <Term>approach categories</Term>. Each category is identified by a letter, A through E.
+          Most small GA aircraft will fall under category A, and some of the more performant may
+          fall under category B.{' '}
+        </Paragraph>,
+
+        <Quotation source={<AIM paragraph={[5, 4, 7, 'a']} />}>
+          Aircraft approach category means a grouping of aircraft based on a speed of V
+          <sub>REF</sub> at the maximum certified landing weight, if specified, or if V
+          <sub>REF</sub> is not specified,{' '}
+          <Info>
+            1.3 V<sub>SO</sub> at the maximum certified landing weight
+          </Info>
+          . V<sub>REF</sub>, V<sub>SO</sub>, and the maximum certified landing weight are those
+          values as established for the aircraft by the certification authority of the country of
+          registry
+        </Quotation>,
+
+        <>
+          <AIM paragraph={[5, 4, 7, 'e']} /> specifies the speed boundaries of the categories:
+          <BulletList type="disc">
+            <Success>Category A: Speed less than 91 knots.</Success>
+            <>Category B: Speed 91 knots or more but less than 121 knots.</>
+            <>Category C: Speed 121 knots or more but less than 141 knots.</>
+            <>Category D: Speed 141 knots or more but less than 166 knots.</>
+            <>Category E: Speed 166 knots or more.</>
+          </BulletList>
+        </>,
+
+        <>
+          The Cessna 172 has a V<sub>SO</sub> of 40 knots. Thus, in the absence of an official V
+          <sub>REF</sub>{' '}
+          <Info>
+            its calculated V<sub>REF</sub> is 52 knots, well below the upper limit for category A
+            aircraft.
+          </Info>{' '}
+          Approaches in the 172 are generally flown at 90 knots.
+        </>,
+
+        <>
+          Which approach category an aircraft falls into has significant consequences. Foremost
+          among them,{' '}
+          <Info>
+            instrument approach minimums differ across classes; higher classes generally have higher
+            minimums.
+          </Info>{' '}
+          There's very good reason for this: a higher approach speed means an aircraft will travel
+          further in a unit of time and will have a larger turn radius. Simply put, faster aircraft
+          take up more space in their approach maneuvers and will need extra buffer around obstacles
+          since they are less nimble. Additionally,{' '}
+          <Info>
+            the radius of the protected area in circling approaches is greater for higher-category
+            aircraft.
+          </Info>{' '}
+          See <Link.Task section={6} task="D" id="k1-the_protected_area" />.
         </>,
 
         <Paragraph heading="Procedure turns" references={<AIM paragraph={[5, 4, 9]} />}>
@@ -82,18 +141,21 @@ const ApproachProcedures: ACS.Page = (props) => {
         </>,
 
         <Quotation source={<AIM paragraph={[5, 4, 9, 'a', 3]} />}>
-          Pilots should begin the outbound turn immediately after passing the procedure turn fix.
-          The procedure turn maneuver must be executed within the distance specified in the profile
-          view. The normal procedure turn distance is 10 miles. This may be reduced to a minimum of
-          5 miles where only Category A or helicopter aircraft are to be operated or increased to as
-          much as 15 miles to accommodate high performance aircraft.
+          Pilots should begin the outbound turn{' '}
+          <Bold>immediately after passing the procedure turn fix.</Bold> The procedure turn maneuver
+          must be executed within the distance specified in the profile view. The normal procedure
+          turn distance is 10 miles. This may be reduced to a minimum of 5 miles where only Category
+          A or helicopter aircraft are to be operated or increased to as much as 15 miles to
+          accommodate high performance aircraft.
         </Quotation>,
 
         <Image src="procedure_turn" />,
 
         <>
           PTs are essential for performing the turn-around, but{' '}
-          <Success>they can also be valuable for losing altitude.</Success>
+          <Success>they can also be valuable for losing altitude.</Success> The maximum speed
+          throughout the PT maneuver is 200 knots IAS (<AIM paragraph={[5, 4, 9, 'a', 3]} />
+          ).
         </>,
 
         <>

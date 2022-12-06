@@ -83,7 +83,7 @@ const Holding: ACS.Page = (props) => {
               "all fixed wing aircraft conducting holding should fly at speeds at or above 90 KIAS
               to minimize the influence of wind drift."
             </Warning>{' '}
-            This is a speed constraint for skyhawks to know about!
+            This is a speed constraint for Skyhawks to know about!
           </>,
 
           <Paragraph heading="Hold entries">
