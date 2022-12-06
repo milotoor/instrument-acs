@@ -1,16 +1,17 @@
 import React from 'react';
 
 import {
+  AIM,
   Bold,
   BulletList,
   Danger,
+  FAR,
   Info,
   InlineList,
   Link,
   Paragraph,
   Success,
   TaskPage,
-  ToDo,
   Warning,
 } from '../../components';
 import { ACS } from '../../lib';
@@ -37,13 +38,40 @@ const Missed: ACS.Page = (props) => {
             <Warning>Just don't get so focused on landing that you forget to stay safe.</Warning>
           </>,
 
-          <Paragraph heading="When to execute">
-            <ToDo />
+          <Paragraph heading="When to execute" references={[<FAR section={[91, 175, 'c-d']} />]}>
+            A missed approach must be flown if, upon arriving at the DA (on a precision approach) or
+            MAP (on a non-precision approach) you do not have the required conditions to descend
+            further. <FAR section={[91, 175, 'c-d']} /> delineates these requirements. See also{' '}
+            <Link.Task section={6} task="E" id="k1-landing_requirements" />. Additionally,{' '}
+            <Warning>
+              if the approach is not stabilized by 1000 feet above TDZE you should strongly consider
+              going missed.
+            </Warning>{' '}
+            <AIM paragraph={[5, 4, 9]} />
           </Paragraph>,
+
+          <>
+            Once you decide to go missed, it's acceptable to immediately begin the climb. However,{' '}
+            <Danger>
+              you must not make any turns or deviations from the approach course until passing the
+              MAP!
+            </Danger>{' '}
+            The missed approach segment is a very well defined 3-dimensional "lane" that has been
+            thoroughly surveyed for required obstacle protection.{' '}
+            <Warning>
+              If you turn early, you are exiting this protected lane, and are not guaranteed
+              protection from obstacles or terrain.
+            </Warning>
+          </>,
+
+          <>
+            For details on going missed from a circling approach, see{' '}
+            <Link.Task section={6} task="D" id="k1-going_missed" />.
+          </>,
 
           <Paragraph heading="The 6 C's">
             When it's time to go missed,{' '}
-            <Success>the pilot should execute the procedure known as the 6 C's</Success> (Various
+            <Success>the pilot should execute the procedure known as the 6 C's</Success> (various
             mnemonics use a different number of C's; I choose to use 6):
             <BulletList type="decimal">
               <>
