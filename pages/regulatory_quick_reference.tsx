@@ -1,8 +1,10 @@
 import React from 'react';
 
-import { BulletList, Layout, NoteCard } from '../components';
+import { FAR, Layout, NoteCard } from '../components';
 import { ACS, useACS } from '../lib';
 import { getStaticPropsFn } from '../ssr';
+
+type ReferenceRowProps = { reference: React.ReactNode; name: string };
 
 export const getStaticProps = getStaticPropsFn;
 const FARQuickReference: ACS.Page = ({ rawData }) => {
@@ -16,13 +18,47 @@ const FARQuickReference: ACS.Page = ({ rawData }) => {
         and other FAA publications.
       </div>
 
-      <BulletList type="disc">
-        <>FAR 61.51 -- Pilot logbooks</>
-        <>FAR 91.105 -- Required equipment</>
-        <>FAR 91.109 -- Flight instruction; Simulated instrument flight and certain flight tests</>
-      </BulletList>
+      <NoteCard
+        note={
+          <>
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Reference</th>
+                  <th scope="col" className="text-left">
+                    Name
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <ReferenceRow reference={<FAR section={[61, 51]} />} name="Pilot logbooks" />
+                <ReferenceRow
+                  reference={<FAR section={[91, 109]} />}
+                  name="Flight instruction; Simulated instrument flight and certain flight tests"
+                />
+                <ReferenceRow
+                  reference={<FAR section={[91, 185]} />}
+                  name="IFR operations: Two-way radio communications failure"
+                />
+                <ReferenceRow reference={<FAR section={[91, 205]} />} name="Required equipment" />
+              </tbody>
+            </table>
+          </>
+        }
+      />
     </Layout>
   );
 };
 
 export default FARQuickReference;
+
+function ReferenceRow({ name, reference }: ReferenceRowProps) {
+  return (
+    <tr>
+      <th scope="row" className="pr-10">
+        {reference}
+      </th>
+      <td>{name}</td>
+    </tr>
+  );
+}
