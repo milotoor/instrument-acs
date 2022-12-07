@@ -1,3 +1,4 @@
+import { DateTime } from 'luxon';
 import React from 'react';
 
 import {
@@ -60,9 +61,10 @@ export function TaskPage(props: TaskPageProps) {
 
 function LastUpdatedWidget({ task }: LastUpdatedWidgetProps) {
   const [updated, sha] = task.updated;
+  const date = DateTime.fromRFC2822(updated);
   return (
     <Link className="text-sm mt-1" color="text-slate-300" href={uri.github('commit', sha)}>
-      <span>Last updated:</span> <Bold>{updated}</Bold>
+      <span>Last updated:</span> <Bold>{date.toLocaleString(DateTime.DATE_FULL)}</Bold>
     </Link>
   );
 }
