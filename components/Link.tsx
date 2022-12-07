@@ -30,7 +30,7 @@ type ReferenceLinkProps = CommonLinkProps & {
   title?: string;
 };
 
-type AIMReference = [number, number, number, ...(string | number)[]];
+type AIMReference = [number, number, number?, ...(string | number)[]];
 type AIMProps = CommonLinkProps & { bold?: boolean; paragraph: AIMReference };
 type FARReference = [number, number, ...(string | number)[]];
 type FARProps = CommonLinkProps & {
@@ -136,7 +136,8 @@ export function AIM({ bold = true, paragraph, ...rest }: AIMProps) {
     <Link bold={bold} href={aimURI} {...rest}>
       AIM{' '}
       <span className="whitespace-nowrap">
-        {chapter}-{section}-{subsection}
+        {chapter}-{section}
+        {typeof subsection === 'number' && `-` + subsection}
         {subsectionID ? ' ' + subsectionID : null}
       </span>
     </Link>

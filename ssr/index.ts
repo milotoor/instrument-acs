@@ -40,7 +40,7 @@ function getSectionStructure(pathToRoot: string = '.'): ACS.Raw.Section[] {
 
 function getImageData(pathToRoot: string = '.'): ACS.Images {
   const tree = dirTree(path.join(pathToRoot, 'public/img'), { extensions: /(webp|gif|svg)/ });
-  const sections = tree?.children?.filter((child) => child.name.match(/^\d$/)) ?? [];
+  const sections = tree?.children?.filter((child) => child.name.match(/^\d|misc$/)) ?? [];
   return Object.fromEntries(
     sections.flatMap((section) => {
       return (section.children ?? []).map((img) => {

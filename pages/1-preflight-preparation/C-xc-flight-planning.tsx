@@ -609,7 +609,7 @@ export default XcFlightPlanning;
 
 const references = {
   dma: {
-    presentation: uri.atc(
+    presentation: uri.faa.atc(
       'flight_info/aeronav/acf/media/Presentations/20-02-Designated-Mountainous-Areas.pdf'
     ),
     explainer: 'https://bruceair.wordpress.com/2020/11/10/redefining-designated-mountainous-areas/',
