@@ -6,7 +6,7 @@ import Amplify from '@aws-amplify/core';
 import 'katex/dist/katex.min.css';
 import type { AppProps } from 'next/app';
 import config from '../lib/aws-exports';
-import '../styles/globals.css';
+import '../styles.css';
 
 Amplify.configure(config);
 
