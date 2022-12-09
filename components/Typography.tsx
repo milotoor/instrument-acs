@@ -24,7 +24,7 @@ type InlineListProps = ChildProp<React.ReactNode[]> & {
 };
 
 type KatexProps = ChildProp<string> & { block?: boolean } & React.HTMLAttributes<HTMLDivElement>;
-type NoteCardProps = { note: WrapParagraphProps['content'] };
+type NoteCardProps = { label?: string; note: WrapParagraphProps['content'] };
 type ParagraphProps = ChildProp & ReferenceListProps & { heading?: string; hr?: boolean };
 type QuotationProps = ChildProp & QuotationSourceProps & { inline?: boolean; padded?: boolean };
 type QuotationSourceProps = { source?: [string, string] | Reference };
@@ -125,10 +125,15 @@ export function Katex({ block = false, children, ...rest }: KatexProps) {
   });
 }
 
-export function NoteCard({ note }: NoteCardProps) {
+export function NoteCard({ label, note }: NoteCardProps) {
   if (!note) return null;
   return (
-    <div className="w-full bg-white text-black my-5 rounded-lg shadow-[0px_0px_15px] shadow-yellow-400 text-sm">
+    <div className="w-full bg-white text-black my-5 rounded-lg shadow-[0px_0px_15px] shadow-yellow-400 text-sm relative">
+      {label && (
+        <span className="absolute top-0 left-4 -translate-y-1/2 bg-theme-gradient text-white rounded-full px-2 font-bold cursor-default">
+          {label}
+        </span>
+      )}
       <WrapParagraph content={note} />
     </div>
   );

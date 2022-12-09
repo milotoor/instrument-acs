@@ -119,7 +119,7 @@ function TopBar() {
     <div
       className={cn(
         barClasses,
-        'z-10 flex-shrink-0 shadow-xl shadow-slate-800 lg:justify-center bg-gradient-to-r from-cyan-500 to-blue-500'
+        'z-10 flex-shrink-0 shadow-xl shadow-slate-800 lg:justify-center bg-theme-gradient'
       )}
     >
       {/* ml-16 provides space for the hamburger menu */}
