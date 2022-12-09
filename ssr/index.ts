@@ -9,14 +9,21 @@ import { getLastUpdates } from './last_updates';
 
 export function getStructure(pathToRoot: string = '.') {
   return {
+    aim: getAIM(),
     images: getImageData(pathToRoot),
     sections: getSectionStructure(pathToRoot),
   };
 }
 
+function getAIM() {
+  const aimPath = path.join('.', 'data/aim.toml');
+  const fileContent = fs.readFileSync(aimPath).toString();
+  return toml.parse(fileContent);
+}
+
 /** Loads the ACS .toml files, returning an array of "section" data */
 function getSectionStructure(pathToRoot: string = '.'): ACS.Raw.Section[] {
-  const tree = dirTree(path.join(pathToRoot, 'acs'));
+  const tree = dirTree(path.join(pathToRoot, 'data/acs'));
   const areas = tree!.children!.filter((child) => child.name.match(/\d\./));
   const updates = getLastUpdates(pathToRoot);
 
