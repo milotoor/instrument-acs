@@ -8,6 +8,7 @@ import {
   Info,
   InlineList,
   Link,
+  Success,
   TaskPage,
   Term,
   Warning,
@@ -55,6 +56,13 @@ const UnusualAttitudes: ACS.Page = (props) => {
                 </BulletList>
               </>
             </BulletList>
+          </>,
+
+          <>
+            If you've lost your attitude indicator this recovery becomes much more challenging. The
+            best proxy is to <Success>stabilize the ASI and altimeter</Success>; this state
+            indicates you are in approximate level, un-accelerated flight.{' '}
+            <Warning>The VSI lags, so it will not immediately indicate you are level.</Warning>
           </>,
 
           <>
@@ -129,7 +137,7 @@ const UnusualAttitudes: ACS.Page = (props) => {
         s1: [
           <>
             As always in instrument flight, <Info>cross-checking your instruments is vital!</Info>{' '}
-            You should be able to immediately recognize if you are nose-low or nose-high with a
+            You should be able to immediately recognize if you are nose-high or nose-low with a
             quick glance at the attitude indicator: it'll be{' '}
             <span className="font-bold text-blue-500">very blue</span> or{' '}
             <span className="font-bold text-amber-800">very brown</span>! On the check ride this is

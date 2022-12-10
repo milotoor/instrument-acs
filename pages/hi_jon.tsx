@@ -1,14 +1,13 @@
 import React from 'react';
 
 import { Image, Layout, NoteCard } from '../components';
-import { ACS, useACS } from '../lib';
+import { ACS } from '../lib';
 import { getStaticPropsFn } from '../ssr';
 
 export const getStaticProps = getStaticPropsFn;
 const HiJon: ACS.Page = ({ rawData }) => {
-  const acsData = useACS(rawData);
   return (
-    <Layout acs={acsData} title="Hi, Jon!">
+    <Layout data={rawData} title="Hi, Jon!">
       <h1 className="text-title text-glow-gold">Hi, JT!</h1>
 
       <Image.Row align="center">

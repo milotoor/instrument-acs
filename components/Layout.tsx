@@ -2,7 +2,7 @@ import cn from 'classnames';
 import Head from 'next/head';
 import React from 'react';
 
-import { ACS, ChildProp, tailwindBreakpoints, uri, useClientRendering } from '../lib';
+import { ACS, ChildProp, Data, tailwindBreakpoints, uri, useClientRendering } from '../lib';
 import { AppContext, BreakpointContext } from './context';
 import { Link } from './Link';
 
@@ -11,13 +11,13 @@ type SidebarProps = { isOpen: boolean; setOpen: (open: boolean) => void };
 type SidebarLinkProps = { icon?: React.ReactNode; link: string; title: string };
 type TaskListProps = { activeTask?: ACS.Task.Letter; className?: string; tasks: ACS.Task[] };
 type LayoutProps = ChildProp & {
-  acs: ACS;
+  data: Data.Raw;
   section?: ACS.Section.Number;
   task?: ACS.Task.Letter;
   title: string;
 };
 
-export function Layout({ acs, children, section, task, title }: LayoutProps) {
+export function Layout({ data, children, section, task, title }: LayoutProps) {
   const [dimensions, setDimensions] = React.useState<BreakpointContext>();
 
   // Calculates the window dimensions and recalculates them whenever the window is resized. This
@@ -52,7 +52,7 @@ export function Layout({ acs, children, section, task, title }: LayoutProps) {
   });
 
   return (
-    <AppContext.Provider value={{ acs, section, task }}>
+    <AppContext.Provider value={{ data: { ...data, acs: new ACS(data.acs) }, section, task }}>
       <Head>
         <title>{title}</title>
       </Head>
@@ -118,7 +118,7 @@ function TopBar() {
     <div
       className={cn(
         barClasses,
-        'z-10 flex-shrink-0 shadow-xl shadow-slate-800 lg:justify-center bg-gradient-to-r from-cyan-500 to-blue-500'
+        'z-10 flex-shrink-0 shadow-xl shadow-slate-800 lg:justify-center bg-theme-gradient'
       )}
     >
       {/* ml-16 provides space for the hamburger menu */}
@@ -166,7 +166,7 @@ function Sidebar(props: SidebarProps) {
         <SidebarButton {...props} />
         <div className="mb-4">
           <SidebarLink title="Home" link="/" />
-          {/*<SidebarLink title="FAR Quick Reference" link="/far_quick_reference" />*/}
+          <SidebarLink title="Regulation Quick Reference" link="/regulatory_quick_reference" />
           <SidebarLink
             icon={<img alt="GitHub" src="/img/github.png" height={32} width={32} />}
             title="Source Code"
@@ -228,7 +228,8 @@ function SidebarLink({ icon, link, title }: SidebarLinkProps) {
 
 const activeLinkColor = 'text-glow-gold';
 export function TableOfContents() {
-  const { acs, section, task } = React.useContext(AppContext);
+  const { data, section, task } = React.useContext(AppContext);
+  const { acs } = data;
   return (
     <ol className="list-decimal leading-7 ml-8 mt-4">
       {acs.sections.map(({ name, number, tasks, uri }) => (

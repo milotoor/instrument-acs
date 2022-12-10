@@ -5,11 +5,13 @@ import React from 'react';
 import {
   ACS,
   ChildProp,
+  Data,
   makeAnchorId,
   objectHasProperty,
   referenceNames,
   referenceURIs,
   uri,
+  useAIM,
 } from '../lib';
 import { AppContext } from './context';
 import { Emphasize, Tooltip } from './Typography';
@@ -30,8 +32,7 @@ type ReferenceLinkProps = CommonLinkProps & {
   title?: string;
 };
 
-type AIMReference = [number, number, number?, ...(string | number)[]];
-type AIMProps = CommonLinkProps & { bold?: boolean; paragraph: AIMReference };
+type AIMProps = CommonLinkProps & { bold?: boolean; paragraph: Data.AIM.Reference };
 type FARReference = [number, number, ...(string | number)[]];
 type FARProps = CommonLinkProps & {
   appendix?: [number, string];
@@ -103,7 +104,7 @@ export const Link = Object.assign(
 
     Task({ id, ...props }: TaskLinkProps) {
       const context = React.useContext(AppContext);
-      const { acs } = context;
+      const { acs } = context.data;
       const taskLetter = props.task || context.task;
       const section = props.section || context.section;
       if (!section || !taskLetter) throw Error('Unable to identify task for link');
@@ -129,18 +130,21 @@ export const Link = Object.assign(
 
 export function AIM({ bold = true, paragraph, ...rest }: AIMProps) {
   const [chapter, section, subsection, ...components] = paragraph;
+  const name = useAIM(paragraph);
 
   let aimURI = uri.aim(chapter, section, subsection);
   const subsectionID = components.length ? ' ' + components.map((id) => `(${id})`).join('') : '';
   return (
-    <Link bold={bold} href={aimURI} {...rest}>
-      AIM{' '}
-      <span className="whitespace-nowrap">
-        {chapter}-{section}
-        {typeof subsection === 'number' && `-` + subsection}
-        {subsectionID ? ' ' + subsectionID : null}
-      </span>
-    </Link>
+    <Tooltip message={name}>
+      <Link bold={bold} href={aimURI} {...rest}>
+        AIM{' '}
+        <span className="whitespace-nowrap">
+          {chapter}-{section}
+          {typeof subsection === 'number' && `-` + subsection}
+          {subsectionID ? ' ' + subsectionID : null}
+        </span>
+      </Link>
+    </Tooltip>
   );
 }
 

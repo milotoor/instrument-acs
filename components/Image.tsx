@@ -99,8 +99,8 @@ function Attribution(props: AttributionProps) {
 export const Image = Object.assign(
   function Image(props: ImageProps) {
     const { children: caption, noShadow = false, src, type = 'webp' } = props;
-    const { section, acs } = React.useContext(AppContext);
-    const { images } = acs;
+    const { section, data } = React.useContext(AppContext);
+    const { images } = data;
     const srcWithSection = [section || 'misc', src].join('/');
     const dimensions = images && images[srcWithSection];
     const hasCaption = !!caption;
