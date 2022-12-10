@@ -1,8 +1,8 @@
 from bs4 import BeautifulSoup, Tag
+import json
 from pathlib import Path
 import re
 import requests
-import tomli_w
 
 base_url = "https://www.faa.gov/air_traffic/publications/atpubs/aim_html/"
 paragraph_name_regex = re.compile(r"(\d+-\d+-\d+.) (.*)")
@@ -74,8 +74,8 @@ def write_to_file(data: AIMData):
     """Save the results to the data directory"""
     results = create_toml_object(data)
     data_dir = Path(__file__).parent.parent / "data"
-    with open(data_dir / "aim.toml", "bw") as f:
-        tomli_w.dump(results, f)
+    with open(data_dir / "aim.json", "w") as f:
+        json.dump(results, f, indent=2)
 
 
 def scrape():

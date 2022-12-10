@@ -16,9 +16,9 @@ export function getStructure(pathToRoot: string = '.') {
 }
 
 function getAIM() {
-  const aimPath = path.join('.', 'data/aim.toml');
+  const aimPath = path.join('.', 'data/aim.json');
   const fileContent = fs.readFileSync(aimPath).toString();
-  return toml.parse(fileContent);
+  return JSON.parse(fileContent);
 }
 
 /** Loads the ACS .toml files, returning an array of "section" data */
