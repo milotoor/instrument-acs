@@ -4,25 +4,18 @@ import imageSize from 'image-size';
 import path from 'path';
 import toml from 'toml';
 
-import { ACS } from '../lib';
+import { ACS, Data } from '../lib';
 import { getLastUpdates } from './last_updates';
 
 export function getStructure(pathToRoot: string = '.') {
   return {
-    aim: getAIM(),
+    acs: getSectionStructure(pathToRoot),
     images: getImageData(pathToRoot),
-    sections: getSectionStructure(pathToRoot),
   };
 }
 
-function getAIM() {
-  const aimPath = path.join('.', 'data/aim.json');
-  const fileContent = fs.readFileSync(aimPath).toString();
-  return JSON.parse(fileContent);
-}
-
 /** Loads the ACS .toml files, returning an array of "section" data */
-function getSectionStructure(pathToRoot: string = '.'): ACS.Raw.Section[] {
+function getSectionStructure(pathToRoot: string = '.'): ACS.Raw {
   const tree = dirTree(path.join(pathToRoot, 'data/acs'));
   const areas = tree!.children!.filter((child) => child.name.match(/\d\./));
   const updates = getLastUpdates(pathToRoot);
@@ -45,7 +38,7 @@ function getSectionStructure(pathToRoot: string = '.'): ACS.Raw.Section[] {
   });
 }
 
-function getImageData(pathToRoot: string = '.'): ACS.Images {
+function getImageData(pathToRoot: string = '.'): Data.Images {
   const tree = dirTree(path.join(pathToRoot, 'public/img'), { extensions: /(webp|gif|svg)/ });
   const sections = tree?.children?.filter((child) => child.name.match(/^\d$/)) ?? [];
   return Object.fromEntries(
@@ -53,7 +46,7 @@ function getImageData(pathToRoot: string = '.'): ACS.Images {
       return (section.children ?? []).map((img) => {
         const { name, path } = img;
         const nameNoSuffix = name.slice(0, name.lastIndexOf('.'));
-        return [`${section.name}/${nameNoSuffix}`, imageSize(path) as ACS.Image];
+        return [`${section.name}/${nameNoSuffix}`, imageSize(path) as Data.Image];
       });
     })
   );

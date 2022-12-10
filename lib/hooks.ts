@@ -1,10 +1,10 @@
 import * as React from 'react';
 import useResizeObserver from '@react-hook/resize-observer';
 
-import { ACS } from './acs_data';
+import { ACS, Data } from './acs_data';
 
-export function useACS(rawData: ACS.Raw) {
-  return React.useMemo(() => new ACS(rawData), []);
+export function useACS(rawData: Data.Raw) {
+  return React.useMemo(() => new ACS(rawData.acs), []);
 }
 
 /**

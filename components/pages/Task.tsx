@@ -20,7 +20,7 @@ type ItemHeadingProps = { marker: string; id: string; text: string };
 type LastUpdatedWidgetProps = { task: ACS.Task };
 type ReferencesSectionProps = { references: string[] };
 type SectionContainerProps = ChildProp & { heading: string };
-type TaskPageProps = ACS.TopLevelProps & {
+type TaskPageProps = ACS.Page.DataProps & {
   notes?: NotesObject;
   section: ACS.Section.Number;
   task: ACS.Task.Letter;
@@ -37,7 +37,7 @@ export function TaskPage(props: TaskPageProps) {
   const task = acsData.getTask(sectionNumber, taskLetter);
   const dataSectionProps = { task, notes };
   return (
-    <Layout acs={acsData} section={sectionNumber} task={taskLetter} title={task.name}>
+    <Layout data={rawData} section={sectionNumber} task={taskLetter} title={task.name}>
       <Link className="text-subtitle" color={null} href={section.uri}>
         Section {section.numeral}. {section.name}
       </Link>

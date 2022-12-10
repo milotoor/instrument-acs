@@ -103,7 +103,7 @@ export const Link = Object.assign(
 
     Task({ id, ...props }: TaskLinkProps) {
       const context = React.useContext(AppContext);
-      const { acs } = context;
+      const { acs } = context.data;
       const taskLetter = props.task || context.task;
       const section = props.section || context.section;
       if (!section || !taskLetter) throw Error('Unable to identify task for link');
