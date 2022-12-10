@@ -139,7 +139,8 @@ export function AIM({ bold = true, paragraph, ...rest }: AIMProps) {
       <Link bold={bold} href={aimURI} {...rest}>
         AIM{' '}
         <span className="whitespace-nowrap">
-          {chapter}-{section}-{subsection}
+          {chapter}-{section}
+          {typeof subsection === 'number' && `-` + subsection}
           {subsectionID ? ' ' + subsectionID : null}
         </span>
       </Link>

@@ -30,7 +30,8 @@ type ImageProps = Partial<ChildProp> & {
 };
 
 type ImageElement = React.ReactElement<ImageProps>;
-type ImageRowProps = ChildProp<[ImageElement, ImageElement]>;
+type ImageRowAlignment = 'top' | 'center' | 'bottom';
+type ImageRowProps = ChildProp<[ImageElement, ImageElement]> & { align?: ImageRowAlignment };
 
 const licenseHrefs = {
   'CC BY-SA 4.0': 'https://creativecommons.org/licenses/by-sa/4.0/',
@@ -100,7 +101,7 @@ export const Image = Object.assign(
     const { children: caption, noShadow = false, src, type = 'webp' } = props;
     const { section, data } = React.useContext(AppContext);
     const { images } = data;
-    const srcWithSection = [section, src].join('/');
+    const srcWithSection = [section || 'misc', src].join('/');
     const dimensions = images && images[srcWithSection];
     const hasCaption = !!caption;
 
@@ -139,9 +140,15 @@ export const Image = Object.assign(
   }
 );
 
-function ImageRow({ children }: ImageRowProps) {
+function ImageRow({ align = 'center', children }: ImageRowProps) {
   return (
-    <div className="flex flex-wrap justify-center items-center">
+    <div
+      className={cn('flex flex-wrap justify-center', {
+        'items-start': align === 'top',
+        'items-center': align === 'center',
+        'items-end': align === 'bottom',
+      })}
+    >
       <div className="md:flex-half">{children[0]}</div>
       <div className="md:flex-half">{children[1]}</div>
     </div>

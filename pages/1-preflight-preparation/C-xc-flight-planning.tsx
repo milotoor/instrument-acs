@@ -5,6 +5,7 @@ import {
   Bold,
   BulletList,
   Collapse,
+  Danger,
   FAR,
   Gray,
   Image,
@@ -151,19 +152,19 @@ const XcFlightPlanning: ACS.Page = (props) => {
                     If you have a WAAS-capable aircraft, (i.e. your aircraft is equipped with a{' '}
                     <Link href={references.tso.c145}>TSO-C145</Link> or{' '}
                     <Link href={references.tso.c146}>TSO-C146</Link> GPS){' '}
-                    <Bold>
+                    <Info>
                       you are allowed to plan to use an RNAV approach at both the destination and
                       alternate
-                    </Bold>
-                    , though you must use nonprecision minima for planning purposes. See{' '}
-                    <AIM paragraph={[1, 1, 18, 'c', 9, 'a']} />:
-                    <Quotation padded>
+                    </Info>
+                    , though{' '}
+                    <Warning>you must use nonprecision minima for planning purposes:</Warning>
+                    <Quotation padded source={<AIM paragraph={[1, 1, 18, 'c', 9, 'a']} />}>
                       When using WAAS at an alternate airport, flight planning must be based on
-                      flying the RNAV (GPS) LNAV or circling minima line...91 non-precision weather
-                      requirements must be used for planning. Upon arrival at an alternate, when the
-                      WAAS navigation system indicates that LNAV/VNAV or LPV service is available,
-                      then vertical guidance may be used to complete the approach using the
-                      displayed level of service
+                      flying the RNAV (GPS) LNAV or circling minima line...Part 91 non-precision
+                      weather requirements must be used for planning. Upon arrival at an alternate,
+                      when the WAAS navigation system indicates that LNAV/VNAV or LPV service is
+                      available, then vertical guidance may be used to complete the approach using
+                      the displayed level of service
                     </Quotation>
                   </>
                   <>
@@ -171,10 +172,10 @@ const XcFlightPlanning: ACS.Page = (props) => {
                     a <Link href={references.tso.c129}>TSO-C129</Link> or{' '}
                     <Link href={references.tso.c196}>TSO-C196</Link> GPS, or you have no GPS at all)
                     you are allowed to plan to use an RNAV approach at{' '}
-                    <Bold>
+                    <Warning>
                       either the destination or the alternate,{' '}
                       <span className="italic">but not both</span>
-                    </Bold>
+                    </Warning>
                     . Additionally, the aircraft must be equipped with fault detection and exclusion
                     (FDE) and the pilot must perform a preflight RAIM check. See{' '}
                     <AIM paragraph={[1, 1, 17, 'b', 5, 'c']} />.
@@ -234,7 +235,7 @@ const XcFlightPlanning: ACS.Page = (props) => {
 
           <>
             The minimum altitude for IFR flight depends on the area. In{' '}
-            <Bold>Designated Mountainous Terrain (DMA)</Bold> the MIA is 2,000 feet above the
+            <Term>Designated Mountainous Terrain (DMA)</Term> the MIA is 2,000 feet above the
             highest obstacle in a 4 mile radius. In non-mountainous terrain the MIA is 1,000 feet.
             At this point in time, virtually the entire western US is considered DMA, though there
             is an FAA effort underway to change this (see collapsed section below).{' '}
@@ -297,10 +298,10 @@ const XcFlightPlanning: ACS.Page = (props) => {
               </>
               <>
                 You must comply with IFR regulations applicable to your flight. That means{' '}
-                <Bold>
+                <Warning>
                   you must adhere to minimum IFR altitudes, your ATC clearance, position reporting,
                   radio communications, course to be flown, etc.
-                </Bold>
+                </Warning>
               </>
               <>
                 You should advise ATC before any altitude change when operating VFR-on-top so ATC
@@ -343,7 +344,9 @@ const XcFlightPlanning: ACS.Page = (props) => {
             test (as I do when flying anywhere), and for the most part this should be satisfactory
             for the examiner. It's important to know how to do the calculations by hand in case it
             comes to that, but it probably won't.{' '}
-            <Bold>Be able to justify the ForeFlight performance profile for your aircraft.</Bold>
+            <Warning>
+              Be able to justify the ForeFlight performance profile for your aircraft.
+            </Warning>
           </>,
           <Collapse heading="Calculating true airspeed">
             <>
@@ -396,10 +399,10 @@ const XcFlightPlanning: ACS.Page = (props) => {
             <>
               Hence, the only inputs required are the height, OAT, sea level pressure and calibrated
               airspeed.{' '}
-              <Bold gray>
+              <Info>
                 A decent rule of thumb is that TAS is 2% greater than CAS for every thousand feet of
                 altitude.
-              </Bold>
+              </Info>
             </>
           </Collapse>,
         ],
@@ -463,11 +466,13 @@ const XcFlightPlanning: ACS.Page = (props) => {
         // Flight plan elements
         k4: [
           <>
-            An IFR flight plan and a clearance are required for operating{' '}
-            <Bold>in controlled airspace</Bold> under IFR. Therefore, no flight plan is required in
-            class G airspace (but VFR rules require you to remain clear of clouds).{' '}
-            <AIM paragraph={[5, 1, 6]} /> describes how to fill out a flight plan. Important items
-            include:
+            <Info>
+              An IFR flight plan and a clearance are required for operating in controlled airspace
+              under IFR.
+            </Info>{' '}
+            Therefore, no flight plan is required in class G airspace (but VFR rules require you to
+            remain clear of clouds). <AIM paragraph={[5, 1, 6]} /> describes how to fill out a
+            flight plan. Important items include:
             <BulletList type="decimal">
               <>
                 ATC issues clearances based on aircraft capabilities filed in Items 10 and 18, so{' '}
@@ -571,8 +576,11 @@ const XcFlightPlanning: ACS.Page = (props) => {
                   filed in the flight plan.
                 </Warning>{' '}
                 The altitude (or "expect N, M minutes after departure") will be included in the
-                clearance. If any part of this is unclear,{' '}
-                <Bold>do not hesitate to clarify with ATC and request a full route clearance!</Bold>{' '}
+                clearance.{' '}
+                <Danger>
+                  If any part of this is unclear, do not hesitate to clarify with ATC and request a
+                  full route clearance!
+                </Danger>{' '}
                 See <AIM paragraph={[5, 2, 6]} /> for more.
               </>
             </BulletList>
@@ -601,7 +609,7 @@ export default XcFlightPlanning;
 
 const references = {
   dma: {
-    presentation: uri.atc(
+    presentation: uri.faa.atc(
       'flight_info/aeronav/acf/media/Presentations/20-02-Designated-Mountainous-Areas.pdf'
     ),
     explainer: 'https://bruceair.wordpress.com/2020/11/10/redefining-designated-mountainous-areas/',

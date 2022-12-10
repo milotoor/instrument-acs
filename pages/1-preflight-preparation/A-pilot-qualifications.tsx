@@ -1,6 +1,19 @@
 import React from 'react';
 
-import { Bold, BulletList, FAR, InlineList, Link, TaskPage } from '../../components';
+import {
+  Bold,
+  BulletList,
+  Danger,
+  FAR,
+  Info,
+  InlineList,
+  Link,
+  Quotation,
+  ReferenceList,
+  Success,
+  TaskPage,
+  Warning,
+} from '../../components';
 import { ACS } from '../../lib';
 import { getStaticPropsFn } from '../../ssr';
 
@@ -30,15 +43,18 @@ const PilotQualifications: ACS.Page = (props) => {
           </>,
 
           <>
-            For recordkeeping, the pilot must log the{' '}
-            <Bold>location and type of each instrument approach</Bold> and the name of the safety
-            pilot if required. See <FAR section={[61, 51, 'g']} />. The FAA's{' '}
-            <Link.Reference reference="InFO 15012" /> specifies that an approach can only be logged
-            if{' '}
+            For record-keeping,{' '}
+            <Info>
+              the pilot must log the <Bold>location and type of each instrument approach</Bold> and
+              the name of the safety pilot if there is one.
+            </Info>{' '}
+            See <FAR section={[61, 51, 'g']} />. The FAA's <Link.Reference reference="InFO 15012" />{' '}
+            specifies that an approach can only be logged if{' '}
             <BulletList type="decimal">
               <>
-                the aircraft is operated solely by reference to instruments in actual or simulated
-                IMC (one or both of "Actual IMC" and "Simulated IMC" must also be logged)
+                the aircraft is{' '}
+                <Bold>operated solely by reference to instruments in actual or simulated IMC</Bold>{' '}
+                (one or both of "Actual IMC" and "Simulated IMC" must also be logged)
               </>
               <>the simulated IMC continues to MDA or DA</>
               <>
@@ -51,27 +67,39 @@ const PilotQualifications: ACS.Page = (props) => {
 
           <>
             If your recent experience lapses, you have another six months to regain currency. This
-            can be done with a CFI or safety pilot, but until currency is regained you may not
-            operate as PIC under IFR. If <span className="italic">those</span> six months lapse,
-            your only option is an <Bold>instrument proficiency check</Bold> (see{' '}
-            <FAR section={[61, 57, 'd']} />
-            ). This basically means taking your check ride again, so don't let that happen.
+            can be done with a CFI or safety pilot, but{' '}
+            <Warning>until currency is regained you may not operate as PIC under IFR.</Warning> If{' '}
+            <span className="italic">those</span> six months lapse, your only option is an{' '}
+            <Bold>instrument proficiency check</Bold> (see <FAR section={[61, 57, 'd']} />
+            ). <Danger>This basically means taking your check ride again,</Danger> so don't let that
+            happen.
           </>,
         ],
 
         // Privileges and limitations
         k2: [
           <>
-            Per <FAR section={[61, 3]} />, having an instrument rating allows a pilot to operate:
-            <BulletList type="decimal">
-              <>under IFR</>
-              <>in weather conditions less than the minima for VFR flight</>
-              <>in Class A airspace</>
+            <Quotation source={<FAR section={[61, 3, 'e']} />}>
+              No person may act as <Bold>pilot in command</Bold> of a civil aircraft{' '}
+              <Bold>
+                under IFR or in weather conditions less than the minimums prescribed for VFR flight
+              </Bold>{' '}
+              unless that person holds...the appropriate aircraft category, class, type (if
+              required), and <Bold>instrument rating</Bold> on that person's pilot certificate for
+              any airplane, helicopter, or powered-lift being flown
+            </Quotation>
+          </>,
+
+          <>
+            Additionally, an instrument rating is required{' '}
+            <InlineList logic="or">
+              <>to fly in Class A airspace</>
               <>
-                for hire (assuming the pilot has a commercial license) at night or cross-country
-                beyond 50 nautical miles
+                for hire at night or cross-country beyond 50 nautical miles (assuming the pilot has
+                a commercial license)
               </>
-            </BulletList>
+            </InlineList>
+            .
           </>,
 
           <>
@@ -91,6 +119,9 @@ const PilotQualifications: ACS.Page = (props) => {
 
         // BasicMed
         k3: [
+          <ReferenceList
+            references={[<FAR section={[61, 113, 'i']} />, <FAR section={[61, 23, 'c', 3]} />]}
+          />,
           <>
             Per <FAR section={[61, 113, 'i']} />, a private pilot with a U.S. driver's license but
             no medical certificate may act as PIC of an aircraft if it{' '}
@@ -107,10 +138,102 @@ const PilotQualifications: ACS.Page = (props) => {
             </InlineList>
           </>,
           <>
-            They are required to have the <Bold>medical examination checklist</Bold> required by{' '}
-            <FAR section={[68, 7]} /> and <Bold>medical education course certificate</Bold> (see{' '}
+            They are required to have the <Info>medical examination checklist</Info> required by{' '}
+            <FAR section={[68, 7]} /> and <Info>medical education course certificate</Info> (see{' '}
             <FAR section={[68, 3]} />) in their logbook. To act as PIC on an IFR flight plan they
             must have an instrument rating and be current.
+          </>,
+        ],
+
+        // Currency vs. proficiency
+        r1: (
+          <>
+            Currency means legal. Proficient means safe. My plan to maintain proficiency (and
+            currency) is to{' '}
+            <Info>
+              routinely fly in the sim with my group of PilotBuddies, and help coach others on their
+              own IFR journey.
+            </Info>
+          </>
+        ),
+
+        // Personal minimums
+        r2: [
+          <>
+            My personal minimums are going to be very restrictive for a while. At a little less than
+            200 hours total, I am still smack in the middle of{' '}
+            <Link href={references.killing_zone}>the killing zone</Link>, in which a
+            disproportionate number of relatively new pilots die, largely due to inexperience and
+            poor ADM.{' '}
+            <Danger>
+              These pilots are flying as PIC without needing the sign-off of an instructor. They
+              over-challenge themselves (or simply don't consider the challenge they're embracing),
+              get into trouble and kill themselves and their unwitting passengers.
+            </Danger>
+          </>,
+
+          <>
+            I do not wish for this to happen to me. Thus,{' '}
+            <Success>
+              I will be restricting the flights I undertake as I build more experience.
+            </Success>{' '}
+            The tentative plan is this:
+            <BulletList type="disc">
+              <>
+                To begin with, I am not going to fly at all in IMC. I first want to get some solo
+                time flying IFR in VMC. I hope this will build confidence and allow me some time to
+                navigate the procedural world of IFR on my own.
+              </>
+              <>
+                Once I feel confident enough about flying single-pilot IFR,{' '}
+                <Success>I will allow myself to fly in IMC</Success> but{' '}
+                <Warning>
+                  only to circling minimums, and never at night nor over mountainous terrain
+                </Warning>{' '}
+                (though my definition of mountainous will differ from the FAA's).
+              </>
+              <>
+                Further down the line perhaps I will relax some of those constraints further, but
+                it's not yet clear to me when that will be.
+              </>
+            </BulletList>
+          </>,
+        ],
+
+        // Fitness for flight
+        r3: [
+          <>
+            Of course, the standard <Bold>IMSAFE checklist</Bold> applies:
+            <BulletList type="disc">
+              <>
+                <Bold>I</Bold>llness
+              </>
+              <>
+                <Bold>M</Bold>edication
+              </>
+              <>
+                <Bold>S</Bold>tress
+              </>
+              <>
+                <Bold>A</Bold>locohol
+              </>
+              <>
+                <Bold>F</Bold>atigue
+              </>
+              <>
+                <Bold>E</Bold>motion/eating
+              </>
+            </BulletList>
+          </>,
+
+          <>
+            However, the same checklist should not have the exact same meanings/implications for IFR
+            flight as it does for VFR.{' '}
+            <Info>
+              Flying IFR is a more mentally challenging activity than flying VFR. Therefore, it's
+              appropriate to have a different (read: lower) threshold for acceptable risk when
+              evaluating one's fitness to fly IFR.
+            </Info>
           </>,
         ],
       }}
@@ -119,3 +242,7 @@ const PilotQualifications: ACS.Page = (props) => {
 };
 
 export default PilotQualifications;
+
+const references = {
+  killing_zone: 'https://www.amazon.com/Killing-Zone-Second-How-Pilots/dp/0071798404',
+};

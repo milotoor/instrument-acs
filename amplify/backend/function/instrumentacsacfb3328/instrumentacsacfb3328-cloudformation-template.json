@@ -55,12 +55,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "instrumentacsd0795340",
+            "instrumentacsacfb3328",
             {
               "Fn::Join": [
                 "",
                 [
-                  "instrumentacsd0795340",
+                  "instrumentacsacfb3328",
                   "-",
                   {
                     "Ref": "env"
@@ -97,12 +97,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "instrumentacsLambdaRole13f90934",
+            "instrumentacsLambdaRole3ce9a51c",
             {
               "Fn::Join": [
                 "",
                 [
-                  "instrumentacsLambdaRole13f90934",
+                  "instrumentacsLambdaRole3ce9a51c",
                   "-",
                   {
                     "Ref": "env"
@@ -170,11 +170,12 @@
               }
             },
             {
-              "Action": [
-                "ses:SendEmail"
-              ],
+              "Action": "ses:SendEmail",
               "Effect": "Allow",
-              "Resource": "arn:aws:ses:us-west-1:164895447730:identity/milo.toor@gmail.com"
+              "Resource": [
+                "arn:aws:ses:us-west-1:164895447730:identity/milo.aero",
+                "arn:aws:ses:us-west-1:164895447730:identity/milo.toor@gmail.com"
+              ]
             }
           ]
         }

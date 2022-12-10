@@ -12,7 +12,7 @@ export function useAIM(paragraph: Data.AIM.Reference) {
   return React.useMemo(() => {
     const [chapter, section, subsection] = paragraph;
     try {
-      return aim[chapter][section][subsection];
+      return aim[chapter][section][subsection || 'name'];
     } catch (e) {}
   }, [paragraph]);
 }

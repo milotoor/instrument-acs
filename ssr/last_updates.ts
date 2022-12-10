@@ -1,6 +1,5 @@
 import { execSync } from 'child_process';
 import dirTree, { DirectoryTree } from 'directory-tree';
-import { DateTime } from 'luxon';
 import path from 'path';
 
 import { ACS } from '../lib';
@@ -17,10 +16,10 @@ type SectionUpdates = Record<Number, { updated: UpdateType; tasks: TaskUpdates }
  * As of October 17, 2022, this is the only usage of luxon in the entire site, but there is no TTFB
  * penalty incurred (as a result of larger bundle size) because this is only executed at build time.
  */
-function getLastUpdateForPath(path: string): UpdateType {
-  const gitLog = (format: string) => String(execSync(`git log -1 --format=%${format} "${path}"`));
-  const date = DateTime.fromRFC2822(gitLog('cD'));
-  return [date.toLocaleString(DateTime.DATE_FULL), gitLog('h')];
+function getLastUpdateForPath(path: string) {
+  const delimiter = '__';
+  const log = String(execSync(`git log -1 --format=%cD${delimiter}%h "${path}"`));
+  return log.split(delimiter) as UpdateType;
 }
 
 function getLastUpdateForTask({ name, path }: DirectoryTree) {

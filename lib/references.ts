@@ -1,5 +1,6 @@
 const cornell14CFR = 'https://www.law.cornell.edu/cfr/text/14';
-const faaHq = 'https://www.faa.gov/about/office_org/headquarters_offices';
+const faaBase = uriExtender('https://www.faa.gov');
+const faaHq = faaBase('about/office_org/headquarters_offices');
 
 // AeroNav organizes its IAP charts into folders of the form YYMM, where YY is the last two digits
 // of the current year, and MM is the 2-digit representation of the current month
@@ -21,7 +22,7 @@ export const uri = {
   aeronav_iap: (id: string) => `https://aeronav.faa.gov/d-tpp/${AERONAV_FOLDER}/${id}.PDF`,
 
   aim: (chapter?: number, section?: number, paragraph?: number) => {
-    const aimURIBase = uri.atc('publications/atpubs/aim_html/');
+    const aimURIBase = uri.faa.atc('publications/atpubs/aim_html/');
     if (typeof chapter === 'undefined') return aimURIBase;
     if (typeof section === 'undefined') return aimURIBase + `chap_${chapter}.html`;
 
@@ -31,8 +32,6 @@ export const uri = {
     const paraSuffix = [chapter, section, paragraph].join('-');
     return aimURIBase + `chap${chapter}_section_${section}.html#$paragraph${paraSuffix}`;
   },
-
-  atc: (rest: string) => `https://www.faa.gov/air_traffic/${rest}`,
 
   aviation_news_talk: (episode?: keyof typeof aviationNewsTalkEpisodes) => {
     const baseUrl = 'https://aviationnewstalk.com';
@@ -48,12 +47,14 @@ export const uri = {
     blog: (...components: string[]) => uri.boldMethod('blog', ...components),
   }),
 
-  faa: {
-    docs: uriExtender('https://www.faa.gov/documentLibrary/media'),
-    legal_interpretations: (rest: string) =>
-      `${faaHq}/agc/practice_areas/regulations/interpretations/Data/interps/${rest}`,
-    nav_services: (rest: string) => `${faaHq}/ato/service_units/techops/navservices/${rest}`,
-  },
+  faa: Object.assign(faaBase, {
+    atc: uriExtender(faaBase('air_traffic')),
+    docs: uriExtender(faaBase('documentLibrary/media')),
+    legal_interpretations: uriExtender(
+      `${faaHq}/agc/practice_areas/regulations/interpretations/Data/interps`
+    ),
+    nav_services: uriExtender(`${faaHq}/ato/service_units/techops/navservices`),
+  }),
 
   far: (part: number, section?: number) => {
     if (typeof section === 'undefined') return cornell14CFR + `/part-${part}`;
@@ -72,8 +73,9 @@ export const uri = {
   youtube: (id: string) => `https://youtu.be/${id}`,
 };
 
-const handbooksURIBase =
-  'https://www.faa.gov/sites/faa.gov/files/regulations_policies/handbooks_manuals/aviation';
+const handbook = uriExtender(
+  faaBase('sites/faa.gov/files/regulations_policies/handbooks_manuals/aviation')
+);
 
 const aviationNewsTalkEpisodes = {
   245: 'what-you-need-to-know-about-tis-tas-and-ads-b-traffic-systems-ga-news',
@@ -92,17 +94,19 @@ export const referenceURIs = {
   'AC 90-66B': uri.ac('90-66b'),
   'AC 90-100A': uri.ac('90-100A_CHG_2'),
   'AC 91-74': uri.ac('91-74B'),
+  'AC 91-92': uri.ac('91-92'),
   'AC 91.21-1': uri.ac('91.21-1D'),
   'AIM': uri.aim(),
-  'FAA-H-8083-2': 'https://www.faa.gov/sites/faa.gov/files/2022-06/risk_management_handbook_2A.pdf',
-  'FAA-H-8083-3': `${handbooksURIBase}/airplane_handbook/00_afh_full.pdf`,
-  'FAA-H-8083-15': `${handbooksURIBase}/FAA-H-8083-15B.pdf`,
-  'FAA-H-8083-16': `${handbooksURIBase}/instrument_procedures_handbook/FAA-H-8083-16B.pdf`,
-  'FAA-H-8083-25': 'https://www.faa.gov/sites/faa.gov/files/2022-03/pilot_handbook.pdf',
+  'FAA-H-8083-2': faaBase('sites/faa.gov/files/2022-06/risk_management_handbook_2A.pdf'),
+  'FAA-H-8083-3': handbook('airplane_handbook/00_afh_full.pdf'),
+  'FAA-H-8083-15': handbook(`FAA-H-8083-15B.pdf`),
+  'FAA-H-8083-16': handbook('instrument_procedures_handbook/FAA-H-8083-16B.pdf'),
+  'FAA-H-8083-25': faaBase('sites/faa.gov/files/2022-03/pilot_handbook.pdf'),
   'g1000': 'https://static.garmin.com/pumac/190-00498-08_0A_Web.pdf',
-  'IFP': uri.atc('flight_info/aeronav/procedures/'),
-  'InFO 15012':
-    'https://www.faa.gov/other_visit/aviation_industry/airline_operators/airline_safety/info/all_infos/media/2015/info15012.pdf',
+  'IFP': uri.faa.atc('flight_info/aeronav/procedures/'),
+  'InFO 15012': faaBase(
+    'sites/faa.gov/files/other_visit/aviation_industry/airline_operators/airline_safety/InFO15012.pdf'
+  ),
   'TERPS supplement': 'https://www.1800wxbrief.com/Website/aip/tpp/FRNTMATTER.pdf',
   'TSO-C145': uri.tso('efe54f1e6272a7068625811d0064b679/$FILE/TSO-C145e.pdf'),
   'TSO-C146': uri.tso('76fa4ba66612622a86257282006d332a/$FILE/TSO-C146b%20(3-2-07%20Revised).pdf'),
@@ -118,6 +122,7 @@ export const referenceNames = {
   'AC 68-1': 'AC 68-1 (Alternative Pilot Physical Examination and Education Requirements)',
   'AC 90-66B': 'AC 90-66B (Non-Towered Airport Flight Operations)',
   'AC 91-74': 'AC 91-74 (Pilot Guide: Flight in Icing Conditions)',
+  'AC 91-92': "AC 91-92 (Pilot's Guide to a Preflight Briefing)",
   'AC 91.21-1': 'AC 91.21-1 (Use of Portable Electronic Devices Aboard Aircraft)',
   'FAA-H-8083-2': 'Risk Management Handbook',
   'FAA-H-8083-3': 'Airplane Flying Handbook',
