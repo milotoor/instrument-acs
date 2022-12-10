@@ -1,10 +1,20 @@
 import * as React from 'react';
 import useResizeObserver from '@react-hook/resize-observer';
 
+import { aim } from '../data';
 import { ACS, Data } from './acs_data';
 
 export function useACS(rawData: Data.Raw) {
   return React.useMemo(() => new ACS(rawData.acs), []);
+}
+
+export function useAIM(paragraph: Data.AIM.Reference) {
+  return React.useMemo(() => {
+    const [chapter, section, subsection] = paragraph;
+    try {
+      return aim[chapter][section][subsection];
+    } catch (e) {}
+  }, [paragraph]);
 }
 
 /**

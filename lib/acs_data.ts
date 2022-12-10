@@ -82,6 +82,12 @@ export class ACS {
 
 export type Data = { acs: ACS; images: Data.Images };
 export namespace Data {
+  type Name = { name: string };
+  export type AIM = Record<number, Name & Record<number, Name & Record<number, string>>>;
+  export namespace AIM {
+    export type Reference = [number, number, number, ...(string | number)[]];
+  }
+
   export type Image = { width: number; height: number; type?: string };
   export type Images = Record<string, Image>;
 
