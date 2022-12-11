@@ -8,7 +8,7 @@ export const getStaticProps = getStaticPropsFn;
 const HiJon: ACS.Page = ({ rawData }) => {
   return (
     <Layout data={rawData} title="Hi, Jon!">
-      <h1 className="text-title text-glow-gold">Hi, JT!</h1>
+      <Layout.Title>Hi, JT!</Layout.Title>
 
       <Image.Row align="center">
         <NoteCard

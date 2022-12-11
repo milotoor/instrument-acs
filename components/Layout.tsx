@@ -7,6 +7,7 @@ import { AppContext, BreakpointContext } from './context';
 import { Link } from './Link';
 
 type BreakpointKey = keyof typeof tailwindBreakpoints;
+type PageTitleProps = ChildProp & { className?: string };
 type SidebarProps = { isOpen: boolean; setOpen: (open: boolean) => void };
 type SidebarLinkProps = { icon?: React.ReactNode; link: string; title: string };
 type TaskListProps = { activeTask?: ACS.Task.Letter; className?: string; tasks: ACS.Task[] };
@@ -17,63 +18,71 @@ type LayoutProps = ChildProp & {
   title: string;
 };
 
-export function Layout({ data, children, section, task, title }: LayoutProps) {
-  const [dimensions, setDimensions] = React.useState<BreakpointContext>();
-
-  // Calculates the window dimensions and recalculates them whenever the window is resized. This
-  // will cause the Layout component to set state immediately after mounting, resulting in two
-  // renders up front. This is not ideal; it would be preferable if the `dimensions` state could
-  // simply be initialized to the window dimensions on page load. However, that would interfere with
-  // SSR and re-hydration, as the server has no way of knowing the client's window size.
-  useClientRendering(() => {
-    window.addEventListener('resize', handleResize);
-    handleResize();
-    return () => window.removeEventListener('resize', handleResize);
-
-    // Handler to call on window resize. Determines which breakpoint should apply to the client
-    // window. Exactly one of the values in the object should be `true`; the rest should be `false`
-    function handleResize() {
-      setDimensions({
-        isXS: between(null, 'sm'),
-        isSmall: between('sm', 'md'),
-        isMedium: between('md', 'lg'),
-        isLarge: between('lg', 'xl'),
-        isXL: between('xl', 'xxl'),
-        isXXL: between('xxl', null),
-      });
-    }
-
-    // Returns `true` if `window.innerWidth` is greater than or equal to the tailwind breakpoint
-    // specified by `key1` *and* less than the breakpoint specified by `key2`.
-    function between(key1: BreakpointKey | null, key2: BreakpointKey | null) {
-      if (key1 && window.innerWidth < tailwindBreakpoints[key1]) return false;
-      return !key2 || window.innerWidth < tailwindBreakpoints[key2];
-    }
-  });
-
-  return (
-    <AppContext.Provider value={{ data: { ...data, acs: new ACS(data.acs) }, section, task }}>
-      <Head>
-        <title>{title}</title>
-      </Head>
-
-      {
-        // -webkit-fill-available is a weird hack to fix the "iOS viewport scroll bug"
-        // See https://css-tricks.com/css-fix-for-100vh-in-mobile-webkit/
-        //     https://allthingssmitty.com/2020/05/11/css-fix-for-100vh-in-mobile-webkit/
-      }
-      <div className="h-screen max-h-screen h-[-webkit-fill-available] flex justify-start">
-        <BreakpointContext.Provider value={dimensions}>
-          {
-            // Skip the first render entirely, until we have determined the window dimensions. This
-            // avoids an immediate repaint of size-sensitive content after the initial load
-            dimensions && <ScreenSizeSensitiveLayout>{children}</ScreenSizeSensitiveLayout>
-          }
-        </BreakpointContext.Provider>
-      </div>
-    </AppContext.Provider>
-  );
+function PageTitle({ children, className }: PageTitleProps) {
+  return <h1 className={cn('text-title text-glow-gold', className)}>{children}</h1>;
 }
+
+export const Layout = Object.assign(
+  function Layout(props: LayoutProps) {
+    const { data, children, section, task, title } = props;
+    const [dimensions, setDimensions] = React.useState<BreakpointContext>();
+
+    // Calculates the window dimensions and recalculates them whenever the window is resized. This
+    // will cause the Layout component to set state immediately after mounting, resulting in two
+    // renders up front. This is not ideal; it would be preferable if the `dimensions` state could
+    // simply be initialized to the window dimensions on page load. However, that would interfere with
+    // SSR and re-hydration, as the server has no way of knowing the client's window size.
+    useClientRendering(() => {
+      window.addEventListener('resize', handleResize);
+      handleResize();
+      return () => window.removeEventListener('resize', handleResize);
+
+      // Handler to call on window resize. Determines which breakpoint should apply to the client
+      // window. Exactly one of the values in the object should be `true`; the rest should be `false`
+      function handleResize() {
+        setDimensions({
+          isXS: between(null, 'sm'),
+          isSmall: between('sm', 'md'),
+          isMedium: between('md', 'lg'),
+          isLarge: between('lg', 'xl'),
+          isXL: between('xl', 'xxl'),
+          isXXL: between('xxl', null),
+        });
+      }
+
+      // Returns `true` if `window.innerWidth` is greater than or equal to the tailwind breakpoint
+      // specified by `key1` *and* less than the breakpoint specified by `key2`.
+      function between(key1: BreakpointKey | null, key2: BreakpointKey | null) {
+        if (key1 && window.innerWidth < tailwindBreakpoints[key1]) return false;
+        return !key2 || window.innerWidth < tailwindBreakpoints[key2];
+      }
+    });
+
+    return (
+      <AppContext.Provider value={{ data: { ...data, acs: new ACS(data.acs) }, section, task }}>
+        <Head>
+          <title>{title}</title>
+        </Head>
+
+        {
+          // -webkit-fill-available is a weird hack to fix the "iOS viewport scroll bug"
+          // See https://css-tricks.com/css-fix-for-100vh-in-mobile-webkit/
+          //     https://allthingssmitty.com/2020/05/11/css-fix-for-100vh-in-mobile-webkit/
+        }
+        <div className="h-screen max-h-screen h-[-webkit-fill-available] flex justify-start">
+          <BreakpointContext.Provider value={dimensions}>
+            {
+              // Skip the first render entirely, until we have determined the window dimensions. This
+              // avoids an immediate repaint of size-sensitive content after the initial load
+              dimensions && <ScreenSizeSensitiveLayout>{children}</ScreenSizeSensitiveLayout>
+            }
+          </BreakpointContext.Provider>
+        </div>
+      </AppContext.Provider>
+    );
+  },
+  { Title: PageTitle }
+);
 
 /**
  * Basic hook function to indicate if the screen size is on the smaller end-- i.e. medium or smaller

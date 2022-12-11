@@ -30,7 +30,7 @@ const Contact: ACS.Page = ({ rawData }) => {
 
   return (
     <Layout data={rawData} title="Contact">
-      <h1 className="text-title text-glow-gold">Contact</h1>
+      <Layout.Title>Contact</Layout.Title>
 
       <div className="py-4">
         Found something wrong? Have a question or suggestion? Please get in touch! I'll do my best

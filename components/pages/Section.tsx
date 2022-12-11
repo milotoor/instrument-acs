@@ -16,7 +16,7 @@ export function SectionPage({ note, number, rawData }: SectionPageProps) {
   const title = `Section ${numeral}. ${name}`;
   return (
     <Layout data={rawData} section={number} title={title}>
-      <h1 className="text-title text-glow-gold">{title}</h1>
+      <Layout.Title>{title}</Layout.Title>
 
       <div className="my-10">
         <h3 className="text-subtitle">Tasks</h3>

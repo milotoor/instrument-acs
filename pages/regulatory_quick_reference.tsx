@@ -46,7 +46,7 @@ export const getStaticProps = getStaticPropsFn;
 const FARQuickReference: ACS.Page = ({ rawData }) => {
   return (
     <Layout data={rawData} title="Regulatory Quick Reference">
-      <h1 className="text-title text-glow-gold">Regulatory Quick Reference</h1>
+      <Layout.Title>Regulatory Quick Reference</Layout.Title>
 
       <div className="pt-4">
         This page provides rapid access to some of the most commonly-cited passages in the FAR/AIM

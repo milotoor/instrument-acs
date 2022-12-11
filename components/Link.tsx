@@ -42,6 +42,7 @@ type FARProps = CommonLinkProps & {
 
 type TaskLinkProps = { section?: ACS.Section.Number; task?: ACS.Task.Letter; id: ACS.Item.ID };
 export type LinkProps = NextLinkProps & ChildProp & CommonLinkProps & { noUnderline?: boolean };
+type LinkToSelfProps = Omit<LinkProps, 'href'> & { id: string };
 type LinkableReference = keyof typeof referenceURIs;
 
 export const Link = Object.assign(
@@ -79,6 +80,7 @@ export const Link = Object.assign(
         </Link>
       );
     },
+
     Reference({ reference, text, ...rest }: ReferenceLinkProps) {
       let linkContent: React.ReactNode = reference;
       let title;
@@ -118,11 +120,17 @@ export const Link = Object.assign(
       return (
         <Tooltip message={task.name}>
           <Link href={`${task.uri}#${makeAnchorId(heading, itemId)}`}>
-            <span>
-              Section {section}, Task {taskLetter}
-            </span>
+            Section {section}, Task {taskLetter}
           </Link>
         </Tooltip>
+      );
+    },
+
+    ToSelf({ id, ...rest }: LinkToSelfProps) {
+      return (
+        <span id={id}>
+          <Link {...rest} href={'#' + id} />{' '}
+        </span>
       );
     },
   }
