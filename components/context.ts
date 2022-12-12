@@ -1,15 +1,15 @@
 import * as React from 'react';
-import { ACS } from '../lib';
+import { ACS, Data } from '../lib';
 
 /*************************** AppContext ***************************************/
 type AppContext = {
-  acs: ACS;
+  data: Data;
   section?: ACS.Section.Number;
   task?: ACS.Task.Letter;
 };
 
 export const AppContext = React.createContext<AppContext>({
-  acs: new ACS({ images: {}, sections: [] }),
+  data: { acs: new ACS([]), images: {} },
 });
 
 /*************************** NoteContext **************************************/

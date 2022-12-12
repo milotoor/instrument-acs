@@ -6,9 +6,8 @@ import { ChildProp, Colors, logWarning, makeAnchorId, OneOrMore } from '../lib';
 import { NoteContext } from './context';
 import { Link, LinkProps } from './Link';
 
-type BulletListProps = ChildProp<React.ReactNode[]> & {
-  type: 'alpha' | 'decimal' | 'disc' | 'roman' | 'square';
-};
+type BulletType = 'alpha' | 'decimal' | 'disc' | 'roman' | 'square';
+type BulletListProps = ChildProp<React.ReactNode[]> & { type: BulletType };
 
 type EmphasizeProps = ChildProp & {
   bold?: boolean;
@@ -24,7 +23,14 @@ type InlineListProps = ChildProp<React.ReactNode[]> & {
 };
 
 type KatexProps = ChildProp<string> & { block?: boolean } & React.HTMLAttributes<HTMLDivElement>;
-type NoteCardProps = { note: WrapParagraphProps['content'] };
+type NoteCardProps = {
+  className?: string;
+  label?: string;
+  note: WrapParagraphProps['content'];
+  padding?: Padding;
+};
+
+type Padding = 'sm' | 'md' | 'lg';
 type ParagraphProps = ChildProp & ReferenceListProps & { heading?: string; hr?: boolean };
 type QuotationProps = ChildProp & QuotationSourceProps & { inline?: boolean; padded?: boolean };
 type QuotationSourceProps = { source?: [string, string] | Reference };
@@ -125,10 +131,25 @@ export function Katex({ block = false, children, ...rest }: KatexProps) {
   });
 }
 
-export function NoteCard({ note }: NoteCardProps) {
+export function NoteCard({ className, label, note, padding = 'md' }: NoteCardProps) {
   if (!note) return null;
   return (
-    <div className="w-full bg-white text-black my-5 rounded-lg shadow-[0px_0px_15px] shadow-yellow-400 text-sm">
+    <div
+      className={cn(
+        'w-full relative bg-white text-black text-sm rounded-lg shadow-[0px_0px_15px] shadow-yellow-400',
+        className,
+        {
+          'my-2': padding === 'sm',
+          'my-5': padding === 'md',
+          'my-8': padding === 'lg',
+        }
+      )}
+    >
+      {label && (
+        <span className="absolute top-0 left-4 -translate-y-1/2 bg-theme-gradient text-white rounded-full px-2 font-bold cursor-default">
+          {label}
+        </span>
+      )}
       <WrapParagraph content={note} />
     </div>
   );
@@ -141,22 +162,20 @@ export function Paragraph({ children, heading, hr, references }: ParagraphProps)
     logWarning('References will not be rendered for a Paragraph with no heading');
   }
 
-  let id;
-  if (heading) {
-    const sanitizedHeading = heading.toLowerCase().split(' ').join('_');
-    id = makeAnchorId(sectionHeading, item, sanitizedHeading);
-  }
+  const id = heading
+    ? makeAnchorId(sectionHeading, item, heading.toLowerCase().split(' ').join('_'))
+    : null;
 
   return (
-    <div className="p-3 first:mt-0" id={id}>
+    <div className="p-3 first:mt-0">
       {hr ? <hr className="w-4/5 m-auto mb-5" /> : null}
-      {heading ? (
+      {id ? (
         <div className="flex flex-row items-center mb-1">
-          <Link color={null} href={`#${id}`}>
+          <Link.ToSelf color={null} id={id}>
             <span className="bg-indigo-500 px-2 py-1 inline-block rounded-xl text-white text-xs">
               <Bold>{heading}</Bold>
             </span>
-          </Link>
+          </Link.ToSelf>
           <ReferenceList className="ml-4" references={references} />
         </div>
       ) : null}
@@ -235,10 +254,10 @@ export function Tooltip({ message, children, noUnderline = false }: TooltipProps
         </span>
         {message && (
           <div className="absolute top-0 hidden mt-[-1.7rem] group-hover:block z-50">
-            <div className="py-1 px-2 text-xs text-white rounded-md [width:max-content] shadow-md shadow-slate-700 bg-gray-600 max-w-xl">
-              <Bold>{message}</Bold>
+            <div className="py-1 px-2 text-xs text-white font-bold rounded-md [width:max-content] shadow-md shadow-slate-700 bg-gray-600 max-w-xl text-ellipsis overflow-hidden">
+              {message}
             </div>
-            <span className="absolute top-[100%] left-1/2 -ml-[6px] border-[6px] border-solid border-transparent border-t-gray-600" />
+            <span className="absolute top-[100%] left-1/2 -ml-[4px] -rotate-45 -translate-y-[4px] border-[4px] border-solid border-transparent border-l-gray-600 border-b-gray-600" />
           </div>
         )}
       </div>

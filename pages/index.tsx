@@ -11,16 +11,15 @@ import {
   Term,
   Warning,
 } from '../components';
-import { ACS, ChildProp, uri, useACS } from '../lib';
+import { ACS, ChildProp, uri } from '../lib';
 import { getStaticPropsFn } from '../ssr';
 
 type FAQCardProps = ChildProp & { question: string };
 
 export const getStaticProps = getStaticPropsFn;
 const Home: ACS.Page = ({ rawData }) => {
-  const acsData = useACS(rawData);
   return (
-    <Layout acs={acsData} title="The Instrument ACS">
+    <Layout data={rawData} title="The Instrument ACS">
       <div className="max-w-[800px]">
         <h1 className="text-center sm:text-left text-7xl font-bold font-fancy pt-5 pb-10">
           The{' '}

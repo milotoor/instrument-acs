@@ -4,7 +4,7 @@ import React from 'react';
 import { FieldError, FieldValues, RegisterOptions, useForm, UseFormReturn } from 'react-hook-form';
 
 import { Bold, Layout } from '../components';
-import { ACS, ContactMessage, useACS } from '../lib';
+import { ACS, ContactMessage } from '../lib';
 import { createContactMessage } from '../lib/graphql/mutations';
 import { getStaticPropsFn } from '../ssr';
 
@@ -24,14 +24,13 @@ type FormInputProps = {
 
 export const getStaticProps = getStaticPropsFn;
 const Contact: ACS.Page = ({ rawData }) => {
-  const acsData = useACS(rawData);
   const [reqStatus, setReqStatus] = React.useState<RequestStatus>('unsubmitted');
   const disabled = ['submitted', 'success'].includes(reqStatus);
   const form = useForm<ContactMessage>({ reValidateMode: 'onSubmit' });
 
   return (
-    <Layout acs={acsData} title="Contact">
-      <h1 className="text-title text-glow-gold">Contact</h1>
+    <Layout data={rawData} title="Contact">
+      <Layout.Title>Contact</Layout.Title>
 
       <div className="py-4">
         Found something wrong? Have a question or suggestion? Please get in touch! I'll do my best

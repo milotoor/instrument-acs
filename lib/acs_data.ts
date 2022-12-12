@@ -2,7 +2,6 @@ import { NextPage } from 'next';
 
 import ACSSection = ACS.Section;
 import ACSTask = ACS.Task;
-import Raw = ACS.Raw;
 
 export namespace ACS {
   export namespace Item {
@@ -11,11 +10,11 @@ export namespace ACS {
     export type List = Record<string, Content>;
   }
 
-  export type Image = { width: number; height: number; type?: string };
-  export type Images = Record<string, Image>;
   export type LastUpdate = [string, string];
-  export type Page = NextPage<TopLevelProps>;
-  export type TopLevelProps = { rawData: ACS.Raw };
+  export type Page = NextPage<Page.DataProps>;
+  export namespace Page {
+    export type DataProps = { rawData: Data.Raw };
+  }
 
   export namespace Section {
     export type Heading = 'Knowledge' | 'Risk Management' | 'Skills';
@@ -61,19 +60,14 @@ export namespace ACS {
     };
   }
 
-  export interface Raw {
-    images: Images;
-    sections: Raw.Section[];
-  }
+  export type Raw = Raw.Section[];
 }
 
 export class ACS {
-  images: ACS.Images;
   sections: Section[];
 
-  constructor(data: ACS.Raw) {
-    this.images = data.images;
-    this.sections = data.sections.map((s) => new Section(s));
+  constructor(sections: ACS.Raw) {
+    this.sections = sections.map((s) => new Section(s));
   }
 
   getSection(num: ACSSection.Number): Section {
@@ -86,11 +80,28 @@ export class ACS {
   }
 }
 
+export type Data = { acs: ACS; images: Data.Images };
+export namespace Data {
+  type Name = { name: string };
+  export type AIM = Record<number, Name & Record<number, Name & Record<number, string>>>;
+  export namespace AIM {
+    export type Reference = [number, number, number?, ...(string | number)[]];
+  }
+
+  export type Image = { width: number; height: number; type?: string };
+  export type Images = Record<string, Image>;
+
+  export type Raw = {
+    acs: ACS.Raw;
+    images: Data.Images;
+  };
+}
+
 interface Section extends ACSSection {}
 class Section {
   tasks: Task[];
 
-  constructor(raw: Raw.Section) {
+  constructor(raw: ACS.Raw.Section) {
     this.updated = raw.updated;
     this.name = raw.name;
     this.number = raw.number;
@@ -118,7 +129,7 @@ interface Task extends ACSTask {}
 class Task {
   section: Section;
 
-  constructor(raw: Raw.Task, section: Section) {
+  constructor(raw: ACS.Raw.Task, section: Section) {
     this.updated = raw.updated;
     this.meta = raw.meta;
     this.knowledge = raw.knowledge;
