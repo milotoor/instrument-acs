@@ -67,6 +67,7 @@ const XcFlightPlanning: ACS.Page = (props) => {
               </>
             </BulletList>
           </>,
+
           <>
             The Chart Supplement will have the most recent information about an airport and should
             always be referenced. Check for <Bold>NOTAM(D)s</Bold> pertaining to all NAVAIDs on the
@@ -74,13 +75,39 @@ const XcFlightPlanning: ACS.Page = (props) => {
             <Bold>FDC NOTAMs</Bold> should be sought out as these may have implications for planned
             IAPs. This information can be obtained from FSS or an EFB.
           </>,
+
           <Paragraph heading="Alternate Airports" hr>
-            Use the <Bold>1-2-3</Bold> rule to determine if you need to file an alternate: If,
-            within <Bold>1 hour</Bold> before or after your ETA, the ceiling at your destination is
-            less than <Bold>2000 feet</Bold> or the visibility less than{' '}
-            <Bold>3 statute miles</Bold>, you must file an alternate. Additionally, you must file an
-            alternate <Bold>if your destination doesn't have any instrument approaches</Bold>.
+            Use the <Info>1-2-3</Info> rule to determine if you need to file an alternate: If,
+            within <Info>1 hour</Info> before or after your ETA, the ceiling at your destination is
+            less than <Info>2000 feet</Info> or the visibility less than{' '}
+            <Info>3 statute miles</Info>, you must file an alternate. Additionally, you must file an
+            alternate <Info>if your destination doesn't have any instrument approaches</Info>.
           </Paragraph>,
+
+          <>
+            As <AIM paragraph={[5, 1, 10, 'b']} /> points out,{' '}
+            <Warning>
+              there are situations where failing to plan for an alternate can be a critical mistake
+              even when it's not legally required.
+            </Warning>{' '}
+            They identify three scenarios:
+            <BulletList type="decimal">
+              <>
+                All approaches at the destination have an MDA/DA greater than 2000' AGL and/or
+                visibility requirements greater than 3 miles (South Lake Tahoe is one such airport)
+              </>
+              <>
+                The lowest MDA/DA at the destination is marginally less than 2000' AGL. Pilots are
+                reminded that forecasts may be wrong.
+              </>
+              <>
+                The lowest MDA/DA may only be available to aircraft with specific equipment (e.g.
+                DME). This may be a serious issue if your aircraft's equipment malfunctions in
+                flight.
+              </>
+            </BulletList>
+          </>,
+
           <Tabs>
             <Tab heading="Regulatory requirements">
               <>
@@ -193,6 +220,7 @@ const XcFlightPlanning: ACS.Page = (props) => {
             terrain for short periods.{' '}
             <Success>File the first altitude you want to cruise at.</Success>
           </>,
+
           <Paragraph heading="Altitude Types">
             There are several different types of altitude relevant to VFR and IFR flight:
             <BulletList type="decimal">
@@ -331,6 +359,7 @@ const XcFlightPlanning: ACS.Page = (props) => {
               </>
             </BulletList>
           </Paragraph>,
+
           <Paragraph>
             Additionally, the FAA encourages pilots to use supplemental oxygen{' '}
             <Bold>above 5,000 feet when flying at night.</Bold>
@@ -348,6 +377,7 @@ const XcFlightPlanning: ACS.Page = (props) => {
               Be able to justify the ForeFlight performance profile for your aircraft.
             </Warning>
           </>,
+
           <Collapse heading="Calculating true airspeed">
             <>
               To calculate true airspeed (TAS), you first need to know the pressure at altitude,{' '}
@@ -422,6 +452,7 @@ const XcFlightPlanning: ACS.Page = (props) => {
               </>
             </BulletList>
           </>,
+
           <>
             Converting to UTC is trivial, complicated only by the existence of daylight savings.
             During winter (November-March), California is on Pacific Standard Time (PST) which is
@@ -585,6 +616,7 @@ const XcFlightPlanning: ACS.Page = (props) => {
               </>
             </BulletList>
           </>,
+
           <>
             It's possible to file a <Bold>composite flight plan</Bold>, which enables the pilot to
             fly both VFR and IFR during different portions of the same flight.{' '}
