@@ -177,7 +177,7 @@ function Sidebar(props: SidebarProps) {
           <SidebarLink title="Home" link="/" />
           <SidebarLink title="Regulation Quick Reference" link="/regulatory_quick_reference" />
           <SidebarLink
-            icon={<img alt="GitHub" src="/img/github.png" height={32} width={32} />}
+            icon={<img alt="GitHub" src="/img/misc/github.png" height={32} width={32} />}
             title="Source Code"
             link={uri.github()}
           />
