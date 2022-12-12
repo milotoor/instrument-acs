@@ -2,15 +2,18 @@
 
 # Move into the image directory. See: https://stackoverflow.com/questions/59895/how-do-i-get-the-directory-where-a-bash-script-is-located-from-within-the-script
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
-IMAGE_DIR=$SCRIPT_DIR/../public/img/$1
+IMAGE_DIR=$SCRIPT_DIR/../public/img/$1; shift
 
-if ! cd $IMAGE_DIR ; then
+if ! cd "$IMAGE_DIR" ; then
     echo "Aborting"
     exit 1
 fi
 
-find . -name "$2*" ! -name '*.webp' ! -name '*.gif' | while read line; do
-    filename="${line%.*}"
-    cwebp "$line" -quiet -o "$filename.webp"
-    echo "Converted image '$line'"
+for name in "$@"
+do
+  find . -name "$name*" ! -name '*.webp' ! -name '*.gif' | while read -r line; do
+      filename="${line%.*}"
+      cwebp "$line" -quiet -o "$filename.webp"
+      echo "Converted image '$line'"
+  done
 done
