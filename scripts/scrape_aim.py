@@ -64,10 +64,18 @@ def get_sections(chapter_num: int) -> list[NamesAndSubsections]:
     return sections
 
 
+def sanitize(name: str):
+    name = name.strip()
+    name = name.replace(". . .", "...")
+    return name
+
+
 def create_toml_object(data: AIMData):
     if type(data[0]) == str:
-        return {str(i + 1): datum.strip() for i, datum in enumerate(data)}
-    return {str(i + 1): {"name": name.strip(), **create_toml_object(subdata)} for i, (name, subdata) in enumerate(data)}
+        return {str(i + 1): sanitize(datum) for i, datum in enumerate(data)}
+    return {
+        str(i + 1): {"name": sanitize(name), **create_toml_object(subdata)} for i, (name, subdata) in enumerate(data)
+    }
 
 
 def write_to_file(data: AIMData):

@@ -1,14 +1,16 @@
 import React from 'react';
 
-import { FAR, Layout, NoteCard } from '../components';
-import { ACS } from '../lib';
+import { AIM, FAR, Layout, Link, NoteCard } from '../components';
+import { aim } from '../data';
+import { ACS, ChildProp, uri } from '../lib';
 import { getStaticPropsFn } from '../ssr';
 
-type FARIdentifiers = [number, string];
+type NotableAIMChapter = keyof typeof notableAIMParagraphs;
+type NotableAIMProps = { chapter: NotableAIMChapter };
 type NotableFARsProps = { part: keyof typeof notableFARs };
 type ReferenceRowProps = { reference: React.ReactNode; name: string };
 
-const notableFARs: Record<number, FARIdentifiers[]> = {
+const notableFARs = {
   61: [
     [3, 'Requirement for certificates, ratings, and authorizations'],
     [23, 'Medical certificates: Requirement and duration'],
@@ -40,6 +42,47 @@ const notableFARs: Record<number, FARIdentifiers[]> = {
     [413, 'ATC transponder tests and inspections'],
     [417, 'Maintenance records'],
   ],
+} as const;
+
+const notableAIMParagraphs = {
+  1: {
+    1: [3, 4, 8, 9, 17, 18],
+    2: [1, 2, 3],
+  },
+  2: {
+    1: [2, 6],
+    3: [3, 4, 5],
+  },
+  3: {
+    1: [4],
+  },
+  4: {
+    1: [19, 20],
+    3: [3, 21],
+    4: [1, 3, 7, 8, 11, 14],
+    5: [1, 7],
+  },
+  5: {
+    1: [2, 6, 15, 16],
+    2: [3, 6, 7, 9],
+    3: [2, 4, 6, 8],
+    4: [1, 5, 6, 7, 9, 20, 21, 23],
+    5: [4, 5, 8, 13, 14, 16],
+  },
+  6: {
+    1: [1],
+    2: [4],
+    4: [1],
+  },
+  7: {
+    1: [4, 13, 24, 26, 28],
+    2: [2, 3],
+    3: [1, 5],
+    6: [15],
+  },
+  8: {
+    1: [5, 6],
+  },
 };
 
 export const getStaticProps = getStaticPropsFn;
@@ -53,8 +96,14 @@ const FARQuickReference: ACS.Page = ({ rawData }) => {
         and other FAA publications.
       </div>
 
+      <div className="text-subtitle my-8">FARs</div>
       <NotableFARs part={61} />
       <NotableFARs part={91} />
+
+      <div className="text-subtitle">AIM</div>
+      {Object.keys(notableAIMParagraphs).map((chapter) => (
+        <NotableAIM chapter={+chapter as NotableAIMChapter} />
+      ))}
     </Layout>
   );
 };
@@ -63,34 +112,68 @@ export default FARQuickReference;
 
 function NotableFARs({ part }: NotableFARsProps) {
   return (
-    <div className="my-8">
-      <NoteCard
-        label={`Part ${part}`}
-        note={
-          <>
-            <table>
-              <thead>
-                <tr>
-                  <th scope="col">Reference</th>
-                  <th scope="col" className="text-left">
-                    Name
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {notableFARs[part].map(([section, title]) => (
-                  <ReferenceRow
-                    key={section}
-                    reference={<FAR section={[part, section]} />}
-                    name={title}
-                  />
-                ))}
-              </tbody>
-            </table>
-          </>
-        }
-      />
-    </div>
+    <NoteCard
+      label={`Part ${part}`}
+      padding="lg"
+      note={
+        <ReferenceTable>
+          {notableFARs[part].map(([section, title]) => (
+            <ReferenceRow
+              key={section}
+              reference={<FAR section={[part, section]} />}
+              name={title}
+            />
+          ))}
+        </ReferenceTable>
+      }
+    />
+  );
+}
+
+function NotableAIM({ chapter }: NotableAIMProps) {
+  const chapterTitle = aim[chapter].name;
+  return (
+    <NoteCard
+      label={`Chapter ${chapter}: ${chapterTitle}`}
+      padding="lg"
+      note={
+        <>
+          {Object.entries(notableAIMParagraphs[chapter]).map(([sectionStr, paragraphs]) => {
+            const section = +sectionStr;
+            const aimSection = aim[chapter][section];
+            return (
+              <div className="pt-4 first:pt-2" key={section}>
+                <Link
+                  className="max-w-full font-bold block -indent-3 pl-3"
+                  href={uri.aim(chapter, section)}
+                >
+                  Section {section}: {aimSection.name}
+                </Link>
+                <div className="ml-6">
+                  <ReferenceTable>
+                    {paragraphs.map((paragraph) => (
+                      <ReferenceRow
+                        key={section}
+                        reference={<AIM paragraph={[chapter, section, paragraph]} />}
+                        name={aimSection[paragraph]}
+                      />
+                    ))}
+                  </ReferenceTable>
+                </div>
+              </div>
+            );
+          })}
+        </>
+      }
+    />
+  );
+}
+
+function ReferenceTable({ children }: ChildProp) {
+  return (
+    <table>
+      <tbody>{children}</tbody>
+    </table>
   );
 }
 
