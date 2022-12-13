@@ -40,13 +40,13 @@ function getSectionStructure(pathToRoot: string = '.'): ACS.Raw {
 
 function getImageData(pathToRoot: string = '.'): Data.Images {
   const tree = dirTree(path.join(pathToRoot, 'public/img'), { extensions: /(webp|gif|svg)/ });
-  const sections = tree?.children?.filter((child) => child.name.match(/^\d|misc$/)) ?? [];
+  const dirs = tree?.children?.filter((child) => !child.name.match(/^logo$/)) ?? [];
   return Object.fromEntries(
-    sections.flatMap((section) => {
-      return (section.children ?? []).map((img) => {
+    dirs.flatMap((dir) => {
+      return (dir.children ?? []).map((img) => {
         const { name, path } = img;
         const nameNoSuffix = name.slice(0, name.lastIndexOf('.'));
-        return [`${section.name}/${nameNoSuffix}`, imageSize(path) as Data.Image];
+        return [`${dir.name}/${nameNoSuffix}`, imageSize(path) as Data.Image];
       });
     })
   );
