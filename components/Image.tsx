@@ -24,6 +24,7 @@ type AttributionProps = {
 
 type ImageType = 'gif' | 'webp' | 'svg';
 type ImageProps = Partial<ChildProp> & {
+  directory?: string;
   noShadow?: boolean;
   src: string;
   type?: ImageType;
@@ -98,10 +99,10 @@ function Attribution(props: AttributionProps) {
 
 export const Image = Object.assign(
   function Image(props: ImageProps) {
-    const { children: caption, noShadow = false, src, type = 'webp' } = props;
+    const { children: caption, directory, noShadow = false, src, type = 'webp' } = props;
     const { section, data } = React.useContext(AppContext);
     const { images } = data;
-    const srcWithSection = [section || 'misc', src].join('/');
+    const srcWithSection = [section || directory, src].join('/');
     const dimensions = images && images[srcWithSection];
     const hasCaption = !!caption;
 

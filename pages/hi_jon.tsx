@@ -24,7 +24,7 @@ const HiJon: ACS.Page = ({ rawData }) => {
             </div>
           }
         />
-        <Image src="milo-wave" type="gif" />
+        <Image directory="misc" src="milo-wave" type="gif" />
       </Image.Row>
     </Layout>
   );
