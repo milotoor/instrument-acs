@@ -1,6 +1,6 @@
 import GraphQLAPI, { GraphQLResult } from '@aws-amplify/api-graphql';
 import cn from 'classnames';
-import React from 'react';
+import React, { HTMLInputTypeAttribute } from 'react';
 import { FieldError, FieldValues, RegisterOptions, useForm, UseFormReturn } from 'react-hook-form';
 
 import { Bold, Layout } from '../components';
@@ -17,7 +17,8 @@ type FormInputProps = {
   field: keyof ContactMessage;
   form: UseFormReturn<ContactMessage>;
   fullWidth?: boolean;
-  inputType?: 'input' | 'textarea';
+  inputElement?: 'input' | 'textarea';
+  inputType?: HTMLInputTypeAttribute;
   options?: RegisterOptions<ContactMessage>;
   placeholder: string;
 };
@@ -45,6 +46,7 @@ const Contact: ACS.Page = ({ rawData }) => {
         <FormInput
           field="email"
           form={form}
+          inputType="email"
           options={{
             pattern: {
               value: /\S+@\S+\.\S+/,
@@ -59,7 +61,7 @@ const Contact: ACS.Page = ({ rawData }) => {
           field="message"
           form={form}
           fullWidth
-          inputType="textarea"
+          inputElement="textarea"
           placeholder="Message"
         />
         <div className="flex flex-wrap gap-2">
@@ -125,7 +127,8 @@ function FormInput({
   field,
   form,
   fullWidth = false,
-  inputType = 'input',
+  inputElement = 'input',
+  inputType = 'text',
   options,
   placeholder,
 }: FormInputProps) {
@@ -137,8 +140,9 @@ function FormInput({
   const error = errors[field];
   return (
     <div className="flex justify-start items-center my-2">
-      {React.createElement(inputType, {
+      {React.createElement(inputElement, {
         placeholder,
+        type: inputType,
         ...register(field, {
           ...options,
           required: { value: true, message: 'Field is required' },
