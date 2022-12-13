@@ -179,7 +179,7 @@ const CrossCountryPlan: ACS.Page = ({ rawData }) => {
               minutes have passed before climbing to X.
             </Success>{' '}
             Minimum IFR altitude is defined like so:
-            <Quotation source={<FAR section={[91, 177]} />}>
+            <Quotation padded source={<FAR section={[91, 177]} />}>
               If both a MEA and a MOCA are prescribed for a particular route or route segment, a
               person may operate an aircraft{' '}
               <Bold>
@@ -240,8 +240,8 @@ const CrossCountryPlan: ACS.Page = ({ rawData }) => {
               </>
               <>
                 <FlightPlanLeg start="BASEC" end="PANOS" mia={5500} {...flightPlanLegProps}>
-                  The MIA here is a MOCA, which is allowed because we will be using RNAV (and
-                  because we're within 22 NM of SNS anyway). Also be aware that{' '}
+                  The MIA here is a MOCA, which is allowed because you will be using RNAV (and
+                  because you're within 22 NM of SNS anyway). Also be aware that{' '}
                   <Warning>PANOS has an MCA of 8000 for eastbound traffic.</Warning>
                 </FlightPlanLeg>
               </>
@@ -258,7 +258,7 @@ const CrossCountryPlan: ACS.Page = ({ rawData }) => {
               </>
               <>
                 <FlightPlanLeg start="PXN" end="MENDO" mia={4500} {...flightPlanLegProps}>
-                  In the middle of this leg we enter the Central Valley and exit the designated
+                  In the middle of this leg you enter the Central Valley and exit the designated
                   mountainous area.
                 </FlightPlanLeg>
               </>
@@ -271,8 +271,8 @@ const CrossCountryPlan: ACS.Page = ({ rawData }) => {
                 <FlightPlanLeg start="BLEAR" end="KFAT" mia={1700} {...flightPlanLegProps}>
                   There is no MEA or MOCA for this leg, so the MIA must be manually derived using
                   the 8-NM corridor method. Per ForeFlight, the highest obstacle within that
-                  corridor is 642' high. We are out of mountainous territory, so we add 1000 and get
-                  1642 which we round up to 1700.{' '}
+                  corridor is 642' high. We are out of mountainous territory, so you add 1000 and
+                  get 1642 which you round up to 1700.{' '}
                   <Info>
                     It's worth pointing out that the RNAV 11R approach has an MSA of 7800; however,
                     that's because the MSA extends 25 NM to the east of the airport and into the
@@ -282,6 +282,36 @@ const CrossCountryPlan: ACS.Page = ({ rawData }) => {
                 </FlightPlanLeg>
               </>
             </BulletList>
+          </>,
+
+          <>
+            Upon arriving at KFAT, you are still at your cruise altitude and must descend. The FARs
+            offer some guidance:
+            <Quotation padded source={<FAR section={[91, 185, 'c', 3, 'ii']} />}>
+              If the clearance limit is not a fix from which an approach begins, leave the clearance
+              limit at the expect-further-clearance time if one has been received, or if none has
+              been received,{' '}
+              <Bold>
+                upon arrival over the clearance limit, and proceed to a fix from which an approach
+                begins and commence descent or descent and approach as close as possible to the
+                estimated time of arrival
+              </Bold>{' '}
+              as calculated from the filed or amended (with ATC) estimated time en route.
+            </Quotation>
+          </>,
+
+          <>
+            Stipulating that{' '}
+            <InlineList>
+              <>KFAT is not an IAF for the RNAV 11L approach (nor any other approach)</>
+              <>you do not have an EFC time</>
+            </InlineList>
+            ,{' '}
+            <Success>
+              you should hold over KFAT until our ETA and then proceed to a fix from which you can
+              commence the approach.
+            </Success>{' '}
+            We could either go back to BLEAR or to MORLA and conduct a procedure turn.
           </>,
         ]}
       />
@@ -343,28 +373,23 @@ function FlightPlan({ className, components }: FlightPlanProps) {
   );
 }
 
-function FlightPlanLeg({
-  assigned,
-  children,
-  expectedNA,
-  start,
-  end,
-  expected,
-  mia,
-}: FlightPlanLegProps) {
+function FlightPlanLeg(props: FlightPlanLegProps) {
+  const { assigned, children, expectedNA, start, end, expected, mia } = props;
   const altitudes = { assigned, expected, mia };
   const possibleAltitudeProps = { altitudes, expectedNA };
   return (
     <>
-      <div className="flex items-center mt-2">
-        <Bold>
+      <div className="flex flex-wrap items-center mt-2">
+        <Bold className="mr-6">
           <span className="w-[5ch] inline-block">{start}</span>
           <FlightPlanArrow />
           <span className="w-[5ch] inline-block">{end}</span>:
         </Bold>
-        <PossibleAltitude {...possibleAltitudeProps} type="mia" value={mia} />
-        <PossibleAltitude {...possibleAltitudeProps} type="assigned" value={assigned} />
-        <PossibleAltitude {...possibleAltitudeProps} type="expected" value={expected} />
+        <div className="flex items-center">
+          <PossibleAltitude {...possibleAltitudeProps} type="mia" value={mia} />
+          <PossibleAltitude {...possibleAltitudeProps} type="assigned" value={assigned} />
+          <PossibleAltitude {...possibleAltitudeProps} type="expected" value={expected} />
+        </div>
       </div>
       {children && <div className="ml-4 mt-1">{children}</div>}
     </>
@@ -390,7 +415,7 @@ function PossibleAltitude({ altitudes, type, value, expectedNA = false }: Possib
   const isDisabled = isMissing || (expectedNA && type === 'expected');
   return (
     <div
-      className={cn(chipClasses, 'mx-4', {
+      className={cn(chipClasses, 'first:ml-0 mx-2', {
         'border-green-600': type === 'mia',
         'border-blue-500': type === 'assigned',
         'border-fuchsia-500': type === 'expected',
