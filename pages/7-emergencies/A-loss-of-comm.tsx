@@ -34,7 +34,7 @@ const LossOfComm: ACS.Page = (props) => {
           <>
             It's worth having <FAR section={[91, 185]} /> bookmarked for the check ride, as you are{' '}
             <Bold>100% guaranteed</Bold> to get asked about lost communications procedures. For
-            starters, the FAA acknowledges that this is a tricky situation:{' '}
+            starters, the AIM acknowledges that this is a tricky situation:{' '}
           </>,
 
           <Quotation source={<AIM paragraph={[6, 4, 1, 'a']} />}>
@@ -167,6 +167,14 @@ const LossOfComm: ACS.Page = (props) => {
             descents and standard rate turns so that ATC has the ability to predict what you're
             doing. Finally, <Danger>don't forget to squawk 7600 and run the checklist!</Danger>
           </Paragraph>,
+
+          <>
+            AOPA's Air Safety Institute has put together a{' '}
+            <Link newTab href={references.asi_lost_comms}>
+              helpful flow chart
+            </Link>{' '}
+            for navigating the lost comms scenare.
+          </>,
         ],
         r1: [
           <>
@@ -193,5 +201,6 @@ const LossOfComm: ACS.Page = (props) => {
 export default LossOfComm;
 
 const references = {
+  asi_lost_comms: '/asi_lost_comms.pdf',
   ifr_mag_lost_comms: uri.ifr_mag('system', 'how-far-can-you-go'),
 };

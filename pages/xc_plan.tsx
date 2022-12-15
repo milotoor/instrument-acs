@@ -308,8 +308,8 @@ const CrossCountryPlan: ACS.Page = ({ rawData }) => {
             </InlineList>
             ,{' '}
             <Success>
-              you should hold over KFAT until our ETA and then proceed to a fix from which you can
-              commence the approach.
+              you should proceed to a fix from which you can commence the approach and hold until
+              your ETA.
             </Success>{' '}
             We could either go back to BLEAR or to MORLA and conduct a procedure turn.
           </>,

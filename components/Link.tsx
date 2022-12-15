@@ -16,7 +16,13 @@ import {
 import { AppContext } from './context';
 import { Emphasize, Tooltip } from './Typography';
 
-type CommonLinkProps = { bold?: boolean; className?: string; color?: string | null };
+type CommonLinkProps = Partial<{
+  bold: boolean;
+  className: string;
+  color: string | null;
+  newTab: boolean;
+}>;
+
 type ApproachLinkProps = {
   type: string;
   rwy?: number | string;
@@ -47,9 +53,19 @@ type LinkableReference = keyof typeof referenceURIs;
 
 export const Link = Object.assign(
   function Link(props: LinkProps) {
-    const { bold, children, className, color, href, noUnderline = false, ...rest } = props;
+    const {
+      bold,
+      children,
+      className,
+      color,
+      href,
+      newTab = false,
+      noUnderline = false,
+      ...rest
+    } = props;
+
     const isLocalLink = '/#'.includes(href.toString()[0]);
-    const target = isLocalLink ? undefined : '_blank';
+    const target = newTab || !isLocalLink ? '_blank' : undefined;
     return (
       <span
         className={cn(className, color, {
