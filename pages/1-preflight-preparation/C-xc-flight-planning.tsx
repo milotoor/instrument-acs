@@ -346,7 +346,7 @@ const XcFlightPlanning: ACS.Page = (props) => {
             different.{' '}
             <BulletList type="disc">
               <>
-                <Bold>Between 12,000 and 14,500 feet:</Bold> required flight crew members must have
+                <Bold>Between 12,500 and 14,000 feet:</Bold> required flight crew members must have
                 supplemental oxygen if the flight is longer than 30 minutes at those altitudes
               </>
               <>
