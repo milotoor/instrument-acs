@@ -73,22 +73,19 @@ export function Emphasize({
   gray = false,
   italic = false,
 }: EmphasizeProps) {
-  return (
-    <span
-      className={cn(className, {
-        'font-bold': bold,
-        italic,
-        'bg-slate-200 hover:bg-slate-300': gray,
-        'text-amber-500': color && ['warning', 'warm'].includes(color),
-        'text-blue-500': color && ['cold', 'info'].includes(color),
-        'text-fuchsia-500': color === 'occluded',
-        'text-green-600': color === 'success',
-        'text-red-500': color && ['danger', 'hot'].includes(color),
-      })}
-    >
-      {children}
-    </span>
-  );
+  const classes = cn(className, {
+    'font-bold': bold,
+    italic,
+    'bg-slate-200 hover:bg-slate-300': gray,
+    'text-amber-500': color && ['warning', 'warm'].includes(color),
+    'text-blue-500': color && ['cold', 'info'].includes(color),
+    'text-fuchsia-500': color === 'occluded',
+    'text-green-600': color === 'success',
+    'text-red-500': color && ['danger', 'hot'].includes(color),
+  });
+
+  if (classes.length) return <span className={classes}>{children}</span>;
+  return <>{children}</>;
 }
 
 export function Gray(props: Omit<EmphasizeProps, 'gray'>) {
