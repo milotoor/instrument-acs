@@ -22,6 +22,7 @@ const notableFARs = {
   ],
   91: [
     [3, 'Responsibility and authority of the pilot in command'],
+    [123, 'Compliance with ATC clearances and instructions'],
     [103, 'Preflight action'],
     [109, 'Flight instruction; Simulated instrument flight and certain flight tests'],
     [155, 'Basic VFR weather minimums'],
