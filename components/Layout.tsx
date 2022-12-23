@@ -176,6 +176,7 @@ function Sidebar(props: SidebarProps) {
         <div className="mb-4">
           <SidebarLink title="Home" link="/" />
           <SidebarLink title="Regulation Quick Reference" link="/regulatory_quick_reference" />
+          <SidebarLink title="Resources" link="/resources" />
           <SidebarLink
             icon={<img alt="GitHub" src="/img/misc/github.png" height={32} width={32} />}
             title="Source Code"

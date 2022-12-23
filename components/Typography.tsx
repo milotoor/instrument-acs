@@ -152,7 +152,7 @@ export function NoteCard({ className, label, note, padding = 'md' }: NoteCardPro
   );
 }
 
-export function Paragraph({ children, heading, hr, references }: ParagraphProps) {
+export function Paragraph({ children, className, heading, hr, references }: ParagraphProps) {
   const { heading: sectionHeading, item } = React.useContext(NoteContext);
 
   if (references && !heading) {
@@ -164,7 +164,7 @@ export function Paragraph({ children, heading, hr, references }: ParagraphProps)
     : null;
 
   return (
-    <div className="p-3 first:mt-0">
+    <div className={cn('p-3 first:mt-0', className)}>
       {hr ? <hr className="w-4/5 m-auto mb-5" /> : null}
       {id ? (
         <div className="flex flex-row items-center mb-1">
