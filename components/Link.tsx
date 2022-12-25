@@ -4,6 +4,7 @@ import React from 'react';
 
 import {
   ACS,
+  ArbitraryID,
   ChildProp,
   Data,
   makeAnchorId,
@@ -23,13 +24,12 @@ type CommonLinkProps = Partial<{
   newTab: boolean;
 }>;
 
-type ApproachLinkProps = {
+type ApproachLinkProps = ArbitraryID & {
   type: string;
   rwy?: number | string;
   circling?: string;
   name: string;
   icao?: string;
-  id: string;
 };
 
 type ReferenceLinkProps = CommonLinkProps & {
@@ -48,7 +48,7 @@ type FARProps = CommonLinkProps & {
 
 type TaskLinkProps = { section?: ACS.Section.Number; task?: ACS.Task.Letter; id: ACS.Item.ID };
 export type LinkProps = NextLinkProps & ChildProp & CommonLinkProps & { noUnderline?: boolean };
-type LinkToSelfProps = Omit<LinkProps, 'href'> & { id: string };
+type LinkToSelfProps = Omit<LinkProps, 'href'> & ArbitraryID;
 type LinkableReference = keyof typeof referenceURIs;
 
 export const Link = Object.assign(

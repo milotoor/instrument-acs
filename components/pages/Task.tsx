@@ -3,6 +3,7 @@ import React from 'react';
 
 import {
   ACS,
+  ArbitraryID,
   ChildProp,
   makeAnchorId,
   objectHasProperty,
@@ -17,7 +18,7 @@ import { Bold, NoteCard } from '../Typography';
 
 // Component prop types
 type DataSectionProps = { heading: ACS.Section.Heading; notes?: NotesObject; task: ACS.Task };
-type ItemHeadingProps = { marker: string; id: string; text: string };
+type ItemHeadingProps = ArbitraryID & { marker: string; text: string };
 type LastUpdatedWidgetProps = { task: ACS.Task };
 type ReferencesSectionProps = { references: string[] };
 type SectionContainerProps = ChildProp & { heading: string };

@@ -1,7 +1,8 @@
+import { ArbitraryID } from '../lib';
 import { Collapse } from './Collapse';
 import { Image } from './Image';
 
-type YouTubeLinkProps = { id: string; title: string };
+type YouTubeLinkProps = ArbitraryID & { title: string };
 
 export function YouTube({ id, title }: YouTubeLinkProps) {
   return (
