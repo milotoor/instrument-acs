@@ -70,17 +70,15 @@ def sanitize(name: str):
     return name
 
 
-def create_toml_object(data: AIMData):
+def format_data(data: AIMData):
     if type(data[0]) == str:
         return {str(i + 1): sanitize(datum) for i, datum in enumerate(data)}
-    return {
-        str(i + 1): {"name": sanitize(name), **create_toml_object(subdata)} for i, (name, subdata) in enumerate(data)
-    }
+    return {str(i + 1): {"name": sanitize(name), **format_data(subdata)} for i, (name, subdata) in enumerate(data)}
 
 
 def write_to_file(data: AIMData):
     """Save the results to the data directory"""
-    results = create_toml_object(data)
+    results = format_data(data)
     data_dir = Path(__file__).parent.parent / "data"
     with open(data_dir / "aim.json", "w") as f:
         json.dump(results, f, indent=2)
@@ -89,7 +87,7 @@ def write_to_file(data: AIMData):
 def scrape():
     """
     Main scraping function. Sends out an initial request to retrieve the AIM chapters, then one additional request per
-    chapter to acquire chapter-level structure. Synthesizes the results into an object and writes it to a TOML file
+    chapter to acquire chapter-level structure. Synthesizes the results into an object and writes it to a JSON file
     """
     chapters = get_chapters()
     aim_data = [(chapter, get_sections(i + 1)) for i, chapter in enumerate(chapters)]
