@@ -177,7 +177,7 @@ export function FAR({ appendix, bold = true, section, paragraph = [], ...rest }:
   const paragraphArr = Array.isArray(paragraph) ? paragraph : [paragraph];
   const [farURI, linkText, tooltipText] = React.useMemo(() => {
     if (section) {
-      let farURI = uri.far(section, ...paragraphArr);
+      let farURI = uri.far(section, paragraphArr);
       let linkText = `14 CFR §${section}`;
       if (paragraphArr.length) linkText += ' ' + paragraphArr.map((t) => `(${t})`).join('');
       return [farURI, linkText, getSectionDescription(section)];

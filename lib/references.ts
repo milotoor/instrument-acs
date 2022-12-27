@@ -60,7 +60,7 @@ export const uri = {
     nav_services: uriExtender(`${faaHq}/ato/service_units/techops/navservices`),
   }),
 
-  far: (id: Data.FAR.Section | Data.FAR.Part, ...paragraph: Data.FAR.Paragraph) => {
+  far: (id: Data.FAR.Section | Data.FAR.Part, paragraph?: Data.FAR.Paragraph) => {
     const part = id.split('.')[0] as Data.FAR.Part;
     const linkComponents: Array<[string, string]> = [
       ['title', '14'],
@@ -69,17 +69,31 @@ export const uri = {
       ['part', part],
     ];
 
-    if (id in far.sections) {
-      const sectionIdentifiers = far.sections[id as Data.FAR.Section];
+    const isPartOnly = partOnly(id);
+    if (!isPartOnly) {
+      const sectionIdentifiers = far.sections[id];
       if (sectionIdentifiers.length > 1) linkComponents.push(['subpart', sectionIdentifiers[0]]);
       if (sectionIdentifiers.length === 3)
         linkComponents.push(['subject-group', sectionIdentifiers[1]]);
       linkComponents.push(['section', id]);
     }
 
+    // If the link is only a part add a query parameter to render the table of contents only.
+    // Otherwise, target the link to the section or paragraph.
     let link = ecfrBase + linkComponents.map((ids) => ids.join('-')).join('/');
-    if (paragraph.length) link += `#p-${id}${paragraph.map((el) => `(${el})`).join('')}`;
+    if (isPartOnly) link += '?toc=1';
+    else {
+      const paragraphArr = Array.isArray(paragraph) ? paragraph : [paragraph];
+      if (paragraphArr.length) link += `#p-${id}${paragraphArr.map((el) => `(${el})`).join('')}`;
+      else link += `#${id}`;
+    }
+
     return link;
+
+    // Simple type guard for the id
+    function partOnly(id: Data.FAR.Section | Data.FAR.Part): id is Data.FAR.Part {
+      return ['43', '61', '68', '91', '95'].includes(id);
+    }
   },
 
   farAppendix: (part: number, letter: string) => {
