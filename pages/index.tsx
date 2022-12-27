@@ -45,8 +45,8 @@ const Home: ACS.Page = ({ rawData }) => {
               . This website is my attempt to prepare for the check ride in a comprehensive and
               shareable way.
               <div className="mt-2">
-                <Success>Update: I PASSED!</Success> Ask me for the write-up if you'd like to hear
-                about it.
+                <Success>Update: I PASSED!</Success> <Link href="/contact">Ask me</Link> for the
+                write-up if you'd like to hear about it.
               </div>
             </FAQ>,
 
