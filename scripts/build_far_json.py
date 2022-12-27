@@ -142,7 +142,7 @@ class FARJSONBuilder:
                 self.json["sections"][anc_id] = section_identifiers + [anc_desc]
 
     def generate(self):
-        """Save the results to the data directory"""
+        """Build the JSON object and save the results to the data directory"""
         for part, sections in cited_sections.items():
             for section in sections:
                 self.build_section(part, section)
