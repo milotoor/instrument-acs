@@ -20,7 +20,7 @@ import {
   Term,
   Warning,
 } from '../components';
-import { ACS, ChildProp, uri } from '../lib';
+import { ACS, capitalize, ChildProp, uri } from '../lib';
 import { getStaticPropsFn } from '../ssr';
 
 type AltitudeType = 'assigned' | 'expected';
@@ -428,8 +428,4 @@ function PossibleAltitude({ altitudes, type, value, expectedNA = false }: Possib
       {value !== undefined && ':'} {value}
     </div>
   );
-}
-
-function capitalize(str: string) {
-  return str[0].toUpperCase() + str.slice(1);
 }

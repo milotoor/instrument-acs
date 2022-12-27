@@ -6,6 +6,7 @@ import { aim, far } from '../data';
 import {
   ACS,
   ArbitraryID,
+  capitalize,
   ChildProp,
   Data,
   makeAnchorId,
@@ -129,15 +130,16 @@ export const Link = Object.assign(
       if (!section || !taskLetter) throw Error('Unable to identify task for link');
 
       const task = acs.getTask(section, taskLetter);
-      const dataSection = id[0].toLowerCase();
+      const dataSection = id[0].toLowerCase() as ACS.Section.AbbreviatedHeading;
       const itemId = id.slice(1);
-      const heading =
-        dataSection === 'k' ? 'Knowledge' : dataSection === 'r' ? 'Risk Management' : 'Skills';
+
+      // Strip any reference to a particular paragraph from the ID
+      const baseId = capitalize(id.includes('-') ? id.slice(0, id.indexOf('-')) : id);
 
       return (
         <Tooltip message={task.name}>
-          <Link href={`${task.uri}#${makeAnchorId(heading, itemId)}`}>
-            Section {section}, Task {taskLetter}
+          <Link href={`${task.uri}#${makeAnchorId(dataSection, itemId)}`}>
+            Task {task.section.numeral}.{taskLetter}.{baseId}
           </Link>
         </Tooltip>
       );

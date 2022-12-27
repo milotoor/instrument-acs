@@ -1,5 +1,10 @@
 import { ACS } from './acs_data';
 
+/** Uppercases the first character of a string */
+export function capitalize(str: string) {
+  return str[0].toUpperCase() + str.slice(1);
+}
+
 /** Logs a warning message to the console in dev mode */
 export function logWarning(warning: string) {
   if (process.env.NODE_ENV === 'development') {
@@ -12,7 +17,7 @@ export function logWarning(warning: string) {
  * but will be unique within the context of a given task.
  */
 export function makeAnchorId(
-  heading: ACS.Section.Heading,
+  heading: ACS.Section.Heading | ACS.Section.AbbreviatedHeading,
   itemId: ACS.Item.ID,
   paragraphId?: string
 ) {

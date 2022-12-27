@@ -19,6 +19,7 @@ export namespace ACS {
   }
 
   export namespace Section {
+    export type AbbreviatedHeading = 'k' | 'r' | 's';
     export type Heading = 'Knowledge' | 'Risk Management' | 'Skills';
     export type Number = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
     export type Numeral = 'I' | 'II' | 'III' | 'IV' | 'V' | 'VI' | 'VII' | 'VIII';
