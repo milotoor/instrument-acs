@@ -120,6 +120,10 @@ class FARJSONBuilder:
             anc_id = ancestor["identifier"]
             anc_desc = ancestor["label_description"]
 
+            # Drop the period at the end of certain elements
+            if anc_desc[-1] == ".":
+                anc_desc = anc_desc[:-1]
+
             # The title is always 14 and chapter always I. The part is included in the citation and the subchapter is
             # identifiable from the part. The section is handled differently and includes its description, not its ID.
             if anc_type in ["subpart", "subject_group"]:
