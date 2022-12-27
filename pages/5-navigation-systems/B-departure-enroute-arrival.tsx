@@ -47,7 +47,7 @@ const DepartureEnrouteArrival: ACS.Page = (props) => {
                 <Bold>The standard takeoff weather minimum is 1 mile visibility</Bold> (for 1 & 2
                 engine aircraft; 3 & 4 engine aircraft use half a mile). Notably, this does not
                 legally apply to part 91 operators like myself, but it's a good rule to follow
-                nevertheless. See <FAR section={[91, 175, 'f', 2]} />.
+                nevertheless. See <FAR section="91.175" paragraph={['f', 2]} />.
               </>
               <Bold>The standard climb gradient is 200 ft/nm</Bold>
               <>

@@ -108,25 +108,25 @@ const FlightDeckCheck: ACS.Page = (props) => {
             <BulletList type="disc">
               <>
                 All <Term>airworthiness directives (AD)</Term> must be in compliance (
-                <FAR section={[91, 403, 'a']} />)
+                <FAR section="91.403" paragraph="a" />)
               </>
               <>
-                An annual inspection (<FAR section={[91, 409, 'a']} />)
+                An annual inspection (<FAR section="91.409" paragraph="a" />)
               </>
               <>
-                A 100-hour inspection (<FAR section={[91, 409, 'b']} />
+                A 100-hour inspection (<FAR section="91.409" paragraph="b" />
                 ); this only applies to aircraft flown for hire or rented for flight instruction.
               </>
               <>
                 The transponder must be inspected <Info>every 24 calendar months</Info> (
-                <FAR section={[91, 413]} />)
+                <FAR section="91.413" />)
               </>
               <>
                 The ELT must be inspected <Info>every 12 calendar months</Info> (
-                <FAR section={[91, 207, 'c-d']} />
+                <FAR section="91.207" paragraph="c" />
                 ), and the battery must be replaced after one hour's cumulative use or when 50% of
-                the battery's useful life has expired.{' '}
-                <Warning>How do you know your ELT meets these usage criteria?</Warning>
+                the battery's useful life has expired (<FAR section="91.207" paragraph="d" />
+                ). <Warning>How do you know your ELT meets these usage criteria?</Warning>
               </>
             </BulletList>
           </Paragraph>,
@@ -139,7 +139,7 @@ const FlightDeckCheck: ACS.Page = (props) => {
                   The altimeter and pitot-static pressure system must have been tested in the last
                   24 calendar months
                 </Info>{' '}
-                (<FAR section={[91, 411]} />
+                (<FAR section="91.411" />
                 ); this includes testing the Mode C altitude reporting system
               </>
               <>
@@ -147,7 +147,7 @@ const FlightDeckCheck: ACS.Page = (props) => {
                   If used during a flight, a VOR receiver must have been checked within the last 30
                   days
                 </Info>{' '}
-                (<FAR section={[91, 171]} />; <AIM paragraph={[1, 1, 4]} />
+                (<FAR section="91.171" />; <AIM paragraph={[1, 1, 4]} />
                 ). Unlike all of the other inspections listed here,{' '}
                 <Success>this check may be performed by a pilot.</Success> There are several
                 different ways VOR receivers may be tested:
@@ -229,14 +229,17 @@ const FlightDeckCheck: ACS.Page = (props) => {
             </BulletList>
           </>,
 
-          <Paragraph heading="Required equipment" references={<FAR section={[91, 205, 'd']} />}>
+          <Paragraph
+            heading="Required equipment"
+            references={<FAR section="91.205" paragraph="d" />}
+          >
             As with the inspections,{' '}
             <Info>
               the list of required equipment for flight under IFR extends the equivalent list for
               flight under VFR.
             </Info>{' '}
-            Review <FAR section={[91, 205, 'b-c']} /> for the VFR day/night equipment requirements.
-            For flight under IFR, the following equipment is required:
+            Review <FAR section="91.205" /> for the VFR day/night equipment requirements. For flight
+            under IFR, the following equipment is required:
             <BulletList type="disc">
               <>Two-way radio communication equipment</>
               <>Navigation equipment suitable to the route being flown</>
@@ -254,12 +257,12 @@ const FlightDeckCheck: ACS.Page = (props) => {
           <>
             Flying with inoperative equipment under IFR can be permissible. As with VFR flight,
             there are two crucial sources of information regarding which aircraft equipment are
-            permitted to be inoperative: <FAR section={[91, 213]} /> and the aircraft's{' '}
+            permitted to be inoperative: <FAR section="91.213" /> and the aircraft's{' '}
             <Term>minimum equipment list (MEL)</Term> or{' '}
             <Term>kinds of operation equipment list (KOEL)</Term>
           </>,
 
-          <Paragraph heading="Minimum Equipment Lists" references={<FAR section={[91, 213]} />}>
+          <Paragraph heading="Minimum Equipment Lists" references={<FAR section="91.213" />}>
             Most small aircraft do not have an <Link href={references.mel}>MEL</Link>. They are
             aircraft- and operator-specific and must be approved by the FAA:
           </Paragraph>,
@@ -306,12 +309,12 @@ const FlightDeckCheck: ACS.Page = (props) => {
 
           <Paragraph
             heading="Operation with Inoperative Equipment"
-            references={<FAR section={[91, 213, 'd']} />}
+            references={<FAR section="91.213" paragraph="d" />}
           >
             If the pilot determines that the inoperative instrument/equipment{' '}
             <InlineList>
               <>
-                is not required by <FAR section={[91, 205]} />, the KOEL or any ADs
+                is not required by <FAR section="91.205" />, the KOEL or any ADs
               </>
               <>does not pose a hazard or jeopardize flight safety</>
             </InlineList>
@@ -319,7 +322,7 @@ const FlightDeckCheck: ACS.Page = (props) => {
             <BulletList type="roman">
               <>
                 Removed from the aircraft, the cockpit control placarded, and the maintenance
-                recorded in accordance with <FAR section={[43, 9]} />; or
+                recorded in accordance with <FAR section="43.9" />; or
               </>
               <>Deactivated and placarded “Inoperative”</>
             </BulletList>

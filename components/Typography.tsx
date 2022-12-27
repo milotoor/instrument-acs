@@ -73,22 +73,19 @@ export function Emphasize({
   gray = false,
   italic = false,
 }: EmphasizeProps) {
-  return (
-    <span
-      className={cn(className, {
-        'font-bold': bold,
-        italic,
-        'bg-slate-200 hover:bg-slate-300': gray,
-        'text-amber-500': color && ['warning', 'warm'].includes(color),
-        'text-blue-500': color && ['cold', 'info'].includes(color),
-        'text-fuchsia-500': color === 'occluded',
-        'text-green-600': color === 'success',
-        'text-red-500': color && ['danger', 'hot'].includes(color),
-      })}
-    >
-      {children}
-    </span>
-  );
+  const classes = cn(className, {
+    'font-bold': bold,
+    italic,
+    'bg-slate-200 hover:bg-slate-300': gray,
+    'text-amber-500': color && ['warning', 'warm'].includes(color),
+    'text-blue-500': color && ['cold', 'info'].includes(color),
+    'text-fuchsia-500': color === 'occluded',
+    'text-green-600': color === 'success',
+    'text-red-500': color && ['danger', 'hot'].includes(color),
+  });
+
+  if (classes.length) return <span className={classes}>{children}</span>;
+  return <>{children}</>;
 }
 
 export function Gray(props: Omit<EmphasizeProps, 'gray'>) {
@@ -155,7 +152,7 @@ export function NoteCard({ className, label, note, padding = 'md' }: NoteCardPro
   );
 }
 
-export function Paragraph({ children, heading, hr, references }: ParagraphProps) {
+export function Paragraph({ children, className, heading, hr, references }: ParagraphProps) {
   const { heading: sectionHeading, item } = React.useContext(NoteContext);
 
   if (references && !heading) {
@@ -167,7 +164,7 @@ export function Paragraph({ children, heading, hr, references }: ParagraphProps)
     : null;
 
   return (
-    <div className="p-3 first:mt-0">
+    <div className={cn('p-3 first:mt-0', className)}>
       {hr ? <hr className="w-4/5 m-auto mb-5" /> : null}
       {id ? (
         <div className="flex flex-row items-center mb-1">
@@ -254,7 +251,7 @@ export function Tooltip({ message, children, noUnderline = false }: TooltipProps
         </span>
         {message && (
           <div className="absolute top-0 hidden mt-[-1.7rem] group-hover:block z-50">
-            <div className="py-1 px-2 text-xs text-white font-bold rounded-md [width:max-content] shadow-md shadow-slate-700 bg-gray-600 max-w-xl text-ellipsis overflow-hidden">
+            <div className="py-1 px-2 text-xs text-white font-bold rounded-md [width:max-content] shadow-md shadow-slate-700 bg-gray-600 max-w-xl text-ellipsis overflow-hidden whitespace-nowrap">
               {message}
             </div>
             <span className="absolute top-[100%] left-1/2 -ml-[4px] -rotate-45 -translate-y-[4px] border-[4px] border-solid border-transparent border-l-gray-600 border-b-gray-600" />

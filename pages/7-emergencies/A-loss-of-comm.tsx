@@ -29,12 +29,12 @@ const LossOfComm: ACS.Page = (props) => {
       task="A"
       notes={{
         k1: [
-          <ReferenceList references={[<FAR section={[91, 185]} />, <AIM paragraph={[6, 4]} />]} />,
+          <ReferenceList references={[<FAR section="91.185" />, <AIM paragraph={[6, 4]} />]} />,
 
           <>
-            It's worth having <FAR section={[91, 185]} /> bookmarked for the check ride, as you are{' '}
+            It's worth having <FAR section="91.185" /> bookmarked for the check ride, as you are{' '}
             <Bold>100% guaranteed</Bold> to get asked about lost communications procedures. For
-            starters, the FAA acknowledges that this is a tricky situation:{' '}
+            starters, the AIM acknowledges that this is a tricky situation:{' '}
           </>,
 
           <Quotation source={<AIM paragraph={[6, 4, 1, 'a']} />}>
@@ -45,7 +45,7 @@ const LossOfComm: ACS.Page = (props) => {
             to take.{' '}
             <Warning>
               Should the situation so dictate they should not be reluctant to use the emergency
-              action contained in <FAR section={[91, 3, 'b']} />.
+              action contained in <FAR section="91.3" paragraph="b" />.
             </Warning>
           </Quotation>,
 
@@ -87,7 +87,10 @@ const LossOfComm: ACS.Page = (props) => {
 
           <Paragraph
             heading="Failure in VMC"
-            references={[<FAR section={[91, 185, 'b']} />, <AIM paragraph={[6, 4, 1, 'c', 2]} />]}
+            references={[
+              <FAR section="91.185" paragraph="b" />,
+              <AIM paragraph={[6, 4, 1, 'c', 2]} />,
+            ]}
           >
             If the failure occurs in VFR conditions, remain in VFR conditions and land{' '}
             <Bold>"as soon as practicable."</Bold> In other words,{' '}
@@ -103,7 +106,10 @@ const LossOfComm: ACS.Page = (props) => {
 
           <Paragraph
             heading="Failure in IMC"
-            references={[<FAR section={[91, 185, 'c']} />, <AIM paragraph={[6, 4, 1, 'c', 3]} />]}
+            references={[
+              <FAR section="91.185" paragraph="c" />,
+              <AIM paragraph={[6, 4, 1, 'c', 3]} />,
+            ]}
           >
             If the failure occurs in IFR conditions, there is a standard procedure for maintaining
             safety of flight.
@@ -131,7 +137,7 @@ const LossOfComm: ACS.Page = (props) => {
                 <Bold>Leave the clearance limit.</Bold> When you get to where you've been cleared
                 to, you will want to begin your descent and approach. The by-the-book way to do this
                 is to fly to your clearance limit--typically the destination airport--and from there
-                to an IAF. <FAR section={[91, 185, 'c', 3, 'ii']} /> says to{' '}
+                to an IAF. <FAR section="91.185" paragraph={['c', 3, 'ii']} /> says to{' '}
                 <Quotation inline>
                   commence descent or descent and approach as close as possible to the ETA as
                   calculated from
@@ -167,6 +173,14 @@ const LossOfComm: ACS.Page = (props) => {
             descents and standard rate turns so that ATC has the ability to predict what you're
             doing. Finally, <Danger>don't forget to squawk 7600 and run the checklist!</Danger>
           </Paragraph>,
+
+          <>
+            AOPA's Air Safety Institute has put together a{' '}
+            <Link newTab href={references.asi_lost_comms}>
+              helpful flow chart
+            </Link>{' '}
+            for navigating the lost comms scenare.
+          </>,
         ],
         r1: [
           <>
@@ -193,5 +207,6 @@ const LossOfComm: ACS.Page = (props) => {
 export default LossOfComm;
 
 const references = {
+  asi_lost_comms: '/asi_lost_comms.pdf',
   ifr_mag_lost_comms: uri.ifr_mag('system', 'how-far-can-you-go'),
 };

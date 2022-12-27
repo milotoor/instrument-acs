@@ -23,7 +23,7 @@ const Home: ACS.Page = ({ rawData }) => {
       <div className="max-w-[800px]">
         <h1 className="text-center sm:text-left text-7xl font-bold font-fancy pt-5 pb-10">
           The{' '}
-          <Link className="text-glow-gold" href={references.acs}>
+          <Link color="text-glow-gold" href={references.acs}>
             Instrument ACS
           </Link>
         </h1>
@@ -44,6 +44,10 @@ const Home: ACS.Page = ({ rawData }) => {
               </Link>
               . This website is my attempt to prepare for the check ride in a comprehensive and
               shareable way.
+              <div className="mt-2">
+                <Success>Update: I PASSED!</Success> <Link href="/contact">Ask me</Link> for the
+                write-up if you'd like to hear about it.
+              </div>
             </FAQ>,
 
             <FAQ question="What is the ACS?">

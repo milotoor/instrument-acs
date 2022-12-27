@@ -2,7 +2,7 @@ import React from 'react';
 
 import { AIM, FAR, Layout, Link, NoteCard } from '../components';
 import { aim } from '../data';
-import { ACS, ChildProp, uri } from '../lib';
+import { ACS, ChildProp, Data, uri } from '../lib';
 import { getStaticPropsFn } from '../ssr';
 
 type NotableAIMChapter = keyof typeof notableAIMParagraphs;
@@ -24,6 +24,7 @@ const notableFARs = {
     [3, 'Responsibility and authority of the pilot in command'],
     [103, 'Preflight action'],
     [109, 'Flight instruction; Simulated instrument flight and certain flight tests'],
+    [123, 'Compliance with ATC clearances and instructions'],
     [155, 'Basic VFR weather minimums'],
     [167, 'Fuel requirements for flight in IFR conditions'],
     [169, 'IFR flight plan: Information required'],
@@ -102,7 +103,7 @@ const FARQuickReference: ACS.Page = ({ rawData }) => {
 
       <div className="text-subtitle">AIM</div>
       {Object.keys(notableAIMParagraphs).map((chapter) => (
-        <NotableAIM chapter={+chapter as NotableAIMChapter} />
+        <NotableAIM key={chapter} chapter={+chapter as NotableAIMChapter} />
       ))}
     </Layout>
   );
@@ -120,7 +121,7 @@ function NotableFARs({ part }: NotableFARsProps) {
           {notableFARs[part].map(([section, title]) => (
             <ReferenceRow
               key={section}
-              reference={<FAR section={[part, section]} />}
+              reference={<FAR section={`${part}.${section}` as Data.FAR.Section} />}
               name={title}
             />
           ))}

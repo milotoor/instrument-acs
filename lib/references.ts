@@ -1,4 +1,12 @@
-const cornell14CFR = 'https://www.law.cornell.edu/cfr/text/14';
+import { far } from '../data';
+import { Data } from './acs_data';
+
+type FAROptions = {
+  appendix?: Data.FAR.Appendix;
+  paragraph?: Data.FAR.Paragraph;
+};
+
+const ecfrBase = 'https://www.ecfr.gov/current/';
 const faaBase = uriExtender('https://www.faa.gov');
 const faaHq = faaBase('about/office_org/headquarters_offices');
 
@@ -56,13 +64,49 @@ export const uri = {
     nav_services: uriExtender(`${faaHq}/ato/service_units/techops/navservices`),
   }),
 
-  far: (part: number, section?: number) => {
-    if (typeof section === 'undefined') return cornell14CFR + `/part-${part}`;
-    return cornell14CFR + `/${part}.${section}`;
-  },
+  far: (id: Data.FAR.Section | Data.FAR.Part, options: FAROptions = {}) => {
+    const part = id.split('.')[0] as Data.FAR.Part;
+    const { appendix, paragraph } = options;
+    const linkComponents: Array<[string, string]> = [
+      ['title', '14'],
+      ['chapter', 'I'],
+      ['subchapter', far.parts[part][0]],
+      ['part', part],
+    ];
 
-  farAppendix: (part: number, letter: string) => {
-    return cornell14CFR + `/appendix-${letter}_to_part_${part}`;
+    const isPartOnly = partOnly(id);
+    if (!isPartOnly) {
+      const sectionIdentifiers = far.sections[id];
+      if (sectionIdentifiers.length > 1) linkComponents.push(['subpart', sectionIdentifiers[0]]);
+      if (sectionIdentifiers.length === 3)
+        linkComponents.push(['subject-group', sectionIdentifiers[1]]);
+      linkComponents.push(['section', id]);
+    } else if (options?.appendix)
+      linkComponents.push(['appendix', `Appendix ${options.appendix} to Part ${id}`]);
+
+    // Combine the components together to make the base link. Query parameters/ID targets may follow
+    let link = ecfrBase + linkComponents.map((ids) => ids.join('-')).join('/');
+
+    // If the link is to a whole part, add a query parameter to render the table of contents only.
+    if (isPartOnly) {
+      if (appendix) link += `#Appendix-${appendix}-to-Part-${id}`;
+      else link += '?toc=1';
+    } else {
+      // Otherwise, target the link to the section or paragraph.
+      if (paragraph) {
+        const paragraphArr = Array.isArray(paragraph) ? paragraph : [paragraph];
+        if (paragraphArr.length) link += `#p-${id}${paragraphArr.map((el) => `(${el})`).join('')}`;
+      } else {
+        link += `#${id}`;
+      }
+    }
+
+    return link;
+
+    // Simple type guard for the id
+    function partOnly(id: Data.FAR.Section | Data.FAR.Part): id is Data.FAR.Part {
+      return !id.includes('.');
+    }
   },
 
   github: uriExtender('https://github.com/milotoor/instrument-acs'),
@@ -82,8 +126,8 @@ const aviationNewsTalkEpisodes = {
 };
 
 export const referenceURIs = {
-  '14 CFR part 61': uri.far(61),
-  '14 CFR part 91': uri.far(91),
+  '14 CFR part 61': uri.far('61'),
+  '14 CFR part 91': uri.far('91'),
   'AC 00-6': uri.ac('00-6b'),
   'AC 00-45': uri.ac('00-45H'),
   'AC 00-54': uri.ac('00-54', 'AC'),

@@ -318,79 +318,72 @@ const WeatherInformation: ACS.Page = (props) => {
             runway selection. En route they can push you faster, slow you down or simply blow you
             off course.
           </>,
-          <Tabs>
-            <Tab heading="Macro-Systems">
+          <Paragraph heading="Macro-Systems">
+            In the northern hemisphere:
+            <BulletList type="decimal">
               <>
-                In the northern hemisphere:
-                <BulletList type="decimal">
-                  <>
-                    Air circulates clockwise around high pressure systems and counterclockwise
-                    around low pressure systems
-                  </>
-                  <>
-                    The steeper the pressure gradient, the closer the isobars, the stronger the
-                    winds (this is also true in the southern hemisphere)
-                  </>
-                  <>
-                    <Bold>Surface friction</Bold> impacts wind speed and direction up to about
-                    2,000' AGL. Below this altitude the winds are slower and do not parallel the
-                    isobars but rather flow across them from high to low pressure.
-                  </>
-                  <>
-                    The <Bold>Coriolis force</Bold> deflects winds to the right. The faster the
-                    winds, the greater the deflection.
-                  </>
-                </BulletList>
+                Air circulates clockwise around high pressure systems and counterclockwise around
+                low pressure systems
               </>
-
-              <Image src="cyclonic_flow" />
-            </Tab>
-
-            <Tab heading="Jetstream">
-              The <Bold>jetstream</Bold> is defined as a wind of 50 knots or greater associated with
-              the tropopause. It shifts seasonally, extending farther south (and blowing more
-              strongly) in the winter.
-            </Tab>
-
-            <Tab heading="Hazards">
               <>
-                Phenomena like <Link.Reference bold reference="AC 00-54" text="wind shear" /> or{' '}
-                <Link.Reference bold reference="AC 00-57" text="mountain wave" /> can be extremely
-                hazardous: countless GA accidents have occurred simply because pilots (especially
-                instrument pilots!) forget that downwind of a mountain range is a high-risk
-                environment.
+                The steeper the pressure gradient, the closer the isobars, the stronger the winds
+                (this is also true in the southern hemisphere)
               </>
-
               <>
-                <Bold>Thunderstorms</Bold> are a source of extremely hazardous windshear and
-                microbursts. Windshear can be found on all sides a thunderstorm cell and in the
-                downdrafts underneath the cell. The gust front from a thunderstorm can precede the
-                storm itself by <Bold>15 miles or more!</Bold>
+                <Bold>Surface friction</Bold> impacts wind speed and direction up to about 2,000'
+                AGL. Below this altitude the winds are slower and do not parallel the isobars but
+                rather flow across them from high to low pressure.
               </>
-
               <>
-                For reasons not entirely clear to me, wind shear patterns vary between front types:
-                <BulletList type="alpha">
-                  <>
-                    with a <ColdFront />, it occurs just after the front passes and for a short
-                    period thereafter
-                  </>
-                  <>
-                    with a <WarmFront />, it occurs just before the front passes
-                  </>
-                  <>
-                    <WarmFront plural /> seem to produce much greater wind shear than{' '}
-                    <ColdFront plural /> do
-                  </>
-                </BulletList>
+                The <Bold>Coriolis force</Bold> deflects winds to the right. The faster the winds,
+                the greater the deflection.
               </>
+            </BulletList>
+          </Paragraph>,
 
+          <Image src="cyclonic_flow" />,
+
+          <Paragraph heading="Jetstream">
+            The <Bold>jetstream</Bold> is defined as a wind of 50 knots or greater associated with
+            the tropopause. It shifts seasonally, extending farther south (and blowing more
+            strongly) in the winter.
+          </Paragraph>,
+
+          <Paragraph heading="Hazards">
+            Phenomena like <Link.Reference bold reference="AC 00-54" text="wind shear" /> or{' '}
+            <Link.Reference bold reference="AC 00-57" text="mountain wave" /> can be extremely
+            hazardous: countless GA accidents have occurred simply because pilots (especially
+            instrument pilots!) forget that downwind of a mountain range is a high-risk environment.
+          </Paragraph>,
+
+          <>
+            <Bold>Thunderstorms</Bold> are a source of extremely hazardous windshear and
+            microbursts. Windshear can be found on all sides a thunderstorm cell and in the
+            downdrafts underneath the cell. The gust front from a thunderstorm can precede the storm
+            itself by <Bold>15 miles or more!</Bold>
+          </>,
+
+          <>
+            For reasons not entirely clear to me, wind shear patterns vary between front types:
+            <BulletList type="alpha">
               <>
-                Additionally,{' '}
-                <Bold>low-level temperature inversions are common sources of windshear.</Bold>
+                with a <ColdFront />, it occurs just after the front passes and for a short period
+                thereafter
               </>
-            </Tab>
-          </Tabs>,
+              <>
+                with a <WarmFront />, it occurs just before the front passes
+              </>
+              <>
+                <WarmFront plural /> seem to produce much greater wind shear than{' '}
+                <ColdFront plural /> do
+              </>
+            </BulletList>
+          </>,
+
+          <>
+            Additionally,{' '}
+            <Bold>low-level temperature inversions are common sources of windshear.</Bold>
+          </>,
         ],
 
         // Temperature

@@ -38,10 +38,13 @@ const Missed: ACS.Page = (props) => {
             <Warning>Just don't get so focused on landing that you forget to stay safe.</Warning>
           </>,
 
-          <Paragraph heading="When to execute" references={[<FAR section={[91, 175, 'c-d']} />]}>
+          <Paragraph
+            heading="When to execute"
+            references={[<FAR section="91.175" paragraph="c" />]}
+          >
             A missed approach must be flown if, upon arriving at the DA (on a precision approach) or
             MAP (on a non-precision approach) you do not have the required conditions to descend
-            further. <FAR section={[91, 175, 'c-d']} /> delineates these requirements. See also{' '}
+            further. <FAR section="91.175" paragraph="c" /> delineates these requirements. See also{' '}
             <Link.Task section={6} task="E" id="k1-landing_requirements" />. Additionally,{' '}
             <Warning>
               if the approach is not stabilized by 1000 feet above TDZE you should strongly consider

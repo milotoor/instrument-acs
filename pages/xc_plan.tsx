@@ -133,8 +133,8 @@ const CrossCountryPlan: ACS.Page = ({ rawData }) => {
         note={[
           <>
             See <Link.Task section={7} task="A" id="k1" /> for a complete discussion of the
-            appropriate procedures in a lost comms scenario. Refer to <FAR section={[91, 185]} />,{' '}
-            <FAR section={[91, 177]} /> and <AIM paragraph={[6, 4]} />.
+            appropriate procedures in a lost comms scenario. Refer to <FAR section="91.185" />,{' '}
+            <FAR section="91.177" /> and <AIM paragraph={[6, 4]} />.
           </>,
 
           <>
@@ -179,7 +179,7 @@ const CrossCountryPlan: ACS.Page = ({ rawData }) => {
               minutes have passed before climbing to X.
             </Success>{' '}
             Minimum IFR altitude is defined like so:
-            <Quotation padded source={<FAR section={[91, 177]} />}>
+            <Quotation padded source={<FAR section="91.177" />}>
               If both a MEA and a MOCA are prescribed for a particular route or route segment, a
               person may operate an aircraft{' '}
               <Bold>
@@ -287,7 +287,7 @@ const CrossCountryPlan: ACS.Page = ({ rawData }) => {
           <>
             Upon arriving at KFAT, you are still at your cruise altitude and must descend. The FARs
             offer some guidance:
-            <Quotation padded source={<FAR section={[91, 185, 'c', 3, 'ii']} />}>
+            <Quotation padded source={<FAR section="91.185" paragraph={['c', 3, 'ii']} />}>
               If the clearance limit is not a fix from which an approach begins, leave the clearance
               limit at the expect-further-clearance time if one has been received, or if none has
               been received,{' '}
@@ -308,8 +308,8 @@ const CrossCountryPlan: ACS.Page = ({ rawData }) => {
             </InlineList>
             ,{' '}
             <Success>
-              you should hold over KFAT until our ETA and then proceed to a fix from which you can
-              commence the approach.
+              you should proceed to a fix from which you can commence the approach and hold until
+              your ETA.
             </Success>{' '}
             We could either go back to BLEAR or to MORLA and conduct a procedure turn.
           </>,
