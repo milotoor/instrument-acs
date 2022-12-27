@@ -1,7 +1,11 @@
 import { far } from '../data';
 import { Data } from './acs_data';
 
-const cornell14CFR = 'https://www.law.cornell.edu/cfr/text/14';
+type FAROptions = {
+  appendix?: Data.FAR.Appendix;
+  paragraph?: Data.FAR.Paragraph;
+};
+
 const ecfrBase = 'https://www.ecfr.gov/current/';
 const faaBase = uriExtender('https://www.faa.gov');
 const faaHq = faaBase('about/office_org/headquarters_offices');
@@ -60,8 +64,9 @@ export const uri = {
     nav_services: uriExtender(`${faaHq}/ato/service_units/techops/navservices`),
   }),
 
-  far: (id: Data.FAR.Section | Data.FAR.Part, paragraph?: Data.FAR.Paragraph) => {
+  far: (id: Data.FAR.Section | Data.FAR.Part, options: FAROptions = {}) => {
     const part = id.split('.')[0] as Data.FAR.Part;
+    const { appendix, paragraph } = options;
     const linkComponents: Array<[string, string]> = [
       ['title', '14'],
       ['chapter', 'I'],
@@ -76,28 +81,32 @@ export const uri = {
       if (sectionIdentifiers.length === 3)
         linkComponents.push(['subject-group', sectionIdentifiers[1]]);
       linkComponents.push(['section', id]);
-    }
+    } else if (options?.appendix)
+      linkComponents.push(['appendix', `Appendix ${options.appendix} to Part ${id}`]);
 
-    // If the link is only a part add a query parameter to render the table of contents only.
-    // Otherwise, target the link to the section or paragraph.
+    // Combine the components together to make the base link. Query parameters/ID targets may follow
     let link = ecfrBase + linkComponents.map((ids) => ids.join('-')).join('/');
-    if (isPartOnly) link += '?toc=1';
-    else {
-      const paragraphArr = Array.isArray(paragraph) ? paragraph : [paragraph];
-      if (paragraphArr.length) link += `#p-${id}${paragraphArr.map((el) => `(${el})`).join('')}`;
-      else link += `#${id}`;
+
+    // If the link is to a whole part, add a query parameter to render the table of contents only.
+    if (isPartOnly) {
+      if (appendix) link += `#Appendix-${appendix}-to-Part-${id}`;
+      else link += '?toc=1';
+    } else {
+      // Otherwise, target the link to the section or paragraph.
+      if (paragraph) {
+        const paragraphArr = Array.isArray(paragraph) ? paragraph : [paragraph];
+        if (paragraphArr.length) link += `#p-${id}${paragraphArr.map((el) => `(${el})`).join('')}`;
+      } else {
+        link += `#${id}`;
+      }
     }
 
     return link;
 
     // Simple type guard for the id
     function partOnly(id: Data.FAR.Section | Data.FAR.Part): id is Data.FAR.Part {
-      return ['43', '61', '68', '91', '95'].includes(id);
+      return !id.includes('.');
     }
-  },
-
-  farAppendix: (part: number, letter: string) => {
-    return cornell14CFR + `/appendix-${letter}_to_part_${part}`;
   },
 
   github: uriExtender('https://github.com/milotoor/instrument-acs'),

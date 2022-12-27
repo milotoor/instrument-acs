@@ -253,7 +253,7 @@ const Instruments: ACS.Page = (props) => {
               </>
               <>
                 <Bold>Within the mode C veil</Bold>, which is technically described as the airspace
-                within a 30-mile radius of an airport in <FAR appendix={[91, 'D']} bold={false} />{' '}
+                within a 30-mile radius of an airport in <FAR part="91" appendix="D" bold={false} />{' '}
                 section 1 (the class B airports)
               </>
               <>

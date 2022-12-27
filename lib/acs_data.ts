@@ -100,6 +100,7 @@ export namespace Data {
 
   export namespace FAR {
     type FarJson = typeof far;
+    export type Appendix = 'A' | 'B' | 'C' | 'D' | 'E' | 'F';
     export type Paragraph = string | (string | number)[];
 
     type Subchapter = keyof FarJson['subchapters'];

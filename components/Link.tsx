@@ -41,8 +41,9 @@ type ReferenceLinkProps = CommonLinkProps & {
 
 type AIMProps = CommonLinkProps & { bold?: boolean; paragraph: Data.AIM.Reference };
 type FARProps = CommonLinkProps & {
-  appendix?: [number, string];
+  appendix?: Data.FAR.Appendix;
   bold?: boolean;
+  part?: Data.FAR.Part;
   section?: Data.FAR.Section;
   paragraph?: Data.FAR.Paragraph;
 };
@@ -173,21 +174,30 @@ export function AIM({ bold = true, paragraph, ...rest }: AIMProps) {
   );
 }
 
-export function FAR({ appendix, bold = true, section, paragraph = [], ...rest }: FARProps) {
-  const paragraphArr = Array.isArray(paragraph) ? paragraph : [paragraph];
+export function FAR({ appendix, bold = true, part, section, paragraph, ...rest }: FARProps) {
+  if (typeof section === 'undefined' && typeof part === 'undefined')
+    throw Error('FAR component must be provided with `part` or `section` prop!');
+
   const [farURI, linkText, tooltipText] = React.useMemo(() => {
+    let linkText = '14 CFR §';
+    let tooltipText;
+    const farUri = uri.far((section || part)!, { appendix, paragraph });
+
     if (section) {
-      let farURI = uri.far(section, paragraphArr);
-      let linkText = `14 CFR §${section}`;
-      if (paragraphArr.length) linkText += ' ' + paragraphArr.map((t) => `(${t})`).join('');
-      return [farURI, linkText, getSectionDescription(section)];
-    } else if (appendix) {
-      const [part, letter] = appendix;
-      const farURI = uri.farAppendix(part, letter);
-      return [farURI, `14 CFR §${part} Appendix ${letter}`];
+      linkText += section;
+      tooltipText = getSectionDescription(section);
+
+      // Add in paragraphs
+      if (paragraph) {
+        const paragraphArr = Array.isArray(paragraph) ? paragraph : [paragraph];
+        linkText += ' ' + paragraphArr.map((t) => `(${t})`).join('');
+      }
     } else {
-      throw Error('FAR component must be provided with `appendix` or `section` prop!');
+      linkText += part;
+      if (appendix) linkText += ` Appendix ${appendix}`;
     }
+
+    return [farUri, linkText, tooltipText];
   }, [appendix, section, paragraph]);
 
   return (
