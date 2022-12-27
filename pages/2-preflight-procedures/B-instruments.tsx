@@ -10,6 +10,7 @@ import {
   Image,
   Info,
   InlineList,
+  Italic,
   Link,
   Paragraph,
   Quotation,
@@ -32,6 +33,17 @@ const Instruments: ACS.Page = (props) => {
       section={2}
       task="B"
       notes={{
+        // Operation of applicable flight instrument systems
+        k1: (
+          <>
+            This section is going to emphasize the instrumentation of a Cessna 172 Nav III, more
+            commonly known as the G1000.{' '}
+            <Success>
+              Be sure to check your own aircraft's POH for information applicable to your situation.
+            </Success>
+          </>
+        ),
+
         // Pitot-static instrument operation
         k1a: [
           <>
@@ -190,6 +202,68 @@ const Instruments: ACS.Page = (props) => {
             <Link href={references.cold_temperature_airports}>CTA list</Link>.{' '}
             <Warning>To me this seems like more work without a ton of payoff,</Warning> but what do
             I know.
+          </>,
+        ],
+
+        // Attitude indicator, heading indicator, turn-and-slip indicator/turn coordinator
+        k1b: [
+          <>
+            In the G1000, the primary attitude indicator, horizontal situation indicator and turn
+            coordinator are all electrically powered. The AI and HSI are provided data from the{' '}
+            <Term>Attitude and Heading Reference System (AHRS)</Term>, and the HSI further receives
+            info from the magnetometer. From the POH:
+          </>,
+
+          <Quotation>
+            The AHRS provides airplane attitude and flight characteristics information to the G1000
+            displays and to the integrated avionics units, which is located in the tailcone of the
+            airplane.{' '}
+            <Info>
+              The AHRS unit contains accelerometers, tilt sensors and rate sensors that replace
+              spinning mass gyros used in other airplanes.
+            </Info>{' '}
+            The magnetometer is located inside the <Bold>left wing panel</Bold> and interfaces with
+            the AHRS to provide heading information.
+          </Quotation>,
+
+          <Paragraph heading="Principles of gyroscopes">
+            Even though the conventional gyroscope does not play a huge role in the operation of
+            G1000 aircraft, it's still worth knowing how they function. There are two core
+            principles. There are plenty of other articles (such as this one from{' '}
+            <Link href={references.gyroscopes}>SKYbrary</Link>) where these are discussed in detail,
+            but to summarize:
+            <BulletList type="disc">
+              <>
+                <Term>Rigidity in space</Term>: gyroscopes have a rotational inertia and will remain
+                in the same orientation unless acted upon by outside forces. This is what people are
+                referring to when they say{' '}
+                <Quotation inline>the airplane moves around the gyroscope.</Quotation>{' '}
+                <Info>This principle is essential to the conventional attitude indicator.</Info>
+              </>
+              <>
+                <Term>Precession</Term> is what happens when the gyroscope is tilted or turned off
+                its axis by external forces. It can be both helpful, like in the{' '}
+                <Info>turn coordinator,</Info> and annoying, like in the{' '}
+                <Warning>directional gyro.</Warning>
+              </>
+            </BulletList>
+          </Paragraph>,
+
+          <Paragraph heading="Vacuum system">
+            The G1000 does come with a vacuum system, though it only powers the standby attitude
+            indicator. In some planes this standby instrument is actually another electrical
+            instrument, in which case the plane may not have a vacuum system at all!
+          </Paragraph>,
+
+          <>
+            If the plane does have a vacuum system,{' '}
+            <Info>it's important to verify its performance prior to takeoff.</Info> The Cessna 172{' '}
+            <Term>Kinds of Operations Equipment List (KOEL)</Term> (see{' '}
+            <Link.Task section={2} task="C" id="k3-kinds_of_operation_equipment_lists" />) lists the
+            vacuum pump and indicator as required for IFR flight (day or night). This should be done
+            during the run up, when the engine is brought up during the magnetos check. There is a
+            low-vacuum warning flag which reads GYRO and comes into view when the vacuum pump is not
+            providing sufficient power to reliably operate the instrument.
           </>,
         ],
 
@@ -460,6 +534,38 @@ const Instruments: ACS.Page = (props) => {
           </Collapse>,
         ],
 
+        // Compass
+        k1d: [
+          <>
+            We are all familiar with the compass. It is a technology{' '}
+            <Link href={references.compass_history}>over 2000 years old.</Link> When it comes to
+            aviation, it operates in the exact same way it does in other contexts, though there are
+            errors to be aware of:
+            <BulletList type="disc">
+              <>
+                Northerly/southerly turning error. When the aircraft is turning through northerly
+                headings, the compass will lead the actual heading{' '}
+                <Warning italic>in the northern hemisphere</Warning>. Likewise it will lag the
+                actual heading when turning through southerly headings. This has lead to the acronym{' '}
+                <Bold>UNOS</Bold> when performing compass turns: <Bold>u</Bold>ndershoot{' '}
+                <Bold>n</Bold>orth, <Bold>o</Bold>vershoot <Bold>s</Bold>outh. In the southern
+                hemisphere the errors are reversed. The greatest error occurs when passing through
+                magnetic north or south, and{' '}
+                <Info>the magnitude of the error approximately matches ones latitude.</Info> These
+                errors are the result of <Term>magnetic dip</Term> and{' '}
+                <Success>only occur when airborne.</Success>
+              </>
+              <>
+                Acceleration error. This only occurs when accelerating along an easterly or westerly
+                heading. When the aircraft accelerates, the compass will show an erroneous turn to
+                the north; when it decelerates it'll show a turn to the south. The mnemonic{' '}
+                <Bold>ANDS</Bold> is helpful for remembering this: <Bold>a</Bold>ccelerate{' '}
+                <Bold>n</Bold>orth, <Bold>d</Bold>ecelerate <Bold>s</Bold>outh.
+              </>
+            </BulletList>
+          </>,
+        ],
+
         // Operation of nav systems
         k2: [
           <>
@@ -481,6 +587,7 @@ const Instruments: ACS.Page = (props) => {
             .
           </>,
         ],
+
         k2a: [
           <Tabs>
             <Tab heading="VOR">
@@ -645,7 +752,9 @@ const references = {
     ep245: uri.aviation_news_talk(245),
   },
   cold_temperature_airports: 'https://aeronav.faa.gov/d-tpp/Cold_Temp_Airports.pdf',
+  compass_history: uri.wikipedia('history_of_the_compass'),
   federal_register_mon: 'https://www.govinfo.gov/content/pkg/FR-2016-07-26/pdf/2016-17579.pdf',
+  gyroscopes: uri.skybrary('gyroscopic-flight-instruments'),
   tso_c112: uri.tso('a920c2bd43aa26b786257bf0006e6acd/$FILE/TSO-C112e.pdf'),
   vor_mon: uri.faa.nav_services('gbng/vormon'),
   vor_volumes: uri.boldMethod.l2f('navigation', 'the-types-of-vors-and-how-to-identify-them/'),
