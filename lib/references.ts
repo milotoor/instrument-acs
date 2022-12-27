@@ -1,4 +1,8 @@
+import { far } from '../data';
+import { Data } from './acs_data';
+
 const cornell14CFR = 'https://www.law.cornell.edu/cfr/text/14';
+const ecfrBase = 'https://www.ecfr.gov/current/';
 const faaBase = uriExtender('https://www.faa.gov');
 const faaHq = faaBase('about/office_org/headquarters_offices');
 
@@ -56,9 +60,26 @@ export const uri = {
     nav_services: uriExtender(`${faaHq}/ato/service_units/techops/navservices`),
   }),
 
-  far: (part: number, section?: number) => {
-    if (typeof section === 'undefined') return cornell14CFR + `/part-${part}`;
-    return cornell14CFR + `/${part}.${section}`;
+  far: (id: Data.FAR.Section | Data.FAR.Part, ...paragraph: Data.FAR.Paragraph) => {
+    const part = id.split('.')[0] as Data.FAR.Part;
+    const linkComponents: Array<[string, string]> = [
+      ['title', '14'],
+      ['chapter', 'I'],
+      ['subchapter', far.parts[part][0]],
+      ['part', part],
+    ];
+
+    if (id in far.sections) {
+      const sectionIdentifiers = far.sections[id as Data.FAR.Section];
+      if (sectionIdentifiers.length > 1) linkComponents.push(['subpart', sectionIdentifiers[0]]);
+      if (sectionIdentifiers.length === 3)
+        linkComponents.push(['subject-group', sectionIdentifiers[1]]);
+      linkComponents.push(['section', id]);
+    }
+
+    let link = ecfrBase + linkComponents.map((ids) => ids.join('-')).join('/');
+    if (paragraph.length) link += `#p-${id}${paragraph.map((el) => `(${el})`).join('')}`;
+    return link;
   },
 
   farAppendix: (part: number, letter: string) => {
@@ -82,8 +103,8 @@ const aviationNewsTalkEpisodes = {
 };
 
 export const referenceURIs = {
-  '14 CFR part 61': uri.far(61),
-  '14 CFR part 91': uri.far(91),
+  '14 CFR part 61': uri.far('61'),
+  '14 CFR part 91': uri.far('91'),
   'AC 00-6': uri.ac('00-6b'),
   'AC 00-45': uri.ac('00-45H'),
   'AC 00-54': uri.ac('00-54', 'AC'),

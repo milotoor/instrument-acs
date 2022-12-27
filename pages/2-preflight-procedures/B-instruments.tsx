@@ -52,8 +52,9 @@ const Instruments: ACS.Page = (props) => {
 
           <>
             When departing from an airfield where you can't obtain an altimeter setting, you should
-            set the altimeter to the field elevation. See <FAR section={[91, 121, 'a', 1, 'iii']} />
-            . Keeping the altimeter setting up to date during flight is quite important,{' '}
+            set the altimeter to the field elevation. See{' '}
+            <FAR section="91.121" paragraph={['a', 1, 'iii']} />. Keeping the altimeter setting up
+            to date during flight is very important,{' '}
             <Danger>
               especially when transitioning from a high pressure region to a low pressure region.
             </Danger>
@@ -89,7 +90,7 @@ const Instruments: ACS.Page = (props) => {
                 <Info>High barometric pressure (above 31 "Hg)</Info> may be caused by{' '}
                 <Info>cold, dry air masses</Info>. When an aircraft's altimeter cannot be set above
                 31 “Hg, true altitude will be higher than indicated altitude. Whenever this occurs,
-                a NOTAM will be published in accordance with <FAR section={[91, 144]} />. Procedures
+                a NOTAM will be published in accordance with <FAR section="91.144" />. Procedures
                 for operating in the NOTAM's geographic area are described by{' '}
                 <AIM paragraph={[7, 2, 3, 'c', 1, 'b']} />; in short, IFR aircraft should{' '}
                 <InlineList>
@@ -224,7 +225,7 @@ const Instruments: ACS.Page = (props) => {
 
           <Paragraph
             heading="Transponder"
-            references={[<AIM paragraph={[4, 1, 20]} />, <FAR section={[91, 215]} />]}
+            references={[<AIM paragraph={[4, 1, 20]} />, <FAR section="91.215" />]}
           >
             The transponder's role is to provide responses to ATC ground-based{' '}
             <Term>Secondary Surveillance Radar (SSR)</Term> and{' '}
@@ -240,8 +241,8 @@ const Instruments: ACS.Page = (props) => {
           </Paragraph>,
 
           <>
-            <FAR section={[91, 215, 'b']} /> specifies what airspace is off limits for aircraft
-            without a functioning transponder:
+            <FAR section="91.215" paragraph="b" /> specifies what airspace is off limits for
+            aircraft without a functioning transponder:
             <BulletList type="disc">
               <>
                 <Bold>Class A, B or C airspace.</Bold>{' '}
@@ -267,14 +268,14 @@ const Instruments: ACS.Page = (props) => {
             hr
             references={[
               <AIM paragraph={[4, 5, 7]} />,
-              <FAR section={[91, 225]} />,
-              <FAR section={[91, 227]} />,
+              <FAR section="91.225" />,
+              <FAR section="91.227" />,
             ]}
           >
             <Term>Automatic Dependent Surveillance-Broadcast (ADS-B)</Term> is a relatively new
             technology, and was only recently mandated. ADS-B Out periodically broadcasts the
             aircraft's GPS-derived position, altitude, velocity and identifier. The full set of
-            information that must be included is defined in <FAR section={[91, 227]} />.
+            information that must be included is defined in <FAR section="91.227" />.
           </Paragraph>,
 
           <>
@@ -462,7 +463,7 @@ const Instruments: ACS.Page = (props) => {
         // Operation of nav systems
         k2: [
           <>
-            I couldn't quite figure out where to place this factoid. <FAR section={[91, 21]} />{' '}
+            I couldn't quite figure out where to place this factoid. <FAR section="91.21" />{' '}
             prohibits the use of portable electronic devices (by the flight crew or passengers) on
             IFR flights unless{' '}
             <Quotation inline>

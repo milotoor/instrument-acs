@@ -251,7 +251,7 @@ export function Tooltip({ message, children, noUnderline = false }: TooltipProps
         </span>
         {message && (
           <div className="absolute top-0 hidden mt-[-1.7rem] group-hover:block z-50">
-            <div className="py-1 px-2 text-xs text-white font-bold rounded-md [width:max-content] shadow-md shadow-slate-700 bg-gray-600 max-w-xl text-ellipsis overflow-hidden">
+            <div className="py-1 px-2 text-xs text-white font-bold rounded-md [width:max-content] shadow-md shadow-slate-700 bg-gray-600 max-w-xl text-ellipsis overflow-hidden whitespace-nowrap">
               {message}
             </div>
             <span className="absolute top-[100%] left-1/2 -ml-[4px] -rotate-45 -translate-y-[4px] border-[4px] border-solid border-transparent border-l-gray-600 border-b-gray-600" />

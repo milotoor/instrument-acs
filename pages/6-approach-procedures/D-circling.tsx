@@ -105,7 +105,7 @@ const Circling: ACS.Page = (props) => {
                 non-towered airports must make turns in the direction specified for the pattern.
                 See, e.g., the{' '}
                 <Link href={references.murphy_interpretation}>2009 Murphy interpretation</Link>,
-                which references <FAR section={[91, 126]} />.
+                which references <FAR section="91.126" />.
                 <div className="pt-3">
                   In the author's humble opinion this is an absurd interpretation lacking
                   consistency with other rules of air traffic. The interpretation states that pilots
@@ -125,7 +125,7 @@ const Circling: ACS.Page = (props) => {
                   prohibits circling southwest of runway 13-31, but runway 31 is left traffic). Any
                   reasonable pilot would determine that they should circle on the other side of the
                   airport where circling is permitted, but the Murphy interpretation ostensibly
-                  makes that a violation <FAR section={[91, 126, 'b', 1]} />
+                  makes that a violation <FAR section="91.126" paragraph={['b', 1]} />
                   ...
                 </div>
               </>
