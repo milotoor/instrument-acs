@@ -85,7 +85,7 @@ const FlightDeckCheck: ACS.Page = (props) => {
                   <>the airspeed indicator should read 0, or very close to it</>
                   <>
                     the attitude indicator should remain level (during turns it may shift
-                    ever-so-slightly)
+                    ever-so-slightly, <Warning>but not more than 5°</Warning>)
                   </>
                   <>the inclinometer (i.e. "the ball") should swing to the outside of the turn</>
                   <>the slip/skid indicator should also move during turns</>
