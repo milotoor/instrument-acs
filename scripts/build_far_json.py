@@ -56,48 +56,46 @@ class FARJSONBuilder:
     a JSON structure ordered like so:
 
       {
-        "43.1": [
-          { "id": "C", "description": "Aircraft", "type": "subchapter" },
-          {
-            "id": "43",
-            "description": "Maintenance, Preventive Maintenance, Rebuilding, and Alteration",
-            "type": "part",
-          },
-          { "id": "1", "description": "Applicability.", "type": "section" }
-        ],
-
-        ...
-
-        "61.3": [
-          { "id": "D", "description": "Airmen", "type": "subchapter" },
-          {
-            "id": "61",
-            "description": "Certification: Pilots, Flight Instructors, and Ground Instructors",
-            "type": "part",
-          },
-          { "id": "A", "description": "General", "type": "subpart" },
-          {
-            "id": "61.3", "description": "Requirement for certificates, ratings, and authorizations.", "type": "section"
-          }
-        ]
-
-        ...
-
-        "91.101": [
-          { "id": "F", "description": "Air Traffic and General Operating Rules", "type": "subchapter" },
-          { "id": "91", "description": "General Operating and Flight Rules", "type": "part" },
-          { "id": "B", "description": "Flight Rules", "type": "subpart" },
-          { "id": "ECFRe4c59b5f5506932", "description": "General", "type": "subject_group" },
-          { "id": "91.101", "description": "Applicability.", "type": "section" }
-        ]
+        "subchapters": {
+          "A": "Chapter A's Name",
+          "B": "Chapter B's Name",
+          ...
+        },
+        "parts": {
+          "43": ["C", "Maintenance, Preventive Maintenance, Rebuilding, and Alteration"],
+          ...
+        },
+        "subparts": {
+          "61.A": "General",
+          "61.B": "Aircraft Ratings and Pilot Authorizations",
+          ...
+        },
+        "subject_groups": {
+          "ECFRe4c59b5f5506932": "General",
+          ...
+        },
+        "sections": {
+          "61.3": ["A", "Requirement for certificates, ratings, and authorizations"],
+          ...
+          "68.3": ["Medical education course requirements"],
+          ...
+          "91.103": ["B", "ECFRe4c59b5f5506932", "Preflight action"],
+          ...
+        }
       }
 
-    The top level contains the sections of interest. Nested under each is an array of identifiers, one identifier per
-    parent in the CFR ontology leading to that section. Each identifier contains three keys: "type" (indicating what
-    sort of parent is identified, i.e. "subchapter", "part", "subpart", etc.), "description" (the name of the identified
-    parent) and "id" (the parent's ID). Together these describe precisely how to access the cited FAR section within the
-    eCFR website. (Note that the CFR title (14) and chapter ("I") are omitted because they are the same across all
-    citations)
+    The top level contains several fields:
+      - ``subchapters`` are the subchapters of title 14 chapter I
+      - ``parts`` are those contained in the subchapters which are referenced in the application. Each entry is a 2-
+          tuple where the first element is the part's subchapter ("A", "B", ...) and the second element the part's name
+      - ``subparts`` are the names of the subparts contained within the parts of interest. Not all subparts of a given
+          part are included; only those which are referenced remain
+      - ``subject_groups`` are a layer under subpart; they are only used in part 91 subpart B
+      - ``sections`` are what we're really after. Each section is associated with an array of 1 to 3 elements. If
+          there's only 1 element, it's the name of the section--this indicates there is no subpart or subject group. If
+          there are 2 elements then the first element is the subpart identifier and the second is the section name.
+          Finally, if there are 3 elements then the first is the subpart ID, the second is the subject group ID and the
+          last is the section name.
 
     To generate this structure we make one request per cited section, using the eCFR API endpoint
     `/api/versioner/v1/ancestry/{date}/title-{title}.json`. For instance, to look up FAR 91.175 we would use the URL:
