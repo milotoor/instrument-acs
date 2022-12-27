@@ -2,7 +2,7 @@ import cn from 'classnames';
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import React from 'react';
 
-import { far } from '../data';
+import { aim, far } from '../data';
 import {
   ACS,
   ArbitraryID,
@@ -13,7 +13,6 @@ import {
   referenceNames,
   referenceURIs,
   uri,
-  useAIM,
 } from '../lib';
 import { AppContext } from './context';
 import { Emphasize, Tooltip } from './Typography';
@@ -156,7 +155,12 @@ export const Link = Object.assign(
 
 export function AIM({ bold = true, paragraph, ...rest }: AIMProps) {
   const [chapter, section, subsection, ...components] = paragraph;
-  const name = useAIM(paragraph);
+
+  const name = React.useMemo(() => {
+    try {
+      return aim[chapter][section][subsection || 'name'];
+    } catch (e) {}
+  }, [chapter, section, subsection]);
 
   let aimURI = uri.aim(chapter, section, subsection);
   const subsectionID = components.length ? ' ' + components.map((id) => `(${id})`).join('') : '';
