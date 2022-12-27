@@ -13,7 +13,6 @@ import {
   Link,
   Paragraph,
   Quotation,
-  ReferenceList,
   Success,
   TaskPage,
   Term,
@@ -116,7 +115,7 @@ const Compliance: ACS.Page = (props) => {
                 </Gray>{' '}
                 Intuitively that sounds like separation <Italic>would be</Italic> guaranteed if you
                 depart within 30 minutes after the void time. Regardless, you would be in violation
-                of <FAR section={[91, 173]} /> so just don't.
+                of <FAR section="91.173" /> so just don't.
               </>
               <>
                 <Bold>The "if not off by" time</Bold>, beyond which ATC will initiate search and
@@ -129,8 +128,7 @@ const Compliance: ACS.Page = (props) => {
           <>
             In an emergency, the PIC is given authority to deviate from the rules set forth in the
             FARs, as well as instructions provided by ATC in clearances, to the extent required by
-            the emergency. <FAR section={[91, 3]} /> provides the regulatory basis for this
-            authority:{' '}
+            the emergency. <FAR section="91.3" /> provides the regulatory basis for this authority:{' '}
             <Quotation inline>
               The pilot in command of an aircraft is directly responsible for, and is the final
               authority as to, the operation of that aircraft.

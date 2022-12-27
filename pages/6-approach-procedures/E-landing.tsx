@@ -31,7 +31,7 @@ const Landing: ACS.Page = (props) => {
         k1: [
           <Paragraph
             heading="Meteorological factors"
-            references={[<AIM paragraph={[7, 1, 13]} />, <FAR section={[91, 175, 'h']} />]}
+            references={[<AIM paragraph={[7, 1, 13]} />, <FAR section="91.175" paragraph="h" />]}
           >
             A crucial consideration on every IAP so <Term>flight visibility</Term> and{' '}
             <Term>runway visual range (RVR)</Term>.{' '}
@@ -66,7 +66,7 @@ const Landing: ACS.Page = (props) => {
           <>
             RVR values are computed by sensors mounted on poles near the runway which transmit light
             at a known intensity and measure the extent of dissipation. Per{' '}
-            <FAR section={[91, 175, 'h']} />{' '}
+            <FAR section="91.175" paragraph="h" />{' '}
             <Info>
               If RVR equipment is inoperative, an approach's minimum RVR requirement may be met by
               converting to ground visibility.
@@ -74,7 +74,7 @@ const Landing: ACS.Page = (props) => {
             2,400 RVR should be converted to ½SM.
           </>,
 
-          <Paragraph heading="Landing requirements" references={<FAR section={[91, 175]} />}>
+          <Paragraph heading="Landing requirements" references={<FAR section="91.175" />}>
             There are three requirements that must be met prior to descending below MDA or DA:
             <BulletList type="decimal">
               <>

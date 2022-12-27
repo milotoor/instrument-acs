@@ -1,3 +1,4 @@
+export type ArbitraryID = { id: string };
 export type ChildProp<C = React.ReactNode> = { children: C };
 export type OneOrMore<T> = T | T[];
 

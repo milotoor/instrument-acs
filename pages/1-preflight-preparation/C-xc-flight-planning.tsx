@@ -153,7 +153,7 @@ const XcFlightPlanning: ACS.Page = (props) => {
                 If the proposed alternate doesn't have any IAPs, it may still be filed as an
                 alternate if the ceiling and visibility at the time of arrival at the alternate
                 would allow a descent from the MEA under basic VFR. See{' '}
-                <FAR section={[91, 169, 'c', 2]} />. Of course,{' '}
+                <FAR section="91.169" paragraph={['c', 2]} />. Of course,{' '}
                 <Bold>
                   if you choose to deviate to the alternate, you should use the published minimums
                   for the approach you choose to fly.
@@ -267,8 +267,8 @@ const XcFlightPlanning: ACS.Page = (props) => {
             highest obstacle in a 4 mile radius. In non-mountainous terrain the MIA is 1,000 feet.
             At this point in time, virtually the entire western US is considered DMA, though there
             is an FAA effort underway to change this (see collapsed section below).{' '}
-            <FAR section={[91, 177, 'a', 2]} /> and <FAR section={[95, 15]} /> are the relevant
-            regulations.
+            <FAR section="91.177" paragraph={['a', 2]} /> and <FAR section="95.15" /> are the
+            relevant regulations.
           </>,
 
           <Collapse heading="Designated Mountainous Areas">
@@ -318,11 +318,11 @@ const XcFlightPlanning: ACS.Page = (props) => {
             <BulletList type="disc">
               <>
                 You must fly at the appropriate VFR altitude as prescribed in{' '}
-                <FAR section={[91, 159]} />
+                <FAR section="91.159" />
               </>
               <>
                 You must comply with VFR visibility and distance-from-cloud criteria prescribed in{' '}
-                <FAR section={[91, 155]} />
+                <FAR section="91.155" />
               </>
               <>
                 You must comply with IFR regulations applicable to your flight. That means{' '}
@@ -341,7 +341,7 @@ const XcFlightPlanning: ACS.Page = (props) => {
 
           <Paragraph heading="Oxygen Requirements">
             The oxygen requirements are no different for IFR than they are for VFR.{' '}
-            <FAR section={[91, 211]} /> specifies the requirements. Note that these values refer to{' '}
+            <FAR section="91.211" /> specifies the requirements. Note that these values refer to{' '}
             <Italic>cabin pressure altitudes</Italic>. If the airplane is pressurized the rules are
             different.{' '}
             <BulletList type="disc">
@@ -464,7 +464,7 @@ const XcFlightPlanning: ACS.Page = (props) => {
         // Fuel requirements
         k3c: [
           <>
-            <FAR section={[91, 167]} /> is the relevant regulation. It specifies that "no person may
+            <FAR section="91.167" /> is the relevant regulation. It specifies that "no person may
             operate a civil aircraft in IFR conditions unless it carries enough fuel to:"
             <BulletList type="decimal">
               <>Complete the flight to the first airport of intended landing and fly an approach</>

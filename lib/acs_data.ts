@@ -1,5 +1,7 @@
 import { NextPage } from 'next';
 
+import far from '../data/far.json';
+
 import ACSSection = ACS.Section;
 import ACSTask = ACS.Task;
 
@@ -86,6 +88,51 @@ export namespace Data {
   export type AIM = Record<number, Name & Record<number, Name & Record<number, string>>>;
   export namespace AIM {
     export type Reference = [number, number, number?, ...(string | number)[]];
+  }
+
+  export type FAR = {
+    subchapters: FAR.Subchapters;
+    parts: FAR.Parts;
+    subparts: FAR.SubParts;
+    subject_groups: FAR.SubjectGroups;
+    sections: FAR.Sections;
+  };
+
+  export namespace FAR {
+    type FarJson = typeof far;
+    export type Appendix = 'A' | 'B' | 'C' | 'D' | 'E' | 'F';
+    export type Paragraph = string | (string | number)[];
+
+    type Subchapter = keyof FarJson['subchapters'];
+    type SubjectGroup = keyof FarJson['subject_groups'];
+    type Description = string;
+
+    export type Subchapters = Record<Subchapter, Description>;
+    export type Parts = Record<Part.Id, Part.Content>;
+    export type SubParts = Record<Subpart.Id, Description>;
+    export type SubjectGroups = Record<SubjectGroup, Description>;
+    export type Sections = Record<Section.Id, Section.Content>;
+
+    export type Part = Part.Id;
+    namespace Part {
+      export type Id = keyof FarJson['parts'];
+      export type Content = [Subchapter, Description];
+    }
+
+    export type Subpart = Subpart.Id;
+    namespace Subpart {
+      export type Id = `${Part.Id}.${Letter}`;
+      export type Letter = 'A' | 'B' | 'C' | 'E';
+    }
+
+    export type Section = Section.Id;
+    namespace Section {
+      export type Id = keyof FarJson['sections'];
+      export type Content =
+        | [Description]
+        | [Subpart.Letter, Description]
+        | [Subpart.Letter, SubjectGroup, Description];
+    }
   }
 
   export type Image = { width: number; height: number; type?: string };
